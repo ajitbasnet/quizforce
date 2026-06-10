@@ -20,7 +20,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   return (
     <aside
       className={[
-        'shrink-0 overflow-hidden border-r border-text-muted/20 bg-surface transition-[width] duration-200',
+        'hidden shrink-0 overflow-hidden border-r border-text-muted/20 bg-surface transition-[width] duration-200 md:block',
         isOpen ? 'w-64' : 'w-0',
       ].join(' ')}
     >

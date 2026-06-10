@@ -10,13 +10,15 @@ export function AppShell() {
   const toggleSidebar = () => setSidebarOpen((open) => !open)
 
   return (
-    <div className="flex min-h-screen bg-bg text-text-primary">
-      <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
-      <div className="flex flex-1 flex-col">
-        <TopBar onMenuToggle={toggleSidebar} />
-        <PageWrapper>
-          <Outlet />
-        </PageWrapper>
+    <div className="min-h-screen bg-bg text-text-primary">
+      <TopBar />
+      <div className="flex pt-16">
+        <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <PageWrapper>
+            <Outlet />
+          </PageWrapper>
+        </div>
       </div>
     </div>
   )

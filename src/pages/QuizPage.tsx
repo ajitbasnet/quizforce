@@ -6,6 +6,7 @@ import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { ProgressBar } from '../components/ui/ProgressBar'
 import { useLanguage } from '../hooks/useLanguage'
+import { useQuizNavigation } from '../hooks/useQuizNavigation'
 import { LANGUAGE_OPTIONS } from '../i18n'
 import { useQuizStore } from '../store/quizStore'
 import type { QuizSettings } from '../types/quiz'
@@ -38,11 +39,16 @@ export default function QuizPage() {
   const userAnswers = useQuizStore((s) => s.userAnswers)
   const setAnswer = useQuizStore((s) => s.setAnswer)
 
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const {
+    currentQuestionIndex,
+    navigate,
+    canGoNext,
+    canGoPrev,
+    totalQuestions,
+  } = useQuizNavigation()
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
 
   useEffect(() => {
-    setCurrentIndex(0)
     setElapsedSeconds(0)
   }, [currentQuiz?.id])
 
@@ -61,8 +67,8 @@ export default function QuizPage() {
   }
 
   const { questions, settings } = currentQuiz
-  const total = questions.length
-  const question = questions[currentIndex]
+  const total = totalQuestions
+  const question = questions[currentQuestionIndex]
   const languageOption = LANGUAGE_OPTIONS.find(
     (opt) => opt.code === currentQuiz.language,
   )
@@ -111,12 +117,12 @@ export default function QuizPage() {
         <div className="sticky top-16 z-10 -mx-4 bg-bg/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex flex-col gap-1">
             <ProgressBar
-              value={((currentIndex + 1) / total) * 100}
+              value={((currentQuestionIndex + 1) / total) * 100}
               height="thin"
             />
             <p className="text-sm text-text-muted">
               {t('quiz.questionOf', {
-                current: currentIndex + 1,
+                current: currentQuestionIndex + 1,
                 total,
               })}
             </p>
@@ -134,7 +140,7 @@ export default function QuizPage() {
             >
               <QuestionBlock
                 question={question}
-                questionNumber={currentIndex + 1}
+                questionNumber={currentQuestionIndex + 1}
                 selectedOptionId={userAnswers[question.id] ?? null}
                 onSelect={(optionId) => setAnswer(question.id, optionId)}
                 isSubmitted={false}
@@ -150,23 +156,23 @@ export default function QuizPage() {
         <nav className="mt-auto flex items-center justify-between gap-4 pt-4">
           <Button
             variant="ghost"
-            disabled={currentIndex === 0}
-            onClick={() => setCurrentIndex((i) => i - 1)}
+            disabled={!canGoPrev}
+            onClick={() => navigate('prev')}
           >
             {t('quiz.previousQuestion')}
           </Button>
 
           <span className="text-sm text-text-muted">
             {t('quiz.questionOf', {
-              current: currentIndex + 1,
+              current: currentQuestionIndex + 1,
               total,
             })}
           </span>
 
           <Button
             variant="primary"
-            disabled={currentIndex === total - 1}
-            onClick={() => setCurrentIndex((i) => i + 1)}
+            disabled={!canGoNext}
+            onClick={() => navigate('next')}
           >
             {t('quiz.nextQuestion')}
           </Button>

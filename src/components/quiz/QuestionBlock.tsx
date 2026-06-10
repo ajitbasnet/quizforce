@@ -19,6 +19,16 @@ export interface QuestionBlockProps {
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
+function getOptionFeedback(
+  q: QuizQuestion,
+  optionId: string,
+  submitted: boolean,
+): string | null {
+  if (!submitted) return null
+  if (optionId === q.correctOptionId) return q.explanation
+  return q.wrongExplanations[optionId] ?? null
+}
+
 function getDifficultyVariant(
   difficulty: QuizQuestion['difficulty'],
 ): 'info' | 'warning' | 'danger' {
@@ -106,15 +116,25 @@ export function QuestionBlock({
         {question.questionText}
       </p>
 
-      <div className="flex flex-col gap-3">
+      <div
+        role="radiogroup"
+        aria-label={question.questionText}
+        className="flex flex-col gap-3"
+      >
         {question.options.map((option, index) => (
           <AnswerOption
             key={option.id}
+            option={option}
             letter={OPTION_LETTERS[index] ?? String(index + 1)}
-            label={option.text}
             isSelected={selectedOptionId === option.id}
-            onSelect={() => onSelect(option.id)}
             isSubmitted={isSubmitted}
+            isCorrect={option.id === question.correctOptionId}
+            onSelect={() => onSelect(option.id)}
+            feedback={getOptionFeedback(question, option.id, isSubmitted)}
+            voiceEnabled={voiceEnabled}
+            voiceRate={voiceRate}
+            voicePitch={voicePitch}
+            language={language}
           />
         ))}
       </div>

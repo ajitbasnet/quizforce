@@ -6,21 +6,32 @@ import {
   Volume2,
   type LucideIcon,
 } from 'lucide-react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { GenerateButton } from '../components/input/GenerateButton'
 import {
   InputModeTabs,
   type InputMode,
 } from '../components/input/InputModeTabs'
-import { PDFUploader } from '../components/input/PDFUploader'
-import { PromptBuilder } from '../components/input/PromptBuilder'
-import { QuizSettingsPanel } from '../components/input/QuizSettingsPanel'
-import { TextInputPanel } from '../components/input/TextInputPanel'
+import {
+  PDFUploader,
+  type PDFUploaderHandle,
+} from '../components/input/PDFUploader'
+import {
+  PromptBuilder,
+  type PromptBuilderHandle,
+} from '../components/input/PromptBuilder'
+import {
+  QuizSettingsPanel,
+  type QuizSettingsPanelHandle,
+} from '../components/input/QuizSettingsPanel'
+import {
+  TextInputPanel,
+  type TextInputPanelHandle,
+} from '../components/input/TextInputPanel'
 import { useLanguage } from '../hooks/useLanguage'
 import { useQuizStore } from '../store/quizStore'
 import type { Quiz } from '../types/quiz'
-import { promptTopicSchema, textInputSchema } from '../utils/validators'
 
 const containerVariants = {
   hidden: {},
@@ -95,45 +106,49 @@ export default function HomePage() {
   const [textContent, setTextContent] = useState('')
   const [pdfContent, setPdfContent] = useState('')
   const [promptTopic, setPromptTopic] = useState('')
-  const [promptContent, setPromptContent] = useState('')
+
+  const textPanelRef = useRef<TextInputPanelHandle>(null)
+  const pdfPanelRef = useRef<PDFUploaderHandle>(null)
+  const promptPanelRef = useRef<PromptBuilderHandle>(null)
+  const settingsPanelRef = useRef<QuizSettingsPanelHandle>(null)
 
   const handlePromptChange = useCallback(
     (data: { topic: string; prompt: string }) => {
       setPromptTopic(data.topic)
-      setPromptContent(data.prompt)
     },
     [],
   )
 
-  const getGenerationInput = useCallback((): {
-    ok: true
-    content: string
-    sourceType: Quiz['sourceType']
-  } | { ok: false; error: string } => {
+  const getGenerationInput = useCallback(async (): Promise<
+    | { ok: true; content: string; sourceType: Quiz['sourceType'] }
+    | { ok: false }
+  > => {
+    const settingsResult = await settingsPanelRef.current?.validate()
+    if (!settingsResult?.ok) {
+      settingsPanelRef.current?.expand()
+      return { ok: false }
+    }
+
     switch (inputMode) {
       case 'text': {
-        const result = textInputSchema.safeParse(textContent)
-        if (!result.success) {
-          return { ok: false, error: t('input.textMinLengthError') }
-        }
-        return { ok: true, content: result.data, sourceType: 'text' }
+        const result = await textPanelRef.current?.validate()
+        if (!result?.ok) return { ok: false }
+        return { ok: true, content: result.content, sourceType: 'text' }
       }
-      case 'pdf':
-        if (!pdfContent.trim()) {
-          return { ok: false, error: t('input.pdfNotReady') }
-        }
-        return { ok: true, content: pdfContent, sourceType: 'pdf' }
+      case 'pdf': {
+        const result = await pdfPanelRef.current?.validate()
+        if (!result?.ok) return { ok: false }
+        return { ok: true, content: result.content, sourceType: 'pdf' }
+      }
       case 'prompt': {
-        const result = promptTopicSchema.safeParse(promptTopic)
-        if (!result.success) {
-          return { ok: false, error: t('input.topicRequiredError') }
-        }
-        return { ok: true, content: promptContent, sourceType: 'prompt' }
+        const result = await promptPanelRef.current?.validate()
+        if (!result?.ok) return { ok: false }
+        return { ok: true, content: result.content, sourceType: 'prompt' }
       }
       default:
-        return { ok: false, error: t('errors.invalidInput') }
+        return { ok: false }
     }
-  }, [inputMode, textContent, pdfContent, promptTopic, promptContent, t])
+  }, [inputMode])
 
   const isGenerateDisabled = useMemo(() => {
     switch (inputMode) {
@@ -173,15 +188,20 @@ export default function HomePage() {
                 >
                   {inputMode === 'text' && (
                     <TextInputPanel
+                      ref={textPanelRef}
                       hideSubmit
                       onContentChange={setTextContent}
                     />
                   )}
                   {inputMode === 'pdf' && (
-                    <PDFUploader onExtracted={setPdfContent} />
+                    <PDFUploader
+                      ref={pdfPanelRef}
+                      onExtracted={setPdfContent}
+                    />
                   )}
                   {inputMode === 'prompt' && (
                     <PromptBuilder
+                      ref={promptPanelRef}
                       hideSubmit
                       onPromptChange={handlePromptChange}
                     />
@@ -189,7 +209,7 @@ export default function HomePage() {
                 </motion.div>
               </AnimatePresence>
 
-              <QuizSettingsPanel />
+              <QuizSettingsPanel ref={settingsPanelRef} />
             </>
           )}
 

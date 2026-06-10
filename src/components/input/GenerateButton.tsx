@@ -13,10 +13,10 @@ import { GenerationProgress } from './GenerationProgress'
 
 type GenerationInputResult =
   | { ok: true; content: string; sourceType: Quiz['sourceType'] }
-  | { ok: false; error: string }
+  | { ok: false }
 
 interface GenerateButtonProps {
-  getGenerationInput: () => GenerationInputResult
+  getGenerationInput: () => Promise<GenerationInputResult>
   disabled?: boolean
 }
 
@@ -56,9 +56,8 @@ export function GenerateButton({
   }
 
   const handleGenerate = async () => {
-    const input = getGenerationInput()
+    const input = await getGenerationInput()
     if (!input.ok) {
-      toast.error(input.error)
       return
     }
 

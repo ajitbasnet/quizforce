@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useLanguage } from '../../hooks/useLanguage'
 
 type SidebarProps = {
   isOpen: boolean
@@ -14,6 +15,8 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   ].join(' ')
 
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
+  const { t } = useLanguage()
+
   return (
     <aside
       className={[
@@ -23,25 +26,25 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
     >
       <div className="flex h-full w-64 flex-col">
         <div className="flex h-14 items-center justify-between border-b border-text-muted/20 px-4">
-          <span className="text-sm font-semibold text-text-primary">Menu</span>
+          <span className="text-sm font-semibold text-text-primary">{t('nav.menu')}</span>
           <button
             type="button"
             onClick={onToggle}
             className="rounded-md p-1.5 text-text-muted hover:bg-bg hover:text-text-primary"
-            aria-label="Close sidebar"
+            aria-label={t('nav.closeSidebar')}
           >
             ×
           </button>
         </div>
         <nav className="flex flex-col gap-1 p-3">
           <NavLink to="/" end className={navLinkClass}>
-            Home
+            {t('nav.home')}
           </NavLink>
           <NavLink to="/history" className={navLinkClass}>
-            History
+            {t('nav.history')}
           </NavLink>
           <NavLink to="/settings" className={navLinkClass}>
-            Settings
+            {t('nav.settings')}
           </NavLink>
         </nav>
       </div>

@@ -25,6 +25,7 @@ export interface QuizSettings {
   voiceEnabled: boolean
   voiceRate: number
   voicePitch: number
+  timerEnabled: boolean
   language: SupportedLanguage
 }
 

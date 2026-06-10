@@ -79,6 +79,7 @@ export const settingsSchema = z.object({
   difficulty: z.enum(DIFFICULTY_LEVELS),
   language: z.enum(SUPPORTED_LANGUAGES),
   voiceEnabled: z.boolean(),
+  timerEnabled: z.boolean(),
   voiceRate: z
     .number()
     .min(0.5, 'input.voiceRateRangeError')

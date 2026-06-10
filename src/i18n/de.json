@@ -133,6 +133,7 @@
     "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     "network": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
     "generationFailed": "Quiz konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+    "missingApiKey": "API-Schlüssel fehlt. Fügen Sie VITE_ANTHROPIC_API_KEY zu Ihrer .env-Datei hinzu.",
     "invalidInput": "Ungültige Eingabe. Überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
     "textTooShort": "Text ist zu kurz. Bitte geben Sie mehr Inhalt an.",
     "pdfParseFailed": "PDF konnte nicht gelesen werden. Versuchen Sie eine andere Datei.",

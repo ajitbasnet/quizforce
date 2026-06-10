@@ -133,6 +133,7 @@
     "generic": "Une erreur s'est produite. Veuillez réessayer.",
     "network": "Erreur réseau. Vérifiez votre connexion et réessayez.",
     "generationFailed": "Échec de la génération du quiz. Veuillez réessayer.",
+    "missingApiKey": "Clé API manquante. Ajoutez VITE_ANTHROPIC_API_KEY à votre fichier .env.",
     "invalidInput": "Saisie invalide. Vérifiez votre entrée et réessayez.",
     "textTooShort": "Le texte est trop court. Veuillez fournir plus de contenu.",
     "pdfParseFailed": "Impossible de lire le PDF. Essayez un autre fichier.",

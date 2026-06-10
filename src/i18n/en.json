@@ -133,6 +133,7 @@
     "generic": "Something went wrong. Please try again.",
     "network": "Network error. Check your connection and try again.",
     "generationFailed": "Failed to generate the quiz. Please try again.",
+    "missingApiKey": "Missing API key. Add VITE_ANTHROPIC_API_KEY to your .env file.",
     "invalidInput": "Invalid input. Please check your entry and try again.",
     "textTooShort": "Text is too short. Please provide more content.",
     "pdfParseFailed": "Could not read the PDF. Try a different file.",

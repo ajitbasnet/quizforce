@@ -133,6 +133,7 @@
     "generic": "Algo salió mal. Inténtalo de nuevo.",
     "network": "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
     "generationFailed": "No se pudo generar el cuestionario. Inténtalo de nuevo.",
+    "missingApiKey": "Falta la clave API. Añade VITE_ANTHROPIC_API_KEY a tu archivo .env.",
     "invalidInput": "Entrada no válida. Revisa tu información e inténtalo de nuevo.",
     "textTooShort": "El texto es demasiado corto. Proporciona más contenido.",
     "pdfParseFailed": "No se pudo leer el PDF. Prueba con otro archivo.",

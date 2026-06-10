@@ -133,6 +133,7 @@
     "generic": "出了点问题，请重试。",
     "network": "网络错误，请检查连接后重试。",
     "generationFailed": "测验生成失败，请重试。",
+    "missingApiKey": "缺少 API 密钥。请在 .env 文件中添加 VITE_ANTHROPIC_API_KEY。",
     "invalidInput": "输入无效，请检查后重试。",
     "textTooShort": "文本太短，请提供更多内容。",
     "pdfParseFailed": "无法读取 PDF，请尝试其他文件。",

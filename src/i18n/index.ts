@@ -21,15 +21,25 @@ const SUPPORTED_LANGUAGE_CODES: SupportedLanguage[] = [
   'zh',
 ]
 
-export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string }[] = [
-  { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
-  { code: 'fr', label: 'Français' },
-  { code: 'hi', label: 'हिन्दी' },
-  { code: 'ne', label: 'नेपाली' },
-  { code: 'de', label: 'Deutsch' },
-  { code: 'zh', label: '中文' },
+export interface LanguageOption {
+  code: SupportedLanguage
+  flag: string
+  nativeName: string
+  englishName: string
+}
+
+export const LANGUAGE_OPTIONS: LanguageOption[] = [
+  { code: 'en', flag: '🇬🇧', nativeName: 'English', englishName: 'English' },
+  { code: 'es', flag: '🇪🇸', nativeName: 'Español', englishName: 'Spanish' },
+  { code: 'fr', flag: '🇫🇷', nativeName: 'Français', englishName: 'French' },
+  { code: 'hi', flag: '🇮🇳', nativeName: 'हिन्दी', englishName: 'Hindi' },
+  { code: 'ne', flag: '🇳🇵', nativeName: 'नेपाली', englishName: 'Nepali' },
+  { code: 'de', flag: '🇩🇪', nativeName: 'Deutsch', englishName: 'German' },
+  { code: 'zh', flag: '🇨🇳', nativeName: '中文', englishName: 'Chinese' },
 ]
+
+export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string }[] =
+  LANGUAGE_OPTIONS.map(({ code, nativeName }) => ({ code, label: nativeName }))
 
 function isSupportedLanguage(lang: string): lang is SupportedLanguage {
   return SUPPORTED_LANGUAGE_CODES.includes(lang as SupportedLanguage)

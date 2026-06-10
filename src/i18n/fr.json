@@ -63,6 +63,9 @@
     "urlPlaceholder": "https://exemple.com/article",
     "questionsCount": "Nombre de questions",
     "difficulty": "Difficulté",
+    "customizeQuiz": "Personnaliser le quiz →",
+    "voiceNarration": "Narration vocale",
+    "pointsPerQuestion": "Points par défaut par question",
     "generateButton": "Générer le quiz",
     "generating": "Génération…"
   },

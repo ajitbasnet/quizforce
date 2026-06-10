@@ -63,6 +63,9 @@
     "urlPlaceholder": "https://beispiel.de/artikel",
     "questionsCount": "Anzahl der Fragen",
     "difficulty": "Schwierigkeit",
+    "customizeQuiz": "Quiz anpassen →",
+    "voiceNarration": "Sprachausgabe",
+    "pointsPerQuestion": "Standardpunkte pro Frage",
     "generateButton": "Quiz generieren",
     "generating": "Wird generiert…"
   },

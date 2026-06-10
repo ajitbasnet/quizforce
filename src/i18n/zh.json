@@ -63,6 +63,9 @@
     "urlPlaceholder": "https://example.com/article",
     "questionsCount": "题目数量",
     "difficulty": "难度",
+    "customizeQuiz": "自定义测验 →",
+    "voiceNarration": "语音朗读",
+    "pointsPerQuestion": "每题默认分数",
     "generateButton": "生成测验",
     "generating": "生成中…"
   },

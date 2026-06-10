@@ -63,6 +63,9 @@
     "urlPlaceholder": "https://example.com/article",
     "questionsCount": "प्रश्नहरूको संख्या",
     "difficulty": "कठिनाई",
+    "customizeQuiz": "क्विज अनुकूलन गर्नुहोस् →",
+    "voiceNarration": "आवाज नरेशन",
+    "pointsPerQuestion": "प्रति प्रश्न पूर्वनिर्धारित अंक",
     "generateButton": "क्विज बनाउनुहोस्",
     "generating": "बनाइँदै छ…"
   },

@@ -111,6 +111,8 @@
     "difficultyMixed": "Mixed",
     "questionsCount": "{{count}} questions",
     "totalPoints": "{{count}} pts total",
+    "worthPoints": "Worth {{count}} pts",
+    "questionChip": "Q{{number}}",
     "generatingTitle": "Generating your quiz…",
     "generatingSubtitle": "This may take a moment depending on the content length.",
     "stageAnalyzing": "Analyzing your content...",

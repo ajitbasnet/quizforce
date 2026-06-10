@@ -111,6 +111,8 @@
     "difficultyMixed": "मिश्रित",
     "questionsCount": "{{count}} प्रश्न",
     "totalPoints": "कुल {{count}} अंक",
+    "worthPoints": "{{count}} अंक मूल्य",
+    "questionChip": "प्र{{number}}",
     "generatingTitle": "आपकी क्विज़ बनाई जा रही है…",
     "generatingSubtitle": "सामग्री की लंबाई के अनुसार इसमें कुछ समय लग सकता है।",
     "stageAnalyzing": "आपकी सामग्री का विश्लेषण हो रहा है...",

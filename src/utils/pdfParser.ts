@@ -3,9 +3,17 @@ import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
+export const PDF_MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024
+
 const MAX_PAGES = 50
 const MAX_TEXT_LENGTH = 12000
 const TRUNCATION_SUFFIX = '[...truncated]'
+
+export interface PDFExtractResult {
+  text: string
+  pageCount: number
+  totalPages: number
+}
 
 export class PDFPasswordError extends Error {
   constructor(message = 'PDF is password-protected') {
@@ -76,7 +84,9 @@ function truncateText(text: string): string {
   return `${cleaned.slice(0, MAX_TEXT_LENGTH)}${TRUNCATION_SUFFIX}`
 }
 
-export async function extractTextFromPDF(file: File): Promise<string> {
+export async function extractTextFromPDF(
+  file: File,
+): Promise<PDFExtractResult> {
   try {
     const data = await file.arrayBuffer()
     const pdf = await pdfjsLib.getDocument({ data }).promise
@@ -100,7 +110,8 @@ export async function extractTextFromPDF(file: File): Promise<string> {
       throw new PDFParseError('No text could be extracted from PDF')
     }
 
-    return truncateText(pageTexts.join('\n'))
+    const text = truncateText(pageTexts.join('\n'))
+    return { text, pageCount, totalPages: pdf.numPages }
   } catch (error) {
     mapPdfError(error)
   }

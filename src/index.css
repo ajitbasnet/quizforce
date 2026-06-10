@@ -37,4 +37,38 @@
   .animate-progress-shimmer {
     animation: progress-shimmer 1.5s infinite;
   }
+
+  @keyframes dash-border {
+    to {
+      background-position: 100% 0;
+    }
+  }
+
+  .animate-dash-border {
+    position: relative;
+  }
+
+  .animate-dash-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    padding: 2px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      90deg,
+      rgb(99 102 241),
+      rgb(99 102 241) 8px,
+      transparent 8px,
+      transparent 16px
+    );
+    background-size: 200% 100%;
+    background-position: 0 0;
+    animation: dash-border 1s linear infinite;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
 }

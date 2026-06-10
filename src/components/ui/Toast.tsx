@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   AlertCircle,
   CheckCircle2,
@@ -8,8 +8,47 @@ import {
   XCircle,
   type LucideIcon,
 } from 'lucide-react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
+import { createPortal } from 'react-dom'
 
 export type ToastVariant = 'success' | 'error' | 'info' | 'warning'
+
+const MAX_TOASTS = 5
+const DEFAULT_DURATION = 4000
+
+interface ToastItem {
+  id: string
+  title: string
+  description?: string
+  variant: ToastVariant
+  duration: number
+}
+
+interface ToastOptions {
+  description?: string
+  duration?: number
+}
+
+interface ToastContextValue {
+  toast: {
+    success: (title: string, options?: ToastOptions) => void
+    error: (title: string, options?: ToastOptions) => void
+    info: (title: string, options?: ToastOptions) => void
+    warning: (title: string, options?: ToastOptions) => void
+    dismiss: (id: string) => void
+  }
+}
+
+const ToastContext = createContext<ToastContextValue | null>(null)
 
 export interface ToastProps {
   title: string
@@ -53,7 +92,7 @@ const VARIANT_CONFIG: Record<
   },
 }
 
-export const toastMotionProps = {
+const toastMotionProps = {
   initial: { opacity: 0, x: 80 },
   animate: { opacity: 1, x: 0 },
   exit: { opacity: 0, x: 80 },
@@ -90,10 +129,102 @@ export function Toast({ title, description, variant, onDismiss }: ToastProps) {
   )
 }
 
-export function AnimatedToast(props: ToastProps) {
-  return (
-    <motion.div className="pointer-events-auto" {...toastMotionProps}>
-      <Toast {...props} />
-    </motion.div>
+export function ToastProvider({ children }: { children: ReactNode }) {
+  const [toasts, setToasts] = useState<ToastItem[]>([])
+  const timeoutMapRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(
+    new Map(),
   )
+
+  const dismiss = useCallback((id: string) => {
+    const timeout = timeoutMapRef.current.get(id)
+    if (timeout) {
+      clearTimeout(timeout)
+      timeoutMapRef.current.delete(id)
+    }
+    setToasts((current) => current.filter((toast) => toast.id !== id))
+  }, [])
+
+  const addToast = useCallback(
+    (
+      variant: ToastVariant,
+      title: string,
+      options?: ToastOptions,
+    ) => {
+      const id = crypto.randomUUID()
+      const duration = options?.duration ?? DEFAULT_DURATION
+
+      const item: ToastItem = {
+        id,
+        title,
+        description: options?.description,
+        variant,
+        duration,
+      }
+
+      setToasts((current) => [item, ...current].slice(0, MAX_TOASTS))
+
+      const timeout = setTimeout(() => dismiss(id), duration)
+      timeoutMapRef.current.set(id, timeout)
+    },
+    [dismiss],
+  )
+
+  useEffect(() => {
+    const timeouts = timeoutMapRef.current
+    return () => {
+      timeouts.forEach(clearTimeout)
+      timeouts.clear()
+    }
+  }, [])
+
+  const value = useMemo<ToastContextValue>(
+    () => ({
+      toast: {
+        success: (title, options) => addToast('success', title, options),
+        error: (title, options) => addToast('error', title, options),
+        info: (title, options) => addToast('info', title, options),
+        warning: (title, options) => addToast('warning', title, options),
+        dismiss,
+      },
+    }),
+    [addToast, dismiss],
+  )
+
+  return (
+    <ToastContext.Provider value={value}>
+      {children}
+      {createPortal(
+        <div
+          aria-live="polite"
+          className="pointer-events-none fixed bottom-4 right-4 z-[60] flex flex-col-reverse gap-3"
+        >
+          <AnimatePresence>
+            {toasts.map((item) => (
+              <motion.div
+                key={item.id}
+                className="pointer-events-auto"
+                {...toastMotionProps}
+              >
+                <Toast
+                  title={item.title}
+                  description={item.description}
+                  variant={item.variant}
+                  onDismiss={() => dismiss(item.id)}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>,
+        document.body,
+      )}
+    </ToastContext.Provider>
+  )
+}
+
+export function useToast(): ToastContextValue {
+  const context = useContext(ToastContext)
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider')
+  }
+  return context
 }

@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "Menu",
+    "closeSidebar": "Fermer la barre latérale",
+    "toggleSidebar": "Afficher ou masquer la barre latérale",
+    "home": "Accueil",
+    "history": "Historique",
+    "settings": "Paramètres"
+  },
+  "input": {
+    "title": "Créer un quiz",
+    "subtitle": "Collez du texte, téléversez un PDF, saisissez une consigne ou fournissez une URL pour générer des questions.",
+    "tabText": "Texte",
+    "tabPdf": "PDF",
+    "tabPrompt": "Consigne",
+    "tabUrl": "URL",
+    "textLabel": "Texte source",
+    "textPlaceholder": "Collez ou saisissez le contenu sur lequel vous souhaitez être interrogé…",
+    "pdfLabel": "Fichier PDF",
+    "pdfDropzone": "Déposez un PDF ici ou cliquez pour parcourir",
+    "pdfBrowse": "Parcourir les fichiers",
+    "promptLabel": "Consigne",
+    "promptPlaceholder": "Décrivez le sujet ou les questions souhaitées, p. ex. « 10 questions sur la photosynthèse »",
+    "topicLabel": "Sujet",
+    "topicPlaceholder": "p. ex. Seconde Guerre mondiale, bases de Python, biologie cellulaire",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://exemple.com/article",
+    "questionsCount": "Nombre de questions",
+    "difficulty": "Difficulté",
+    "generateButton": "Générer le quiz",
+    "generating": "Génération…"
+  },
+  "quiz": {
+    "questionOf": "Question {{current}} sur {{total}}",
+    "submitAnswer": "Soumettre la réponse",
+    "nextQuestion": "Question suivante",
+    "previousQuestion": "Question précédente",
+    "finishQuiz": "Terminer le quiz",
+    "correct": "Correct !",
+    "incorrect": "Incorrect",
+    "explanation": "Explication",
+    "points": "{{count}} point",
+    "points_plural": "{{count}} points",
+    "selectAnswer": "Sélectionnez une réponse",
+    "difficultyEasy": "Facile",
+    "difficultyMedium": "Moyen",
+    "difficultyHard": "Difficile",
+    "difficultyMixed": "Mixte",
+    "generatingTitle": "Génération de votre quiz…",
+    "generatingSubtitle": "Cela peut prendre un moment selon la longueur du contenu."
+  },
+  "results": {
+    "title": "Résultats du quiz",
+    "yourScore": "Votre score",
+    "totalPoints": "Points totaux",
+    "percentage": "Pourcentage",
+    "timeTaken": "Temps écoulé",
+    "reviewAnswers": "Revoir les réponses",
+    "retakeQuiz": "Refaire le quiz",
+    "backToHome": "Retour à l'accueil"
+  },
+  "history": {
+    "title": "Historique des quiz",
+    "emptyTitle": "Aucun quiz pour l'instant",
+    "emptyDescription": "Terminez un quiz et vos tentatives apparaîtront ici.",
+    "score": "Score",
+    "duration": "Durée",
+    "viewDetails": "Voir les détails",
+    "backToHistory": "Retour à l'historique",
+    "attemptDate": "Tentative le {{date}}"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "languageDescription": "Choisissez la langue de l'interface de l'application.",
+    "pointsPerQuestion": "Points par question",
+    "questionsCount": "Nombre de questions par défaut",
+    "difficulty": "Difficulté par défaut",
+    "voiceEnabled": "Activer la lecture vocale",
+    "voiceRate": "Vitesse de la voix",
+    "voicePitch": "Hauteur de la voix",
+    "resetDefaults": "Réinitialiser les valeurs par défaut",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Veuillez réessayer.",
+    "network": "Erreur réseau. Vérifiez votre connexion et réessayez.",
+    "generationFailed": "Échec de la génération du quiz. Veuillez réessayer.",
+    "invalidInput": "Saisie invalide. Vérifiez votre entrée et réessayez.",
+    "textTooShort": "Le texte est trop court. Veuillez fournir plus de contenu.",
+    "pdfParseFailed": "Impossible de lire le PDF. Essayez un autre fichier.",
+    "pdfTooLarge": "Le PDF est trop volumineux. Utilisez un fichier plus petit.",
+    "quizNotFound": "Quiz introuvable.",
+    "attemptNotFound": "Tentative de quiz introuvable.",
+    "loadFailed": "Échec du chargement des données. Actualisez la page et réessayez."
+  },
+  "voice": {
+    "enable": "Activer la voix",
+    "disable": "Désactiver la voix",
+    "play": "Lecture",
+    "pause": "Pause",
+    "stop": "Arrêt",
+    "rate": "Vitesse",
+    "pitch": "Hauteur",
+    "notSupported": "La synthèse vocale n'est pas prise en charge par ce navigateur.",
+    "readingQuestion": "Lecture de la question {{current}} sur {{total}}"
+  }
+}

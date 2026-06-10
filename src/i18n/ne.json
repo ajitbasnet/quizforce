@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "मेनु",
+    "closeSidebar": "साइडबार बन्द गर्नुहोस्",
+    "toggleSidebar": "साइडबार टगल गर्नुहोस्",
+    "home": "गृहपृष्ठ",
+    "history": "इतिहास",
+    "settings": "सेटिङहरू"
+  },
+  "input": {
+    "title": "क्विज बनाउनुहोस्",
+    "subtitle": "प्रश्नहरू बनाउन पाठ टाँस्नुहोस्, PDF अपलोड गर्नुहोस्, प्रम्प्ट प्रविष्ट गर्नुहोस् वा URL दिनुहोस्।",
+    "tabText": "पाठ",
+    "tabPdf": "PDF",
+    "tabPrompt": "प्रम्प्ट",
+    "tabUrl": "URL",
+    "textLabel": "स्रोत पाठ",
+    "textPlaceholder": "क्विज चाहिएको सामग्री टाँस्नुहोस् वा टाइप गर्नुहोस्…",
+    "pdfLabel": "PDF फाइल",
+    "pdfDropzone": "PDF यहाँ छोड्नुहोस् वा ब्राउज गर्न क्लिक गर्नुहोस्",
+    "pdfBrowse": "फाइलहरू ब्राउज गर्नुहोस्",
+    "promptLabel": "प्रम्प्ट",
+    "promptPlaceholder": "विषय वा चाहिएका प्रश्नहरू वर्णन गर्नुहोस्, जस्तै \"प्रकाश संश्लेषणमा १० प्रश्न\"",
+    "topicLabel": "विषय",
+    "topicPlaceholder": "जस्तै दोस्रो विश्वयुद्ध, Python का आधारभूत कुरा, कोशिका जीवविज्ञान",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://example.com/article",
+    "questionsCount": "प्रश्नहरूको संख्या",
+    "difficulty": "कठिनाई",
+    "generateButton": "क्विज बनाउनुहोस्",
+    "generating": "बनाइँदै छ…"
+  },
+  "quiz": {
+    "questionOf": "प्रश्न {{current}} / {{total}}",
+    "submitAnswer": "उत्तर पेश गर्नुहोस्",
+    "nextQuestion": "अर्को प्रश्न",
+    "previousQuestion": "अघिल्लो प्रश्न",
+    "finishQuiz": "क्विज समाप्त गर्नुहोस्",
+    "correct": "सही!",
+    "incorrect": "गलत",
+    "explanation": "व्याख्या",
+    "points": "{{count}} अङ्क",
+    "points_plural": "{{count}} अङ्क",
+    "selectAnswer": "एउटा उत्तर छान्नुहोस्",
+    "difficultyEasy": "सजिलो",
+    "difficultyMedium": "मध्यम",
+    "difficultyHard": "कठिन",
+    "difficultyMixed": "मिश्रित",
+    "generatingTitle": "तपाईंको क्विज बनाइँदै छ…",
+    "generatingSubtitle": "सामग्रीको लम्बाइ अनुसार यसमा केही समय लाग्न सक्छ।"
+  },
+  "results": {
+    "title": "क्विज परिणाम",
+    "yourScore": "तपाईंको स्कोर",
+    "totalPoints": "कुल अङ्क",
+    "percentage": "प्रतिशत",
+    "timeTaken": "लागेको समय",
+    "reviewAnswers": "उत्तरहरू समीक्षा गर्नुहोस्",
+    "retakeQuiz": "क्विज फेरि लिनुहोस्",
+    "backToHome": "गृहपृष्ठमा फर्कनुहोस्"
+  },
+  "history": {
+    "title": "क्विज इतिहास",
+    "emptyTitle": "अहिलेसम्म कुनै क्विज छैन",
+    "emptyDescription": "एउटा क्विज पूरा गर्नुहोस् र तपाईंका प्रयासहरू यहाँ देखिनेछन्।",
+    "score": "स्कोर",
+    "duration": "अवधि",
+    "viewDetails": "विवरण हेर्नुहोस्",
+    "backToHistory": "इतिहासमा फर्कनुहोस्",
+    "attemptDate": "{{date}} मा प्रयास गरियो"
+  },
+  "settings": {
+    "title": "सेटिङहरू",
+    "language": "भाषा",
+    "languageDescription": "एप इन्टरफेसको लागि भाषा छान्नुहोस्।",
+    "pointsPerQuestion": "प्रति प्रश्न अङ्क",
+    "questionsCount": "पूर्वनिर्धारित प्रश्नहरूको संख्या",
+    "difficulty": "पूर्वनिर्धारित कठिनाई",
+    "voiceEnabled": "आवाज पढाइ सक्षम गर्नुहोस्",
+    "voiceRate": "आवाज गति",
+    "voicePitch": "आवाज पिच",
+    "resetDefaults": "पूर्वनिर्धारितमा रिसेट गर्नुहोस्",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "केही गलत भयो। कृपया पुनः प्रयास गर्नुहोस्।",
+    "network": "नेटवर्क त्रुटि। आफ्नो जडान जाँच गर्नुहोस् र पुनः प्रयास गर्नुहोस्।",
+    "generationFailed": "क्विज बनाउन असफल भयो। कृपया पुनः प्रयास गर्नुहोस्।",
+    "invalidInput": "अमान्य इनपुट। आफ्नो जानकारी जाँच गर्नुहोस् र पुनः प्रयास गर्नुहोस्।",
+    "textTooShort": "पाठ धेरै छोटो छ। कृपया थप सामग्री दिनुहोस्।",
+    "pdfParseFailed": "PDF पढ्न सकिएन। अर्को फाइल प्रयास गर्नुहोस्।",
+    "pdfTooLarge": "PDF धेरै ठूलो छ। कृपया सानो फाइल प्रयोग गर्नुहोस्।",
+    "quizNotFound": "क्विज फेला परेन।",
+    "attemptNotFound": "क्विज प्रयास फेला परेन।",
+    "loadFailed": "डेटा लोड गर्न असफल भयो। पृष्ठ रिफ्रेस गर्नुहोस् र पुनः प्रयास गर्नुहोस्।"
+  },
+  "voice": {
+    "enable": "आवाज सक्षम गर्नुहोस्",
+    "disable": "आवाज अक्षम गर्नुहोस्",
+    "play": "चलाउनुहोस्",
+    "pause": "रोक्नुहोस्",
+    "stop": "बन्द गर्नुहोस्",
+    "rate": "गति",
+    "pitch": "पिच",
+    "notSupported": "यो ब्राउजरमा टेक्स्ट-टु-स्पीच समर्थित छैन।",
+    "readingQuestion": "प्रश्न {{current}} / {{total}} पढिँदै छ"
+  }
+}

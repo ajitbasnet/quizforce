@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "Menü",
+    "closeSidebar": "Seitenleiste schließen",
+    "toggleSidebar": "Seitenleiste ein- oder ausblenden",
+    "home": "Startseite",
+    "history": "Verlauf",
+    "settings": "Einstellungen"
+  },
+  "input": {
+    "title": "Quiz erstellen",
+    "subtitle": "Fügen Sie Text ein, laden Sie ein PDF hoch, geben Sie eine Eingabeaufforderung ein oder geben Sie eine URL an, um Quizfragen zu generieren.",
+    "tabText": "Text",
+    "tabPdf": "PDF",
+    "tabPrompt": "Eingabe",
+    "tabUrl": "URL",
+    "textLabel": "Quelltext",
+    "textPlaceholder": "Fügen Sie den Inhalt ein oder geben Sie ihn ein, zu dem Sie ein Quiz erstellen möchten…",
+    "pdfLabel": "PDF-Datei",
+    "pdfDropzone": "PDF hier ablegen oder zum Durchsuchen klicken",
+    "pdfBrowse": "Dateien durchsuchen",
+    "promptLabel": "Eingabeaufforderung",
+    "promptPlaceholder": "Beschreiben Sie das Thema oder die gewünschten Fragen, z. B. „10 Fragen zur Photosynthese“",
+    "topicLabel": "Thema",
+    "topicPlaceholder": "z. B. Zweiter Weltkrieg, Python-Grundlagen, Zellbiologie",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://beispiel.de/artikel",
+    "questionsCount": "Anzahl der Fragen",
+    "difficulty": "Schwierigkeit",
+    "generateButton": "Quiz generieren",
+    "generating": "Wird generiert…"
+  },
+  "quiz": {
+    "questionOf": "Frage {{current}} von {{total}}",
+    "submitAnswer": "Antwort absenden",
+    "nextQuestion": "Nächste Frage",
+    "previousQuestion": "Vorherige Frage",
+    "finishQuiz": "Quiz beenden",
+    "correct": "Richtig!",
+    "incorrect": "Falsch",
+    "explanation": "Erklärung",
+    "points": "{{count}} Punkt",
+    "points_plural": "{{count}} Punkte",
+    "selectAnswer": "Wählen Sie eine Antwort",
+    "difficultyEasy": "Leicht",
+    "difficultyMedium": "Mittel",
+    "difficultyHard": "Schwer",
+    "difficultyMixed": "Gemischt",
+    "generatingTitle": "Ihr Quiz wird generiert…",
+    "generatingSubtitle": "Dies kann je nach Länge des Inhalts einen Moment dauern."
+  },
+  "results": {
+    "title": "Quiz-Ergebnisse",
+    "yourScore": "Ihre Punktzahl",
+    "totalPoints": "Gesamtpunkte",
+    "percentage": "Prozentsatz",
+    "timeTaken": "Benötigte Zeit",
+    "reviewAnswers": "Antworten überprüfen",
+    "retakeQuiz": "Quiz wiederholen",
+    "backToHome": "Zurück zur Startseite"
+  },
+  "history": {
+    "title": "Quiz-Verlauf",
+    "emptyTitle": "Noch keine Quizze",
+    "emptyDescription": "Schließen Sie ein Quiz ab, und Ihre Versuche werden hier angezeigt.",
+    "score": "Punktzahl",
+    "duration": "Dauer",
+    "viewDetails": "Details anzeigen",
+    "backToHistory": "Zurück zum Verlauf",
+    "attemptDate": "Versucht am {{date}}"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "languageDescription": "Wählen Sie die Sprache für die App-Oberfläche.",
+    "pointsPerQuestion": "Punkte pro Frage",
+    "questionsCount": "Standardanzahl der Fragen",
+    "difficulty": "Standard-Schwierigkeit",
+    "voiceEnabled": "Sprachausgabe aktivieren",
+    "voiceRate": "Sprechgeschwindigkeit",
+    "voicePitch": "Stimmlage",
+    "resetDefaults": "Auf Standardwerte zurücksetzen",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "network": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "generationFailed": "Quiz konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+    "invalidInput": "Ungültige Eingabe. Überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
+    "textTooShort": "Text ist zu kurz. Bitte geben Sie mehr Inhalt an.",
+    "pdfParseFailed": "PDF konnte nicht gelesen werden. Versuchen Sie eine andere Datei.",
+    "pdfTooLarge": "PDF ist zu groß. Bitte verwenden Sie eine kleinere Datei.",
+    "quizNotFound": "Quiz nicht gefunden.",
+    "attemptNotFound": "Quiz-Versuch nicht gefunden.",
+    "loadFailed": "Daten konnten nicht geladen werden. Aktualisieren Sie die Seite und versuchen Sie es erneut."
+  },
+  "voice": {
+    "enable": "Sprache aktivieren",
+    "disable": "Sprache deaktivieren",
+    "play": "Abspielen",
+    "pause": "Pause",
+    "stop": "Stopp",
+    "rate": "Geschwindigkeit",
+    "pitch": "Tonhöhe",
+    "notSupported": "Sprachausgabe wird in diesem Browser nicht unterstützt.",
+    "readingQuestion": "Frage {{current}} von {{total}} wird vorgelesen"
+  }
+}

@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "Menu",
+    "closeSidebar": "Close sidebar",
+    "toggleSidebar": "Toggle sidebar",
+    "home": "Home",
+    "history": "History",
+    "settings": "Settings"
+  },
+  "input": {
+    "title": "Create a Quiz",
+    "subtitle": "Paste text, upload a PDF, enter a prompt, or provide a URL to generate quiz questions.",
+    "tabText": "Text",
+    "tabPdf": "PDF",
+    "tabPrompt": "Prompt",
+    "tabUrl": "URL",
+    "textLabel": "Source text",
+    "textPlaceholder": "Paste or type the content you want to quiz on…",
+    "pdfLabel": "PDF file",
+    "pdfDropzone": "Drop a PDF here or click to browse",
+    "pdfBrowse": "Browse files",
+    "promptLabel": "Prompt",
+    "promptPlaceholder": "Describe the topic or questions you want, e.g. \"10 questions on photosynthesis\"",
+    "topicLabel": "Topic",
+    "topicPlaceholder": "e.g. World War II, Python basics, cell biology",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://example.com/article",
+    "questionsCount": "Number of questions",
+    "difficulty": "Difficulty",
+    "generateButton": "Generate Quiz",
+    "generating": "Generating…"
+  },
+  "quiz": {
+    "questionOf": "Question {{current}} of {{total}}",
+    "submitAnswer": "Submit Answer",
+    "nextQuestion": "Next Question",
+    "previousQuestion": "Previous Question",
+    "finishQuiz": "Finish Quiz",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "explanation": "Explanation",
+    "points": "{{count}} point",
+    "points_plural": "{{count}} points",
+    "selectAnswer": "Select an answer",
+    "difficultyEasy": "Easy",
+    "difficultyMedium": "Medium",
+    "difficultyHard": "Hard",
+    "difficultyMixed": "Mixed",
+    "generatingTitle": "Generating your quiz…",
+    "generatingSubtitle": "This may take a moment depending on the content length."
+  },
+  "results": {
+    "title": "Quiz Results",
+    "yourScore": "Your Score",
+    "totalPoints": "Total Points",
+    "percentage": "Percentage",
+    "timeTaken": "Time Taken",
+    "reviewAnswers": "Review Answers",
+    "retakeQuiz": "Retake Quiz",
+    "backToHome": "Back to Home"
+  },
+  "history": {
+    "title": "Quiz History",
+    "emptyTitle": "No quizzes yet",
+    "emptyDescription": "Complete a quiz and your attempts will appear here.",
+    "score": "Score",
+    "duration": "Duration",
+    "viewDetails": "View Details",
+    "backToHistory": "Back to History",
+    "attemptDate": "Attempted on {{date}}"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageDescription": "Choose the language for the app interface.",
+    "pointsPerQuestion": "Points per question",
+    "questionsCount": "Default number of questions",
+    "difficulty": "Default difficulty",
+    "voiceEnabled": "Enable voice reading",
+    "voiceRate": "Voice speed",
+    "voicePitch": "Voice pitch",
+    "resetDefaults": "Reset to defaults",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Check your connection and try again.",
+    "generationFailed": "Failed to generate the quiz. Please try again.",
+    "invalidInput": "Invalid input. Please check your entry and try again.",
+    "textTooShort": "Text is too short. Please provide more content.",
+    "pdfParseFailed": "Could not read the PDF. Try a different file.",
+    "pdfTooLarge": "PDF is too large. Please use a smaller file.",
+    "quizNotFound": "Quiz not found.",
+    "attemptNotFound": "Quiz attempt not found.",
+    "loadFailed": "Failed to load data. Please refresh and try again."
+  },
+  "voice": {
+    "enable": "Enable voice",
+    "disable": "Disable voice",
+    "play": "Play",
+    "pause": "Pause",
+    "stop": "Stop",
+    "rate": "Speed",
+    "pitch": "Pitch",
+    "notSupported": "Text-to-speech is not supported in this browser.",
+    "readingQuestion": "Reading question {{current}} of {{total}}"
+  }
+}

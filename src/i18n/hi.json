@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "मेनू",
+    "closeSidebar": "साइडबार बंद करें",
+    "toggleSidebar": "साइडबार टॉगल करें",
+    "home": "होम",
+    "history": "इतिहास",
+    "settings": "सेटिंग्स"
+  },
+  "input": {
+    "title": "क्विज़ बनाएँ",
+    "subtitle": "प्रश्न बनाने के लिए टेक्स्ट पेस्ट करें, PDF अपलोड करें, प्रॉम्प्ट दर्ज करें या URL दें।",
+    "tabText": "टेक्स्ट",
+    "tabPdf": "PDF",
+    "tabPrompt": "प्रॉम्प्ट",
+    "tabUrl": "URL",
+    "textLabel": "स्रोत टेक्स्ट",
+    "textPlaceholder": "वह सामग्री पेस्ट या टाइप करें जिस पर आप क्विज़ चाहते हैं…",
+    "pdfLabel": "PDF फ़ाइल",
+    "pdfDropzone": "PDF यहाँ छोड़ें या ब्राउज़ करने के लिए क्लिक करें",
+    "pdfBrowse": "फ़ाइलें ब्राउज़ करें",
+    "promptLabel": "प्रॉम्प्ट",
+    "promptPlaceholder": "विषय या प्रश्नों का वर्णन करें, जैसे \"प्रकाश संश्लेषण पर 10 प्रश्न\"",
+    "topicLabel": "विषय",
+    "topicPlaceholder": "जैसे द्वितीय विश्व युद्ध, Python की मूल बातें, कोशिका जीव विज्ञान",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://example.com/article",
+    "questionsCount": "प्रश्नों की संख्या",
+    "difficulty": "कठिनाई",
+    "generateButton": "क्विज़ बनाएँ",
+    "generating": "बनाया जा रहा है…"
+  },
+  "quiz": {
+    "questionOf": "प्रश्न {{current}} / {{total}}",
+    "submitAnswer": "उत्तर जमा करें",
+    "nextQuestion": "अगला प्रश्न",
+    "previousQuestion": "पिछला प्रश्न",
+    "finishQuiz": "क्विज़ समाप्त करें",
+    "correct": "सही!",
+    "incorrect": "गलत",
+    "explanation": "व्याख्या",
+    "points": "{{count}} अंक",
+    "points_plural": "{{count}} अंक",
+    "selectAnswer": "एक उत्तर चुनें",
+    "difficultyEasy": "आसान",
+    "difficultyMedium": "मध्यम",
+    "difficultyHard": "कठिन",
+    "difficultyMixed": "मिश्रित",
+    "generatingTitle": "आपकी क्विज़ बनाई जा रही है…",
+    "generatingSubtitle": "सामग्री की लंबाई के अनुसार इसमें कुछ समय लग सकता है।"
+  },
+  "results": {
+    "title": "क्विज़ परिणाम",
+    "yourScore": "आपका स्कोर",
+    "totalPoints": "कुल अंक",
+    "percentage": "प्रतिशत",
+    "timeTaken": "लिया गया समय",
+    "reviewAnswers": "उत्तरों की समीक्षा करें",
+    "retakeQuiz": "क्विज़ फिर से लें",
+    "backToHome": "होम पर वापस जाएँ"
+  },
+  "history": {
+    "title": "क्विज़ इतिहास",
+    "emptyTitle": "अभी तक कोई क्विज़ नहीं",
+    "emptyDescription": "एक क्विज़ पूरा करें और आपके प्रयास यहाँ दिखाई देंगे।",
+    "score": "स्कोर",
+    "duration": "अवधि",
+    "viewDetails": "विवरण देखें",
+    "backToHistory": "इतिहास पर वापस जाएँ",
+    "attemptDate": "{{date}} को प्रयास किया गया"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "language": "भाषा",
+    "languageDescription": "ऐप इंटरफ़ेस के लिए भाषा चुनें।",
+    "pointsPerQuestion": "प्रति प्रश्न अंक",
+    "questionsCount": "डिफ़ॉल्ट प्रश्नों की संख्या",
+    "difficulty": "डिफ़ॉल्ट कठिनाई",
+    "voiceEnabled": "वॉइस रीडिंग सक्षम करें",
+    "voiceRate": "वॉइस गति",
+    "voicePitch": "वॉइस पिच",
+    "resetDefaults": "डिफ़ॉल्ट पर रीसेट करें",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+    "network": "नेटवर्क त्रुटि। अपना कनेक्शन जाँचें और पुनः प्रयास करें।",
+    "generationFailed": "क्विज़ बनाने में विफल। कृपया पुनः प्रयास करें।",
+    "invalidInput": "अमान्य इनपुट। अपनी जानकारी जाँचें और पुनः प्रयास करें।",
+    "textTooShort": "टेक्स्ट बहुत छोटा है। कृपया अधिक सामग्री दें।",
+    "pdfParseFailed": "PDF पढ़ा नहीं जा सका। कोई अन्य फ़ाइल आज़माएँ।",
+    "pdfTooLarge": "PDF बहुत बड़ी है। कृपया छोटी फ़ाइल का उपयोग करें।",
+    "quizNotFound": "क्विज़ नहीं मिली।",
+    "attemptNotFound": "क्विज़ प्रयास नहीं मिला।",
+    "loadFailed": "डेटा लोड करने में विफल। पृष्ठ रिफ़्रेश करें और पुनः प्रयास करें।"
+  },
+  "voice": {
+    "enable": "वॉइस सक्षम करें",
+    "disable": "वॉइस अक्षम करें",
+    "play": "चलाएँ",
+    "pause": "रोकें",
+    "stop": "बंद करें",
+    "rate": "गति",
+    "pitch": "पिच",
+    "notSupported": "इस ब्राउज़र में टेक्स्ट-टू-स्पीच समर्थित नहीं है।",
+    "readingQuestion": "प्रश्न {{current}} / {{total}} पढ़ा जा रहा है"
+  }
+}

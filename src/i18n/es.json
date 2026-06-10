@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "Menú",
+    "closeSidebar": "Cerrar barra lateral",
+    "toggleSidebar": "Mostrar u ocultar barra lateral",
+    "home": "Inicio",
+    "history": "Historial",
+    "settings": "Ajustes"
+  },
+  "input": {
+    "title": "Crear un cuestionario",
+    "subtitle": "Pega texto, sube un PDF, escribe un prompt o proporciona una URL para generar preguntas.",
+    "tabText": "Texto",
+    "tabPdf": "PDF",
+    "tabPrompt": "Prompt",
+    "tabUrl": "URL",
+    "textLabel": "Texto de origen",
+    "textPlaceholder": "Pega o escribe el contenido sobre el que quieres el cuestionario…",
+    "pdfLabel": "Archivo PDF",
+    "pdfDropzone": "Suelta un PDF aquí o haz clic para buscar",
+    "pdfBrowse": "Buscar archivos",
+    "promptLabel": "Prompt",
+    "promptPlaceholder": "Describe el tema o las preguntas que quieres, p. ej. \"10 preguntas sobre fotosíntesis\"",
+    "topicLabel": "Tema",
+    "topicPlaceholder": "p. ej. Segunda Guerra Mundial, fundamentos de Python, biología celular",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://ejemplo.com/articulo",
+    "questionsCount": "Número de preguntas",
+    "difficulty": "Dificultad",
+    "generateButton": "Generar cuestionario",
+    "generating": "Generando…"
+  },
+  "quiz": {
+    "questionOf": "Pregunta {{current}} de {{total}}",
+    "submitAnswer": "Enviar respuesta",
+    "nextQuestion": "Siguiente pregunta",
+    "previousQuestion": "Pregunta anterior",
+    "finishQuiz": "Finalizar cuestionario",
+    "correct": "¡Correcto!",
+    "incorrect": "Incorrecto",
+    "explanation": "Explicación",
+    "points": "{{count}} punto",
+    "points_plural": "{{count}} puntos",
+    "selectAnswer": "Selecciona una respuesta",
+    "difficultyEasy": "Fácil",
+    "difficultyMedium": "Medio",
+    "difficultyHard": "Difícil",
+    "difficultyMixed": "Mixto",
+    "generatingTitle": "Generando tu cuestionario…",
+    "generatingSubtitle": "Esto puede tardar un momento según la longitud del contenido."
+  },
+  "results": {
+    "title": "Resultados del cuestionario",
+    "yourScore": "Tu puntuación",
+    "totalPoints": "Puntos totales",
+    "percentage": "Porcentaje",
+    "timeTaken": "Tiempo empleado",
+    "reviewAnswers": "Revisar respuestas",
+    "retakeQuiz": "Repetir cuestionario",
+    "backToHome": "Volver al inicio"
+  },
+  "history": {
+    "title": "Historial de cuestionarios",
+    "emptyTitle": "Aún no hay cuestionarios",
+    "emptyDescription": "Completa un cuestionario y tus intentos aparecerán aquí.",
+    "score": "Puntuación",
+    "duration": "Duración",
+    "viewDetails": "Ver detalles",
+    "backToHistory": "Volver al historial",
+    "attemptDate": "Realizado el {{date}}"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "languageDescription": "Elige el idioma de la interfaz de la aplicación.",
+    "pointsPerQuestion": "Puntos por pregunta",
+    "questionsCount": "Número predeterminado de preguntas",
+    "difficulty": "Dificultad predeterminada",
+    "voiceEnabled": "Activar lectura por voz",
+    "voiceRate": "Velocidad de voz",
+    "voicePitch": "Tono de voz",
+    "resetDefaults": "Restablecer valores predeterminados",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "Algo salió mal. Inténtalo de nuevo.",
+    "network": "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
+    "generationFailed": "No se pudo generar el cuestionario. Inténtalo de nuevo.",
+    "invalidInput": "Entrada no válida. Revisa tu información e inténtalo de nuevo.",
+    "textTooShort": "El texto es demasiado corto. Proporciona más contenido.",
+    "pdfParseFailed": "No se pudo leer el PDF. Prueba con otro archivo.",
+    "pdfTooLarge": "El PDF es demasiado grande. Usa un archivo más pequeño.",
+    "quizNotFound": "Cuestionario no encontrado.",
+    "attemptNotFound": "Intento de cuestionario no encontrado.",
+    "loadFailed": "No se pudieron cargar los datos. Actualiza la página e inténtalo de nuevo."
+  },
+  "voice": {
+    "enable": "Activar voz",
+    "disable": "Desactivar voz",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "stop": "Detener",
+    "rate": "Velocidad",
+    "pitch": "Tono",
+    "notSupported": "La síntesis de voz no es compatible con este navegador.",
+    "readingQuestion": "Leyendo pregunta {{current}} de {{total}}"
+  }
+}

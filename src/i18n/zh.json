@@ -1,1 +1,119 @@
-{ "app": { "name": "QuizForge" } }
+{
+  "app": {
+    "name": "QuizForge"
+  },
+  "nav": {
+    "menu": "菜单",
+    "closeSidebar": "关闭侧边栏",
+    "toggleSidebar": "切换侧边栏",
+    "home": "首页",
+    "history": "历史记录",
+    "settings": "设置"
+  },
+  "input": {
+    "title": "创建测验",
+    "subtitle": "粘贴文本、上传 PDF、输入提示词或提供 URL 以生成测验题目。",
+    "tabText": "文本",
+    "tabPdf": "PDF",
+    "tabPrompt": "提示词",
+    "tabUrl": "URL",
+    "textLabel": "源文本",
+    "textPlaceholder": "粘贴或输入您想要测验的内容…",
+    "pdfLabel": "PDF 文件",
+    "pdfDropzone": "将 PDF 拖放到此处或点击浏览",
+    "pdfBrowse": "浏览文件",
+    "promptLabel": "提示词",
+    "promptPlaceholder": "描述您想要的主题或题目，例如「10 道关于光合作用的题目」",
+    "topicLabel": "主题",
+    "topicPlaceholder": "例如：第二次世界大战、Python 基础、细胞生物学",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://example.com/article",
+    "questionsCount": "题目数量",
+    "difficulty": "难度",
+    "generateButton": "生成测验",
+    "generating": "生成中…"
+  },
+  "quiz": {
+    "questionOf": "第 {{current}} 题，共 {{total}} 题",
+    "submitAnswer": "提交答案",
+    "nextQuestion": "下一题",
+    "previousQuestion": "上一题",
+    "finishQuiz": "完成测验",
+    "correct": "正确！",
+    "incorrect": "错误",
+    "explanation": "解析",
+    "points": "{{count}} 分",
+    "points_plural": "{{count}} 分",
+    "selectAnswer": "请选择一个答案",
+    "difficultyEasy": "简单",
+    "difficultyMedium": "中等",
+    "difficultyHard": "困难",
+    "difficultyMixed": "混合",
+    "generatingTitle": "正在生成您的测验…",
+    "generatingSubtitle": "根据内容长度，这可能需要一些时间。"
+  },
+  "results": {
+    "title": "测验结果",
+    "yourScore": "您的得分",
+    "totalPoints": "总分",
+    "percentage": "百分比",
+    "timeTaken": "用时",
+    "reviewAnswers": "查看答案",
+    "retakeQuiz": "重新测验",
+    "backToHome": "返回首页"
+  },
+  "history": {
+    "title": "测验历史",
+    "emptyTitle": "暂无测验记录",
+    "emptyDescription": "完成一次测验后，您的记录将显示在这里。",
+    "score": "得分",
+    "duration": "时长",
+    "viewDetails": "查看详情",
+    "backToHistory": "返回历史记录",
+    "attemptDate": "测验日期：{{date}}"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "languageDescription": "选择应用界面的显示语言。",
+    "pointsPerQuestion": "每题分值",
+    "questionsCount": "默认题目数量",
+    "difficulty": "默认难度",
+    "voiceEnabled": "启用语音朗读",
+    "voiceRate": "语音速度",
+    "voicePitch": "语音音调",
+    "resetDefaults": "恢复默认设置",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "hi": "हिन्दी",
+      "ne": "नेपाली",
+      "de": "Deutsch",
+      "zh": "中文"
+    }
+  },
+  "errors": {
+    "generic": "出了点问题，请重试。",
+    "network": "网络错误，请检查连接后重试。",
+    "generationFailed": "测验生成失败，请重试。",
+    "invalidInput": "输入无效，请检查后重试。",
+    "textTooShort": "文本太短，请提供更多内容。",
+    "pdfParseFailed": "无法读取 PDF，请尝试其他文件。",
+    "pdfTooLarge": "PDF 文件过大，请使用较小的文件。",
+    "quizNotFound": "未找到测验。",
+    "attemptNotFound": "未找到测验记录。",
+    "loadFailed": "数据加载失败，请刷新页面后重试。"
+  },
+  "voice": {
+    "enable": "启用语音",
+    "disable": "禁用语音",
+    "play": "播放",
+    "pause": "暂停",
+    "stop": "停止",
+    "rate": "语速",
+    "pitch": "音调",
+    "notSupported": "此浏览器不支持文字转语音。",
+    "readingQuestion": "正在朗读第 {{current}} 题，共 {{total}} 题"
+  }
+}

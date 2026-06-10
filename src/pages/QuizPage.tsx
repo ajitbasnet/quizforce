@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
+import { QuestionMap } from '../components/quiz/QuestionMap'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { ProgressBar } from '../components/ui/ProgressBar'
@@ -42,9 +43,11 @@ export default function QuizPage() {
   const {
     currentQuestionIndex,
     navigate,
+    jumpTo,
     canGoNext,
     canGoPrev,
     totalQuestions,
+    isAnswered,
   } = useQuizNavigation()
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
 
@@ -128,6 +131,13 @@ export default function QuizPage() {
             </p>
           </div>
         </div>
+
+        <QuestionMap
+          total={total}
+          currentIndex={currentQuestionIndex}
+          isAnswered={isAnswered}
+          onJump={jumpTo}
+        />
 
         <main className="flex-1">
           <AnimatePresence mode="wait">

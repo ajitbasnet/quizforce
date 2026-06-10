@@ -21,9 +21,9 @@
   "input": {
     "title": "Créer un quiz",
     "subtitle": "Collez du texte, téléversez un PDF, saisissez une consigne ou fournissez une URL pour générer des questions.",
-    "tabText": "Texte",
-    "tabPdf": "PDF",
-    "tabPrompt": "Consigne",
+    "tabText": "Coller le texte",
+    "tabPdf": "Importer un PDF",
+    "tabPrompt": "Écrire une consigne",
     "tabUrl": "URL",
     "textLabel": "Texte source",
     "textPlaceholder": "Collez ou saisissez le contenu sur lequel vous souhaitez être interrogé…",

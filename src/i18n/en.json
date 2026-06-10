@@ -21,9 +21,9 @@
   "input": {
     "title": "Create a Quiz",
     "subtitle": "Paste text, upload a PDF, enter a prompt, or provide a URL to generate quiz questions.",
-    "tabText": "Text",
-    "tabPdf": "PDF",
-    "tabPrompt": "Prompt",
+    "tabText": "Paste Text",
+    "tabPdf": "Upload PDF",
+    "tabPrompt": "Write Prompt",
     "tabUrl": "URL",
     "textLabel": "Source text",
     "textPlaceholder": "Paste or type the content you want to quiz on…",

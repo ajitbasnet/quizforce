@@ -21,9 +21,9 @@
   "input": {
     "title": "Quiz erstellen",
     "subtitle": "Fügen Sie Text ein, laden Sie ein PDF hoch, geben Sie eine Eingabeaufforderung ein oder geben Sie eine URL an, um Quizfragen zu generieren.",
-    "tabText": "Text",
-    "tabPdf": "PDF",
-    "tabPrompt": "Eingabe",
+    "tabText": "Text einfügen",
+    "tabPdf": "PDF hochladen",
+    "tabPrompt": "Prompt schreiben",
     "tabUrl": "URL",
     "textLabel": "Quelltext",
     "textPlaceholder": "Fügen Sie den Inhalt ein oder geben Sie ihn ein, zu dem Sie ein Quiz erstellen möchten…",

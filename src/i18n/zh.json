@@ -21,9 +21,9 @@
   "input": {
     "title": "创建测验",
     "subtitle": "粘贴文本、上传 PDF、输入提示词或提供 URL 以生成测验题目。",
-    "tabText": "文本",
-    "tabPdf": "PDF",
-    "tabPrompt": "提示词",
+    "tabText": "粘贴文本",
+    "tabPdf": "上传 PDF",
+    "tabPrompt": "编写提示词",
     "tabUrl": "URL",
     "textLabel": "源文本",
     "textPlaceholder": "粘贴或输入您想要测验的内容…",

@@ -21,9 +21,9 @@
   "input": {
     "title": "Crear un cuestionario",
     "subtitle": "Pega texto, sube un PDF, escribe un prompt o proporciona una URL para generar preguntas.",
-    "tabText": "Texto",
-    "tabPdf": "PDF",
-    "tabPrompt": "Prompt",
+    "tabText": "Pegar texto",
+    "tabPdf": "Subir PDF",
+    "tabPrompt": "Escribir prompt",
     "tabUrl": "URL",
     "textLabel": "Texto de origen",
     "textPlaceholder": "Pega o escribe el contenido sobre el que quieres el cuestionario…",

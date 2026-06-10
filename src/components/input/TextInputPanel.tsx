@@ -10,18 +10,27 @@ import { Button } from '../ui/Button'
 import { Textarea } from '../ui/Textarea'
 
 interface TextInputPanelProps {
-  onSubmit: (content: string) => void
+  onSubmit?: (content: string) => void
   isLoading?: boolean
+  hideSubmit?: boolean
+  onContentChange?: (content: string) => void
 }
 
-export function TextInputPanel({ onSubmit, isLoading = false }: TextInputPanelProps) {
+export function TextInputPanel({
+  onSubmit,
+  isLoading = false,
+  hideSubmit = false,
+  onContentChange,
+}: TextInputPanelProps) {
   const { t } = useLanguage()
   const [content, setContent] = useState('')
   const [validationError, setValidationError] = useState<string | undefined>()
 
   const handleChange = (value: string) => {
-    setContent(value.slice(0, TEXT_INPUT_MAX_CHARS))
+    const next = value.slice(0, TEXT_INPUT_MAX_CHARS)
+    setContent(next)
     setValidationError(undefined)
+    onContentChange?.(next)
   }
 
   const handleSubmit = (e: FormEvent) => {
@@ -37,13 +46,18 @@ export function TextInputPanel({ onSubmit, isLoading = false }: TextInputPanelPr
       return
     }
     setValidationError(undefined)
-    onSubmit(result.data)
+    onSubmit?.(result.data)
   }
 
   const showWarning = content.length > TEXT_INPUT_WARN_CHARS
 
+  const Wrapper = hideSubmit ? 'div' : 'form'
+  const wrapperProps = hideSubmit
+    ? { className: 'flex flex-col gap-4' }
+    : { onSubmit: handleSubmit, className: 'flex flex-col gap-4' }
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <Wrapper {...wrapperProps}>
       <Textarea
         label={t('input.textLabel')}
         placeholder={t('input.textPlaceholder')}
@@ -70,15 +84,17 @@ export function TextInputPanel({ onSubmit, isLoading = false }: TextInputPanelPr
         )}
       </div>
 
-      <Button
-        type="submit"
-        variant="primary"
-        fullWidth
-        disabled={content.trim().length === 0}
-        isLoading={isLoading}
-      >
-        {t('input.generateButton')}
-      </Button>
-    </form>
+      {!hideSubmit && (
+        <Button
+          type="submit"
+          variant="primary"
+          fullWidth
+          disabled={content.trim().length === 0}
+          isLoading={isLoading}
+        >
+          {t('input.generateButton')}
+        </Button>
+      )}
+    </Wrapper>
   )
 }

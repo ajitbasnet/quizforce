@@ -1,4 +1,4 @@
-import { type FormEvent, useMemo, useState } from 'react'
+import { type FormEvent, useEffect, useMemo, useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 import {
   assemblePrompt,
@@ -12,8 +12,10 @@ import { Select } from '../ui/Select'
 import { Textarea } from '../ui/Textarea'
 
 interface PromptBuilderProps {
-  onSubmit: (prompt: string) => void
+  onSubmit?: (prompt: string) => void
   isLoading?: boolean
+  hideSubmit?: boolean
+  onPromptChange?: (data: { topic: string; prompt: string }) => void
 }
 
 const AUDIENCE_OPTIONS: TargetAudience[] = [
@@ -32,7 +34,12 @@ const AUDIENCE_LABEL_KEYS: Record<TargetAudience, string> = {
   custom: 'input.audienceCustom',
 }
 
-export function PromptBuilder({ onSubmit, isLoading = false }: PromptBuilderProps) {
+export function PromptBuilder({
+  onSubmit,
+  isLoading = false,
+  hideSubmit = false,
+  onPromptChange,
+}: PromptBuilderProps) {
   const { t } = useLanguage()
   const [topic, setTopic] = useState('')
   const [subtopics, setSubtopics] = useState('')
@@ -69,6 +76,13 @@ export function PromptBuilder({ onSubmit, isLoading = false }: PromptBuilderProp
     t,
   ])
 
+  useEffect(() => {
+    onPromptChange?.({
+      topic,
+      prompt: topic.trim() ? previewText : '',
+    })
+  }, [topic, previewText, onPromptChange])
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const result = promptTopicSchema.safeParse(topic)
@@ -82,7 +96,7 @@ export function PromptBuilder({ onSubmit, isLoading = false }: PromptBuilderProp
       return
     }
     setTopicError(undefined)
-    onSubmit(
+    onSubmit?.(
       assemblePrompt(
         { ...fields, topic: result.data },
         { audience: resolvedAudienceLabel },
@@ -90,8 +104,13 @@ export function PromptBuilder({ onSubmit, isLoading = false }: PromptBuilderProp
     )
   }
 
+  const Wrapper = hideSubmit ? 'div' : 'form'
+  const wrapperProps = hideSubmit
+    ? { className: 'flex flex-col gap-4' }
+    : { onSubmit: handleSubmit, className: 'flex flex-col gap-4' }
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <Wrapper {...wrapperProps}>
       <Input
         label={t('input.topicLabel')}
         placeholder={t('input.topicPlaceholder')}
@@ -149,15 +168,17 @@ export function PromptBuilder({ onSubmit, isLoading = false }: PromptBuilderProp
         </pre>
       </div>
 
-      <Button
-        type="submit"
-        variant="primary"
-        fullWidth
-        disabled={!topic.trim()}
-        isLoading={isLoading}
-      >
-        {t('input.generateButton')}
-      </Button>
-    </form>
+      {!hideSubmit && (
+        <Button
+          type="submit"
+          variant="primary"
+          fullWidth
+          disabled={!topic.trim()}
+          isLoading={isLoading}
+        >
+          {t('input.generateButton')}
+        </Button>
+      )}
+    </Wrapper>
   )
 }

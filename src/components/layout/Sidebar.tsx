@@ -9,11 +9,14 @@ import {
   Sparkles,
   type LucideIcon,
 } from 'lucide-react'
+import { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useHistoryStore } from '../../store/historyStore'
-import { useSidebarStore } from '../../store/sidebarStore'
+import { VoiceToggle } from '../voice/VoiceToggle'
 import { Tooltip } from '../ui/Tooltip'
+import { LanguageSelector } from './LanguageSelector'
+import { useSidebar } from './SidebarContext'
 
 type NavItem = {
   labelKey: string
@@ -52,10 +55,10 @@ const NAV_ITEMS: NavItem[] = [
   },
 ]
 
-function navLinkClass(isActive: boolean, collapsed: boolean) {
+function navLinkClass(isActive: boolean, showCollapsed: boolean) {
   return clsx(
     'flex items-center rounded-lg text-sm font-medium transition-colors',
-    collapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
+    showCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
     isActive
       ? 'bg-indigo-50 text-indigo-600'
       : 'text-text-muted hover:bg-gray-50 hover:text-text-primary',
@@ -65,10 +68,16 @@ function navLinkClass(isActive: boolean, collapsed: boolean) {
 export function Sidebar() {
   const { t } = useLanguage()
   const location = useLocation()
-  const collapsed = useSidebarStore((s) => s.collapsed)
-  const toggleCollapsed = useSidebarStore((s) => s.toggleCollapsed)
+  const {
+    isCollapsed,
+    toggleCollapsed,
+    isMobileOpen,
+    closeMobile,
+  } = useSidebar()
   const quizzes = useHistoryStore((s) => s.quizzes)
   const attempts = useHistoryStore((s) => s.attempts)
+
+  const showCollapsed = isCollapsed && !isMobileOpen
 
   const averageScore =
     attempts.length > 0
@@ -80,82 +89,111 @@ export function Sidebar() {
 
   const statsTooltip = `${t('sidebar.totalQuizzes', { count: quizzes.length })} · ${t('sidebar.averageScore', { score: averageScore })}`
 
+  useEffect(() => {
+    if (!isMobileOpen) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMobile()
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [isMobileOpen, closeMobile])
+
   return (
-    <aside
-      className={clsx(
-        'fixed left-0 top-16 z-40 hidden h-[calc(100vh-4rem)] flex-col border-r border-gray-100 bg-white transition-[width] duration-200 md:flex',
-        collapsed ? 'w-16' : 'w-64',
-      )}
-    >
-      <div className="flex items-center justify-end border-b border-gray-100 p-2">
+    <>
+      {isMobileOpen && (
         <button
           type="button"
-          onClick={toggleCollapsed}
-          className="rounded-lg p-2 text-text-muted transition-colors hover:bg-gray-50 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
-          aria-label={t('nav.toggleSidebar')}
-        >
-          {collapsed ? (
-            <ChevronRight className="h-4 w-4" aria-hidden />
-          ) : (
-            <ChevronLeft className="h-4 w-4" aria-hidden />
-          )}
-        </button>
-      </div>
+          className="fixed inset-0 top-16 z-30 bg-black/40 lg:hidden"
+          onClick={closeMobile}
+          aria-label={t('nav.closeSidebar')}
+        />
+      )}
 
-      <nav className="flex flex-col gap-1 p-2">
-        {NAV_ITEMS.map((item) => {
-          const Icon = item.icon
-          const label = t(item.labelKey)
-          const link = (
-            <NavLink
-              key={item.labelKey}
-              to={item.to}
-              end={item.end}
-              className={({ isActive: routerActive }) =>
-                navLinkClass(
-                  item.isActive
-                    ? item.isActive(location.pathname)
-                    : routerActive,
-                  collapsed,
-                )
-              }
-            >
-              <Icon className="h-5 w-5 shrink-0" aria-hidden />
-              {!collapsed && <span>{label}</span>}
-            </NavLink>
-          )
-
-          if (collapsed) {
-            return (
-              <Tooltip key={item.labelKey} content={label}>
-                {link}
-              </Tooltip>
-            )
-          }
-
-          return link
-        })}
-      </nav>
-
-      <div className="mt-auto border-t border-gray-100 p-2">
-        {collapsed ? (
-          <Tooltip content={statsTooltip}>
-            <div className="flex justify-center rounded-lg bg-gray-50 p-2.5">
-              <BarChart2 className="h-5 w-5 text-text-muted" aria-hidden />
-            </div>
-          </Tooltip>
-        ) : (
-          <div className="rounded-lg bg-gray-50 p-3 text-xs">
-            <p className="font-medium text-text-muted">{t('sidebar.stats')}</p>
-            <p className="mt-1 text-text-primary">
-              {t('sidebar.totalQuizzes', { count: quizzes.length })}
-            </p>
-            <p className="text-text-primary">
-              {t('sidebar.averageScore', { score: averageScore })}
-            </p>
-          </div>
+      <aside
+        className={clsx(
+          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-64 flex-col border-r border-gray-100 bg-white transition-transform duration-200 lg:transition-[width]',
+          isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
+          isCollapsed ? 'lg:w-16' : 'lg:w-64',
         )}
-      </div>
-    </aside>
+      >
+        <div className="flex flex-col gap-2 border-b border-gray-100 p-2 lg:hidden">
+          <LanguageSelector />
+          <VoiceToggle />
+        </div>
+
+        <div className="hidden items-center justify-end border-b border-gray-100 p-2 lg:flex">
+          <button
+            type="button"
+            onClick={toggleCollapsed}
+            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-gray-50 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+            aria-label={t('nav.toggleSidebar')}
+          >
+            {isCollapsed ? (
+              <ChevronRight className="h-4 w-4" aria-hidden />
+            ) : (
+              <ChevronLeft className="h-4 w-4" aria-hidden />
+            )}
+          </button>
+        </div>
+
+        <nav className="flex flex-col gap-1 p-2">
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon
+            const label = t(item.labelKey)
+            const link = (
+              <NavLink
+                key={item.labelKey}
+                to={item.to}
+                end={item.end}
+                onClick={closeMobile}
+                className={({ isActive: routerActive }) =>
+                  navLinkClass(
+                    item.isActive
+                      ? item.isActive(location.pathname)
+                      : routerActive,
+                    showCollapsed,
+                  )
+                }
+              >
+                <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                {!showCollapsed && <span>{label}</span>}
+              </NavLink>
+            )
+
+            if (showCollapsed) {
+              return (
+                <Tooltip key={item.labelKey} content={label}>
+                  {link}
+                </Tooltip>
+              )
+            }
+
+            return link
+          })}
+        </nav>
+
+        <div className="mt-auto border-t border-gray-100 p-2">
+          {showCollapsed ? (
+            <Tooltip content={statsTooltip}>
+              <div className="flex justify-center rounded-lg bg-gray-50 p-2.5">
+                <BarChart2 className="h-5 w-5 text-text-muted" aria-hidden />
+              </div>
+            </Tooltip>
+          ) : (
+            <div className="rounded-lg bg-gray-50 p-3 text-xs">
+              <p className="font-medium text-text-muted">{t('sidebar.stats')}</p>
+              <p className="mt-1 text-text-primary">
+                {t('sidebar.totalQuizzes', { count: quizzes.length })}
+              </p>
+              <p className="text-text-primary">
+                {t('sidebar.averageScore', { score: averageScore })}
+              </p>
+            </div>
+          )}
+        </div>
+      </aside>
+    </>
   )
 }

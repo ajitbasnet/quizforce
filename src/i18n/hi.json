@@ -9,8 +9,14 @@
     "home": "होम",
     "history": "इतिहास",
     "settings": "सेटिंग्स",
+    "createQuiz": "Create Quiz",
     "quiz": "Quiz",
     "results": "Results"
+  },
+  "sidebar": {
+    "stats": "Your stats",
+    "totalQuizzes": "{{count}} quizzes created",
+    "averageScore": "{{score}}% avg score"
   },
   "input": {
     "title": "क्विज़ बनाएँ",

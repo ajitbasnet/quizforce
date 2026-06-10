@@ -9,8 +9,14 @@
     "home": "Inicio",
     "history": "Historial",
     "settings": "Ajustes",
+    "createQuiz": "Create Quiz",
     "quiz": "Quiz",
     "results": "Results"
+  },
+  "sidebar": {
+    "stats": "Your stats",
+    "totalQuizzes": "{{count}} quizzes created",
+    "averageScore": "{{score}}% avg score"
   },
   "input": {
     "title": "Crear un cuestionario",

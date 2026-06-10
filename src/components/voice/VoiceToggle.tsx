@@ -1,7 +1,7 @@
 import { Volume2, VolumeX } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useSettingsStore } from '../../store/settingsStore'
-import { Button } from '../ui/Button'
+import { topBarToggleClass } from '../layout/topBarActionStyles'
 
 export function VoiceToggle() {
   const { t } = useLanguage()
@@ -9,10 +9,9 @@ export function VoiceToggle() {
   const updateSettings = useSettingsStore((s) => s.updateSettings)
 
   return (
-    <Button
+    <button
       type="button"
-      variant="ghost"
-      size="sm"
+      className={topBarToggleClass(voiceEnabled)}
       aria-label={voiceEnabled ? t('voice.disable') : t('voice.enable')}
       aria-pressed={voiceEnabled}
       onClick={() => updateSettings({ voiceEnabled: !voiceEnabled })}
@@ -22,6 +21,6 @@ export function VoiceToggle() {
       ) : (
         <VolumeX className="h-4 w-4" aria-hidden />
       )}
-    </Button>
+    </button>
   )
 }

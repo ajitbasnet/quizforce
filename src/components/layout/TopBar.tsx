@@ -6,6 +6,7 @@ import { VoiceToggle } from '../voice/VoiceToggle'
 import { Button } from '../ui/Button'
 import { Tooltip } from '../ui/Tooltip'
 import { LanguageSelector } from './LanguageSelector'
+import { topBarNavLinkClass } from './topBarActionStyles'
 import { useSidebar } from './SidebarContext'
 
 function getBreadcrumbKey(pathname: string): string {
@@ -19,22 +20,10 @@ function getBreadcrumbKey(pathname: string): string {
 }
 
 const actionLinkClass = ({ isActive }: { isActive: boolean }) =>
-  [
-    'inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
-    isActive
-      ? 'text-indigo-600 bg-indigo-50'
-      : 'text-text-primary hover:bg-gray-100',
-  ].join(' ')
+  topBarNavLinkClass(isActive)
 
 const iconLinkClass = ({ isActive }: { isActive: boolean }) =>
-  [
-    'inline-flex items-center justify-center rounded-lg p-2 text-sm font-medium transition-colors',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
-    isActive
-      ? 'text-indigo-600 bg-indigo-50'
-      : 'text-text-primary hover:bg-gray-100',
-  ].join(' ')
+  topBarNavLinkClass(isActive, true)
 
 export function TopBar() {
   const { t } = useLanguage()

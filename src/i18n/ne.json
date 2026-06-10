@@ -8,7 +8,9 @@
     "toggleSidebar": "साइडबार टगल गर्नुहोस्",
     "home": "गृहपृष्ठ",
     "history": "इतिहास",
-    "settings": "सेटिङहरू"
+    "settings": "सेटिङहरू",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "क्विज बनाउनुहोस्",

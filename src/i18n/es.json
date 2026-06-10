@@ -8,7 +8,9 @@
     "toggleSidebar": "Mostrar u ocultar barra lateral",
     "home": "Inicio",
     "history": "Historial",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "Crear un cuestionario",

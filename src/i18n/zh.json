@@ -8,7 +8,9 @@
     "toggleSidebar": "切换侧边栏",
     "home": "首页",
     "history": "历史记录",
-    "settings": "设置"
+    "settings": "设置",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "创建测验",

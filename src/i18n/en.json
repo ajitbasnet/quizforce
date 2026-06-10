@@ -8,7 +8,9 @@
     "toggleSidebar": "Toggle sidebar",
     "home": "Home",
     "history": "History",
-    "settings": "Settings"
+    "settings": "Settings",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "Create a Quiz",

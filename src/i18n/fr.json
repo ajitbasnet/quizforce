@@ -8,7 +8,9 @@
     "toggleSidebar": "Afficher ou masquer la barre latérale",
     "home": "Accueil",
     "history": "Historique",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "Créer un quiz",

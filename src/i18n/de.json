@@ -8,7 +8,9 @@
     "toggleSidebar": "Seitenleiste ein- oder ausblenden",
     "home": "Startseite",
     "history": "Verlauf",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "Quiz erstellen",

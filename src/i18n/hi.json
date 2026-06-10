@@ -8,7 +8,9 @@
     "toggleSidebar": "साइडबार टॉगल करें",
     "home": "होम",
     "history": "इतिहास",
-    "settings": "सेटिंग्स"
+    "settings": "सेटिंग्स",
+    "quiz": "Quiz",
+    "results": "Results"
   },
   "input": {
     "title": "क्विज़ बनाएँ",

@@ -1,19 +1,35 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import HomePage from '../pages/HomePage'
-import QuizPage from '../pages/QuizPage'
-import HistoryPage from '../pages/HistoryPage'
-import ResultsPage from '../pages/ResultsPage'
-import SettingsPage from '../pages/SettingsPage'
+import { AppShell } from '../components/layout/AppShell'
+import { Spinner } from '../components/ui/Spinner'
+
+const HomePage = lazy(() => import('../pages/HomePage'))
+const QuizPage = lazy(() => import('../pages/QuizPage'))
+const ResultsPage = lazy(() => import('../pages/ResultsPage'))
+const HistoryPage = lazy(() => import('../pages/HistoryPage'))
+const HistoryDetailPage = lazy(() => import('../pages/HistoryDetailPage'))
+const SettingsPage = lazy(() => import('../pages/SettingsPage'))
+
+function LazyPage({ Page }: { Page: React.ComponentType }) {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <Page />
+    </Suspense>
+  )
+}
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/quiz" element={<QuizPage />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/results" element={<ResultsPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route element={<AppShell />}>
+          <Route path="/" element={<LazyPage Page={HomePage} />} />
+          <Route path="/quiz" element={<LazyPage Page={QuizPage} />} />
+          <Route path="/results/:attemptId" element={<LazyPage Page={ResultsPage} />} />
+          <Route path="/history" element={<LazyPage Page={HistoryPage} />} />
+          <Route path="/history/:quizId" element={<LazyPage Page={HistoryDetailPage} />} />
+          <Route path="/settings" element={<LazyPage Page={SettingsPage} />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

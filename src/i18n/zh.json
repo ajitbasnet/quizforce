@@ -109,6 +109,8 @@
     "difficultyMedium": "中等",
     "difficultyHard": "困难",
     "difficultyMixed": "混合",
+    "questionsCount": "{{count}} 道题",
+    "totalPoints": "共 {{count}} 分",
     "generatingTitle": "正在生成您的测验…",
     "generatingSubtitle": "根据内容长度，这可能需要一些时间。",
     "stageAnalyzing": "正在分析您的内容...",

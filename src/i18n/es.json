@@ -109,6 +109,8 @@
     "difficultyMedium": "Medio",
     "difficultyHard": "Difícil",
     "difficultyMixed": "Mixto",
+    "questionsCount": "{{count}} preguntas",
+    "totalPoints": "{{count}} pts en total",
     "generatingTitle": "Generando tu cuestionario…",
     "generatingSubtitle": "Esto puede tardar un momento según la longitud del contenido.",
     "stageAnalyzing": "Analizando tu contenido...",

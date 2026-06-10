@@ -109,6 +109,8 @@
     "difficultyMedium": "Mittel",
     "difficultyHard": "Schwer",
     "difficultyMixed": "Gemischt",
+    "questionsCount": "{{count}} Fragen",
+    "totalPoints": "{{count}} Pkt. gesamt",
     "generatingTitle": "Ihr Quiz wird generiert…",
     "generatingSubtitle": "Dies kann je nach Länge des Inhalts einen Moment dauern.",
     "stageAnalyzing": "Ihr Inhalt wird analysiert...",

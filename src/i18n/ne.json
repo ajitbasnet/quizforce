@@ -109,6 +109,8 @@
     "difficultyMedium": "मध्यम",
     "difficultyHard": "कठिन",
     "difficultyMixed": "मिश्रित",
+    "questionsCount": "{{count}} प्रश्नहरू",
+    "totalPoints": "कुल {{count}} अङ्क",
     "generatingTitle": "तपाईंको क्विज बनाइँदै छ…",
     "generatingSubtitle": "सामग्रीको लम्बाइ अनुसार यसमा केही समय लाग्न सक्छ।",
     "stageAnalyzing": "तपाईंको सामग्री विश्लेषण गर्दै...",

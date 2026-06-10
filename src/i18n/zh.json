@@ -171,9 +171,9 @@
     "quizNotFound": "未找到测验。",
     "attemptNotFound": "未找到测验记录。",
     "loadFailed": "数据加载失败，请刷新页面后重试。",
-    "rateLimit": "请求过于频繁，请稍后再试。",
-    "overloaded": "AI 服务暂时过载，请稍后重试。",
-    "invalidApiKeyConfig": "API 密钥无效。请检查 .env 文件中的 VITE_ANTHROPIC_API_KEY。"
+    "rateLimit": "请求过多，请等待 30 秒后再试。",
+    "overloaded": "AI 繁忙，请稍后再试。",
+    "invalidApiKeyConfig": "配置错误 — 请联系支持。"
   },
   "voice": {
     "enable": "启用语音",

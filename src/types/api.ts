@@ -11,14 +11,23 @@ export type QuizGenerationErrorCode =
   | 'VALIDATION_ERROR'
   | 'NETWORK_ERROR'
   | 'ABORTED'
+  | 'RATE_LIMIT_ERROR'
+  | 'OVERLOADED_ERROR'
+  | 'INVALID_API_KEY'
 
 export class QuizGenerationError extends Error {
   code: QuizGenerationErrorCode
+  apiErrorType?: string
 
-  constructor(message: string, code: QuizGenerationErrorCode) {
+  constructor(
+    message: string,
+    code: QuizGenerationErrorCode,
+    apiErrorType?: string,
+  ) {
     super(message)
     this.name = 'QuizGenerationError'
     this.code = code
+    this.apiErrorType = apiErrorType
   }
 }
 

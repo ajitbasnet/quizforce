@@ -171,9 +171,9 @@
     "quizNotFound": "Quiz not found.",
     "attemptNotFound": "Quiz attempt not found.",
     "loadFailed": "Failed to load data. Please refresh and try again.",
-    "rateLimit": "Too many requests. Please wait a moment and try again.",
-    "overloaded": "The AI service is temporarily overloaded. Please try again shortly.",
-    "invalidApiKeyConfig": "Invalid API key. Check VITE_ANTHROPIC_API_KEY in your .env file."
+    "rateLimit": "Too many requests, please wait 30 seconds.",
+    "overloaded": "AI is busy, please try again.",
+    "invalidApiKeyConfig": "Configuration error — contact support."
   },
   "voice": {
     "enable": "Enable voice",

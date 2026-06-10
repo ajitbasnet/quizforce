@@ -171,9 +171,9 @@
     "quizNotFound": "Cuestionario no encontrado.",
     "attemptNotFound": "Intento de cuestionario no encontrado.",
     "loadFailed": "No se pudieron cargar los datos. Actualiza la página e inténtalo de nuevo.",
-    "rateLimit": "Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.",
-    "overloaded": "El servicio de IA está temporalmente saturado. Inténtalo de nuevo en breve.",
-    "invalidApiKeyConfig": "Clave API no válida. Comprueba VITE_ANTHROPIC_API_KEY en tu archivo .env."
+    "rateLimit": "Demasiadas solicitudes, espera 30 segundos.",
+    "overloaded": "La IA está ocupada, inténtalo de nuevo.",
+    "invalidApiKeyConfig": "Error de configuración — contacta con soporte."
   },
   "voice": {
     "enable": "Activar voz",

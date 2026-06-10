@@ -171,9 +171,9 @@
     "quizNotFound": "Quiz introuvable.",
     "attemptNotFound": "Tentative de quiz introuvable.",
     "loadFailed": "Échec du chargement des données. Actualisez la page et réessayez.",
-    "rateLimit": "Trop de requêtes. Veuillez patienter un instant et réessayer.",
-    "overloaded": "Le service d'IA est temporairement surchargé. Veuillez réessayer sous peu.",
-    "invalidApiKeyConfig": "Clé API invalide. Vérifiez VITE_ANTHROPIC_API_KEY dans votre fichier .env."
+    "rateLimit": "Trop de requêtes, veuillez attendre 30 secondes.",
+    "overloaded": "L'IA est occupée, veuillez réessayer.",
+    "invalidApiKeyConfig": "Erreur de configuration — contactez le support."
   },
   "voice": {
     "enable": "Activer la voix",

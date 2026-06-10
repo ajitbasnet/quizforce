@@ -19,6 +19,49 @@ interface AnthropicMessageResponse {
   content?: Array<{ type?: string; text?: string }>
 }
 
+interface AnthropicErrorResponse {
+  type?: string
+  error?: {
+    type?: string
+    message?: string
+  }
+}
+
+async function parseAnthropicError(
+  response: Response,
+): Promise<QuizGenerationError> {
+  let errorType: string | undefined
+  let message = `API request failed with status ${response.status}`
+
+  const text = await response.text()
+  if (text) {
+    try {
+      const body = JSON.parse(text) as AnthropicErrorResponse
+      errorType = body.error?.type
+      if (body.error?.message) {
+        message = body.error.message
+      }
+    } catch {
+      message = text
+    }
+  }
+
+  switch (errorType) {
+    case 'rate_limit_error':
+      return new QuizGenerationError(message, 'RATE_LIMIT_ERROR', errorType)
+    case 'overloaded_error':
+      return new QuizGenerationError(message, 'OVERLOADED_ERROR', errorType)
+    case 'invalid_api_key':
+    case 'authentication_error':
+      return new QuizGenerationError(message, 'INVALID_API_KEY', errorType)
+    default:
+      if (response.status === 401) {
+        return new QuizGenerationError(message, 'INVALID_API_KEY', errorType)
+      }
+      return new QuizGenerationError(message, 'API_ERROR', errorType)
+  }
+}
+
 function startProgressSimulation(
   onProgress: ((progress: number) => void) | undefined,
 ): { stop: (finalProgress?: number) => void } {
@@ -119,12 +162,7 @@ export async function generateQuiz({
     })
 
     if (!response.ok) {
-      const errorBody = await response.text()
-      const code = response.status === 401 ? 'AUTH_ERROR' : 'API_ERROR'
-      throw new QuizGenerationError(
-        errorBody || `API request failed with status ${response.status}`,
-        code,
-      )
+      throw await parseAnthropicError(response)
     }
 
     const data = (await response.json()) as AnthropicMessageResponse

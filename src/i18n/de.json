@@ -171,9 +171,9 @@
     "quizNotFound": "Quiz nicht gefunden.",
     "attemptNotFound": "Quiz-Versuch nicht gefunden.",
     "loadFailed": "Daten konnten nicht geladen werden. Aktualisieren Sie die Seite und versuchen Sie es erneut.",
-    "rateLimit": "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
-    "overloaded": "Der KI-Dienst ist vorübergehend überlastet. Bitte versuchen Sie es in Kürze erneut.",
-    "invalidApiKeyConfig": "Ungültiger API-Schlüssel. Überprüfen Sie VITE_ANTHROPIC_API_KEY in Ihrer .env-Datei."
+    "rateLimit": "Zu viele Anfragen, bitte 30 Sekunden warten.",
+    "overloaded": "Die KI ist ausgelastet, bitte erneut versuchen.",
+    "invalidApiKeyConfig": "Konfigurationsfehler — Support kontaktieren."
   },
   "voice": {
     "enable": "Sprache aktivieren",

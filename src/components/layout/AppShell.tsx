@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { Outlet } from 'react-router-dom'
 import { useSidebarStore } from '../../store/sidebarStore'
-import { PageWrapper } from './PageWrapper'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
 
@@ -18,9 +17,9 @@ export function AppShell() {
           collapsed ? 'md:pl-16' : 'md:pl-64',
         )}
       >
-        <PageWrapper>
+        <main className="flex-1 overflow-auto">
           <Outlet />
-        </PageWrapper>
+        </main>
       </div>
     </div>
   )

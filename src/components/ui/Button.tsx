@@ -73,10 +73,7 @@ export function Button({
             className="absolute inset-0 flex items-center justify-center"
             aria-hidden
           >
-            <Spinner
-              size="sm"
-              className="border-current border-t-transparent"
-            />
+            <Spinner size="sm" />
           </span>
         </>
       ) : (

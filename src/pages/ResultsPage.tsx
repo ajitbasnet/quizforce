@@ -1,3 +1,6 @@
+import { useParams } from 'react-router-dom'
+
 export default function ResultsPage() {
-  return <div className="min-h-screen bg-bg" />
+  const { attemptId } = useParams()
+  return <div className="min-h-full bg-bg" data-attempt-id={attemptId} />
 }

@@ -12,7 +12,13 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage'))
 
 function LazyPage({ Page }: { Page: React.ComponentType }) {
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense
+      fallback={
+        <div className="flex min-h-[50vh] items-center justify-center">
+          <Spinner />
+        </div>
+      }
+    >
       <Page />
     </Suspense>
   )

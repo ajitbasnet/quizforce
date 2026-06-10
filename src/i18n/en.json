@@ -67,6 +67,7 @@
     "voiceNarration": "Voice Narration",
     "pointsPerQuestion": "Default Points per Question",
     "generateButton": "Generate Quiz",
+    "cancelGeneration": "Cancel",
     "generating": "Generating…"
   },
   "quiz": {

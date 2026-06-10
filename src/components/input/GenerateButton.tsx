@@ -1,4 +1,5 @@
 import { Sparkles } from 'lucide-react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { generateQuiz } from '../../api/claude'
 import { useLanguage } from '../../hooks/useLanguage'
@@ -45,6 +46,14 @@ export function GenerateButton({
   const setProgress = useQuizStore((s) => s.setProgress)
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
   const setError = useQuizStore((s) => s.setError)
+  const abortRef = useRef<AbortController | null>(null)
+
+  const handleCancel = () => {
+    abortRef.current?.abort()
+    setGenerating(false)
+    setProgress(0)
+    setError(null)
+  }
 
   const handleGenerate = async () => {
     const input = getGenerationInput()
@@ -52,6 +61,9 @@ export function GenerateButton({
       toast.error(input.error)
       return
     }
+
+    const controller = new AbortController()
+    abortRef.current = controller
 
     setGenerating(true)
     setProgress(0)
@@ -63,19 +75,31 @@ export function GenerateButton({
         settings,
         sourceType: input.sourceType,
         onProgress: setProgress,
+        signal: controller.signal,
       })
       setCurrentQuiz(quiz)
       navigate('/quiz')
     } catch (error) {
+      if (
+        error instanceof QuizGenerationError &&
+        error.code === 'ABORTED'
+      ) {
+        return
+      }
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        return
+      }
       const message = getErrorMessage(error, t)
       setError(message)
       toast.error(message)
       setGenerating(false)
+    } finally {
+      abortRef.current = null
     }
   }
 
   if (isGenerating) {
-    return <GenerationProgress />
+    return <GenerationProgress onCancel={handleCancel} />
   }
 
   return (

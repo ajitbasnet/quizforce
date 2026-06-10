@@ -67,6 +67,7 @@
     "voiceNarration": "Narración por voz",
     "pointsPerQuestion": "Puntos predeterminados por pregunta",
     "generateButton": "Generar cuestionario",
+    "cancelGeneration": "Cancelar",
     "generating": "Generando…"
   },
   "quiz": {

@@ -67,6 +67,7 @@
     "voiceNarration": "Sprachausgabe",
     "pointsPerQuestion": "Standardpunkte pro Frage",
     "generateButton": "Quiz generieren",
+    "cancelGeneration": "Abbrechen",
     "generating": "Wird generiert…"
   },
   "quiz": {

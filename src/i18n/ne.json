@@ -67,6 +67,7 @@
     "voiceNarration": "आवाज नरेशन",
     "pointsPerQuestion": "प्रति प्रश्न पूर्वनिर्धारित अंक",
     "generateButton": "क्विज बनाउनुहोस्",
+    "cancelGeneration": "रद्द गर्नुहोस्",
     "generating": "बनाइँदै छ…"
   },
   "quiz": {

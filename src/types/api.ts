@@ -10,6 +10,7 @@ export type QuizGenerationErrorCode =
   | 'PARSE_ERROR'
   | 'VALIDATION_ERROR'
   | 'NETWORK_ERROR'
+  | 'ABORTED'
 
 export class QuizGenerationError extends Error {
   code: QuizGenerationErrorCode
@@ -26,4 +27,5 @@ export interface GenerateQuizParams {
   settings: QuizSettings
   sourceType: Quiz['sourceType']
   onProgress?: (progress: number) => void
+  signal?: AbortSignal
 }

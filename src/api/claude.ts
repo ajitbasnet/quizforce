@@ -90,6 +90,7 @@ export async function generateQuiz({
   settings,
   sourceType,
   onProgress,
+  signal,
 }: GenerateQuizParams): Promise<Quiz> {
   const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
   if (!apiKey) {
@@ -114,6 +115,7 @@ export async function generateQuiz({
         system,
         messages: [{ role: 'user', content: user }],
       }),
+      signal,
     })
 
     if (!response.ok) {
@@ -145,6 +147,9 @@ export async function generateQuiz({
     return quiz
   } catch (error) {
     progress.stop()
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new QuizGenerationError('Generation cancelled', 'ABORTED')
+    }
     throw toQuizGenerationError(error)
   }
 }

@@ -67,3 +67,43 @@ export function buildQuizPrompt(
 
   return { system: SYSTEM_PROMPT, user }
 }
+
+export type TargetAudience =
+  | 'elementary'
+  | 'high_school'
+  | 'college'
+  | 'professional'
+  | 'custom'
+
+export interface PromptBuilderFields {
+  topic: string
+  subtopics: string
+  audience: TargetAudience
+  customAudience: string
+  specialInstructions: string
+}
+
+export interface PromptBuilderLabels {
+  audience: string
+}
+
+export function assemblePrompt(
+  fields: PromptBuilderFields,
+  labels: PromptBuilderLabels,
+): string {
+  const lines: string[] = [`Create a quiz on the topic: ${fields.topic.trim()}`]
+
+  const subtopics = fields.subtopics.trim()
+  if (subtopics) {
+    lines.push('', `Subtopics to cover: ${subtopics}`)
+  }
+
+  lines.push('', `Target audience: ${labels.audience}`)
+
+  const instructions = fields.specialInstructions.trim()
+  if (instructions) {
+    lines.push('', `Special instructions: ${instructions}`)
+  }
+
+  return lines.join('\n')
+}

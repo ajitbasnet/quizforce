@@ -7,3 +7,34 @@
     @apply bg-bg text-text-primary font-sans antialiased;
   }
 }
+
+@layer utilities {
+  @keyframes spinner-dash {
+    0% {
+      stroke-dashoffset: 31.4;
+    }
+    50% {
+      stroke-dashoffset: 7.85;
+    }
+    100% {
+      stroke-dashoffset: 31.4;
+    }
+  }
+
+  .animate-spinner-dash {
+    animation: spinner-dash 1s ease-in-out infinite;
+  }
+
+  @keyframes progress-shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-progress-shimmer {
+    animation: progress-shimmer 1.5s infinite;
+  }
+}

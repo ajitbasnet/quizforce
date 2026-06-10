@@ -1,3 +1,12 @@
+import { PageWrapper } from '../components/layout/PageWrapper'
+import { useLanguage } from '../hooks/useLanguage'
+
 export default function HistoryPage() {
-  return <div className="min-h-screen bg-bg" />
+  const { t } = useLanguage()
+
+  return (
+    <PageWrapper title={t('history.title')}>
+      <div />
+    </PageWrapper>
+  )
 }

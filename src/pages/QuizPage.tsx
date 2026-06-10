@@ -1,3 +1,12 @@
+import { PageWrapper } from '../components/layout/PageWrapper'
+import { useLanguage } from '../hooks/useLanguage'
+
 export default function QuizPage() {
-  return <div className="min-h-screen bg-bg" />
+  const { t } = useLanguage()
+
+  return (
+    <PageWrapper title={t('nav.quiz')}>
+      <div />
+    </PageWrapper>
+  )
 }

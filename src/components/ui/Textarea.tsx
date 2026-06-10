@@ -23,11 +23,25 @@ interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>
   helperText?: string
   rows?: number
   autoResize?: boolean
+  minHeightPx?: number
+  maxHeightPx?: number
 }
 
-function resizeTextarea(el: HTMLTextAreaElement) {
+interface ResizeOptions {
+  minHeightPx?: number
+  maxHeightPx?: number
+}
+
+function resizeTextarea(el: HTMLTextAreaElement, options: ResizeOptions = {}) {
+  const { minHeightPx, maxHeightPx } = options
   el.style.height = 'auto'
-  el.style.height = `${el.scrollHeight}px`
+  const scrollHeight = el.scrollHeight
+  const min = minHeightPx ?? scrollHeight
+  const max = maxHeightPx ?? scrollHeight
+  const height = Math.min(Math.max(scrollHeight, min), Math.max(min, max))
+  el.style.height = `${height}px`
+  el.style.overflowY =
+    maxHeightPx !== undefined && scrollHeight > maxHeightPx ? 'auto' : 'hidden'
 }
 
 export function Textarea({
@@ -37,12 +51,15 @@ export function Textarea({
   helperText,
   rows = 4,
   autoResize = false,
+  minHeightPx,
+  maxHeightPx,
   id,
   className,
   onInput,
   ...props
 }: TextareaProps) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const resizeOptions: ResizeOptions = { minHeightPx, maxHeightPx }
   const inputId = fieldId(label, id)
   const helperId = inputId && helperText ? `${inputId}-helper` : undefined
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
@@ -53,21 +70,21 @@ export function Textarea({
       textareaRef.current = el
       register?.ref(el)
       if (el && autoResize) {
-        resizeTextarea(el)
+        resizeTextarea(el, resizeOptions)
       }
     },
-    [register, autoResize],
+    [register, autoResize, minHeightPx, maxHeightPx],
   )
 
   useEffect(() => {
     if (autoResize && textareaRef.current) {
-      resizeTextarea(textareaRef.current)
+      resizeTextarea(textareaRef.current, resizeOptions)
     }
-  }, [autoResize, props.value, props.defaultValue])
+  }, [autoResize, minHeightPx, maxHeightPx, props.value, props.defaultValue])
 
   const handleInput = (e: InputEvent<HTMLTextAreaElement>) => {
     if (autoResize) {
-      resizeTextarea(e.currentTarget)
+      resizeTextarea(e.currentTarget, resizeOptions)
     }
     onInput?.(e)
   }

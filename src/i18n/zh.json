@@ -18,6 +18,16 @@
     "totalQuizzes": "{{count}} quizzes created",
     "averageScore": "{{score}}% avg score"
   },
+  "home": {
+    "heroTitle": "将任何内容变成测验",
+    "heroSubtitle": "粘贴文本、上传 PDF 或描述主题 — QuizForge 可在数秒内生成测验。",
+    "featureVoiceTitle": "语音朗读",
+    "featureVoiceDescription": "以可调速度和音调朗读题目。",
+    "featureMultilingualTitle": "多语言",
+    "featureMultilingualDescription": "一键生成 7 种语言的测验。",
+    "featureExplanationsTitle": "答案解析",
+    "featureExplanationsDescription": "每道题都包含对正确和错误答案的清晰解释。"
+  },
   "input": {
     "title": "创建测验",
     "subtitle": "粘贴文本、上传 PDF、输入提示词或提供 URL 以生成测验题目。",
@@ -39,6 +49,7 @@
     "pdfCharCount": "已提取 {{count}} 个字符",
     "pdfRetry": "重试",
     "pdfInvalidType": "请上传 PDF 文件。",
+    "pdfNotReady": "生成前请先上传并提取 PDF。",
     "pdfPasswordProtected": "此 PDF 受密码保护，请上传未加密的文件。",
     "promptLabel": "提示词",
     "promptPlaceholder": "描述您想要的主题或题目，例如「10 道关于光合作用的题目」",

@@ -18,6 +18,16 @@
     "totalQuizzes": "{{count}} quizzes created",
     "averageScore": "{{score}}% avg score"
   },
+  "home": {
+    "heroTitle": "Transformez n'importe quel contenu en quiz",
+    "heroSubtitle": "Collez du texte, téléversez un PDF ou décrivez un sujet — QuizForge crée un quiz en quelques secondes.",
+    "featureVoiceTitle": "Narration vocale",
+    "featureVoiceDescription": "Écoutez les questions lues à voix haute avec vitesse et tonalité réglables.",
+    "featureMultilingualTitle": "Multilingue",
+    "featureMultilingualDescription": "Générez des quiz en 7 langues en un clic.",
+    "featureExplanationsTitle": "Explications des réponses",
+    "featureExplanationsDescription": "Chaque question inclut des explications claires pour les bonnes et mauvaises réponses."
+  },
   "input": {
     "title": "Créer un quiz",
     "subtitle": "Collez du texte, téléversez un PDF, saisissez une consigne ou fournissez une URL pour générer des questions.",
@@ -39,6 +49,7 @@
     "pdfCharCount": "{{count}} caractères extraits",
     "pdfRetry": "Réessayer",
     "pdfInvalidType": "Veuillez téléverser un fichier PDF.",
+    "pdfNotReady": "Téléversez et extrayez un PDF avant de générer.",
     "pdfPasswordProtected": "Ce PDF est protégé par mot de passe. Téléversez un fichier déverrouillé.",
     "promptLabel": "Consigne",
     "promptPlaceholder": "Décrivez le sujet ou les questions souhaitées, p. ex. « 10 questions sur la photosynthèse »",

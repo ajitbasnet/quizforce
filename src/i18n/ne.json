@@ -18,6 +18,16 @@
     "totalQuizzes": "{{count}} quizzes created",
     "averageScore": "{{score}}% avg score"
   },
+  "home": {
+    "heroTitle": "कुनै पनि सामग्रीलाई क्विजमा बदल्नुहोस्",
+    "heroSubtitle": "टेक्स्ट टाँस्नुहोस्, PDF अपलोड गर्नुहोस् वा विषय वर्णन गर्नुहोस् — QuizForge ले सेकेन्डमा क्विज बनाउँछ।",
+    "featureVoiceTitle": "भ्वाइस न्यारेसन",
+    "featureVoiceDescription": "समायोज्य गति र पिचसहित प्रश्नहरू सुन्नुहोस्।",
+    "featureMultilingualTitle": "बहुभाषिक",
+    "featureMultilingualDescription": "एक क्लिकमा ७ भाषामा क्विज बनाउनुहोस्।",
+    "featureExplanationsTitle": "उत्तर व्याख्या",
+    "featureExplanationsDescription": "प्रत्येक प्रश्नमा सही र गलत उत्तरका लागि स्पष्ट व्याख्या समावेश छ।"
+  },
   "input": {
     "title": "क्विज बनाउनुहोस्",
     "subtitle": "प्रश्नहरू बनाउन पाठ टाँस्नुहोस्, PDF अपलोड गर्नुहोस्, प्रम्प्ट प्रविष्ट गर्नुहोस् वा URL दिनुहोस्।",
@@ -39,6 +49,7 @@
     "pdfCharCount": "{{count}} अक्षर निकालियो",
     "pdfRetry": "पुनः प्रयास गर्नुहोस्",
     "pdfInvalidType": "कृपया PDF फाइल अपलोड गर्नुहोस्।",
+    "pdfNotReady": "जेनरेट गर्नु अघि PDF अपलोड गरी निकाल्नुहोस्।",
     "pdfPasswordProtected": "यो PDF पासवर्ड-सुरक्षित छ। कृपया अनलक गरिएको फाइल अपलोड गर्नुहोस्।",
     "promptLabel": "प्रम्प्ट",
     "promptPlaceholder": "विषय वा चाहिएका प्रश्नहरू वर्णन गर्नुहोस्, जस्तै \"प्रकाश संश्लेषणमा १० प्रश्न\"",

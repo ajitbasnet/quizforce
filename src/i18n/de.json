@@ -18,6 +18,16 @@
     "totalQuizzes": "{{count}} quizzes created",
     "averageScore": "{{score}}% avg score"
   },
+  "home": {
+    "heroTitle": "Verwandeln Sie beliebige Inhalte in ein Quiz",
+    "heroSubtitle": "Text einfügen, PDF hochladen oder ein Thema beschreiben — QuizForge erstellt in Sekunden ein Quiz.",
+    "featureVoiceTitle": "Sprachausgabe",
+    "featureVoiceDescription": "Lassen Sie sich Fragen mit einstellbarer Geschwindigkeit und Tonhöhe vorlesen.",
+    "featureMultilingualTitle": "Mehrsprachig",
+    "featureMultilingualDescription": "Erstellen Sie Quizze in 7 Sprachen mit einem Klick.",
+    "featureExplanationsTitle": "Antworterklärungen",
+    "featureExplanationsDescription": "Jede Frage enthält klare Erklärungen für richtige und falsche Antworten."
+  },
   "input": {
     "title": "Quiz erstellen",
     "subtitle": "Fügen Sie Text ein, laden Sie ein PDF hoch, geben Sie eine Eingabeaufforderung ein oder geben Sie eine URL an, um Quizfragen zu generieren.",
@@ -39,6 +49,7 @@
     "pdfCharCount": "{{count}} Zeichen extrahiert",
     "pdfRetry": "Erneut versuchen",
     "pdfInvalidType": "Bitte laden Sie eine PDF-Datei hoch.",
+    "pdfNotReady": "Laden Sie ein PDF hoch und extrahieren Sie es, bevor Sie generieren.",
     "pdfPasswordProtected": "Diese PDF ist passwortgeschützt. Bitte laden Sie eine ungeschützte Datei hoch.",
     "promptLabel": "Eingabeaufforderung",
     "promptPlaceholder": "Beschreiben Sie das Thema oder die gewünschten Fragen, z. B. „10 Fragen zur Photosynthese“",

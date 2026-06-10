@@ -1,26 +1,35 @@
 import clsx from 'clsx'
+import { type ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
-import { useSidebarStore } from '../../store/sidebarStore'
+import { SidebarProvider, useSidebar } from './SidebarContext'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
 
 export function AppShell() {
-  const collapsed = useSidebarStore((s) => s.collapsed)
+  return (
+    <SidebarProvider>
+      <div className="min-h-screen bg-bg text-text-primary">
+        <TopBar />
+        <Sidebar />
+        <AppShellMain>
+          <Outlet />
+        </AppShellMain>
+      </div>
+    </SidebarProvider>
+  )
+}
+
+function AppShellMain({ children }: { children: ReactNode }) {
+  const { isCollapsed } = useSidebar()
 
   return (
-    <div className="min-h-screen bg-bg text-text-primary">
-      <TopBar />
-      <Sidebar />
-      <div
-        className={clsx(
-          'flex min-w-0 flex-1 flex-col pt-16 transition-[padding] duration-200',
-          collapsed ? 'md:pl-16' : 'md:pl-64',
-        )}
-      >
-        <main className="flex-1 overflow-auto">
-          <Outlet />
-        </main>
-      </div>
-    </div>
+    <main
+      className={clsx(
+        'min-h-screen pt-16 transition-[margin] duration-200',
+        isCollapsed ? 'lg:ml-16' : 'lg:ml-64',
+      )}
+    >
+      {children}
+    </main>
   )
 }

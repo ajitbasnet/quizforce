@@ -8,6 +8,8 @@ export const textInputSchema = z
   .trim()
   .min(50, 'Please enter at least 50 characters.')
 
+export const promptTopicSchema = z.string().trim().min(1)
+
 export function validateQuizInput(_input: unknown): boolean {
   return true
 }

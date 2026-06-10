@@ -1,11 +1,11 @@
 const TOP_BAR_ACTION_BASE = [
   'transition-[color,background-color,box-shadow,transform] duration-200 ease-out',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 focus-visible:ring-offset-0',
   'active:scale-[0.97]',
 ].join(' ')
 
 const TOP_BAR_ACTION_HOVER =
-  'hover:bg-indigo-50/80 hover:text-indigo-700 hover:shadow-sm'
+  'hover:bg-indigo-50 hover:text-indigo-700'
 
 export const topBarIconButtonClass = [
   'inline-flex items-center justify-center rounded-lg p-2 text-sm font-medium',
@@ -15,12 +15,10 @@ export const topBarIconButtonClass = [
 ].join(' ')
 
 export const topBarLanguageSelectClass = [
-  'cursor-pointer rounded-lg border border-gray-200 bg-white/80 px-2 py-1.5 text-sm',
+  'appearance-none cursor-pointer rounded-lg bg-transparent py-1.5 pl-2.5 pr-8 text-sm font-medium',
   TOP_BAR_ACTION_BASE,
   TOP_BAR_ACTION_HOVER,
   'text-text-muted',
-  'hover:border-indigo-200',
-  'focus-visible:border-indigo-300',
 ].join(' ')
 
 export function topBarNavLinkClass(isActive: boolean, iconOnly = false) {
@@ -32,8 +30,8 @@ export function topBarNavLinkClass(isActive: boolean, iconOnly = false) {
     return [
       layout,
       TOP_BAR_ACTION_BASE,
-      'bg-indigo-50 text-indigo-600 shadow-sm',
-      'hover:bg-indigo-100/70 hover:text-indigo-700',
+      'bg-indigo-50 text-indigo-600',
+      'hover:bg-indigo-100/80 hover:text-indigo-700',
     ].join(' ')
   }
 
@@ -45,7 +43,7 @@ export function topBarNavLinkClass(isActive: boolean, iconOnly = false) {
 export function topBarToggleClass(isActive: boolean) {
   return [
     topBarIconButtonClass,
-    isActive && 'bg-indigo-50 text-indigo-600 shadow-sm hover:bg-indigo-100/70',
+    isActive && 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100/80',
   ]
     .filter(Boolean)
     .join(' ')

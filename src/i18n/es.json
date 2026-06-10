@@ -87,7 +87,13 @@
     "difficultyHard": "Difícil",
     "difficultyMixed": "Mixto",
     "generatingTitle": "Generando tu cuestionario…",
-    "generatingSubtitle": "Esto puede tardar un momento según la longitud del contenido."
+    "generatingSubtitle": "Esto puede tardar un momento según la longitud del contenido.",
+    "stageAnalyzing": "Analizando tu contenido...",
+    "stageCrafting": "Elaborando tus preguntas...",
+    "stageFinalizing": "Finalizando tu cuestionario...",
+    "generatingTip1": "Consejo: las preguntas se adaptan a la dificultad seleccionada.",
+    "generatingTip2": "Consejo: puedes activar la narración por voz en la configuración del cuestionario.",
+    "generatingTip3": "Consejo: un contenido más extenso produce preguntas más enfocadas."
   },
   "results": {
     "title": "Resultados del cuestionario",

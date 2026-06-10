@@ -87,7 +87,13 @@
     "difficultyHard": "Schwer",
     "difficultyMixed": "Gemischt",
     "generatingTitle": "Ihr Quiz wird generiert…",
-    "generatingSubtitle": "Dies kann je nach Länge des Inhalts einen Moment dauern."
+    "generatingSubtitle": "Dies kann je nach Länge des Inhalts einen Moment dauern.",
+    "stageAnalyzing": "Ihr Inhalt wird analysiert...",
+    "stageCrafting": "Fragen werden erstellt...",
+    "stageFinalizing": "Quiz wird finalisiert...",
+    "generatingTip1": "Tipp: Fragen werden an Ihre gewählte Schwierigkeit angepasst.",
+    "generatingTip2": "Tipp: Sie können Sprachausgabe in den Quiz-Einstellungen aktivieren.",
+    "generatingTip3": "Tipp: Längere Inhalte führen zu fokussierteren Fragen."
   },
   "results": {
     "title": "Quiz-Ergebnisse",

@@ -87,7 +87,13 @@
     "difficultyHard": "困难",
     "difficultyMixed": "混合",
     "generatingTitle": "正在生成您的测验…",
-    "generatingSubtitle": "根据内容长度，这可能需要一些时间。"
+    "generatingSubtitle": "根据内容长度，这可能需要一些时间。",
+    "stageAnalyzing": "正在分析您的内容...",
+    "stageCrafting": "正在编写题目...",
+    "stageFinalizing": "正在完成测验...",
+    "generatingTip1": "提示：题目会根据您选择的难度量身定制。",
+    "generatingTip2": "提示：您可以在测验设置中启用语音朗读。",
+    "generatingTip3": "提示：内容越长，生成的题目越聚焦。"
   },
   "results": {
     "title": "测验结果",

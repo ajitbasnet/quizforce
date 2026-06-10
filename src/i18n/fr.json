@@ -87,7 +87,13 @@
     "difficultyHard": "Difficile",
     "difficultyMixed": "Mixte",
     "generatingTitle": "Génération de votre quiz…",
-    "generatingSubtitle": "Cela peut prendre un moment selon la longueur du contenu."
+    "generatingSubtitle": "Cela peut prendre un moment selon la longueur du contenu.",
+    "stageAnalyzing": "Analyse de votre contenu...",
+    "stageCrafting": "Création de vos questions...",
+    "stageFinalizing": "Finalisation de votre quiz...",
+    "generatingTip1": "Astuce : les questions sont adaptées à la difficulté sélectionnée.",
+    "generatingTip2": "Astuce : vous pouvez activer la narration vocale dans les paramètres du quiz.",
+    "generatingTip3": "Astuce : un contenu plus long produit des questions plus ciblées."
   },
   "results": {
     "title": "Résultats du quiz",

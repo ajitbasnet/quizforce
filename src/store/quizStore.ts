@@ -10,6 +10,7 @@ interface QuizState {
   generationError: string | null
   setCurrentQuiz: (quiz: Quiz | null) => void
   setAnswer: (questionId: string, optionId: string) => void
+  setCustomPoints: (questionId: string, points: number) => void
   resetAttempt: () => void
   setGenerating: (isGenerating: boolean) => void
   setProgress: (progress: number) => void
@@ -42,6 +43,32 @@ export const useQuizStore = create<QuizState>((set) => ({
         answers: { ...state.currentAttempt.answers, [questionId]: optionId },
       },
     })),
+
+  setCustomPoints: (questionId, points) =>
+    set((state) => {
+      if (!state.currentQuiz) return state
+
+      const clampedPoints = Math.min(1000, Math.max(1, points))
+      const questions = state.currentQuiz.questions.map((q) =>
+        q.id === questionId ? { ...q, points: clampedPoints } : q,
+      )
+      const totalPoints = questions.reduce((sum, q) => sum + q.points, 0)
+
+      return {
+        currentQuiz: {
+          ...state.currentQuiz,
+          questions,
+          totalPoints,
+          settings: {
+            ...state.currentQuiz.settings,
+            customPointsMap: {
+              ...state.currentQuiz.settings.customPointsMap,
+              [questionId]: clampedPoints,
+            },
+          },
+        },
+      }
+    }),
 
   resetAttempt: () => set({ currentAttempt: {}, userAnswers: {} }),
 

@@ -1,5 +1,6 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { useSettingsStore } from '../store/settingsStore'
+import { useVoiceStore } from '../store/voiceStore'
 import type { SupportedLanguage } from '../types/quiz'
 
 const LANG_MAP: Record<SupportedLanguage, string> = {
@@ -31,8 +32,9 @@ function resolveLang(lang?: string): string {
 }
 
 export function useVoice() {
-  const [isSpeaking, setIsSpeaking] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
+  const isSpeaking = useVoiceStore((s) => s.isSpeaking)
+  const isPaused = useVoiceStore((s) => s.isPaused)
+  const currentText = useVoiceStore((s) => s.currentText)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
 
   if (!isSupported && !hasWarnedUnsupported) {
@@ -44,8 +46,7 @@ export function useVoice() {
     if (!isSupported) return
     window.speechSynthesis.cancel()
     utteranceRef.current = null
-    setIsSpeaking(false)
-    setIsPaused(false)
+    useVoiceStore.getState().clearVoice()
   }, [])
 
   const pause = useCallback(() => {
@@ -61,10 +62,12 @@ export function useVoice() {
   const speak = useCallback((text: string, lang?: string) => {
     if (!isSupported || !text.trim()) return
 
+    const { setSpeaking, setPaused, setCurrentText, clearVoice } =
+      useVoiceStore.getState()
+
     window.speechSynthesis.cancel()
     utteranceRef.current = null
-    setIsSpeaking(false)
-    setIsPaused(false)
+    clearVoice()
 
     const { voiceRate, voicePitch } = useSettingsStore.getState().settings
 
@@ -73,24 +76,23 @@ export function useVoice() {
     utterance.pitch = voicePitch
     utterance.lang = resolveLang(lang)
 
-    utterance.onstart = () => setIsSpeaking(true)
+    utterance.onstart = () => setSpeaking(true)
     utterance.onend = () => {
       if (utteranceRef.current === utterance) {
         utteranceRef.current = null
-        setIsSpeaking(false)
-        setIsPaused(false)
+        clearVoice()
       }
     }
     utterance.onerror = () => {
       if (utteranceRef.current === utterance) {
         utteranceRef.current = null
-        setIsSpeaking(false)
-        setIsPaused(false)
+        clearVoice()
       }
     }
-    utterance.onpause = () => setIsPaused(true)
-    utterance.onresume = () => setIsPaused(false)
+    utterance.onpause = () => setPaused(true)
+    utterance.onresume = () => setPaused(false)
 
+    setCurrentText(text)
     utteranceRef.current = utterance
     window.speechSynthesis.speak(utterance)
   }, [])
@@ -103,6 +105,7 @@ export function useVoice() {
       resume: noop,
       isSpeaking: false,
       isPaused: false,
+      currentText: '',
       isSupported: false as const,
     }
   }
@@ -114,6 +117,7 @@ export function useVoice() {
     resume,
     isSpeaking,
     isPaused,
+    currentText,
     isSupported: true as const,
   }
 }

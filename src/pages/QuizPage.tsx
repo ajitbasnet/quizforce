@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
+import { VoicePlayer } from '../components/voice/VoicePlayer'
 import { QuestionMap } from '../components/quiz/QuestionMap'
 import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestionsModal'
 import { Badge } from '../components/ui/Badge'
@@ -256,6 +257,8 @@ export default function QuizPage() {
         onClose={() => setUnansweredModalOpen(false)}
         onConfirmSubmit={() => void confirmSubmit()}
       />
+
+      <VoicePlayer />
     </div>
   )
 }

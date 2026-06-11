@@ -25,6 +25,20 @@
     animation: spinner-dash 1s ease-in-out infinite;
   }
 
+  @keyframes voice-wave {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
+  .animate-voice-wave {
+    animation: voice-wave 0.75s ease-in-out infinite;
+  }
+
   @keyframes progress-shimmer {
     0% {
       transform: translateX(-100%);

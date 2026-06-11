@@ -7,6 +7,7 @@ interface VoiceState {
   setSpeaking: (isSpeaking: boolean) => void
   setPaused: (isPaused: boolean) => void
   setCurrentText: (currentText: string) => void
+  endSpeech: () => void
   clearVoice: () => void
 }
 
@@ -17,5 +18,6 @@ export const useVoiceStore = create<VoiceState>()((set) => ({
   setSpeaking: (isSpeaking) => set({ isSpeaking }),
   setPaused: (isPaused) => set({ isPaused }),
   setCurrentText: (currentText) => set({ currentText }),
+  endSpeech: () => set({ isSpeaking: false, isPaused: false }),
   clearVoice: () => set({ isSpeaking: false, isPaused: false, currentText: '' }),
 }))

@@ -80,13 +80,13 @@ export function useVoice() {
     utterance.onend = () => {
       if (utteranceRef.current === utterance) {
         utteranceRef.current = null
-        clearVoice()
+        useVoiceStore.getState().endSpeech()
       }
     }
     utterance.onerror = () => {
       if (utteranceRef.current === utterance) {
         utteranceRef.current = null
-        clearVoice()
+        useVoiceStore.getState().endSpeech()
       }
     }
     utterance.onpause = () => setPaused(true)

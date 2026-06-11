@@ -47,6 +47,7 @@ export function VoicePlayer() {
     <AnimatePresence>
       {showPlayer && (
         <motion.div
+          key="voice-player"
           className="fixed bottom-6 left-1/2 z-50 flex max-w-lg -translate-x-1/2 items-center gap-3 rounded-xl bg-white px-4 py-2.5 shadow-lg"
           initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

@@ -1,16 +1,19 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
 import { QuestionMap } from '../components/quiz/QuestionMap'
+import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestionsModal'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { ProgressBar } from '../components/ui/ProgressBar'
 import { useLanguage } from '../hooks/useLanguage'
 import { useQuizNavigation } from '../hooks/useQuizNavigation'
 import { LANGUAGE_OPTIONS } from '../i18n'
+import { persistQuizAttempt } from '../services/persistQuizAttempt'
 import { useQuizStore } from '../store/quizStore'
 import type { QuizSettings } from '../types/quiz'
+import { buildQuizAttempt } from '../utils/scoreCalculator'
 
 function formatElapsed(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
@@ -36,20 +39,25 @@ function getDifficultyLabel(
 
 export default function QuizPage() {
   const { t } = useLanguage()
+  const navigate = useNavigate()
   const currentQuiz = useQuizStore((s) => s.currentQuiz)
   const userAnswers = useQuizStore((s) => s.userAnswers)
   const setAnswer = useQuizStore((s) => s.setAnswer)
+  const setCompletedAttempt = useQuizStore((s) => s.setCompletedAttempt)
 
   const {
     currentQuestionIndex,
-    navigate,
+    navigate: navigateQuestion,
     jumpTo,
     canGoNext,
     canGoPrev,
     totalQuestions,
     isAnswered,
   } = useQuizNavigation()
+
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [unansweredModalOpen, setUnansweredModalOpen] = useState(false)
 
   useEffect(() => {
     setElapsedSeconds(0)
@@ -65,6 +73,49 @@ export default function QuizPage() {
     return () => window.clearInterval(interval)
   }, [currentQuiz?.id, currentQuiz?.settings.timerEnabled])
 
+  const unansweredNumbers = useMemo(() => {
+    if (!currentQuiz) return []
+    return currentQuiz.questions
+      .map((q, index) => ({ id: q.id, number: index + 1 }))
+      .filter(({ id }) => !userAnswers[id])
+      .map(({ number }) => number)
+  }, [currentQuiz, userAnswers])
+
+  const confirmSubmit = useCallback(async () => {
+    if (!currentQuiz || isSubmitting) return
+
+    setIsSubmitting(true)
+    setUnansweredModalOpen(false)
+
+    try {
+      const attempt = buildQuizAttempt(
+        currentQuiz,
+        userAnswers,
+        elapsedSeconds,
+      )
+      setCompletedAttempt(attempt)
+      await persistQuizAttempt(currentQuiz, attempt)
+      navigate(`/results/${attempt.id}`)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }, [
+    currentQuiz,
+    userAnswers,
+    elapsedSeconds,
+    isSubmitting,
+    setCompletedAttempt,
+    navigate,
+  ])
+
+  const handleSubmitClick = useCallback(() => {
+    if (unansweredNumbers.length > 0) {
+      setUnansweredModalOpen(true)
+    } else {
+      void confirmSubmit()
+    }
+  }, [unansweredNumbers.length, confirmSubmit])
+
   if (!currentQuiz) {
     return <Navigate to="/" replace />
   }
@@ -72,6 +123,7 @@ export default function QuizPage() {
   const { questions, settings } = currentQuiz
   const total = totalQuestions
   const question = questions[currentQuestionIndex]
+  const isLastQuestion = currentQuestionIndex === total - 1
   const languageOption = LANGUAGE_OPTIONS.find(
     (opt) => opt.code === currentQuiz.language,
   )
@@ -166,8 +218,8 @@ export default function QuizPage() {
         <nav className="mt-auto flex items-center justify-between gap-4 pt-4">
           <Button
             variant="ghost"
-            disabled={!canGoPrev}
-            onClick={() => navigate('prev')}
+            disabled={!canGoPrev || isSubmitting}
+            onClick={() => navigateQuestion('prev')}
           >
             {t('quiz.previousQuestion')}
           </Button>
@@ -179,15 +231,32 @@ export default function QuizPage() {
             })}
           </span>
 
-          <Button
-            variant="primary"
-            disabled={!canGoNext}
-            onClick={() => navigate('next')}
-          >
-            {t('quiz.nextQuestion')}
-          </Button>
+          {isLastQuestion ? (
+            <Button
+              variant="primary"
+              isLoading={isSubmitting}
+              onClick={handleSubmitClick}
+            >
+              {t('quiz.submitQuiz')}
+            </Button>
+          ) : (
+            <Button
+              variant="primary"
+              disabled={!canGoNext || isSubmitting}
+              onClick={() => navigateQuestion('next')}
+            >
+              {t('quiz.nextQuestion')}
+            </Button>
+          )}
         </nav>
       </div>
+
+      <UnansweredQuestionsModal
+        isOpen={unansweredModalOpen}
+        unansweredNumbers={unansweredNumbers}
+        onClose={() => setUnansweredModalOpen(false)}
+        onConfirmSubmit={() => void confirmSubmit()}
+      />
     </div>
   )
 }

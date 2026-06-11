@@ -99,6 +99,11 @@
     "nextQuestion": "Next Question",
     "previousQuestion": "Previous Question",
     "finishQuiz": "Finish Quiz",
+    "submitQuiz": "Submit Quiz",
+    "unansweredTitle": "Unanswered questions",
+    "unansweredDescription": "You have not answered the following questions:",
+    "goBackAndAnswer": "Go Back & Answer",
+    "submitAnyway": "Submit Anyway",
     "correct": "Correct!",
     "incorrect": "Incorrect",
     "explanation": "Explanation",
@@ -129,6 +134,7 @@
     "generatingTip3": "Tip: Longer content produces more focused questions."
   },
   "results": {
+    "calculatingScore": "Calculating your score...",
     "title": "Quiz Results",
     "yourScore": "Your Score",
     "totalPoints": "Total Points",

@@ -99,6 +99,11 @@
     "nextQuestion": "अगला प्रश्न",
     "previousQuestion": "पिछला प्रश्न",
     "finishQuiz": "क्विज़ समाप्त करें",
+    "submitQuiz": "क्विज़ जमा करें",
+    "unansweredTitle": "अनुत्तरित प्रश्न",
+    "unansweredDescription": "आपने निम्नलिखित प्रश्नों के उत्तर नहीं दिए हैं:",
+    "goBackAndAnswer": "वापस जाएँ और उत्तर दें",
+    "submitAnyway": "फिर भी जमा करें",
     "correct": "सही!",
     "incorrect": "गलत",
     "explanation": "व्याख्या",
@@ -129,6 +134,7 @@
     "generatingTip3": "सुझाव: लंबी सामग्री से अधिक केंद्रित प्रश्न बनते हैं।"
   },
   "results": {
+    "calculatingScore": "आपका स्कोर गणना हो रहा है...",
     "title": "क्विज़ परिणाम",
     "yourScore": "आपका स्कोर",
     "totalPoints": "कुल अंक",

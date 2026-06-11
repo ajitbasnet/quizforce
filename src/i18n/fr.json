@@ -99,6 +99,11 @@
     "nextQuestion": "Question suivante",
     "previousQuestion": "Question précédente",
     "finishQuiz": "Terminer le quiz",
+    "submitQuiz": "Soumettre le quiz",
+    "unansweredTitle": "Questions sans réponse",
+    "unansweredDescription": "Vous n'avez pas répondu aux questions suivantes :",
+    "goBackAndAnswer": "Retourner et répondre",
+    "submitAnyway": "Soumettre quand même",
     "correct": "Correct !",
     "incorrect": "Incorrect",
     "explanation": "Explication",
@@ -129,6 +134,7 @@
     "generatingTip3": "Astuce : un contenu plus long produit des questions plus ciblées."
   },
   "results": {
+    "calculatingScore": "Calcul de votre score...",
     "title": "Résultats du quiz",
     "yourScore": "Votre score",
     "totalPoints": "Points totaux",

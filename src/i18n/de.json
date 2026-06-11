@@ -99,6 +99,11 @@
     "nextQuestion": "Nächste Frage",
     "previousQuestion": "Vorherige Frage",
     "finishQuiz": "Quiz beenden",
+    "submitQuiz": "Quiz einreichen",
+    "unansweredTitle": "Unbeantwortete Fragen",
+    "unansweredDescription": "Sie haben die folgenden Fragen nicht beantwortet:",
+    "goBackAndAnswer": "Zurück und beantworten",
+    "submitAnyway": "Trotzdem einreichen",
     "correct": "Richtig!",
     "incorrect": "Falsch",
     "explanation": "Erklärung",
@@ -129,6 +134,7 @@
     "generatingTip3": "Tipp: Längere Inhalte führen zu fokussierteren Fragen."
   },
   "results": {
+    "calculatingScore": "Punkte werden berechnet...",
     "title": "Quiz-Ergebnisse",
     "yourScore": "Ihre Punktzahl",
     "totalPoints": "Gesamtpunkte",

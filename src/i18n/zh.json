@@ -99,6 +99,11 @@
     "nextQuestion": "下一题",
     "previousQuestion": "上一题",
     "finishQuiz": "完成测验",
+    "submitQuiz": "提交测验",
+    "unansweredTitle": "未回答的题目",
+    "unansweredDescription": "您尚未回答以下题目：",
+    "goBackAndAnswer": "返回作答",
+    "submitAnyway": "仍然提交",
     "correct": "正确！",
     "incorrect": "错误",
     "explanation": "解析",
@@ -129,6 +134,7 @@
     "generatingTip3": "提示：内容越长，生成的题目越聚焦。"
   },
   "results": {
+    "calculatingScore": "正在计算您的得分...",
     "title": "测验结果",
     "yourScore": "您的得分",
     "totalPoints": "总分",

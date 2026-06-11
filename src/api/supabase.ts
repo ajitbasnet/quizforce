@@ -32,7 +32,11 @@
 //
 // Add RLS policies and indexes (user_id, quiz_id, created_at desc) when auth is wired up.
 
-import { createClient, type PostgrestError } from '@supabase/supabase-js'
+import {
+  createClient,
+  type PostgrestError,
+  type SupabaseClient,
+} from '@supabase/supabase-js'
 import type {
   Quiz,
   QuizAttempt,
@@ -158,17 +162,25 @@ type QuizInsert = Database['public']['Tables']['quizzes']['Insert']
 type AttemptRow = Database['public']['Tables']['attempts']['Row']
 type AttemptInsert = Database['public']['Tables']['attempts']['Insert']
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+let client: SupabaseClient<Database> | null = null
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY')
+export function isSupabaseConfigured(): boolean {
+  const url = import.meta.env.VITE_SUPABASE_URL
+  const key = import.meta.env.VITE_SUPABASE_ANON_KEY
+  return Boolean(url && key)
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
+export function getSupabaseClient(): SupabaseClient<Database> | null {
+  if (!isSupabaseConfigured()) return null
 
-export function getSupabaseClient() {
-  return supabase
+  if (!client) {
+    client = createClient<Database>(
+      import.meta.env.VITE_SUPABASE_URL,
+      import.meta.env.VITE_SUPABASE_ANON_KEY,
+    )
+  }
+
+  return client
 }
 
 function throwIfError<T>(data: T | null, error: PostgrestError | null): T {
@@ -238,6 +250,9 @@ function rowToAttempt(row: AttemptRow): QuizAttempt {
 }
 
 export async function saveQuiz(quiz: Quiz, userId: string): Promise<Quiz> {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured')
+
   const { data, error } = await supabase
     .from('quizzes')
     .upsert(quizToRow(quiz, userId), { onConflict: 'id' })
@@ -248,6 +263,9 @@ export async function saveQuiz(quiz: Quiz, userId: string): Promise<Quiz> {
 }
 
 export async function getQuizHistory(userId: string): Promise<Quiz[]> {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured')
+
   const { data, error } = await supabase
     .from('quizzes')
     .select('*')
@@ -262,6 +280,9 @@ export async function saveAttempt(
   attempt: QuizAttempt,
   userId: string,
 ): Promise<QuizAttempt> {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured')
+
   const { data, error } = await supabase
     .from('attempts')
     .upsert(attemptToRow(attempt, userId), { onConflict: 'id' })
@@ -272,6 +293,9 @@ export async function saveAttempt(
 }
 
 export async function getAttempt(id: string): Promise<QuizAttempt | null> {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured')
+
   const { data, error } = await supabase
     .from('attempts')
     .select('*')

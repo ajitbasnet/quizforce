@@ -4,6 +4,7 @@ import type { Quiz, QuizAttempt } from '../types/quiz'
 interface QuizState {
   currentQuiz: Quiz | null
   currentAttempt: Partial<QuizAttempt>
+  completedAttempt: QuizAttempt | null
   userAnswers: Record<string, string>
   isGenerating: boolean
   generationProgress: number
@@ -11,6 +12,7 @@ interface QuizState {
   setCurrentQuiz: (quiz: Quiz | null) => void
   setAnswer: (questionId: string, optionId: string) => void
   setCustomPoints: (questionId: string, points: number) => void
+  setCompletedAttempt: (attempt: QuizAttempt | null) => void
   resetAttempt: () => void
   setGenerating: (isGenerating: boolean) => void
   setProgress: (progress: number) => void
@@ -20,6 +22,7 @@ interface QuizState {
 export const useQuizStore = create<QuizState>((set) => ({
   currentQuiz: null,
   currentAttempt: {},
+  completedAttempt: null,
   userAnswers: {},
   isGenerating: false,
   generationProgress: 0,
@@ -29,6 +32,7 @@ export const useQuizStore = create<QuizState>((set) => ({
     set({
       currentQuiz: quiz,
       currentAttempt: {},
+      completedAttempt: null,
       userAnswers: {},
       isGenerating: false,
       generationProgress: 0,
@@ -69,6 +73,8 @@ export const useQuizStore = create<QuizState>((set) => ({
         },
       }
     }),
+
+  setCompletedAttempt: (attempt) => set({ completedAttempt: attempt }),
 
   resetAttempt: () => set({ currentAttempt: {}, userAnswers: {} }),
 

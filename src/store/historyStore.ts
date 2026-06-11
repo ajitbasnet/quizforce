@@ -7,13 +7,14 @@ interface HistoryState {
   attempts: QuizAttempt[]
   addQuiz: (quiz: Quiz) => void
   addAttempt: (attempt: QuizAttempt) => void
+  getAttemptById: (id: string) => QuizAttempt | undefined
   removeQuiz: (quizId: string) => void
   clearHistory: () => void
 }
 
 export const useHistoryStore = create<HistoryState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       quizzes: [],
       attempts: [],
 
@@ -26,6 +27,8 @@ export const useHistoryStore = create<HistoryState>()(
         set((state) => ({
           attempts: [...state.attempts, attempt],
         })),
+
+      getAttemptById: (id) => get().attempts.find((a) => a.id === id),
 
       removeQuiz: (quizId) =>
         set((state) => ({

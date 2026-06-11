@@ -208,8 +208,6 @@ export default function QuizPage() {
                 onSelect={(optionId) => setAnswer(question.id, optionId)}
                 isSubmitted={false}
                 voiceEnabled={settings.voiceEnabled}
-                voiceRate={settings.voiceRate}
-                voicePitch={settings.voicePitch}
                 language={currentQuiz.language}
               />
             </motion.div>

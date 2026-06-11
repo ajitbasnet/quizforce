@@ -12,8 +12,6 @@ export interface AnswerOptionProps {
   onSelect: () => void
   feedback: string | null
   voiceEnabled?: boolean
-  voiceRate?: number
-  voicePitch?: number
   language?: SupportedLanguage
 }
 
@@ -63,8 +61,6 @@ export function AnswerOption({
   onSelect,
   feedback,
   voiceEnabled,
-  voiceRate,
-  voicePitch,
   language,
 }: AnswerOptionProps) {
   const { speak } = useVoice()
@@ -72,7 +68,7 @@ export function AnswerOption({
 
   const handleVoiceRead = () => {
     if (!voiceEnabled || isSubmitted) return
-    speak(option.text, { rate: voiceRate, pitch: voicePitch, lang: language })
+    speak(option.text, language)
   }
 
   const showSelectedCheck = isSelected && !isSubmitted

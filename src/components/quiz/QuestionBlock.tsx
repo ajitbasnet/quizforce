@@ -16,8 +16,6 @@ export interface QuestionBlockProps {
   onSelect: (optionId: string) => void
   isSubmitted: boolean
   voiceEnabled: boolean
-  voiceRate?: number
-  voicePitch?: number
   language?: SupportedLanguage
 }
 
@@ -67,12 +65,10 @@ export function QuestionBlock({
   onSelect,
   isSubmitted,
   voiceEnabled,
-  voiceRate,
-  voicePitch,
   language,
 }: QuestionBlockProps) {
   const { t } = useLanguage()
-  const { speak, cancel } = useVoice()
+  const { speak, stop } = useVoice()
   const customPointsMap = useQuizStore(
     (s) => s.currentQuiz?.settings.customPointsMap ?? {},
   )
@@ -131,21 +127,15 @@ export function QuestionBlock({
 
   useEffect(() => {
     if (!voiceEnabled) return
-    speak(question.questionText, {
-      rate: voiceRate,
-      pitch: voicePitch,
-      lang: language,
-    })
-    return () => cancel()
+    speak(question.questionText, language)
+    return () => stop()
   }, [
     question.id,
     question.questionText,
     voiceEnabled,
-    voiceRate,
-    voicePitch,
     language,
     speak,
-    cancel,
+    stop,
   ])
 
   return (
@@ -234,8 +224,6 @@ export function QuestionBlock({
             onSelect={() => onSelect(option.id)}
             feedback={getOptionFeedback(question, option.id, isSubmitted)}
             voiceEnabled={voiceEnabled}
-            voiceRate={voiceRate}
-            voicePitch={voicePitch}
             language={language}
           />
         ))}

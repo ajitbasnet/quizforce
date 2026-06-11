@@ -1,11 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
+import { useSettingsStore } from '../store/settingsStore'
 import type { SupportedLanguage } from '../types/quiz'
-
-export interface SpeakOptions {
-  rate?: number
-  pitch?: number
-  lang?: SupportedLanguage
-}
 
 const LANG_MAP: Record<SupportedLanguage, string> = {
   en: 'en-US',
@@ -17,54 +12,108 @@ const LANG_MAP: Record<SupportedLanguage, string> = {
   zh: 'zh-CN',
 }
 
-export const isVoiceSupported =
+const isSupported =
   typeof window !== 'undefined' && 'speechSynthesis' in window
 
+let hasWarnedUnsupported = false
+
+function noop() {}
+
+function resolveLang(lang?: string): string {
+  const { language } = useSettingsStore.getState().settings
+  if (lang) {
+    if (lang in LANG_MAP) {
+      return LANG_MAP[lang as SupportedLanguage]
+    }
+    return lang
+  }
+  return LANG_MAP[language] ?? 'en-US'
+}
+
 export function useVoice() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isSpeaking, setIsSpeaking] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
 
-  const cancel = useCallback(() => {
-    if (!isVoiceSupported) return
+  if (!isSupported && !hasWarnedUnsupported) {
+    hasWarnedUnsupported = true
+    console.warn('Text-to-speech is not supported in this browser.')
+  }
+
+  const stop = useCallback(() => {
+    if (!isSupported) return
     window.speechSynthesis.cancel()
     utteranceRef.current = null
-    setIsPlaying(false)
+    setIsSpeaking(false)
+    setIsPaused(false)
   }, [])
 
-  const speak = useCallback(
-    (text: string, options: SpeakOptions = {}) => {
-      if (!isVoiceSupported || !text.trim()) return
+  const pause = useCallback(() => {
+    if (!isSupported || !utteranceRef.current) return
+    window.speechSynthesis.pause()
+  }, [])
 
-      window.speechSynthesis.cancel()
-      utteranceRef.current = null
-      setIsPlaying(false)
+  const resume = useCallback(() => {
+    if (!isSupported) return
+    window.speechSynthesis.resume()
+  }, [])
 
-      const utterance = new SpeechSynthesisUtterance(text)
-      utterance.rate = options.rate ?? 1
-      utterance.pitch = options.pitch ?? 1
-      if (options.lang) {
-        utterance.lang = LANG_MAP[options.lang]
+  const speak = useCallback((text: string, lang?: string) => {
+    if (!isSupported || !text.trim()) return
+
+    window.speechSynthesis.cancel()
+    utteranceRef.current = null
+    setIsSpeaking(false)
+    setIsPaused(false)
+
+    const { voiceRate, voicePitch } = useSettingsStore.getState().settings
+
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.rate = voiceRate
+    utterance.pitch = voicePitch
+    utterance.lang = resolveLang(lang)
+
+    utterance.onstart = () => setIsSpeaking(true)
+    utterance.onend = () => {
+      if (utteranceRef.current === utterance) {
+        utteranceRef.current = null
+        setIsSpeaking(false)
+        setIsPaused(false)
       }
-
-      utterance.onstart = () => setIsPlaying(true)
-      utterance.onend = () => {
-        if (utteranceRef.current === utterance) {
-          utteranceRef.current = null
-          setIsPlaying(false)
-        }
+    }
+    utterance.onerror = () => {
+      if (utteranceRef.current === utterance) {
+        utteranceRef.current = null
+        setIsSpeaking(false)
+        setIsPaused(false)
       }
-      utterance.onerror = () => {
-        if (utteranceRef.current === utterance) {
-          utteranceRef.current = null
-          setIsPlaying(false)
-        }
-      }
+    }
+    utterance.onpause = () => setIsPaused(true)
+    utterance.onresume = () => setIsPaused(false)
 
-      utteranceRef.current = utterance
-      window.speechSynthesis.speak(utterance)
-    },
-    [],
-  )
+    utteranceRef.current = utterance
+    window.speechSynthesis.speak(utterance)
+  }, [])
 
-  return { speak, cancel, isPlaying, isSupported: isVoiceSupported }
+  if (!isSupported) {
+    return {
+      speak: noop,
+      stop: noop,
+      pause: noop,
+      resume: noop,
+      isSpeaking: false,
+      isPaused: false,
+      isSupported: false as const,
+    }
+  }
+
+  return {
+    speak,
+    stop,
+    pause,
+    resume,
+    isSpeaking,
+    isPaused,
+    isSupported: true as const,
+  }
 }

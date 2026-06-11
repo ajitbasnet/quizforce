@@ -1,14 +1,17 @@
+import { nanoid } from 'nanoid'
 import type { AnswerFeedback, Quiz, QuizAttempt } from '../types/quiz'
 
-export function buildQuizAttempt(
+export function calculateScore(
   quiz: Quiz,
-  answers: Record<string, string>,
+  userAnswers: Record<string, string>,
+  customPointsMap: Record<string, number>,
   timeTaken: number,
 ): QuizAttempt {
   const feedback: AnswerFeedback[] = quiz.questions.map((question) => {
-    const selectedOptionId = answers[question.id] ?? ''
+    const questionPoints = customPointsMap[question.id] ?? question.points
+    const selectedOptionId = userAnswers[question.id] ?? ''
     const isCorrect = selectedOptionId === question.correctOptionId
-    const pointsAwarded = isCorrect ? question.points : 0
+    const pointsAwarded = isCorrect ? questionPoints : 0
     const explanation = isCorrect
       ? question.explanation
       : (question.wrongExplanations[selectedOptionId] ?? '')
@@ -22,26 +25,25 @@ export function buildQuizAttempt(
     }
   })
 
-  const score = calculateScore(feedback)
-  const totalPoints = quiz.totalPoints
+  const score = feedback.reduce((sum, f) => sum + f.pointsAwarded, 0)
+  const totalPoints = quiz.questions.reduce(
+    (sum, q) => sum + (customPointsMap[q.id] ?? q.points),
+    0,
+  )
   const percentage =
     totalPoints > 0
       ? Math.round((score / totalPoints) * 1000) / 10
       : 0
 
   return {
-    id: crypto.randomUUID(),
+    id: nanoid(),
     quizId: quiz.id,
-    answers,
+    answers: userAnswers,
     score,
     totalPoints,
     percentage,
-    completedAt: new Date().toISOString(),
     timeTaken,
+    completedAt: new Date().toISOString(),
     feedback,
   }
-}
-
-export function calculateScore(feedback: AnswerFeedback[]): number {
-  return feedback.reduce((sum, f) => sum + f.pointsAwarded, 0)
 }

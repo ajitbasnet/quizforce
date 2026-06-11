@@ -13,7 +13,7 @@ import { LANGUAGE_OPTIONS } from '../i18n'
 import { persistQuizAttempt } from '../services/persistQuizAttempt'
 import { useQuizStore } from '../store/quizStore'
 import type { QuizSettings } from '../types/quiz'
-import { buildQuizAttempt } from '../utils/scoreCalculator'
+import { calculateScore } from '../utils/scoreCalculator'
 
 function formatElapsed(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
@@ -88,9 +88,10 @@ export default function QuizPage() {
     setUnansweredModalOpen(false)
 
     try {
-      const attempt = buildQuizAttempt(
+      const attempt = calculateScore(
         currentQuiz,
         userAnswers,
+        currentQuiz.settings.customPointsMap,
         elapsedSeconds,
       )
       setCompletedAttempt(attempt)

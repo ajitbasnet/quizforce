@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
-import { Button } from '../ui/Button'
 import { Modal } from '../ui/Modal'
 
 export interface QuestionMapProps {
@@ -40,7 +39,7 @@ function QuestionDot({
       aria-label={t('quiz.jumpToQuestion', { number: index + 1 })}
       aria-current={isCurrent ? 'step' : undefined}
       className={clsx(
-        'flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-all duration-150',
+        'flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-all duration-150',
         isCurrent &&
           'scale-110 animate-pulse border-indigo-600 bg-indigo-600 text-white ring-2 ring-white ring-offset-2 ring-offset-indigo-600',
         !isCurrent && answered && 'border-indigo-600 bg-indigo-600 text-white',
@@ -84,22 +83,21 @@ export function QuestionMap({
 
   return (
     <>
-      <div className="hidden md:block">
-        <div className="flex gap-2 overflow-x-auto pb-1">{dots}</div>
+      <div className="hidden sm:block">
+        <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">{dots}</div>
       </div>
 
-      <div className="md:hidden">
-        <Button
+      <div className="sm:hidden">
+        <button
           type="button"
-          variant="ghost"
-          size="sm"
           onClick={() => setModalOpen(true)}
+          className="inline-flex min-h-11 items-center rounded-full border border-gray-200 bg-white px-4 text-sm font-medium text-text-primary transition-colors hover:bg-gray-50"
         >
           {t('quiz.questionMapMobile', {
             current: currentIndex + 1,
             total,
           })}
-        </Button>
+        </button>
       </div>
 
       <Modal

@@ -140,7 +140,11 @@
     "shortcutVoice": "Sprache ein/aus",
     "shortcutSkipVoice": "Sprachausgabe überspringen",
     "shortcutSubmit": "Quiz absenden",
-    "shortcutSubmitNote": "letzte Frage"
+    "shortcutSubmitNote": "letzte Frage",
+    "validationErrorTitle": "Quiz-Validierung fehlgeschlagen",
+    "rawResponse": "Rohe API-Antwort",
+    "tryRegenerating": "Erneut generieren",
+    "close": "Schließen"
   },
   "results": {
     "calculatingScore": "Punkte werden berechnet...",

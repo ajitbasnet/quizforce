@@ -1,5 +1,5 @@
 import { Sparkles } from 'lucide-react'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { generateQuiz } from '../../api/claude'
 import { useLanguage } from '../../hooks/useLanguage'
@@ -7,6 +7,7 @@ import { useQuizStore } from '../../store/quizStore'
 import { useSettingsStore } from '../../store/settingsStore'
 import { QuizGenerationError } from '../../types/api'
 import type { Quiz } from '../../types/quiz'
+import { QuizValidationErrorModal } from '../quiz/QuizValidationErrorModal'
 import { Button } from '../ui/Button'
 import { ErrorBanner } from '../ui/ErrorBanner'
 import { GenerationProgress } from './GenerationProgress'
@@ -57,6 +58,9 @@ export function GenerateButton({
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
   const setError = useQuizStore((s) => s.setError)
   const abortRef = useRef<AbortController | null>(null)
+  const [validationModal, setValidationModal] = useState<{
+    rawResponse: string
+  } | null>(null)
 
   const handleCancel = () => {
     abortRef.current?.abort()
@@ -98,6 +102,15 @@ export function GenerateButton({
       if (error instanceof DOMException && error.name === 'AbortError') {
         return
       }
+      if (
+        error instanceof QuizGenerationError &&
+        (error.code === 'VALIDATION_ERROR' || error.code === 'PARSE_ERROR') &&
+        error.rawResponse
+      ) {
+        setValidationModal({ rawResponse: error.rawResponse })
+        setGenerating(false)
+        return
+      }
       const message = getErrorMessage(error, t)
       setError(message)
       setGenerating(false)
@@ -110,8 +123,23 @@ export function GenerateButton({
     return <GenerationProgress onCancel={handleCancel} />
   }
 
+  const handleValidationModalClose = () => {
+    setValidationModal(null)
+  }
+
+  const handleValidationModalRetry = () => {
+    setValidationModal(null)
+    void handleGenerate()
+  }
+
   return (
     <div className="flex flex-col gap-3">
+      <QuizValidationErrorModal
+        isOpen={validationModal !== null}
+        rawResponse={validationModal?.rawResponse ?? ''}
+        onClose={handleValidationModalClose}
+        onRetry={handleValidationModalRetry}
+      />
       {generationError && (
         <ErrorBanner
           message={generationError}

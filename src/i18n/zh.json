@@ -140,7 +140,11 @@
     "shortcutVoice": "切换语音",
     "shortcutSkipVoice": "跳过语音朗读",
     "shortcutSubmit": "提交测验",
-    "shortcutSubmitNote": "最后一题"
+    "shortcutSubmitNote": "最后一题",
+    "validationErrorTitle": "测验验证失败",
+    "rawResponse": "原始 API 响应",
+    "tryRegenerating": "尝试重新生成",
+    "close": "关闭"
   },
   "results": {
     "calculatingScore": "正在计算您的得分...",

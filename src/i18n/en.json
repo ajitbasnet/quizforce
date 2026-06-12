@@ -140,7 +140,11 @@
     "shortcutVoice": "Toggle voice",
     "shortcutSkipVoice": "Skip voice reading",
     "shortcutSubmit": "Submit quiz",
-    "shortcutSubmitNote": "last question"
+    "shortcutSubmitNote": "last question",
+    "validationErrorTitle": "Quiz validation failed",
+    "rawResponse": "Raw API response",
+    "tryRegenerating": "Try regenerating",
+    "close": "Close"
   },
   "results": {
     "calculatingScore": "Calculating your score...",

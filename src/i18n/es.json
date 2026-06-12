@@ -140,7 +140,11 @@
     "shortcutVoice": "Activar/desactivar voz",
     "shortcutSkipVoice": "Omitir lectura de voz",
     "shortcutSubmit": "Enviar cuestionario",
-    "shortcutSubmitNote": "última pregunta"
+    "shortcutSubmitNote": "última pregunta",
+    "validationErrorTitle": "Error de validación del cuestionario",
+    "rawResponse": "Respuesta sin procesar de la API",
+    "tryRegenerating": "Intentar regenerar",
+    "close": "Cerrar"
   },
   "results": {
     "calculatingScore": "Calculando tu puntuación...",

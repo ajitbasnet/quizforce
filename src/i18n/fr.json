@@ -140,7 +140,11 @@
     "shortcutVoice": "Activer/désactiver la voix",
     "shortcutSkipVoice": "Ignorer la lecture vocale",
     "shortcutSubmit": "Soumettre le quiz",
-    "shortcutSubmitNote": "dernière question"
+    "shortcutSubmitNote": "dernière question",
+    "validationErrorTitle": "Échec de la validation du quiz",
+    "rawResponse": "Réponse brute de l'API",
+    "tryRegenerating": "Réessayer la génération",
+    "close": "Fermer"
   },
   "results": {
     "calculatingScore": "Calcul de votre score...",

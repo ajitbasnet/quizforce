@@ -140,7 +140,11 @@
     "shortcutVoice": "आवाज सक्रिय/निष्क्रिय",
     "shortcutSkipVoice": "आवाज पढ्न छोड्नुहोस्",
     "shortcutSubmit": "क्विज पेश गर्नुहोस्",
-    "shortcutSubmitNote": "अन्तिम प्रश्न"
+    "shortcutSubmitNote": "अन्तिम प्रश्न",
+    "validationErrorTitle": "क्विज प्रमाणीकरण असफल",
+    "rawResponse": "कच्चा API प्रतिक्रिया",
+    "tryRegenerating": "पुनः जनरेट गर्नुहोस्",
+    "close": "बन्द गर्नुहोस्"
   },
   "results": {
     "calculatingScore": "तपाईंको स्कोर गणना हुँदैछ...",

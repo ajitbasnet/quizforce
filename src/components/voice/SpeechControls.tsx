@@ -220,7 +220,7 @@ function SpeechControlsMobileDrawer({
       type="button"
       variant="secondary"
       size="sm"
-      className="fixed bottom-20 right-4 z-40 shadow-md lg:hidden"
+      className="fixed bottom-20 right-4 z-40 min-h-11 shadow-md lg:hidden"
       leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
       onClick={() => setDrawerOpen(true)}
     >
@@ -242,7 +242,7 @@ function SpeechControlsMobileDrawer({
             onClick={() => setDrawerOpen(false)}
           />
           <motion.div
-            className="fixed inset-x-0 bottom-0 z-50 rounded-t-2xl bg-white p-4 shadow-xl lg:hidden"
+            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[60vh] flex-col rounded-t-2xl bg-white shadow-xl lg:hidden"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -251,24 +251,26 @@ function SpeechControlsMobileDrawer({
             aria-modal="true"
             aria-label={t('voice.controlsTitle')}
           >
-            <div className="mb-4 flex items-center justify-between gap-2">
+            <div className="flex shrink-0 items-center justify-between gap-2 p-4 pb-2">
               <h2 className="text-sm font-medium text-text-primary">
                 {t('voice.controlsTitle')}
               </h2>
               <button
                 type="button"
-                className="rounded-lg p-2 text-text-muted hover:bg-gray-100"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-text-muted hover:bg-gray-100"
                 aria-label="Close"
                 onClick={() => setDrawerOpen(false)}
               >
                 <X className="h-4 w-4" aria-hidden />
               </button>
             </div>
-            <SpeechControlsPanel
-              question={question}
-              language={language}
-              disabled={!isSupported}
-            />
+            <div className="min-h-0 flex-1 overflow-y-auto p-4 pt-0">
+              <SpeechControlsPanel
+                question={question}
+                language={language}
+                disabled={!isSupported}
+              />
+            </div>
           </motion.div>
         </>
       )}

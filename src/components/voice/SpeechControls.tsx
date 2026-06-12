@@ -1,6 +1,8 @@
 import clsx from 'clsx'
-import { ChevronRight, Play, RotateCcw } from 'lucide-react'
-import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronRight, Play, RotateCcw, Volume2, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useSpeechVoices } from '../../hooks/useSpeechVoices'
 import { useVoice } from '../../hooks/useVoice'
@@ -143,7 +145,10 @@ export function SpeechControlsPanel({
   )
 }
 
-export function SpeechControls({ question, language }: SpeechControlsProps) {
+function SpeechControlsCollapsible({
+  question,
+  language,
+}: SpeechControlsProps) {
   const { t } = useLanguage()
   const { isSupported } = useVoice()
   const [expanded, setExpanded] = useState(true)
@@ -189,4 +194,114 @@ export function SpeechControls({ question, language }: SpeechControlsProps) {
   }
 
   return panel
+}
+
+function SpeechControlsMobileDrawer({
+  question,
+  language,
+}: SpeechControlsProps) {
+  const { t } = useLanguage()
+  const { isSupported } = useVoice()
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  useEffect(() => {
+    if (!drawerOpen) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setDrawerOpen(false)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [drawerOpen])
+
+  const trigger = (
+    <Button
+      type="button"
+      variant="secondary"
+      size="sm"
+      className="fixed bottom-20 right-4 z-40 shadow-md lg:hidden"
+      leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
+      onClick={() => setDrawerOpen(true)}
+    >
+      {t('voice.openControls')}
+    </Button>
+  )
+
+  const drawer = createPortal(
+    <AnimatePresence>
+      {drawerOpen && (
+        <>
+          <motion.button
+            type="button"
+            className="fixed inset-0 z-50 bg-black/40 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            aria-label="Close"
+            onClick={() => setDrawerOpen(false)}
+          />
+          <motion.div
+            className="fixed inset-x-0 bottom-0 z-50 rounded-t-2xl bg-white p-4 shadow-xl lg:hidden"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={t('voice.controlsTitle')}
+          >
+            <div className="mb-4 flex items-center justify-between gap-2">
+              <h2 className="text-sm font-medium text-text-primary">
+                {t('voice.controlsTitle')}
+              </h2>
+              <button
+                type="button"
+                className="rounded-lg p-2 text-text-muted hover:bg-gray-100"
+                aria-label="Close"
+                onClick={() => setDrawerOpen(false)}
+              >
+                <X className="h-4 w-4" aria-hidden />
+              </button>
+            </div>
+            <SpeechControlsPanel
+              question={question}
+              language={language}
+              disabled={!isSupported}
+            />
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>,
+    document.body,
+  )
+
+  if (!isSupported) {
+    return (
+      <>
+        <Tooltip content={t('voice.notSupported')}>
+          <span className="lg:hidden">{trigger}</span>
+        </Tooltip>
+        {drawer}
+      </>
+    )
+  }
+
+  return (
+    <>
+      {trigger}
+      {drawer}
+    </>
+  )
+}
+
+export function SpeechControls({ question, language }: SpeechControlsProps) {
+  return (
+    <>
+      <aside className="hidden lg:block lg:sticky lg:top-24">
+        <SpeechControlsCollapsible question={question} language={language} />
+      </aside>
+      <SpeechControlsMobileDrawer question={question} language={language} />
+    </>
+  )
 }

@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
+import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
 import { QuestionMap } from '../components/quiz/QuestionMap'
 import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestionsModal'
@@ -132,7 +133,8 @@ export default function QuizPage() {
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col px-4 py-6 sm:px-6">
-      <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6">
+      <div className="mx-auto flex w-full max-w-5xl flex-1 lg:grid lg:grid-cols-[1fr_17rem] lg:items-start lg:gap-6">
+        <div className="flex min-w-0 max-w-3xl flex-1 flex-col gap-6">
         <header>
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
@@ -249,6 +251,9 @@ export default function QuizPage() {
             </Button>
           )}
         </nav>
+        </div>
+
+        <SpeechControls question={question} language={currentQuiz.language} />
       </div>
 
       <UnansweredQuestionsModal

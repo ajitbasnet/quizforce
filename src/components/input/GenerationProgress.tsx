@@ -6,6 +6,7 @@ import { useQuizStore } from '../../store/quizStore'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
 import { ProgressBar } from '../ui/ProgressBar'
+import { OfflineGenerationBanner } from './OfflineGenerationBanner'
 
 interface GenerationProgressProps {
   onCancel: () => void
@@ -67,58 +68,61 @@ export function GenerationProgress({ onCancel }: GenerationProgressProps) {
   const tipKey = useMemo(() => TIP_KEYS[tipIndex], [tipIndex])
 
   return (
-    <Card className="flex flex-col items-center gap-5 px-6 py-10">
-      <div
-        role="status"
-        aria-busy="true"
-        aria-live="polite"
-        className="flex w-full max-w-sm flex-col items-center gap-5"
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={stage}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={fadeTransition}
-            className="flex flex-col items-center gap-3 text-center"
-          >
-            <StageIcon
-              className={`h-12 w-12 ${iconClass} ${spin ? 'animate-spin' : ''}`}
-              aria-hidden
-            />
-            <p className="text-base font-semibold text-text-primary">
-              {t(labelKey)}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-
-        <ProgressBar
-          value={generationProgress}
-          animated
-          variant="primary"
-          className="w-full"
-        />
-
-        <div className="min-h-[2.5rem] w-full text-center">
+    <>
+      <OfflineGenerationBanner onOffline={onCancel} />
+      <Card className="flex flex-col items-center gap-5 px-6 py-10">
+        <div
+          role="status"
+          aria-busy="true"
+          aria-live="polite"
+          className="flex w-full max-w-sm flex-col items-center gap-5"
+        >
           <AnimatePresence mode="wait">
-            <motion.p
-              key={tipKey}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <motion.div
+              key={stage}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={fadeTransition}
-              className="text-sm text-text-muted"
+              className="flex flex-col items-center gap-3 text-center"
             >
-              {t(tipKey)}
-            </motion.p>
+              <StageIcon
+                className={`h-12 w-12 ${iconClass} ${spin ? 'animate-spin' : ''}`}
+                aria-hidden
+              />
+              <p className="text-base font-semibold text-text-primary">
+                {t(labelKey)}
+              </p>
+            </motion.div>
           </AnimatePresence>
-        </div>
 
-        <Button variant="ghost" size="sm" onClick={onCancel}>
-          {t('input.cancelGeneration')}
-        </Button>
-      </div>
-    </Card>
+          <ProgressBar
+            value={generationProgress}
+            animated
+            variant="primary"
+            className="w-full"
+          />
+
+          <div className="min-h-[2.5rem] w-full text-center">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={tipKey}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={fadeTransition}
+                className="text-sm text-text-muted"
+              >
+                {t(tipKey)}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          <Button variant="ghost" size="sm" onClick={onCancel}>
+            {t('input.cancelGeneration')}
+          </Button>
+        </div>
+      </Card>
+    </>
   )
 }

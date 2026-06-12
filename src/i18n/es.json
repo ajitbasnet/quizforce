@@ -205,7 +205,8 @@
     "loadFailed": "No se pudieron cargar los datos. Actualiza la página e inténtalo de nuevo.",
     "rateLimit": "Demasiadas solicitudes, espera 30 segundos.",
     "overloaded": "La IA está ocupada, inténtalo de nuevo.",
-    "invalidApiKeyConfig": "Error de configuración — contacta con soporte."
+    "invalidApiKeyConfig": "Error de configuración — contacta con soporte.",
+    "offlineGenerationPaused": "Estás sin conexión — generación pausada."
   },
   "voice": {
     "enable": "Activar voz",

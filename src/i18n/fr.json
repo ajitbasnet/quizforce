@@ -205,7 +205,8 @@
     "loadFailed": "Échec du chargement des données. Actualisez la page et réessayez.",
     "rateLimit": "Trop de requêtes, veuillez attendre 30 secondes.",
     "overloaded": "L'IA est occupée, veuillez réessayer.",
-    "invalidApiKeyConfig": "Erreur de configuration — contactez le support."
+    "invalidApiKeyConfig": "Erreur de configuration — contactez le support.",
+    "offlineGenerationPaused": "Vous êtes hors ligne — génération en pause."
   },
   "voice": {
     "enable": "Activer la voix",

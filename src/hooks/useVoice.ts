@@ -13,6 +13,7 @@ const utteranceRef: { current: SpeechSynthesisUtterance | null } = {
 }
 const speechQueueRef: { current: string[] } = { current: [] }
 let sequenceLang: string | undefined
+let pausedDuringQuestion = false
 
 function noop() {}
 
@@ -113,6 +114,72 @@ function speakSequenceTexts(texts: string[], lang?: string) {
   speakNextInQueue()
 }
 
+function chainSpeakSequenceTexts(texts: string[], lang?: string) {
+  const filtered = texts.map((t) => t.trim()).filter(Boolean)
+  if (filtered.length === 0) {
+    utteranceRef.current = null
+    useVoiceStore.getState().endSpeech()
+    return
+  }
+
+  sequenceLang = lang
+  speechQueueRef.current = [...filtered]
+  speakNextInQueue()
+}
+
+function speakQuestionThenOptions(
+  questionText: string,
+  optionTexts: string[],
+  lang?: string,
+) {
+  const trimmedQuestion = questionText.trim()
+  if (!trimmedQuestion) return
+
+  pausedDuringQuestion = false
+  cancelSpeech()
+  useVoiceStore.getState().clearVoice()
+
+  const filteredOptions = optionTexts.map((t) => t.trim()).filter(Boolean)
+  const fullText = [trimmedQuestion, ...filteredOptions].join(' ')
+  const { setCurrentText, setLastSpokenText, setSpeaking, setPaused } =
+    useVoiceStore.getState()
+  setCurrentText(trimmedQuestion)
+  setLastSpokenText(fullText)
+
+  const utterance = new SpeechSynthesisUtterance(trimmedQuestion)
+  applyVoiceSettings(utterance, lang)
+
+  utterance.onstart = () => setSpeaking(true)
+  utterance.onpause = () => {
+    setPaused(true)
+    pausedDuringQuestion = true
+  }
+  utterance.onresume = () => setPaused(false)
+  utterance.onerror = () => {
+    if (utteranceRef.current === utterance) {
+      speechQueueRef.current = []
+      utteranceRef.current = null
+      pausedDuringQuestion = false
+      useVoiceStore.getState().endSpeech()
+    }
+  }
+  utterance.onend = () => {
+    if (utteranceRef.current !== utterance) return
+    utteranceRef.current = null
+
+    if (pausedDuringQuestion) {
+      pausedDuringQuestion = false
+      useVoiceStore.getState().endSpeech()
+      return
+    }
+
+    chainSpeakSequenceTexts(filteredOptions, lang)
+  }
+
+  utteranceRef.current = utterance
+  window.speechSynthesis.speak(utterance)
+}
+
 export function useVoice() {
   const isSpeaking = useVoiceStore((s) => s.isSpeaking)
   const isPaused = useVoiceStore((s) => s.isPaused)
@@ -126,6 +193,7 @@ export function useVoice() {
 
   const stop = useCallback(() => {
     if (!isSupported) return
+    pausedDuringQuestion = false
     cancelSpeech()
     useVoiceStore.getState().clearVoice()
   }, [])
@@ -150,6 +218,14 @@ export function useVoice() {
     speakSequenceTexts(texts, lang)
   }, [])
 
+  const speakQuestionThenOptionsFn = useCallback(
+    (questionText: string, optionTexts: string[], lang?: string) => {
+      if (!isSupported) return
+      speakQuestionThenOptions(questionText, optionTexts, lang)
+    },
+    [],
+  )
+
   const speakAgain = useCallback(() => {
     if (!isSupported) return
     const { lastSpokenText: text } = useVoiceStore.getState()
@@ -161,6 +237,7 @@ export function useVoice() {
     return {
       speak: noop,
       speakSequence: noop,
+      speakQuestionThenOptions: noop,
       speakAgain: noop,
       stop: noop,
       pause: noop,
@@ -176,6 +253,7 @@ export function useVoice() {
   return {
     speak,
     speakSequence,
+    speakQuestionThenOptions: speakQuestionThenOptionsFn,
     speakAgain,
     stop,
     pause,

@@ -97,20 +97,6 @@ function toQuizGenerationError(error: unknown): QuizGenerationError {
     return error
   }
 
-  if (error instanceof z.ZodError) {
-    return new QuizGenerationError(
-      `Invalid quiz response: ${error.message}`,
-      'VALIDATION_ERROR',
-    )
-  }
-
-  if (error instanceof SyntaxError) {
-    return new QuizGenerationError(
-      'Failed to parse quiz JSON from API response',
-      'PARSE_ERROR',
-    )
-  }
-
   if (error instanceof TypeError) {
     return new QuizGenerationError(
       error.message || 'Network request failed',
@@ -175,11 +161,32 @@ export async function generateQuiz({
       )
     }
 
-    const quiz = parseAndValidateClaudeQuiz(text, {
-      content,
-      settings,
-      sourceType,
-    })
+    let quiz: Quiz
+    try {
+      quiz = parseAndValidateClaudeQuiz(text, {
+        content,
+        settings,
+        sourceType,
+      })
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        throw new QuizGenerationError(
+          error.message,
+          'VALIDATION_ERROR',
+          undefined,
+          text,
+        )
+      }
+      if (error instanceof SyntaxError) {
+        throw new QuizGenerationError(
+          'Failed to parse quiz JSON from API response',
+          'PARSE_ERROR',
+          undefined,
+          text,
+        )
+      }
+      throw error
+    }
 
     progress.stop(100)
     return quiz

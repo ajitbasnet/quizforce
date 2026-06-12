@@ -18,16 +18,19 @@ export type QuizGenerationErrorCode =
 export class QuizGenerationError extends Error {
   code: QuizGenerationErrorCode
   apiErrorType?: string
+  rawResponse?: string
 
   constructor(
     message: string,
     code: QuizGenerationErrorCode,
     apiErrorType?: string,
+    rawResponse?: string,
   ) {
     super(message)
     this.name = 'QuizGenerationError'
     this.code = code
     this.apiErrorType = apiErrorType
+    this.rawResponse = rawResponse
   }
 }
 

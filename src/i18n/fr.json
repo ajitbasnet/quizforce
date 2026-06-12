@@ -200,6 +200,12 @@
     "rate": "Vitesse",
     "pitch": "Hauteur",
     "notSupported": "La synthèse vocale n'est pas prise en charge par ce navigateur.",
-    "readingQuestion": "Lecture de la question {{current}} sur {{total}}"
+    "readingQuestion": "Lecture de la question {{current}} sur {{total}}",
+    "controlsTitle": "Contrôles vocaux",
+    "readQuestion": "Lire la question",
+    "readOptions": "Lire les options",
+    "readAgain": "Relire",
+    "selectVoice": "Voix",
+    "openControls": "Voix"
   }
 }

@@ -200,6 +200,12 @@
     "rate": "गति",
     "pitch": "पिच",
     "notSupported": "यो ब्राउजरमा टेक्स्ट-टु-स्पीच समर्थित छैन।",
-    "readingQuestion": "प्रश्न {{current}} / {{total}} पढिँदै छ"
+    "readingQuestion": "प्रश्न {{current}} / {{total}} पढिँदै छ",
+    "controlsTitle": "वाक् नियन्त्रण",
+    "readQuestion": "प्रश्न पढ्नुहोस्",
+    "readOptions": "विकल्पहरू पढ्नुहोस्",
+    "readAgain": "फेरि पढ्नुहोस्",
+    "selectVoice": "आवाज",
+    "openControls": "वाक्"
   }
 }

@@ -200,6 +200,12 @@
     "rate": "语速",
     "pitch": "音调",
     "notSupported": "此浏览器不支持文字转语音。",
-    "readingQuestion": "正在朗读第 {{current}} 题，共 {{total}} 题"
+    "readingQuestion": "正在朗读第 {{current}} 题，共 {{total}} 题",
+    "controlsTitle": "语音控制",
+    "readQuestion": "朗读题目",
+    "readOptions": "朗读选项",
+    "readAgain": "重新朗读",
+    "selectVoice": "语音",
+    "openControls": "语音"
   }
 }

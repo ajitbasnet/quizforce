@@ -200,6 +200,12 @@
     "rate": "Speed",
     "pitch": "Pitch",
     "notSupported": "Text-to-speech is not supported in this browser.",
-    "readingQuestion": "Reading question {{current}} of {{total}}"
+    "readingQuestion": "Reading question {{current}} of {{total}}",
+    "controlsTitle": "Speech controls",
+    "readQuestion": "Read question",
+    "readOptions": "Read options",
+    "readAgain": "Read again",
+    "selectVoice": "Voice",
+    "openControls": "Speech"
   }
 }

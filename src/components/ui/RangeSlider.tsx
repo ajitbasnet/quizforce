@@ -20,6 +20,7 @@ interface RangeSliderProps {
   valueFormatter?: (value: number) => string
   id?: string
   className?: string
+  disabled?: boolean
 }
 
 export function RangeSlider({
@@ -34,6 +35,7 @@ export function RangeSlider({
   valueFormatter,
   id,
   className,
+  disabled,
 }: RangeSliderProps) {
   const inputId = fieldId(label, id)
   const helperId = inputId && helperText ? `${inputId}-helper` : undefined
@@ -65,6 +67,7 @@ export function RangeSlider({
         step={step}
         value={value}
         onChange={(event) => onChange(Number(event.target.value))}
+        disabled={disabled}
         aria-invalid={!!error}
         aria-describedby={describedBy}
         className={clsx(

@@ -200,6 +200,12 @@
     "rate": "Velocidad",
     "pitch": "Tono",
     "notSupported": "La síntesis de voz no es compatible con este navegador.",
-    "readingQuestion": "Leyendo pregunta {{current}} de {{total}}"
+    "readingQuestion": "Leyendo pregunta {{current}} de {{total}}",
+    "controlsTitle": "Controles de voz",
+    "readQuestion": "Leer pregunta",
+    "readOptions": "Leer opciones",
+    "readAgain": "Leer de nuevo",
+    "selectVoice": "Voz",
+    "openControls": "Voz"
   }
 }

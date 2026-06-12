@@ -131,7 +131,16 @@
     "stageFinalizing": "Finalisation de votre quiz...",
     "generatingTip1": "Astuce : les questions sont adaptées à la difficulté sélectionnée.",
     "generatingTip2": "Astuce : vous pouvez activer la narration vocale dans les paramètres du quiz.",
-    "generatingTip3": "Astuce : un contenu plus long produit des questions plus ciblées."
+    "generatingTip3": "Astuce : un contenu plus long produit des questions plus ciblées.",
+    "keyboardShortcuts": "Raccourcis clavier",
+    "shortcutNext": "Question suivante",
+    "shortcutPrev": "Question précédente",
+    "shortcutSelect": "Sélectionner une réponse",
+    "shortcutAdvance": "Avancer",
+    "shortcutVoice": "Activer/désactiver la voix",
+    "shortcutSkipVoice": "Ignorer la lecture vocale",
+    "shortcutSubmit": "Soumettre le quiz",
+    "shortcutSubmitNote": "dernière question"
   },
   "results": {
     "calculatingScore": "Calcul de votre score...",

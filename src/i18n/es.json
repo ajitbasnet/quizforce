@@ -131,7 +131,16 @@
     "stageFinalizing": "Finalizando tu cuestionario...",
     "generatingTip1": "Consejo: las preguntas se adaptan a la dificultad seleccionada.",
     "generatingTip2": "Consejo: puedes activar la narración por voz en la configuración del cuestionario.",
-    "generatingTip3": "Consejo: un contenido más extenso produce preguntas más enfocadas."
+    "generatingTip3": "Consejo: un contenido más extenso produce preguntas más enfocadas.",
+    "keyboardShortcuts": "Atajos de teclado",
+    "shortcutNext": "Siguiente pregunta",
+    "shortcutPrev": "Pregunta anterior",
+    "shortcutSelect": "Seleccionar respuesta",
+    "shortcutAdvance": "Avanzar",
+    "shortcutVoice": "Activar/desactivar voz",
+    "shortcutSkipVoice": "Omitir lectura de voz",
+    "shortcutSubmit": "Enviar cuestionario",
+    "shortcutSubmitNote": "última pregunta"
   },
   "results": {
     "calculatingScore": "Calculando tu puntuación...",

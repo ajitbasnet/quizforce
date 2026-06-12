@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { CircleHelp } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
@@ -6,16 +7,25 @@ import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
 import { QuestionMap } from '../components/quiz/QuestionMap'
 import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestionsModal'
+import { topBarIconButtonClass } from '../components/layout/topBarActionStyles'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
+import { Modal } from '../components/ui/Modal'
 import { ProgressBar } from '../components/ui/ProgressBar'
+import { Tooltip } from '../components/ui/Tooltip'
+import { useKeyboard } from '../hooks/useKeyboard'
 import { useLanguage } from '../hooks/useLanguage'
 import { useQuizNavigation } from '../hooks/useQuizNavigation'
+import { useVoice } from '../hooks/useVoice'
 import { LANGUAGE_OPTIONS } from '../i18n'
 import { persistQuizAttempt } from '../services/persistQuizAttempt'
 import { useQuizStore } from '../store/quizStore'
+import { useSettingsStore } from '../store/settingsStore'
 import type { QuizSettings } from '../types/quiz'
 import { calculateScore } from '../utils/scoreCalculator'
+
+const kbdClass =
+  'inline-flex min-w-[1.5rem] items-center justify-center rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 font-mono text-xs text-text-primary'
 
 function formatElapsed(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
@@ -57,9 +67,14 @@ export default function QuizPage() {
     isAnswered,
   } = useQuizNavigation()
 
+  const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
+  const updateSettings = useSettingsStore((s) => s.updateSettings)
+  const { stop } = useVoice()
+
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [unansweredModalOpen, setUnansweredModalOpen] = useState(false)
+  const [shortcutsOpen, setShortcutsOpen] = useState(false)
 
   useEffect(() => {
     setElapsedSeconds(0)
@@ -119,14 +134,64 @@ export default function QuizPage() {
     }
   }, [unansweredNumbers.length, confirmSubmit])
 
+  const question = currentQuiz?.questions[currentQuestionIndex]
+  const isLastQuestion = currentQuiz
+    ? currentQuestionIndex === totalQuestions - 1
+    : false
+
+  useKeyboard(
+    {
+      enabled: !isSubmitting && !!currentQuiz,
+      canGoPrev,
+      canSelectOption: (i) => !!question?.options[i],
+      hasAnswer: !!question && !!userAnswers[question.id],
+      isLastQuestion,
+      onNext: () => {
+        if (canGoNext) navigateQuestion('next')
+      },
+      onPrev: () => {
+        if (canGoPrev) navigateQuestion('prev')
+      },
+      onSelectOption: (i) => {
+        if (!question) return
+        const opt = question.options[i]
+        if (opt) setAnswer(question.id, opt.id)
+      },
+      onAdvance: () => {
+        if (!question || !userAnswers[question.id]) return
+        if (isLastQuestion) handleSubmitClick()
+        else if (canGoNext) navigateQuestion('next')
+      },
+      onToggleVoice: () => updateSettings({ voiceEnabled: !voiceEnabled }),
+      onSkipVoice: () => stop(),
+      onSubmit: () => {
+        if (isLastQuestion) handleSubmitClick()
+      },
+    },
+    [
+      isSubmitting,
+      currentQuiz,
+      canGoPrev,
+      canGoNext,
+      question,
+      userAnswers,
+      isLastQuestion,
+      voiceEnabled,
+      navigateQuestion,
+      setAnswer,
+      handleSubmitClick,
+      updateSettings,
+      stop,
+    ],
+  )
+
   if (!currentQuiz) {
     return <Navigate to="/" replace />
   }
 
   const { questions, settings } = currentQuiz
   const total = totalQuestions
-  const question = questions[currentQuestionIndex]
-  const isLastQuestion = currentQuestionIndex === total - 1
+  const currentQuestion = questions[currentQuestionIndex]
   const languageOption = LANGUAGE_OPTIONS.find(
     (opt) => opt.code === currentQuiz.language,
   )
@@ -145,14 +210,26 @@ export default function QuizPage() {
                 <p className="mt-1 text-text-muted">{currentQuiz.description}</p>
               )}
             </div>
-            {settings.timerEnabled && (
-              <span
-                className="shrink-0 font-mono text-sm tabular-nums text-text-primary"
-                aria-label={formatElapsed(elapsedSeconds)}
-              >
-                {formatElapsed(elapsedSeconds)}
-              </span>
-            )}
+            <div className="flex shrink-0 items-center gap-1">
+              {settings.timerEnabled && (
+                <span
+                  className="font-mono text-sm tabular-nums text-text-primary"
+                  aria-label={formatElapsed(elapsedSeconds)}
+                >
+                  {formatElapsed(elapsedSeconds)}
+                </span>
+              )}
+              <Tooltip content={t('quiz.keyboardShortcuts')}>
+                <button
+                  type="button"
+                  className={topBarIconButtonClass}
+                  aria-label={t('quiz.keyboardShortcuts')}
+                  onClick={() => setShortcutsOpen(true)}
+                >
+                  <CircleHelp className="h-4 w-4" />
+                </button>
+              </Tooltip>
+            </div>
           </div>
 
           <div className="mt-3 flex flex-wrap gap-2">
@@ -198,19 +275,19 @@ export default function QuizPage() {
         <main className="flex-1">
           <AnimatePresence mode="wait">
             <motion.div
-              key={question.id}
+              key={currentQuestion.id}
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25 }}
             >
               <QuestionBlock
-                question={question}
+                question={currentQuestion}
                 questionNumber={currentQuestionIndex + 1}
-                selectedOptionId={userAnswers[question.id] ?? null}
-                onSelect={(optionId) => setAnswer(question.id, optionId)}
+                selectedOptionId={userAnswers[currentQuestion.id] ?? null}
+                onSelect={(optionId) => setAnswer(currentQuestion.id, optionId)}
                 isSubmitted={false}
-                voiceEnabled={settings.voiceEnabled}
+                voiceEnabled={voiceEnabled}
                 language={currentQuiz.language}
               />
             </motion.div>
@@ -253,7 +330,10 @@ export default function QuizPage() {
         </nav>
         </div>
 
-        <SpeechControls question={question} language={currentQuiz.language} />
+        <SpeechControls
+          question={currentQuestion}
+          language={currentQuiz.language}
+        />
       </div>
 
       <UnansweredQuestionsModal
@@ -262,6 +342,52 @@ export default function QuizPage() {
         onClose={() => setUnansweredModalOpen(false)}
         onConfirmSubmit={() => void confirmSubmit()}
       />
+
+      <Modal
+        isOpen={shortcutsOpen}
+        onClose={() => setShortcutsOpen(false)}
+        title={t('quiz.keyboardShortcuts')}
+        size="md"
+      >
+        <ul className="space-y-3">
+          {[
+            { label: t('quiz.shortcutNext'), keys: ['→'] },
+            { label: t('quiz.shortcutPrev'), keys: ['←'] },
+            { label: t('quiz.shortcutSelect'), keys: ['1', '–', '4'] },
+            { label: t('quiz.shortcutAdvance'), keys: ['Space'] },
+            { label: t('quiz.shortcutVoice'), keys: ['V'] },
+            { label: t('quiz.shortcutSkipVoice'), keys: ['S'] },
+            {
+              label: t('quiz.shortcutSubmit'),
+              keys: ['Enter'],
+              hint: t('quiz.shortcutSubmitNote'),
+            },
+          ].map(({ label, keys, hint }) => (
+            <li
+              key={label}
+              className="flex items-center justify-between gap-4 text-sm"
+            >
+              <span className="text-text-primary">{label}</span>
+              <span className="flex shrink-0 items-center gap-1">
+                {keys.map((key) =>
+                  key === '–' ? (
+                    <span key={key} className="text-text-muted">
+                      –
+                    </span>
+                  ) : (
+                    <kbd key={key} className={kbdClass}>
+                      {key}
+                    </kbd>
+                  ),
+                )}
+                {hint && (
+                  <span className="ml-1 text-text-muted">({hint})</span>
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Modal>
 
       <VoicePlayer />
     </div>

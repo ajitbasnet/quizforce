@@ -131,7 +131,16 @@
     "stageFinalizing": "Finalizing your quiz...",
     "generatingTip1": "Tip: Questions are tailored to your selected difficulty.",
     "generatingTip2": "Tip: You can enable voice narration in quiz settings.",
-    "generatingTip3": "Tip: Longer content produces more focused questions."
+    "generatingTip3": "Tip: Longer content produces more focused questions.",
+    "keyboardShortcuts": "Keyboard shortcuts",
+    "shortcutNext": "Next question",
+    "shortcutPrev": "Previous question",
+    "shortcutSelect": "Select answer",
+    "shortcutAdvance": "Advance",
+    "shortcutVoice": "Toggle voice",
+    "shortcutSkipVoice": "Skip voice reading",
+    "shortcutSubmit": "Submit quiz",
+    "shortcutSubmitNote": "last question"
   },
   "results": {
     "calculatingScore": "Calculating your score...",

@@ -131,7 +131,16 @@
     "stageFinalizing": "Quiz wird finalisiert...",
     "generatingTip1": "Tipp: Fragen werden an Ihre gewählte Schwierigkeit angepasst.",
     "generatingTip2": "Tipp: Sie können Sprachausgabe in den Quiz-Einstellungen aktivieren.",
-    "generatingTip3": "Tipp: Längere Inhalte führen zu fokussierteren Fragen."
+    "generatingTip3": "Tipp: Längere Inhalte führen zu fokussierteren Fragen.",
+    "keyboardShortcuts": "Tastenkürzel",
+    "shortcutNext": "Nächste Frage",
+    "shortcutPrev": "Vorherige Frage",
+    "shortcutSelect": "Antwort auswählen",
+    "shortcutAdvance": "Weiter",
+    "shortcutVoice": "Sprache ein/aus",
+    "shortcutSkipVoice": "Sprachausgabe überspringen",
+    "shortcutSubmit": "Quiz absenden",
+    "shortcutSubmitNote": "letzte Frage"
   },
   "results": {
     "calculatingScore": "Punkte werden berechnet...",

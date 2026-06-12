@@ -131,7 +131,16 @@
     "stageFinalizing": "आपका क्विज़ अंतिम रूप दिया जा रहा है...",
     "generatingTip1": "सुझाव: प्रश्न आपकी चुनी गई कठिनाई के अनुसार तैयार होते हैं।",
     "generatingTip2": "सुझाव: आप क्विज़ सेटिंग्स में आवाज़ नरेशन चालू कर सकते हैं।",
-    "generatingTip3": "सुझाव: लंबी सामग्री से अधिक केंद्रित प्रश्न बनते हैं।"
+    "generatingTip3": "सुझाव: लंबी सामग्री से अधिक केंद्रित प्रश्न बनते हैं।",
+    "keyboardShortcuts": "कीबोर्ड शॉर्टकट",
+    "shortcutNext": "अगला प्रश्न",
+    "shortcutPrev": "पिछला प्रश्न",
+    "shortcutSelect": "उत्तर चुनें",
+    "shortcutAdvance": "आगे बढ़ें",
+    "shortcutVoice": "आवाज़ चालू/बंद करें",
+    "shortcutSkipVoice": "आवाज़ पढ़ना छोड़ें",
+    "shortcutSubmit": "क्विज़ जमा करें",
+    "shortcutSubmitNote": "अंतिम प्रश्न"
   },
   "results": {
     "calculatingScore": "आपका स्कोर गणना हो रहा है...",

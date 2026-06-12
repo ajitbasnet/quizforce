@@ -131,7 +131,16 @@
     "stageFinalizing": "正在完成测验...",
     "generatingTip1": "提示：题目会根据您选择的难度量身定制。",
     "generatingTip2": "提示：您可以在测验设置中启用语音朗读。",
-    "generatingTip3": "提示：内容越长，生成的题目越聚焦。"
+    "generatingTip3": "提示：内容越长，生成的题目越聚焦。",
+    "keyboardShortcuts": "键盘快捷键",
+    "shortcutNext": "下一题",
+    "shortcutPrev": "上一题",
+    "shortcutSelect": "选择答案",
+    "shortcutAdvance": "前进",
+    "shortcutVoice": "切换语音",
+    "shortcutSkipVoice": "跳过语音朗读",
+    "shortcutSubmit": "提交测验",
+    "shortcutSubmitNote": "最后一题"
   },
   "results": {
     "calculatingScore": "正在计算您的得分...",

@@ -144,7 +144,10 @@
     "validationErrorTitle": "测验验证失败",
     "rawResponse": "原始 API 响应",
     "tryRegenerating": "尝试重新生成",
-    "close": "关闭"
+    "close": "关闭",
+    "noQuestionsGenerated": "未生成任何题目",
+    "backToHome": "返回首页",
+    "createQuizFirst": "请先创建测验。"
   },
   "results": {
     "calculatingScore": "正在计算您的得分...",

@@ -144,7 +144,10 @@
     "validationErrorTitle": "Error de validación del cuestionario",
     "rawResponse": "Respuesta sin procesar de la API",
     "tryRegenerating": "Intentar regenerar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "noQuestionsGenerated": "No se generaron preguntas",
+    "backToHome": "Volver al inicio",
+    "createQuizFirst": "Comienza creando un cuestionario primero."
   },
   "results": {
     "calculatingScore": "Calculando tu puntuación...",

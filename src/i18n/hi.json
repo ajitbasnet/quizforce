@@ -144,7 +144,10 @@
     "validationErrorTitle": "क्विज़ सत्यापन विफल",
     "rawResponse": "कच्ची API प्रतिक्रिया",
     "tryRegenerating": "पुनः जनरेट करें",
-    "close": "बंद करें"
+    "close": "बंद करें",
+    "noQuestionsGenerated": "कोई प्रश्न नहीं बने",
+    "backToHome": "होम पर वापस जाएँ",
+    "createQuizFirst": "पहले एक क्विज़ बनाकर शुरू करें।"
   },
   "results": {
     "calculatingScore": "आपका स्कोर गणना हो रहा है...",

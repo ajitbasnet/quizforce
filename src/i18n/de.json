@@ -144,7 +144,10 @@
     "validationErrorTitle": "Quiz-Validierung fehlgeschlagen",
     "rawResponse": "Rohe API-Antwort",
     "tryRegenerating": "Erneut generieren",
-    "close": "Schließen"
+    "close": "Schließen",
+    "noQuestionsGenerated": "Keine Fragen generiert",
+    "backToHome": "Zurück zur Startseite",
+    "createQuizFirst": "Erstellen Sie zuerst ein Quiz."
   },
   "results": {
     "calculatingScore": "Punkte werden berechnet...",

@@ -144,7 +144,10 @@
     "validationErrorTitle": "Quiz validation failed",
     "rawResponse": "Raw API response",
     "tryRegenerating": "Try regenerating",
-    "close": "Close"
+    "close": "Close",
+    "noQuestionsGenerated": "No questions generated",
+    "backToHome": "Back to Home",
+    "createQuizFirst": "Start by creating a quiz first."
   },
   "results": {
     "calculatingScore": "Calculating your score...",

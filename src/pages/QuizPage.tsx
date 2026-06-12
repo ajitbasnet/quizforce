@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { CircleHelp } from 'lucide-react'
+import { ArrowLeft, CircleHelp } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
 import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
@@ -10,9 +10,11 @@ import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestions
 import { topBarIconButtonClass } from '../components/layout/topBarActionStyles'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
+import { Card } from '../components/ui/Card'
 import { Modal } from '../components/ui/Modal'
 import { ProgressBar } from '../components/ui/ProgressBar'
 import { Tooltip } from '../components/ui/Tooltip'
+import { useToast } from '../components/ui/Toast'
 import { useKeyboard } from '../hooks/useKeyboard'
 import { useLanguage } from '../hooks/useLanguage'
 import { useQuizNavigation } from '../hooks/useQuizNavigation'
@@ -51,6 +53,7 @@ function getDifficultyLabel(
 
 export default function QuizPage() {
   const { t } = useLanguage()
+  const { toast } = useToast()
   const navigate = useNavigate()
   const currentQuiz = useQuizStore((s) => s.currentQuiz)
   const userAnswers = useQuizStore((s) => s.userAnswers)
@@ -75,6 +78,13 @@ export default function QuizPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [unansweredModalOpen, setUnansweredModalOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
+
+  useEffect(() => {
+    if (currentQuiz) return
+    toast.info(t('quiz.createQuizFirst'))
+    const timer = window.setTimeout(() => navigate('/', { replace: true }), 300)
+    return () => window.clearTimeout(timer)
+  }, [currentQuiz, navigate, toast, t])
 
   useEffect(() => {
     setElapsedSeconds(0)
@@ -186,7 +196,24 @@ export default function QuizPage() {
   )
 
   if (!currentQuiz) {
-    return <Navigate to="/" replace />
+    return null
+  }
+
+  if (currentQuiz.questions.length === 0) {
+    return (
+      <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+        <Card className="max-w-md text-center">
+          <p>{t('quiz.noQuestionsGenerated')}</p>
+          <Button
+            className="mt-4"
+            leftIcon={<ArrowLeft className="h-4 w-4" aria-hidden />}
+            onClick={() => navigate('/')}
+          >
+            {t('quiz.backToHome')}
+          </Button>
+        </Card>
+      </div>
+    )
   }
 
   const { questions, settings } = currentQuiz

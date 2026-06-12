@@ -144,7 +144,10 @@
     "validationErrorTitle": "Échec de la validation du quiz",
     "rawResponse": "Réponse brute de l'API",
     "tryRegenerating": "Réessayer la génération",
-    "close": "Fermer"
+    "close": "Fermer",
+    "noQuestionsGenerated": "Aucune question générée",
+    "backToHome": "Retour à l'accueil",
+    "createQuizFirst": "Commencez par créer un quiz."
   },
   "results": {
     "calculatingScore": "Calcul de votre score...",

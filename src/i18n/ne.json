@@ -144,7 +144,10 @@
     "validationErrorTitle": "क्विज प्रमाणीकरण असफल",
     "rawResponse": "कच्चा API प्रतिक्रिया",
     "tryRegenerating": "पुनः जनरेट गर्नुहोस्",
-    "close": "बन्द गर्नुहोस्"
+    "close": "बन्द गर्नुहोस्",
+    "noQuestionsGenerated": "कुनै प्रश्न उत्पादन भएन",
+    "backToHome": "गृहपृष्ठमा फर्कनुहोस्",
+    "createQuizFirst": "पहिले क्विज सिर्जना गरेर सुरु गर्नुहोस्।"
   },
   "results": {
     "calculatingScore": "तपाईंको स्कोर गणना हुँदैछ...",

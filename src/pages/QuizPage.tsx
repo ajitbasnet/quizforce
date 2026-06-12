@@ -197,13 +197,13 @@ export default function QuizPage() {
   )
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col px-4 py-6 sm:px-6">
-      <div className="mx-auto flex w-full max-w-5xl flex-1 lg:grid lg:grid-cols-[1fr_17rem] lg:items-start lg:gap-6">
-        <div className="flex min-w-0 max-w-3xl flex-1 flex-col gap-6">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col overflow-x-hidden px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+      <div className="mx-auto w-full max-w-5xl lg:grid lg:grid-cols-[minmax(0,48rem)_17rem] lg:items-start lg:gap-8">
+        <div className="flex min-w-0 flex-1 flex-col gap-6">
         <header>
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
-              <h1 className="font-display text-2xl font-bold text-text-primary">
+              <h1 className="break-words font-display text-2xl font-bold text-text-primary">
                 {currentQuiz.title}
               </h1>
               {currentQuiz.description && (
@@ -222,7 +222,7 @@ export default function QuizPage() {
               <Tooltip content={t('quiz.keyboardShortcuts')}>
                 <button
                   type="button"
-                  className={topBarIconButtonClass}
+                  className={`${topBarIconButtonClass} min-h-11 min-w-11`}
                   aria-label={t('quiz.keyboardShortcuts')}
                   onClick={() => setShortcutsOpen(true)}
                 >
@@ -250,7 +250,7 @@ export default function QuizPage() {
           </div>
         </header>
 
-        <div className="sticky top-16 z-10 -mx-4 bg-bg/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
+        <div className="sticky top-16 z-10 max-sm:-mx-4 bg-bg/95 px-4 py-2 backdrop-blur sm:max-lg:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
           <div className="flex flex-col gap-1">
             <ProgressBar
               value={((currentQuestionIndex + 1) / total) * 100}
@@ -294,16 +294,17 @@ export default function QuizPage() {
           </AnimatePresence>
         </main>
 
-        <nav className="mt-auto flex items-center justify-between gap-4 pt-4">
+        <nav className="mt-auto flex min-w-0 flex-wrap items-center justify-between gap-4 pt-4">
           <Button
             variant="ghost"
+            className="min-h-11"
             disabled={!canGoPrev || isSubmitting}
             onClick={() => navigateQuestion('prev')}
           >
             {t('quiz.previousQuestion')}
           </Button>
 
-          <span className="text-sm text-text-muted">
+          <span className="min-w-0 text-sm text-text-muted">
             {t('quiz.questionOf', {
               current: currentQuestionIndex + 1,
               total,
@@ -313,6 +314,7 @@ export default function QuizPage() {
           {isLastQuestion ? (
             <Button
               variant="primary"
+              className="min-h-11"
               isLoading={isSubmitting}
               onClick={handleSubmitClick}
             >
@@ -321,6 +323,7 @@ export default function QuizPage() {
           ) : (
             <Button
               variant="primary"
+              className="min-h-11"
               disabled={!canGoNext || isSubmitting}
               onClick={() => navigateQuestion('next')}
             >

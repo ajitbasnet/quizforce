@@ -200,6 +200,8 @@
     "rate": "Geschwindigkeit",
     "pitch": "Tonhöhe",
     "notSupported": "Sprachausgabe wird in diesem Browser nicht unterstützt.",
+    "reading": "Wird vorgelesen...",
+    "skipReading": "Vorlesen überspringen",
     "readingQuestion": "Frage {{current}} von {{total}} wird vorgelesen",
     "controlsTitle": "Sprachsteuerung",
     "readQuestion": "Frage vorlesen",

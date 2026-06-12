@@ -68,7 +68,7 @@ export function QuestionBlock({
   language,
 }: QuestionBlockProps) {
   const { t } = useLanguage()
-  const { speak, stop } = useVoice()
+  const { speakQuestionThenOptions, stop, isSpeaking } = useVoice()
   const customPointsMap = useQuizStore(
     (s) => s.currentQuiz?.settings.customPointsMap ?? {},
   )
@@ -127,14 +127,19 @@ export function QuestionBlock({
 
   useEffect(() => {
     if (!voiceEnabled) return
-    speak(question.questionText, language)
+    const optionTexts = question.options.map(
+      (option, index) =>
+        `Option ${OPTION_LETTERS[index] ?? String(index + 1)}: ${option.text}`,
+    )
+    speakQuestionThenOptions(question.questionText, optionTexts, language)
     return () => stop()
   }, [
     question.id,
     question.questionText,
+    question.options,
     voiceEnabled,
     language,
-    speak,
+    speakQuestionThenOptions,
     stop,
   ])
 
@@ -144,6 +149,16 @@ export function QuestionBlock({
         <Badge variant="default" size="sm">
           {t('quiz.questionChip', { number: questionNumber })}
         </Badge>
+        {voiceEnabled && isSpeaking && (
+          <>
+            <span className="text-sm text-indigo-600">
+              🔊 {t('voice.reading')}
+            </span>
+            <Button type="button" variant="ghost" size="xs" onClick={stop}>
+              {t('voice.skipReading')}
+            </Button>
+          </>
+        )}
         <Badge
           variant={getDifficultyVariant(question.difficulty)}
           size="sm"

@@ -200,6 +200,8 @@
     "rate": "语速",
     "pitch": "音调",
     "notSupported": "此浏览器不支持文字转语音。",
+    "reading": "正在朗读...",
+    "skipReading": "跳过朗读",
     "readingQuestion": "正在朗读第 {{current}} 题，共 {{total}} 题",
     "controlsTitle": "语音控制",
     "readQuestion": "朗读题目",

@@ -200,6 +200,8 @@
     "rate": "गति",
     "pitch": "पिच",
     "notSupported": "इस ब्राउज़र में टेक्स्ट-टू-स्पीच समर्थित नहीं है।",
+    "reading": "पढ़ा जा रहा है...",
+    "skipReading": "पढ़ना छोड़ें",
     "readingQuestion": "प्रश्न {{current}} / {{total}} पढ़ा जा रहा है",
     "controlsTitle": "वाक् नियंत्रण",
     "readQuestion": "प्रश्न पढ़ें",

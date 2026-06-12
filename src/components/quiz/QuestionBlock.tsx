@@ -154,7 +154,13 @@ export function QuestionBlock({
             <span className="text-sm text-indigo-600">
               🔊 {t('voice.reading')}
             </span>
-            <Button type="button" variant="ghost" size="xs" onClick={stop}>
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
+              className="min-h-11"
+              onClick={stop}
+            >
               {t('voice.skipReading')}
             </Button>
           </>

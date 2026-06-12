@@ -86,7 +86,7 @@ export function AnswerOption({
       onMouseEnter={handleVoiceRead}
       onFocus={handleVoiceRead}
       className={clsx(
-        'flex w-full flex-col rounded-lg border px-4 py-3 text-left transition-colors duration-150',
+        'flex min-h-11 w-full flex-col rounded-lg border px-4 py-3 text-left transition-colors duration-150',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
         getButtonClasses(isSelected, isSubmitted, isCorrect),
       )}

@@ -157,7 +157,12 @@
     "percentage": "प्रतिशत",
     "timeTaken": "लिया गया समय",
     "reviewAnswers": "उत्तरों की समीक्षा करें",
+    "answerReview": "उत्तर समीक्षा",
     "retakeQuiz": "क्विज़ फिर से लें",
+    "playAgain": "फिर से खेलें",
+    "shareScore": "स्कोर साझा करें",
+    "shareText": "मैंने \"{{title}}\" पर {{score}}/{{totalPoints}} ({{percentage}}%) स्कोर किया!",
+    "shareCopied": "स्कोर क्लिपबोर्ड पर कॉपी हो गया",
     "backToHome": "होम पर वापस जाएँ"
   },
   "history": {

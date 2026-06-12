@@ -157,7 +157,12 @@
     "percentage": "Percentage",
     "timeTaken": "Time Taken",
     "reviewAnswers": "Review Answers",
+    "answerReview": "Answer Review",
     "retakeQuiz": "Retake Quiz",
+    "playAgain": "Play Again",
+    "shareScore": "Share Score",
+    "shareText": "I scored {{score}}/{{totalPoints}} ({{percentage}}%) on \"{{title}}\"!",
+    "shareCopied": "Score copied to clipboard",
     "backToHome": "Back to Home"
   },
   "history": {

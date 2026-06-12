@@ -157,7 +157,12 @@
     "percentage": "Pourcentage",
     "timeTaken": "Temps écoulé",
     "reviewAnswers": "Revoir les réponses",
+    "answerReview": "Revue des réponses",
     "retakeQuiz": "Refaire le quiz",
+    "playAgain": "Rejouer",
+    "shareScore": "Partager le score",
+    "shareText": "J'ai obtenu {{score}}/{{totalPoints}} ({{percentage}}%) sur \"{{title}}\" !",
+    "shareCopied": "Score copié dans le presse-papiers",
     "backToHome": "Retour à l'accueil"
   },
   "history": {

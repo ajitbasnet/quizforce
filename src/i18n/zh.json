@@ -157,7 +157,12 @@
     "percentage": "百分比",
     "timeTaken": "用时",
     "reviewAnswers": "查看答案",
+    "answerReview": "答案回顾",
     "retakeQuiz": "重新测验",
+    "playAgain": "再玩一次",
+    "shareScore": "分享得分",
+    "shareText": "我在\"{{title}}\"中获得了 {{score}}/{{totalPoints}} ({{percentage}}%)！",
+    "shareCopied": "得分已复制到剪贴板",
     "backToHome": "返回首页"
   },
   "history": {

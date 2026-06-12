@@ -1,112 +1,153 @@
-import { animate, motion } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { useCallback, useMemo } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
+import { ScorePanel } from '../components/quiz/ScorePanel'
+import { Button } from '../components/ui/Button'
+import { Card } from '../components/ui/Card'
+import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
-import type { QuizAttempt } from '../types/quiz'
 
-function formatTimeTaken(seconds: number): string {
-  const minutes = Math.floor(seconds / 60)
-  const secs = seconds % 60
-  if (minutes > 0) {
-    return `${minutes}m ${secs}s`
-  }
-  return `${secs}s`
+const reviewContainerVariants = {
+  hidden: {},
+  show: {
+    transition: { delayChildren: 0.3, staggerChildren: 0.05 },
+  },
+}
+
+const reviewItemVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 }
 
 export default function ResultsPage() {
   const { t } = useLanguage()
+  const { toast } = useToast()
+  const navigate = useNavigate()
   const { attemptId } = useParams()
   const completedAttempt = useQuizStore((s) => s.completedAttempt)
+  const currentQuiz = useQuizStore((s) => s.currentQuiz)
+  const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
   const getAttemptById = useHistoryStore((s) => s.getAttemptById)
+  const historyQuizzes = useHistoryStore((s) => s.quizzes)
 
-  const attempt = useMemo((): QuizAttempt | undefined => {
-    if (!attemptId) return undefined
-    if (completedAttempt?.id === attemptId) return completedAttempt
-    return getAttemptById(attemptId)
-  }, [attemptId, completedAttempt, getAttemptById])
+  const attempt = useMemo(
+    () =>
+      (attemptId ? getAttemptById(attemptId) : undefined) ??
+      (completedAttempt?.id === attemptId ? completedAttempt : undefined),
+    [attemptId, completedAttempt, getAttemptById],
+  )
 
-  const [phase, setPhase] = useState<'calculating' | 'results'>('calculating')
-  const [displayScore, setDisplayScore] = useState(0)
+  const quiz = useMemo(
+    () =>
+      historyQuizzes.find((q) => q.id === attempt?.quizId) ??
+      (currentQuiz?.id === attempt?.quizId ? currentQuiz : undefined),
+    [historyQuizzes, attempt?.quizId, currentQuiz],
+  )
 
-  useEffect(() => {
+  const handlePlayAgain = useCallback(() => {
+    if (!quiz) {
+      toast.error(t('errors.quizNotFound'))
+      return
+    }
+    setCurrentQuiz(quiz)
+    navigate('/quiz')
+  }, [quiz, setCurrentQuiz, navigate, toast, t])
+
+  const handleShare = useCallback(async () => {
     if (!attempt) return
 
-    setPhase('calculating')
-    setDisplayScore(0)
-
-    const calculatingTimer = window.setTimeout(() => {
-      setPhase('results')
-    }, 800)
-
-    return () => window.clearTimeout(calculatingTimer)
-  }, [attempt?.id])
-
-  useEffect(() => {
-    if (phase !== 'results' || !attempt) return
-
-    const controls = animate(0, attempt.score, {
-      duration: 0.8,
-      onUpdate: (value) => setDisplayScore(Math.round(value)),
+    const text = t('results.shareText', {
+      score: attempt.score,
+      totalPoints: attempt.totalPoints,
+      percentage: attempt.percentage,
+      title: quiz?.title ?? '',
     })
 
-    return () => controls.stop()
-  }, [phase, attempt])
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: t('results.title'), text })
+      } catch (err) {
+        if ((err as Error).name === 'AbortError') return
+      }
+      return
+    }
+
+    try {
+      await navigator.clipboard.writeText(text)
+      toast.success(t('results.shareCopied'))
+    } catch {
+      toast.error(t('errors.generic'))
+    }
+  }, [attempt, quiz?.title, t, toast])
 
   if (!attemptId || !attempt) {
-    return <Navigate to="/" replace />
-  }
-
-  if (phase === 'calculating') {
     return (
       <PageWrapper>
-        <div className="flex min-h-[40vh] items-center justify-center">
-          <motion.p
-            className="text-lg text-text-muted"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {t('results.calculatingScore')}
-          </motion.p>
-        </div>
+        <Card className="mx-auto max-w-md text-center">
+          <p className="text-text-primary">{t('errors.attemptNotFound')}</p>
+          <Button className="mt-4" onClick={() => navigate('/')}>
+            {t('results.backToHome')}
+          </Button>
+        </Card>
       </PageWrapper>
     )
   }
 
   return (
     <PageWrapper title={t('results.title')}>
-      <div className="mx-auto max-w-lg text-center">
-        <p className="text-sm font-medium text-text-muted">
-          {t('results.yourScore')}
-        </p>
-        <motion.p
-          className="mt-2 font-display text-6xl font-bold text-indigo-600 tabular-nums"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {displayScore}
-        </motion.p>
-        <p className="mt-1 text-text-muted">
-          {t('results.totalPoints')}: {attempt.totalPoints}
-        </p>
+          <ScorePanel attempt={attempt} quiz={quiz} />
+        </motion.div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 text-left">
-          <div className="rounded-lg border border-gray-200 bg-white p-4">
-            <p className="text-sm text-text-muted">{t('results.percentage')}</p>
-            <p className="mt-1 text-2xl font-semibold text-text-primary">
-              {attempt.percentage}%
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 bg-white p-4">
-            <p className="text-sm text-text-muted">{t('results.timeTaken')}</p>
-            <p className="mt-1 text-2xl font-semibold text-text-primary">
-              {formatTimeTaken(attempt.timeTaken)}
-            </p>
-          </div>
+        <section>
+          <h2 className="mb-4 text-xl font-semibold text-text-primary">
+            {t('results.answerReview')}
+          </h2>
+          <motion.div
+            className="flex flex-col gap-3"
+            variants={reviewContainerVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {(quiz?.questions ?? []).map((question, index) => {
+              const feedback = attempt.feedback.find(
+                (entry) => entry.questionId === question.id,
+              )
+              const selectedOptionId = attempt.answers[question.id]
+
+              return (
+                <motion.div key={question.id} variants={reviewItemVariants}>
+                  <QuestionReviewCard
+                    question={question}
+                    feedback={feedback}
+                    selectedOptionId={selectedOptionId}
+                    index={index}
+                  />
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </section>
+
+        <div className="flex flex-wrap gap-3">
+          <Button size="lg" onClick={handlePlayAgain}>
+            {t('results.playAgain')}
+          </Button>
+          <Button size="lg" variant="secondary" onClick={() => navigate('/')}>
+            {t('results.backToHome')}
+          </Button>
+          <Button size="lg" variant="secondary" onClick={() => void handleShare()}>
+            {t('results.shareScore')}
+          </Button>
         </div>
       </div>
     </PageWrapper>

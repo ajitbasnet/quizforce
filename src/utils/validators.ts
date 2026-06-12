@@ -88,6 +88,7 @@ export const settingsSchema = z.object({
     .number()
     .min(0.5, 'input.voicePitchRangeError')
     .max(2, 'input.voicePitchRangeError'),
+  voiceURI: z.string().nullable(),
   customPointsMap: z.record(z.string(), z.number().int().positive()),
 })
 

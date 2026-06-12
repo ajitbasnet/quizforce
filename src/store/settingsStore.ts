@@ -10,6 +10,7 @@ const defaultSettings: QuizSettings = {
   voiceEnabled: false,
   voiceRate: 1,
   voicePitch: 1,
+  voiceURI: null,
   timerEnabled: false,
   language: 'en',
 }

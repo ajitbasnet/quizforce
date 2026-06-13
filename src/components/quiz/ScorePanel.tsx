@@ -1,5 +1,8 @@
+import { useEffect, useMemo, useState } from 'react'
+import { useCountUp } from '../../hooks/useCountUp'
 import { useLanguage } from '../../hooks/useLanguage'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
+import { formatCompletionDate, formatDuration } from '../../utils/formatDate'
 import { Card } from '../ui/Card'
 
 interface ScorePanelProps {
@@ -7,22 +10,136 @@ interface ScorePanelProps {
   quiz?: Quiz | null
 }
 
+type GradeKey =
+  | 'results.gradeExcellent'
+  | 'results.gradeGreat'
+  | 'results.gradeGood'
+  | 'results.gradeKeepPracticing'
+
+const RING_SIZE = 132
+const STROKE_WIDTH = 10
+const RADIUS = (RING_SIZE - STROKE_WIDTH) / 2
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS
+
+function getRingColor(pct: number): string {
+  if (pct >= 70) return 'stroke-green-600'
+  if (pct >= 50) return 'stroke-amber-500'
+  return 'stroke-red-600'
+}
+
+function getGradeKey(pct: number): GradeKey {
+  if (pct >= 90) return 'results.gradeExcellent'
+  if (pct >= 70) return 'results.gradeGreat'
+  if (pct >= 50) return 'results.gradeGood'
+  return 'results.gradeKeepPracticing'
+}
+
+interface StatCardProps {
+  label: string
+  value: string
+}
+
+function StatCard({ label, value }: StatCardProps) {
+  return (
+    <Card className="p-3">
+      <p className="text-xs text-text-muted">{label}</p>
+      <p className="mt-1 text-lg font-semibold text-text-primary tabular-nums">{value}</p>
+    </Card>
+  )
+}
+
 export function ScorePanel({ attempt, quiz }: ScorePanelProps) {
-  const { t } = useLanguage()
+  const { t, currentLang } = useLanguage()
+  const animatedScore = useCountUp(attempt.score, 1200)
+  const [ringOffset, setRingOffset] = useState(CIRCUMFERENCE)
+
+  const { correctCount, wrongCount, accuracy } = useMemo(() => {
+    const correct = attempt.feedback.filter((f) => f.isCorrect).length
+    const total = attempt.feedback.length
+    return {
+      correctCount: correct,
+      wrongCount: total - correct,
+      accuracy: total > 0 ? Math.round((correct / total) * 1000) / 10 : 0,
+    }
+  }, [attempt.feedback])
+
+  const percentage = attempt.percentage
+  const ringColor = getRingColor(percentage)
+  const gradeKey = getGradeKey(percentage)
+  const targetOffset = CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE
+
+  useEffect(() => {
+    const rafId = requestAnimationFrame(() => {
+      setRingOffset(targetOffset)
+    })
+    return () => cancelAnimationFrame(rafId)
+  }, [targetOffset])
 
   return (
-    <Card className="text-center">
+    <Card className="p-6 sm:p-8 text-center">
       {quiz?.title ? (
-        <p className="text-sm font-medium text-text-muted">{quiz.title}</p>
+        <p className="text-lg font-semibold text-text-primary">{quiz.title}</p>
       ) : null}
-      <p className="mt-1 text-sm font-medium text-text-muted">
-        {t('results.yourScore')}
-      </p>
-      <p className="mt-2 font-display text-5xl font-bold text-indigo-600 tabular-nums">
-        {attempt.score}/{attempt.totalPoints}
-      </p>
-      <p className="mt-2 text-lg font-semibold text-text-primary">
-        {t('results.percentage')}: {attempt.percentage}%
+
+      <div className="mt-4 flex items-baseline justify-center gap-2">
+        <span className="font-display text-6xl font-bold text-indigo-600 tabular-nums">
+          {animatedScore}
+        </span>
+        <span className="text-xl text-text-muted">
+          / {attempt.totalPoints} {t('results.points')}
+        </span>
+      </div>
+
+      <div className="mt-6 flex flex-col items-center">
+        <div className="relative inline-flex items-center justify-center">
+          <svg
+            role="img"
+            aria-label={`${percentage}%`}
+            width={RING_SIZE}
+            height={RING_SIZE}
+            className="-rotate-90"
+          >
+            <circle
+              cx={RING_SIZE / 2}
+              cy={RING_SIZE / 2}
+              r={RADIUS}
+              fill="none"
+              className="stroke-gray-200"
+              strokeWidth={STROKE_WIDTH}
+            />
+            <circle
+              cx={RING_SIZE / 2}
+              cy={RING_SIZE / 2}
+              r={RADIUS}
+              fill="none"
+              className={ringColor}
+              strokeWidth={STROKE_WIDTH}
+              strokeLinecap="round"
+              strokeDasharray={CIRCUMFERENCE}
+              strokeDashoffset={ringOffset}
+              style={{ transition: 'stroke-dashoffset 1.2s ease-out' }}
+            />
+          </svg>
+          <span className="absolute font-display text-3xl font-bold text-text-primary tabular-nums">
+            {percentage}%
+          </span>
+        </div>
+
+        <p className="mt-3 text-lg font-semibold text-text-primary">{t(gradeKey)}</p>
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatCard label={t('results.questionsCorrect')} value={String(correctCount)} />
+        <StatCard label={t('results.questionsWrong')} value={String(wrongCount)} />
+        <StatCard
+          label={t('results.timeTaken')}
+          value={formatDuration(attempt.timeTaken)}
+        />
+        <StatCard label={t('results.accuracy')} value={`${accuracy}%`} />
+      </div>
+
+      <p className="mt-4 text-sm text-text-muted">
+        {formatCompletionDate(attempt.completedAt, currentLang)}
       </p>
     </Card>
   )

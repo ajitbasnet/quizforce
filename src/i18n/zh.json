@@ -163,7 +163,15 @@
     "shareScore": "分享得分",
     "shareText": "我在\"{{title}}\"中获得了 {{score}}/{{totalPoints}} ({{percentage}}%)！",
     "shareCopied": "得分已复制到剪贴板",
-    "backToHome": "返回首页"
+    "backToHome": "返回首页",
+    "points": "分",
+    "questionsCorrect": "答对题数",
+    "questionsWrong": "答错题数",
+    "accuracy": "正确率",
+    "gradeExcellent": "太棒了！🎉",
+    "gradeGreat": "做得好！👍",
+    "gradeGood": "不错的努力 📚",
+    "gradeKeepPracticing": "继续加油 💪"
   },
   "history": {
     "title": "测验历史",

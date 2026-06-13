@@ -163,7 +163,15 @@
     "shareScore": "Partager le score",
     "shareText": "J'ai obtenu {{score}}/{{totalPoints}} ({{percentage}}%) sur \"{{title}}\" !",
     "shareCopied": "Score copié dans le presse-papiers",
-    "backToHome": "Retour à l'accueil"
+    "backToHome": "Retour à l'accueil",
+    "points": "points",
+    "questionsCorrect": "Questions correctes",
+    "questionsWrong": "Questions incorrectes",
+    "accuracy": "Précision",
+    "gradeExcellent": "Excellent ! 🎉",
+    "gradeGreat": "Bon travail ! 👍",
+    "gradeGood": "Bon effort 📚",
+    "gradeKeepPracticing": "Continuez à pratiquer 💪"
   },
   "history": {
     "title": "Historique des quiz",

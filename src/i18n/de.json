@@ -163,7 +163,15 @@
     "shareScore": "Punktzahl teilen",
     "shareText": "Ich habe {{score}}/{{totalPoints}} ({{percentage}}%) bei \"{{title}}\" erreicht!",
     "shareCopied": "Punktzahl in die Zwischenablage kopiert",
-    "backToHome": "Zurück zur Startseite"
+    "backToHome": "Zurück zur Startseite",
+    "points": "Punkte",
+    "questionsCorrect": "Richtige Fragen",
+    "questionsWrong": "Falsche Fragen",
+    "accuracy": "Genauigkeit",
+    "gradeExcellent": "Ausgezeichnet! 🎉",
+    "gradeGreat": "Gut gemacht! 👍",
+    "gradeGood": "Guter Einsatz 📚",
+    "gradeKeepPracticing": "Weiter üben 💪"
   },
   "history": {
     "title": "Quiz-Verlauf",

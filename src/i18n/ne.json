@@ -163,7 +163,15 @@
     "shareScore": "स्कोर साझा गर्नुहोस्",
     "shareText": "मैले \"{{title}}\" मा {{score}}/{{totalPoints}} ({{percentage}}%) स्कोर गरेँ!",
     "shareCopied": "स्कोर क्लिपबोर्डमा प्रतिलिपि गरियो",
-    "backToHome": "गृहपृष्ठमा फर्कनुहोस्"
+    "backToHome": "गृहपृष्ठमा फर्कनुहोस्",
+    "points": "अङ्क",
+    "questionsCorrect": "सही प्रश्नहरू",
+    "questionsWrong": "गलत प्रश्नहरू",
+    "accuracy": "शुद्धता",
+    "gradeExcellent": "उत्कृष्ट! 🎉",
+    "gradeGreat": "राम्रो काम! 👍",
+    "gradeGood": "राम्रो प्रयास 📚",
+    "gradeKeepPracticing": "अभ्यास जारी राख्नुहोस् 💪"
   },
   "history": {
     "title": "क्विज इतिहास",

@@ -163,7 +163,15 @@
     "shareScore": "Share Score",
     "shareText": "I scored {{score}}/{{totalPoints}} ({{percentage}}%) on \"{{title}}\"!",
     "shareCopied": "Score copied to clipboard",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "points": "points",
+    "questionsCorrect": "Questions Correct",
+    "questionsWrong": "Questions Wrong",
+    "accuracy": "Accuracy",
+    "gradeExcellent": "Excellent! 🎉",
+    "gradeGreat": "Great Job! 👍",
+    "gradeGood": "Good Effort 📚",
+    "gradeKeepPracticing": "Keep Practicing 💪"
   },
   "history": {
     "title": "Quiz History",

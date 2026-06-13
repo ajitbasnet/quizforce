@@ -141,6 +141,7 @@ function ExportMenuItem({
         'flex w-full items-center gap-3 px-3 py-2 text-left text-sm',
         'text-text-primary transition-colors hover:bg-gray-50',
         'focus-visible:bg-gray-50 focus-visible:outline-none',
+        'focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
       )}
       onClick={onClick}
     >

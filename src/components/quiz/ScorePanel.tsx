@@ -1,14 +1,20 @@
+import { Volume2 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useVoice } from '../../hooks/useVoice'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 import { formatCompletionDate, formatDuration } from '../../utils/formatDate'
 import { getGradeKey } from '../../utils/scoreGrade'
+import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
+import { Tooltip } from '../ui/Tooltip'
 
 interface ScorePanelProps {
   attempt: QuizAttempt
   quiz?: Quiz | null
+  voiceEnabled?: boolean
+  onReadResults?: () => void
 }
 
 const RING_SIZE = 132
@@ -36,8 +42,14 @@ function StatCard({ label, value }: StatCardProps) {
   )
 }
 
-export function ScorePanel({ attempt, quiz }: ScorePanelProps) {
+export function ScorePanel({
+  attempt,
+  quiz,
+  voiceEnabled,
+  onReadResults,
+}: ScorePanelProps) {
   const { t, currentLang } = useLanguage()
+  const { isSupported } = useVoice()
   const animatedScore = useCountUp(attempt.score, 1200)
   const [ringOffset, setRingOffset] = useState(CIRCUMFERENCE)
 
@@ -129,6 +141,33 @@ export function ScorePanel({ attempt, quiz }: ScorePanelProps) {
       <p className="mt-4 text-sm text-text-muted">
         {formatCompletionDate(attempt.completedAt, currentLang)}
       </p>
+
+      {voiceEnabled && onReadResults ? (
+        isSupported ? (
+          <Button
+            type="button"
+            variant="secondary"
+            className="mt-4"
+            leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
+            onClick={onReadResults}
+          >
+            {t('results.readMyResults')}
+          </Button>
+        ) : (
+          <Tooltip content={t('voice.notSupported')}>
+            <span className="mt-4 inline-flex">
+              <Button
+                type="button"
+                variant="secondary"
+                leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
+                disabled
+              >
+                {t('results.readMyResults')}
+              </Button>
+            </span>
+          </Tooltip>
+        )
+      ) : null}
     </Card>
   )
 }

@@ -191,7 +191,8 @@
     "whyCorrect": "Why this is correct:",
     "whyWrong": "Why your answer was wrong:",
     "correctAnswerIs": "The correct answer is [{{letter}}]: {{text}} — ",
-    "pointsScore": "{{awarded}}/{{total}} pts"
+    "pointsScore": "{{awarded}}/{{total}} pts",
+    "readMyResults": "Read My Results"
   },
   "history": {
     "title": "Quiz History",

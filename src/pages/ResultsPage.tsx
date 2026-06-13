@@ -7,6 +7,7 @@ import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
 import { ExportResultsDropdown } from '../components/results/ExportResultsDropdown'
+import { HighScoreCelebration } from '../components/results/HighScoreCelebration'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { StopReadingButton } from '../components/results/StopReadingButton'
 import { Button } from '../components/ui/Button'
@@ -304,6 +305,8 @@ export default function ResultsPage() {
           quiz={quiz}
         />
       ) : null}
+
+      <HighScoreCelebration percentage={attempt.percentage} />
 
       <StopReadingButton visible={isResultsReading} onStop={stopReading} />
     </PageWrapper>

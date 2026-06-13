@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 /** Matches Tailwind `lg` breakpoint (1024px). */
 export const LG_MEDIA_QUERY = '(min-width: 1024px)'
 
+export const PREFERS_REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
 function getMatches(query: string): boolean {
   if (typeof window === 'undefined') return false
   return window.matchMedia(query).matches

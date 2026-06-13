@@ -3,18 +3,13 @@ import { useCountUp } from '../../hooks/useCountUp'
 import { useLanguage } from '../../hooks/useLanguage'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 import { formatCompletionDate, formatDuration } from '../../utils/formatDate'
+import { getGradeKey } from '../../utils/scoreGrade'
 import { Card } from '../ui/Card'
 
 interface ScorePanelProps {
   attempt: QuizAttempt
   quiz?: Quiz | null
 }
-
-type GradeKey =
-  | 'results.gradeExcellent'
-  | 'results.gradeGreat'
-  | 'results.gradeGood'
-  | 'results.gradeKeepPracticing'
 
 const RING_SIZE = 132
 const STROKE_WIDTH = 10
@@ -25,13 +20,6 @@ function getRingColor(pct: number): string {
   if (pct >= 70) return 'stroke-green-600'
   if (pct >= 50) return 'stroke-amber-500'
   return 'stroke-red-600'
-}
-
-function getGradeKey(pct: number): GradeKey {
-  if (pct >= 90) return 'results.gradeExcellent'
-  if (pct >= 70) return 'results.gradeGreat'
-  if (pct >= 50) return 'results.gradeGood'
-  return 'results.gradeKeepPracticing'
 }
 
 interface StatCardProps {

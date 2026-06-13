@@ -171,7 +171,13 @@
     "gradeExcellent": "¡Excelente! 🎉",
     "gradeGreat": "¡Buen trabajo! 👍",
     "gradeGood": "Buen esfuerzo 📚",
-    "gradeKeepPracticing": "Sigue practicando 💪"
+    "gradeKeepPracticing": "Sigue practicando 💪",
+    "showExplanation": "Mostrar explicación",
+    "hideExplanation": "Ocultar explicación",
+    "whyCorrect": "Por qué es correcta:",
+    "whyWrong": "Por qué tu respuesta fue incorrecta:",
+    "correctAnswerIs": "La respuesta correcta es [{{letter}}]: {{text}} — ",
+    "pointsScore": "{{awarded}}/{{total}} pts"
   },
   "history": {
     "title": "Historial de cuestionarios",

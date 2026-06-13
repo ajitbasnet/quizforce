@@ -171,7 +171,13 @@
     "gradeExcellent": "太棒了！🎉",
     "gradeGreat": "做得好！👍",
     "gradeGood": "不错的努力 📚",
-    "gradeKeepPracticing": "继续加油 💪"
+    "gradeKeepPracticing": "继续加油 💪",
+    "showExplanation": "显示解释",
+    "hideExplanation": "隐藏解释",
+    "whyCorrect": "为什么正确：",
+    "whyWrong": "为什么你的答案是错的：",
+    "correctAnswerIs": "正确答案是 [{{letter}}]：{{text}} — ",
+    "pointsScore": "{{awarded}}/{{total}} pts"
   },
   "history": {
     "title": "测验历史",

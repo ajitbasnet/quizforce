@@ -171,7 +171,13 @@
     "gradeExcellent": "उत्कृष्ट! 🎉",
     "gradeGreat": "राम्रो काम! 👍",
     "gradeGood": "राम्रो प्रयास 📚",
-    "gradeKeepPracticing": "अभ्यास जारी राख्नुहोस् 💪"
+    "gradeKeepPracticing": "अभ्यास जारी राख्नुहोस् 💪",
+    "showExplanation": "व्याख्या देखाउनुहोस्",
+    "hideExplanation": "व्याख्या लुकाउनुहोस्",
+    "whyCorrect": "यो किन सही हो:",
+    "whyWrong": "तपाईंको जवाफ किन गलत थियो:",
+    "correctAnswerIs": "सही जवाफ [{{letter}}]: {{text}} हो — ",
+    "pointsScore": "{{awarded}}/{{total}} pts"
   },
   "history": {
     "title": "क्विज इतिहास",

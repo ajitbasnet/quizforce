@@ -171,7 +171,13 @@
     "gradeExcellent": "Excellent! 🎉",
     "gradeGreat": "Great Job! 👍",
     "gradeGood": "Good Effort 📚",
-    "gradeKeepPracticing": "Keep Practicing 💪"
+    "gradeKeepPracticing": "Keep Practicing 💪",
+    "showExplanation": "Show Explanation",
+    "hideExplanation": "Hide Explanation",
+    "whyCorrect": "Why this is correct:",
+    "whyWrong": "Why your answer was wrong:",
+    "correctAnswerIs": "The correct answer is [{{letter}}]: {{text}} — ",
+    "pointsScore": "{{awarded}}/{{total}} pts"
   },
   "history": {
     "title": "Quiz History",

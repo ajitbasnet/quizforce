@@ -10,6 +10,7 @@ import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
+import { useSettingsStore } from '../store/settingsStore'
 
 const reviewContainerVariants = {
   hidden: {},
@@ -33,6 +34,7 @@ export default function ResultsPage() {
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
   const getAttemptById = useHistoryStore((s) => s.getAttemptById)
   const historyQuizzes = useHistoryStore((s) => s.quizzes)
+  const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
 
   const attempt = useMemo(
     () =>
@@ -128,9 +130,22 @@ export default function ResultsPage() {
                 <motion.div key={question.id} variants={reviewItemVariants}>
                   <QuestionReviewCard
                     question={question}
-                    feedback={feedback}
-                    selectedOptionId={selectedOptionId}
-                    index={index}
+                    feedback={
+                      feedback ?? {
+                        questionId: question.id,
+                        selectedOptionId: selectedOptionId ?? '',
+                        isCorrect: false,
+                        explanation: '',
+                        pointsAwarded: 0,
+                      }
+                    }
+                    questionNumber={index + 1}
+                    maxPoints={
+                      quiz?.settings.customPointsMap[question.id] ??
+                      question.points
+                    }
+                    voiceEnabled={voiceEnabled}
+                    language={quiz?.language}
                   />
                 </motion.div>
               )

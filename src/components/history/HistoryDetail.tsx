@@ -1,5 +1,6 @@
 import { QuestionReviewCard } from '../quiz/QuestionReviewCard'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useSettingsStore } from '../../store/settingsStore'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 
 interface HistoryDetailProps {
@@ -9,6 +10,7 @@ interface HistoryDetailProps {
 
 export function HistoryDetail({ quiz, attempt }: HistoryDetailProps) {
   const { t } = useLanguage()
+  const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
 
   return (
     <section>
@@ -26,9 +28,21 @@ export function HistoryDetail({ quiz, attempt }: HistoryDetailProps) {
             <QuestionReviewCard
               key={question.id}
               question={question}
-              feedback={feedback}
-              selectedOptionId={selectedOptionId}
-              index={index}
+              feedback={
+                feedback ?? {
+                  questionId: question.id,
+                  selectedOptionId: selectedOptionId ?? '',
+                  isCorrect: false,
+                  explanation: '',
+                  pointsAwarded: 0,
+                }
+              }
+              questionNumber={index + 1}
+              maxPoints={
+                quiz.settings.customPointsMap[question.id] ?? question.points
+              }
+              voiceEnabled={voiceEnabled}
+              language={quiz.language}
             />
           )
         })}

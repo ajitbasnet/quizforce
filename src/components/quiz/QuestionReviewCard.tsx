@@ -7,7 +7,6 @@ import { useVoice } from '../../hooks/useVoice'
 import type { AnswerFeedback, QuizQuestion, SupportedLanguage } from '../../types/quiz'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
-import { Card } from '../ui/Card'
 import { AnswerReviewOption } from './AnswerReviewOption'
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
@@ -45,6 +44,8 @@ export function QuestionReviewCard({
     question.wrongExplanations[feedback.selectedOptionId] ??
     feedback.explanation
 
+  const questionTitleId = `review-q-${question.id}-title`
+
   const handleReadAloud = () => {
     const optionLines = question.options.map(
       (option, index) =>
@@ -71,7 +72,10 @@ export function QuestionReviewCard({
   }
 
   return (
-    <Card className="print:break-inside-avoid">
+    <section
+      aria-labelledby={questionTitleId}
+      className="bg-white rounded-2xl shadow-sm p-4 print:break-inside-avoid"
+    >
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant="default" size="sm">
           {t('quiz.questionChip', { number: questionNumber })}
@@ -85,6 +89,9 @@ export function QuestionReviewCard({
           variant={feedback.isCorrect ? 'success' : 'danger'}
           size="sm"
         >
+          {feedback.isCorrect ? t('quiz.correct') : t('quiz.incorrect')}
+        </Badge>
+        <Badge variant="default" size="sm">
           {t('results.pointsScore', {
             awarded: feedback.pointsAwarded,
             total: maxPoints,
@@ -92,9 +99,12 @@ export function QuestionReviewCard({
         </Badge>
       </div>
 
-      <p className="mt-2 text-lg font-semibold leading-relaxed text-text-primary">
+      <h3
+        id={questionTitleId}
+        className="mt-2 text-lg font-semibold leading-relaxed text-text-primary"
+      >
         {question.questionText}
-      </p>
+      </h3>
 
       {voiceEnabled && isSupported && (
         <Button
@@ -151,6 +161,7 @@ export function QuestionReviewCard({
         {feedback.isCorrect ? (
           <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
             <p className="text-sm text-green-800">
+              <span className="sr-only">{t('quiz.explanation')}:</span>
               <span className="font-semibold">
                 ✓ {t('results.whyCorrect')}
               </span>{' '}
@@ -161,6 +172,7 @@ export function QuestionReviewCard({
           <>
             <div className="border-l-4 border-red-500 bg-red-50 py-3 pl-4">
               <p className="text-sm text-red-800">
+                <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">
                   ✗ {t('results.whyWrong')}
                 </span>{' '}
@@ -169,6 +181,7 @@ export function QuestionReviewCard({
             </div>
             <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
               <p className="text-sm text-green-800">
+                <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">✓ </span>
                 {t('results.correctAnswerIs', {
                   letter: correctLetter,
@@ -180,6 +193,6 @@ export function QuestionReviewCard({
           </>
         )}
       </div>
-    </Card>
+    </section>
   )
 }

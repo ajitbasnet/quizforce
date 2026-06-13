@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getAttempt, isSupabaseConfigured } from '../api/supabase'
 import { PageWrapper } from '../components/layout/PageWrapper'
@@ -55,6 +55,7 @@ export default function ResultsPage() {
   const [isLoadingRemote, setIsLoadingRemote] = useState(false)
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [retryModalOpen, setRetryModalOpen] = useState(false)
+  const scoreHeadingRef = useRef<HTMLHeadingElement>(null)
 
   const sharedPayload = useMemo(() => {
     if (!dataParam) return null
@@ -185,6 +186,11 @@ export default function ResultsPage() {
   const { isResultsReading, startReading, stopReading, registerCardRef } =
     useResultsVoiceReading({ attempt, quiz: quiz ?? undefined, voiceEnabled })
 
+  useEffect(() => {
+    if (!attempt) return
+    scoreHeadingRef.current?.focus()
+  }, [attempt?.id])
+
   if (isLoadingRemote) {
     return (
       <PageWrapper>
@@ -221,6 +227,7 @@ export default function ResultsPage() {
             quiz={quiz}
             voiceEnabled={voiceEnabled}
             onReadResults={startReading}
+            headingRef={scoreHeadingRef}
           />
         </motion.div>
 

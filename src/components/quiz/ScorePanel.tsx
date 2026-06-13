@@ -1,5 +1,5 @@
 import { Volume2 } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type RefObject } from 'react'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useVoice } from '../../hooks/useVoice'
@@ -15,6 +15,7 @@ interface ScorePanelProps {
   quiz?: Quiz | null
   voiceEnabled?: boolean
   onReadResults?: () => void
+  headingRef?: RefObject<HTMLHeadingElement | null>
 }
 
 const RING_SIZE = 132
@@ -47,6 +48,7 @@ export function ScorePanel({
   quiz,
   voiceEnabled,
   onReadResults,
+  headingRef,
 }: ScorePanelProps) {
   const { t, currentLang } = useLanguage()
   const { isSupported } = useVoice()
@@ -77,17 +79,34 @@ export function ScorePanel({
 
   return (
     <Card className="p-6 sm:p-8 text-center">
-      {quiz?.title ? (
-        <p className="text-lg font-semibold text-text-primary">{quiz.title}</p>
-      ) : null}
+      <h2
+        ref={headingRef}
+        tabIndex={-1}
+        className="text-lg font-semibold text-text-primary"
+      >
+        {quiz?.title ?? t('results.yourScore')}
+      </h2>
 
-      <div className="mt-4 flex items-baseline justify-center gap-2">
-        <span className="font-display text-6xl font-bold text-indigo-600 tabular-nums">
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="mt-4 flex items-baseline justify-center gap-2"
+      >
+        <span
+          aria-hidden
+          className="font-display text-6xl font-bold text-indigo-600 tabular-nums"
+        >
           {animatedScore}
         </span>
-        <span className="text-xl text-text-muted">
+        <span className="text-xl text-text-muted" aria-hidden>
           / {attempt.totalPoints} {t('results.points')}
         </span>
+        {animatedScore === attempt.score ? (
+          <span className="sr-only">
+            {t('results.yourScore')}: {attempt.score} / {attempt.totalPoints}{' '}
+            {t('results.points')}
+          </span>
+        ) : null}
       </div>
 
       <div className="mt-6 flex flex-col items-center">

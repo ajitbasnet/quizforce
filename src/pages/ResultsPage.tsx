@@ -7,11 +7,13 @@ import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
+import { StopReadingButton } from '../components/results/StopReadingButton'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { Spinner } from '../components/ui/Spinner'
 import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
+import { useResultsVoiceReading } from '../hooks/useResultsVoiceReading'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
@@ -178,6 +180,9 @@ export default function ResultsPage() {
     setShareModalOpen(true)
   }, [attempt, quiz, toast, t])
 
+  const { isResultsReading, startReading, stopReading, registerCardRef } =
+    useResultsVoiceReading({ attempt, quiz: quiz ?? undefined, voiceEnabled })
+
   if (isLoadingRemote) {
     return (
       <PageWrapper>
@@ -209,7 +214,12 @@ export default function ResultsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ScorePanel attempt={attempt} quiz={quiz} />
+          <ScorePanel
+            attempt={attempt}
+            quiz={quiz}
+            voiceEnabled={voiceEnabled}
+            onReadResults={startReading}
+          />
         </motion.div>
 
         <section>
@@ -229,7 +239,11 @@ export default function ResultsPage() {
               const selectedOptionId = attempt.answers[question.id]
 
               return (
-                <motion.div key={question.id} variants={reviewItemVariants}>
+                <motion.div
+                  key={question.id}
+                  ref={(el) => registerCardRef(question.id, el)}
+                  variants={reviewItemVariants}
+                >
                   <QuestionReviewCard
                     question={question}
                     feedback={
@@ -285,6 +299,8 @@ export default function ResultsPage() {
           quiz={quiz}
         />
       ) : null}
+
+      <StopReadingButton visible={isResultsReading} onStop={stopReading} />
     </PageWrapper>
   )
 }

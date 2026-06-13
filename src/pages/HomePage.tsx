@@ -6,7 +6,8 @@ import {
   Volume2,
   type LucideIcon,
 } from 'lucide-react'
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { GenerateButton } from '../components/input/GenerateButton'
 import {
@@ -31,6 +32,7 @@ import {
 } from '../components/input/TextInputPanel'
 import { useLanguage } from '../hooks/useLanguage'
 import { useQuizStore } from '../store/quizStore'
+import type { RegenerateState } from '../types/regenerate'
 import type { Quiz } from '../types/quiz'
 
 const containerVariants = {
@@ -101,11 +103,28 @@ function FeatureHighlightCard({
 
 export default function HomePage() {
   const { t } = useLanguage()
+  const location = useLocation()
+  const navigate = useNavigate()
   const isGenerating = useQuizStore((s) => s.isGenerating)
   const [inputMode, setInputMode] = useState<InputMode>('text')
   const [textContent, setTextContent] = useState('')
   const [pdfContent, setPdfContent] = useState('')
   const [promptTopic, setPromptTopic] = useState('')
+
+  useEffect(() => {
+    const reg = location.state?.regenerate as RegenerateState | undefined
+    if (!reg?.sourceContent) return
+
+    const mode = reg.sourceType === 'prompt' ? 'prompt' : 'text'
+    setInputMode(mode)
+    if (mode === 'text') {
+      setTextContent(reg.sourceContent)
+    } else {
+      setPromptTopic(reg.sourceContent)
+    }
+
+    navigate('.', { replace: true, state: {} })
+  }, [location.state, navigate])
 
   const textPanelRef = useRef<TextInputPanelHandle>(null)
   const pdfPanelRef = useRef<PDFUploaderHandle>(null)

@@ -6,14 +6,14 @@ import {
   Upload,
   type LucideIcon,
 } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 
 export type InputMode = 'text' | 'pdf' | 'prompt'
 
 interface InputModeTabsProps {
+  mode: InputMode
   onModeChange: (mode: InputMode) => void
-  defaultMode?: InputMode
 }
 
 type TabConfig = {
@@ -28,29 +28,17 @@ const TABS: TabConfig[] = [
   { mode: 'prompt', labelKey: 'input.tabPrompt', icon: Sparkles },
 ]
 
-export function InputModeTabs({
-  onModeChange,
-  defaultMode = 'text',
-}: InputModeTabsProps) {
+export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
   const { t } = useLanguage()
-  const [mode, setMode] = useState<InputMode>(defaultMode)
   const tablistRef = useRef<HTMLDivElement>(null)
   const tabRefs = useRef<Partial<Record<InputMode, HTMLButtonElement>>>({})
 
   const selectMode = useCallback(
     (nextMode: InputMode) => {
-      setMode(nextMode)
       onModeChange(nextMode)
     },
     [onModeChange],
   )
-
-  const onModeChangeRef = useRef(onModeChange)
-  onModeChangeRef.current = onModeChange
-
-  useEffect(() => {
-    onModeChangeRef.current(defaultMode)
-  }, [])
 
   const focusTab = (targetMode: InputMode) => {
     tabRefs.current[targetMode]?.focus()

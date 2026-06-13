@@ -30,11 +30,18 @@ interface TextInputPanelProps {
   isLoading?: boolean
   hideSubmit?: boolean
   onContentChange?: (content: string) => void
+  initialContent?: string
 }
 
 export const TextInputPanel = forwardRef<TextInputPanelHandle, TextInputPanelProps>(
   function TextInputPanel(
-    { onSubmit, isLoading = false, hideSubmit = false, onContentChange },
+    {
+      onSubmit,
+      isLoading = false,
+      hideSubmit = false,
+      onContentChange,
+      initialContent,
+    },
     ref,
   ) {
     const { t } = useLanguage()
@@ -44,6 +51,7 @@ export const TextInputPanel = forwardRef<TextInputPanelHandle, TextInputPanelPro
       watch,
       trigger,
       getValues,
+      reset,
       formState: { errors },
     } = useForm<FormValues>({
       resolver: zodResolver(formSchema),
@@ -52,6 +60,12 @@ export const TextInputPanel = forwardRef<TextInputPanelHandle, TextInputPanelPro
     })
 
     const content = watch('content')
+
+    useEffect(() => {
+      if (initialContent) {
+        reset({ content: initialContent })
+      }
+    }, [initialContent, reset])
 
     useEffect(() => {
       onContentChange?.(content)

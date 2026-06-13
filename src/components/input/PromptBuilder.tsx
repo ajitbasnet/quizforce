@@ -31,6 +31,7 @@ interface PromptBuilderProps {
   isLoading?: boolean
   hideSubmit?: boolean
   onPromptChange?: (data: { topic: string; prompt: string }) => void
+  initialTopic?: string
 }
 
 const AUDIENCE_OPTIONS: TargetAudience[] = [
@@ -70,7 +71,13 @@ function toTranslatedError(
 
 export const PromptBuilder = forwardRef<PromptBuilderHandle, PromptBuilderProps>(
   function PromptBuilder(
-    { onSubmit, isLoading = false, hideSubmit = false, onPromptChange },
+    {
+      onSubmit,
+      isLoading = false,
+      hideSubmit = false,
+      onPromptChange,
+      initialTopic,
+    },
     ref,
   ) {
     const { t } = useLanguage()
@@ -80,12 +87,19 @@ export const PromptBuilder = forwardRef<PromptBuilderHandle, PromptBuilderProps>
       watch,
       trigger,
       getValues,
+      reset,
       formState: { errors },
     } = useForm<PromptFormValues>({
       resolver: zodResolver(promptSchema),
       defaultValues,
       mode: 'onSubmit',
     })
+
+    useEffect(() => {
+      if (initialTopic) {
+        reset({ ...defaultValues, topic: initialTopic })
+      }
+    }, [initialTopic, reset])
 
     const topic = watch('topic')
     const subtopics = watch('subtopics')

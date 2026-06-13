@@ -176,7 +176,7 @@ export default function HomePage() {
                 <p className="mt-2 text-text-muted">{t('home.heroSubtitle')}</p>
               </div>
 
-              <InputModeTabs onModeChange={setInputMode} />
+              <InputModeTabs mode={inputMode} onModeChange={setInputMode} />
 
               <AnimatePresence mode="wait">
                 <motion.div
@@ -190,6 +190,9 @@ export default function HomePage() {
                     <TextInputPanel
                       ref={textPanelRef}
                       hideSubmit
+                      initialContent={
+                        inputMode === 'text' ? textContent : undefined
+                      }
                       onContentChange={setTextContent}
                     />
                   )}
@@ -203,6 +206,9 @@ export default function HomePage() {
                     <PromptBuilder
                       ref={promptPanelRef}
                       hideSubmit
+                      initialTopic={
+                        inputMode === 'prompt' ? promptTopic : undefined
+                      }
                       onPromptChange={handlePromptChange}
                     />
                   )}

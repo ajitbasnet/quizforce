@@ -31,6 +31,7 @@ export function AppRouter() {
         <Route element={<AppShell />}>
           <Route path="/" element={<LazyPage Page={HomePage} />} />
           <Route path="/quiz" element={<LazyPage Page={QuizPage} />} />
+          <Route path="/results" element={<LazyPage Page={ResultsPage} />} />
           <Route path="/results/:attemptId" element={<LazyPage Page={ResultsPage} />} />
           <Route path="/history" element={<LazyPage Page={HistoryPage} />} />
           <Route path="/history/:quizId" element={<LazyPage Page={HistoryDetailPage} />} />

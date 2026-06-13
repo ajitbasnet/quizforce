@@ -1,16 +1,21 @@
 import { motion } from 'framer-motion'
-import { useCallback, useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { getAttempt, isSupabaseConfigured } from '../api/supabase'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { ScorePanel } from '../components/quiz/ScorePanel'
+import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
+import { Spinner } from '../components/ui/Spinner'
 import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
+import type { QuizAttempt } from '../types/quiz'
+import { decodeSharePayload } from '../utils/shareScore'
 
 const reviewContainerVariants = {
   hidden: {},
@@ -29,6 +34,8 @@ export default function ResultsPage() {
   const { toast } = useToast()
   const navigate = useNavigate()
   const { attemptId } = useParams()
+  const [searchParams] = useSearchParams()
+  const dataParam = searchParams.get('data')
   const completedAttempt = useQuizStore((s) => s.completedAttempt)
   const currentQuiz = useQuizStore((s) => s.currentQuiz)
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
@@ -36,18 +43,88 @@ export default function ResultsPage() {
   const historyQuizzes = useHistoryStore((s) => s.quizzes)
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
 
-  const attempt = useMemo(
+  const [remoteAttempt, setRemoteAttempt] = useState<QuizAttempt | null>(null)
+  const [isLoadingRemote, setIsLoadingRemote] = useState(false)
+  const [shareModalOpen, setShareModalOpen] = useState(false)
+
+  const sharedPayload = useMemo(() => {
+    if (!dataParam) return null
+    return decodeSharePayload(dataParam)
+  }, [dataParam])
+
+  const hasInvalidShareData = dataParam !== null && sharedPayload === null
+
+  useEffect(() => {
+    if (!sharedPayload) return
+
+    const { addQuiz, addAttempt, getAttemptById: getById, quizzes } =
+      useHistoryStore.getState()
+
+    if (!getById(sharedPayload.attempt.id)) {
+      addAttempt(sharedPayload.attempt)
+    }
+    if (!quizzes.some((q) => q.id === sharedPayload.quiz.id)) {
+      addQuiz(sharedPayload.quiz)
+    }
+  }, [sharedPayload])
+
+  const localAttempt = useMemo(
     () =>
       (attemptId ? getAttemptById(attemptId) : undefined) ??
       (completedAttempt?.id === attemptId ? completedAttempt : undefined),
     [attemptId, completedAttempt, getAttemptById],
   )
 
+  useEffect(() => {
+    if (sharedPayload || !attemptId || localAttempt) {
+      setRemoteAttempt(null)
+      setIsLoadingRemote(false)
+      return
+    }
+
+    if (!isSupabaseConfigured()) {
+      setRemoteAttempt(null)
+      setIsLoadingRemote(false)
+      return
+    }
+
+    let cancelled = false
+    setIsLoadingRemote(true)
+    setRemoteAttempt(null)
+
+    void getAttempt(attemptId)
+      .then((attempt) => {
+        if (!cancelled) {
+          setRemoteAttempt(attempt)
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setRemoteAttempt(null)
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setIsLoadingRemote(false)
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [attemptId, localAttempt, sharedPayload])
+
+  const attempt = useMemo(
+    () => sharedPayload?.attempt ?? localAttempt ?? remoteAttempt ?? undefined,
+    [sharedPayload, localAttempt, remoteAttempt],
+  )
+
   const quiz = useMemo(
     () =>
+      sharedPayload?.quiz ??
       historyQuizzes.find((q) => q.id === attempt?.quizId) ??
       (currentQuiz?.id === attempt?.quizId ? currentQuiz : undefined),
-    [historyQuizzes, attempt?.quizId, currentQuiz],
+    [sharedPayload, historyQuizzes, attempt?.quizId, currentQuiz],
   )
 
   const handlePlayAgain = useCallback(() => {
@@ -59,34 +136,26 @@ export default function ResultsPage() {
     navigate('/quiz')
   }, [quiz, setCurrentQuiz, navigate, toast, t])
 
-  const handleShare = useCallback(async () => {
+  const handleOpenShare = useCallback(() => {
     if (!attempt) return
-
-    const text = t('results.shareText', {
-      score: attempt.score,
-      totalPoints: attempt.totalPoints,
-      percentage: attempt.percentage,
-      title: quiz?.title ?? '',
-    })
-
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: t('results.title'), text })
-      } catch (err) {
-        if ((err as Error).name === 'AbortError') return
-      }
+    if (!quiz) {
+      toast.error(t('errors.quizNotFound'))
       return
     }
+    setShareModalOpen(true)
+  }, [attempt, quiz, toast, t])
 
-    try {
-      await navigator.clipboard.writeText(text)
-      toast.success(t('results.shareCopied'))
-    } catch {
-      toast.error(t('errors.generic'))
-    }
-  }, [attempt, quiz?.title, t, toast])
+  if (isLoadingRemote) {
+    return (
+      <PageWrapper>
+        <div className="flex min-h-[40vh] items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      </PageWrapper>
+    )
+  }
 
-  if (!attemptId || !attempt) {
+  if (hasInvalidShareData || !attempt) {
     return (
       <PageWrapper>
         <Card className="mx-auto max-w-md text-center">
@@ -160,11 +229,20 @@ export default function ResultsPage() {
           <Button size="lg" variant="secondary" onClick={() => navigate('/')}>
             {t('results.backToHome')}
           </Button>
-          <Button size="lg" variant="secondary" onClick={() => void handleShare()}>
+          <Button size="lg" variant="secondary" onClick={handleOpenShare}>
             {t('results.shareScore')}
           </Button>
         </div>
       </div>
+
+      {quiz ? (
+        <ShareScoreModal
+          isOpen={shareModalOpen}
+          onClose={() => setShareModalOpen(false)}
+          attempt={attempt}
+          quiz={quiz}
+        />
+      ) : null}
     </PageWrapper>
   )
 }

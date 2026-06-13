@@ -6,6 +6,7 @@ import { PageWrapper } from '../components/layout/PageWrapper'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
+import { ExportResultsDropdown } from '../components/results/ExportResultsDropdown'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { StopReadingButton } from '../components/results/StopReadingButton'
 import { Button } from '../components/ui/Button'
@@ -243,6 +244,7 @@ export default function ResultsPage() {
                   key={question.id}
                   ref={(el) => registerCardRef(question.id, el)}
                   variants={reviewItemVariants}
+                  className="print:break-inside-avoid"
                 >
                   <QuestionReviewCard
                     question={question}
@@ -269,7 +271,7 @@ export default function ResultsPage() {
           </motion.div>
         </section>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 print:hidden">
           <Button size="lg" onClick={() => setRetryModalOpen(true)}>
             {t('results.retryQuiz')}
           </Button>
@@ -279,6 +281,9 @@ export default function ResultsPage() {
           <Button size="lg" variant="secondary" onClick={() => navigate('/')}>
             {t('results.backToHome')}
           </Button>
+          {quiz ? (
+            <ExportResultsDropdown quiz={quiz} attempt={attempt} />
+          ) : null}
           <Button size="lg" variant="secondary" onClick={handleOpenShare}>
             {t('results.shareScore')}
           </Button>

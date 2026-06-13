@@ -183,6 +183,10 @@
     "backToHistory": "返回历史记录",
     "attemptDate": "测验日期：{{date}}"
   },
+  "feedback": {
+    "correctAnswer": "正确答案",
+    "yourAnswerIncorrect": "你的答案 — 错误"
+  },
   "settings": {
     "title": "设置",
     "language": "语言",

@@ -183,6 +183,10 @@
     "backToHistory": "इतिहास पर वापस जाएँ",
     "attemptDate": "{{date}} को प्रयास किया गया"
   },
+  "feedback": {
+    "correctAnswer": "सही उत्तर",
+    "yourAnswerIncorrect": "आपका उत्तर — गलत"
+  },
   "settings": {
     "title": "सेटिंग्स",
     "language": "भाषा",

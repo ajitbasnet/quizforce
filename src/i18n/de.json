@@ -183,6 +183,10 @@
     "backToHistory": "Zurück zum Verlauf",
     "attemptDate": "Versucht am {{date}}"
   },
+  "feedback": {
+    "correctAnswer": "Richtige Antwort",
+    "yourAnswerIncorrect": "Ihre Antwort — Falsch"
+  },
   "settings": {
     "title": "Einstellungen",
     "language": "Sprache",

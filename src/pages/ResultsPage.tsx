@@ -4,6 +4,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getAttempt, isSupabaseConfigured } from '../api/supabase'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
+import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { Button } from '../components/ui/Button'
@@ -14,6 +15,7 @@ import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
+import type { RegenerateState } from '../types/regenerate'
 import type { QuizAttempt } from '../types/quiz'
 import { decodeSharePayload } from '../utils/shareScore'
 
@@ -39,6 +41,8 @@ export default function ResultsPage() {
   const completedAttempt = useQuizStore((s) => s.completedAttempt)
   const currentQuiz = useQuizStore((s) => s.currentQuiz)
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
+  const resetAttempt = useQuizStore((s) => s.resetAttempt)
+  const setCompletedAttempt = useQuizStore((s) => s.setCompletedAttempt)
   const getAttemptById = useHistoryStore((s) => s.getAttemptById)
   const historyQuizzes = useHistoryStore((s) => s.quizzes)
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
@@ -46,6 +50,7 @@ export default function ResultsPage() {
   const [remoteAttempt, setRemoteAttempt] = useState<QuizAttempt | null>(null)
   const [isLoadingRemote, setIsLoadingRemote] = useState(false)
   const [shareModalOpen, setShareModalOpen] = useState(false)
+  const [retryModalOpen, setRetryModalOpen] = useState(false)
 
   const sharedPayload = useMemo(() => {
     if (!dataParam) return null
@@ -127,13 +132,41 @@ export default function ResultsPage() {
     [sharedPayload, historyQuizzes, attempt?.quizId, currentQuiz],
   )
 
-  const handlePlayAgain = useCallback(() => {
+  const handleRetryConfirm = useCallback(() => {
     if (!quiz) {
       toast.error(t('errors.quizNotFound'))
       return
     }
-    setCurrentQuiz(quiz)
+    if (currentQuiz?.id !== quiz.id) {
+      setCurrentQuiz(quiz)
+    } else {
+      resetAttempt()
+      setCompletedAttempt(null)
+    }
+    setRetryModalOpen(false)
     navigate('/quiz')
+  }, [
+    quiz,
+    currentQuiz?.id,
+    setCurrentQuiz,
+    resetAttempt,
+    setCompletedAttempt,
+    navigate,
+    toast,
+    t,
+  ])
+
+  const handleRegenerate = useCallback(() => {
+    if (!quiz) {
+      toast.error(t('errors.quizNotFound'))
+      return
+    }
+    setCurrentQuiz(null)
+    const regenerate: RegenerateState = {
+      sourceType: quiz.sourceType,
+      sourceContent: quiz.sourceContent,
+    }
+    navigate('/', { state: { regenerate } })
   }, [quiz, setCurrentQuiz, navigate, toast, t])
 
   const handleOpenShare = useCallback(() => {
@@ -223,8 +256,11 @@ export default function ResultsPage() {
         </section>
 
         <div className="flex flex-wrap gap-3">
-          <Button size="lg" onClick={handlePlayAgain}>
-            {t('results.playAgain')}
+          <Button size="lg" onClick={() => setRetryModalOpen(true)}>
+            {t('results.retryQuiz')}
+          </Button>
+          <Button size="lg" variant="secondary" onClick={handleRegenerate}>
+            {t('results.regenerateQuiz')}
           </Button>
           <Button size="lg" variant="secondary" onClick={() => navigate('/')}>
             {t('results.backToHome')}
@@ -234,6 +270,12 @@ export default function ResultsPage() {
           </Button>
         </div>
       </div>
+
+      <RetryQuizModal
+        isOpen={retryModalOpen}
+        onClose={() => setRetryModalOpen(false)}
+        onConfirm={handleRetryConfirm}
+      />
 
       {quiz ? (
         <ShareScoreModal

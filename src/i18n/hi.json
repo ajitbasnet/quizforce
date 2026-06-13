@@ -191,7 +191,18 @@
     "whyCorrect": "यह सही क्यों है:",
     "whyWrong": "आपका उत्तर गलत क्यों था:",
     "correctAnswerIs": "सही उत्तर [{{letter}}]: {{text}} है — ",
-    "pointsScore": "{{awarded}}/{{total}} pts"
+    "pointsScore": "{{awarded}}/{{total}} pts",
+    "readMyResults": "मेरे परिणाम पढ़ें",
+    "stopReading": "पढ़ना बंद करें",
+    "voiceScoreSummary": "आपने {{totalPoints}} में से {{score}} अंक प्राप्त किए — {{percentage}}%। {{grade}}",
+    "voiceAnswerCounts": "आपने {{correct}} प्रश्नों का सही उत्तर दिया और {{wrong}} प्रश्नों का गलत उत्तर दिया।",
+    "voiceReviewIntro": "आइए आपके उत्तरों की समीक्षा करें।",
+    "voiceAnswerCorrect": "आपने सही उत्तर दिया।",
+    "voiceAnswerIncorrect": "आपने गलत उत्तर दिया। आपका उत्तर {{letter}}: {{text}} था।",
+    "gradeExcellentVoice": "उत्कृष्ट!",
+    "gradeGreatVoice": "बहुत अच्छा!",
+    "gradeGoodVoice": "अच्छा प्रयास।",
+    "gradeKeepPracticingVoice": "अभ्यास जारी रखें।"
   },
   "history": {
     "title": "क्विज़ इतिहास",

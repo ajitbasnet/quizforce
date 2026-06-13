@@ -191,7 +191,18 @@
     "whyCorrect": "Pourquoi c'est correct :",
     "whyWrong": "Pourquoi votre réponse était incorrecte :",
     "correctAnswerIs": "La bonne réponse est [{{letter}}] : {{text}} — ",
-    "pointsScore": "{{awarded}}/{{total}} pts"
+    "pointsScore": "{{awarded}}/{{total}} pts",
+    "readMyResults": "Lire mes résultats",
+    "stopReading": "Arrêter la lecture",
+    "voiceScoreSummary": "Vous avez obtenu {{score}} sur {{totalPoints}} points — {{percentage}} %. {{grade}}.",
+    "voiceAnswerCounts": "Vous avez répondu correctement à {{correct}} questions et incorrectement à {{wrong}} questions.",
+    "voiceReviewIntro": "Passons en revue vos réponses.",
+    "voiceAnswerCorrect": "Vous avez répondu correctement.",
+    "voiceAnswerIncorrect": "Vous avez répondu incorrectement. Votre réponse était {{letter}} : {{text}}.",
+    "gradeExcellentVoice": "Excellent !",
+    "gradeGreatVoice": "Bon travail !",
+    "gradeGoodVoice": "Bon effort.",
+    "gradeKeepPracticingVoice": "Continuez à pratiquer."
   },
   "history": {
     "title": "Historique des quiz",

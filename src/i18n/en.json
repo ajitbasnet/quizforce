@@ -192,7 +192,17 @@
     "whyWrong": "Why your answer was wrong:",
     "correctAnswerIs": "The correct answer is [{{letter}}]: {{text}} — ",
     "pointsScore": "{{awarded}}/{{total}} pts",
-    "readMyResults": "Read My Results"
+    "readMyResults": "Read My Results",
+    "stopReading": "Stop Reading",
+    "voiceScoreSummary": "You scored {{score}} out of {{totalPoints}} points — {{percentage}}%. {{grade}}.",
+    "voiceAnswerCounts": "You answered {{correct}} questions correctly and {{wrong}} questions incorrectly.",
+    "voiceReviewIntro": "Let's review your answers.",
+    "voiceAnswerCorrect": "You answered correctly.",
+    "voiceAnswerIncorrect": "You answered incorrectly. Your answer was {{letter}}: {{text}}.",
+    "gradeExcellentVoice": "Excellent!",
+    "gradeGreatVoice": "Great job!",
+    "gradeGoodVoice": "Good effort.",
+    "gradeKeepPracticingVoice": "Keep practicing."
   },
   "history": {
     "title": "Quiz History",

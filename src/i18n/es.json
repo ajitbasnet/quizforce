@@ -191,7 +191,18 @@
     "whyCorrect": "Por qué es correcta:",
     "whyWrong": "Por qué tu respuesta fue incorrecta:",
     "correctAnswerIs": "La respuesta correcta es [{{letter}}]: {{text}} — ",
-    "pointsScore": "{{awarded}}/{{total}} pts"
+    "pointsScore": "{{awarded}}/{{total}} pts",
+    "readMyResults": "Leer mis resultados",
+    "stopReading": "Dejar de leer",
+    "voiceScoreSummary": "Obtuviste {{score}} de {{totalPoints}} puntos — {{percentage}} %. {{grade}}.",
+    "voiceAnswerCounts": "Respondiste correctamente {{correct}} preguntas e incorrectamente {{wrong}} preguntas.",
+    "voiceReviewIntro": "Revisemos tus respuestas.",
+    "voiceAnswerCorrect": "Respondiste correctamente.",
+    "voiceAnswerIncorrect": "Respondiste incorrectamente. Tu respuesta fue {{letter}}: {{text}}.",
+    "gradeExcellentVoice": "¡Excelente!",
+    "gradeGreatVoice": "¡Buen trabajo!",
+    "gradeGoodVoice": "Buen esfuerzo.",
+    "gradeKeepPracticingVoice": "Sigue practicando."
   },
   "history": {
     "title": "Historial de cuestionarios",

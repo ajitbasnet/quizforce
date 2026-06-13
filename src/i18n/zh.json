@@ -191,7 +191,18 @@
     "whyCorrect": "为什么正确：",
     "whyWrong": "为什么你的答案是错的：",
     "correctAnswerIs": "正确答案是 [{{letter}}]：{{text}} — ",
-    "pointsScore": "{{awarded}}/{{total}} pts"
+    "pointsScore": "{{awarded}}/{{total}} pts",
+    "readMyResults": "朗读我的结果",
+    "stopReading": "停止朗读",
+    "voiceScoreSummary": "您获得了 {{score}} / {{totalPoints}} 分 — {{percentage}}%。{{grade}}",
+    "voiceReviewIntro": "让我们回顾您的答案。",
+    "voiceAnswerCounts": "您答对了 {{correct}} 道题，答错了 {{wrong}} 道题。",
+    "voiceAnswerCorrect": "您回答正确。",
+    "voiceAnswerIncorrect": "您回答错误。您的答案是 {{letter}}：{{text}}。",
+    "gradeExcellentVoice": "太棒了！",
+    "gradeGreatVoice": "做得好！",
+    "gradeGoodVoice": "不错的努力。",
+    "gradeKeepPracticingVoice": "继续加油。"
   },
   "history": {
     "title": "测验历史",

@@ -4,6 +4,7 @@ import { useLanguage } from '../../hooks/useLanguage'
 import { useVoice } from '../../hooks/useVoice'
 import { useQuizStore } from '../../store/quizStore'
 import type { QuizQuestion, SupportedLanguage } from '../../types/quiz'
+import { getOptionFeedback } from '../../utils/quizFeedback'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { NumberInput } from '../ui/NumberInput'
@@ -20,16 +21,6 @@ export interface QuestionBlockProps {
 }
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-
-function getOptionFeedback(
-  q: QuizQuestion,
-  optionId: string,
-  submitted: boolean,
-): string | null {
-  if (!submitted) return null
-  if (optionId === q.correctOptionId) return q.explanation
-  return q.wrongExplanations[optionId] ?? null
-}
 
 function getDifficultyVariant(
   difficulty: QuizQuestion['difficulty'],

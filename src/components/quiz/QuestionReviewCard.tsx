@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import clsx from 'clsx'
 import { ChevronDown, ChevronUp, Volume2 } from 'lucide-react'
 import { useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
@@ -71,7 +71,7 @@ export function QuestionReviewCard({
   }
 
   return (
-    <Card>
+    <Card className="print:break-inside-avoid">
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant="default" size="sm">
           {t('quiz.questionChip', { number: questionNumber })}
@@ -101,7 +101,7 @@ export function QuestionReviewCard({
           type="button"
           variant="ghost"
           size="sm"
-          className="mt-2"
+          className="mt-2 print:hidden"
           leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
           onClick={handleReadAloud}
         >
@@ -126,7 +126,7 @@ export function QuestionReviewCard({
         type="button"
         variant="ghost"
         size="sm"
-        className="mt-4"
+        className="mt-4 print:hidden"
         rightIcon={
           expanded ? (
             <ChevronUp className="h-4 w-4" aria-hidden />
@@ -142,51 +142,44 @@ export function QuestionReviewCard({
           : t('results.showExplanation')}
       </Button>
 
-      <AnimatePresence initial={false}>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-3 flex flex-col gap-3">
-              {feedback.isCorrect ? (
-                <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
-                  <p className="text-sm text-green-800">
-                    <span className="font-semibold">
-                      ✓ {t('results.whyCorrect')}
-                    </span>{' '}
-                    {question.explanation}
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <div className="border-l-4 border-red-500 bg-red-50 py-3 pl-4">
-                    <p className="text-sm text-red-800">
-                      <span className="font-semibold">
-                        ✗ {t('results.whyWrong')}
-                      </span>{' '}
-                      {wrongExplanation}
-                    </p>
-                  </div>
-                  <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
-                    <p className="text-sm text-green-800">
-                      <span className="font-semibold">✓ </span>
-                      {t('results.correctAnswerIs', {
-                        letter: correctLetter,
-                        text: correctOption?.text ?? '',
-                      })}
-                      {question.explanation}
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
-          </motion.div>
+      <div
+        className={clsx(
+          'mt-3 flex flex-col gap-3',
+          !expanded && 'hidden print:block',
         )}
-      </AnimatePresence>
+      >
+        {feedback.isCorrect ? (
+          <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
+            <p className="text-sm text-green-800">
+              <span className="font-semibold">
+                ✓ {t('results.whyCorrect')}
+              </span>{' '}
+              {question.explanation}
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="border-l-4 border-red-500 bg-red-50 py-3 pl-4">
+              <p className="text-sm text-red-800">
+                <span className="font-semibold">
+                  ✗ {t('results.whyWrong')}
+                </span>{' '}
+                {wrongExplanation}
+              </p>
+            </div>
+            <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
+              <p className="text-sm text-green-800">
+                <span className="font-semibold">✓ </span>
+                {t('results.correctAnswerIs', {
+                  letter: correctLetter,
+                  text: correctOption?.text ?? '',
+                })}
+                {question.explanation}
+              </p>
+            </div>
+          </>
+        )}
+      </div>
     </Card>
   )
 }

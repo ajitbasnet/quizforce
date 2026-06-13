@@ -19,7 +19,7 @@ export function StopReadingButton({ visible, onStop }: StopReadingButtonProps) {
     <Button
       type="button"
       variant="secondary"
-      className="fixed bottom-6 right-4 z-50 min-h-11 shadow-md"
+      className="fixed bottom-6 right-4 z-50 min-h-11 shadow-md print:hidden"
       leftIcon={<Square className="h-4 w-4" aria-hidden />}
       onClick={onStop}
     >

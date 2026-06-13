@@ -86,3 +86,29 @@
     mask-composite: exclude;
   }
 }
+
+@media print {
+  header,
+  aside {
+    display: none !important;
+  }
+
+  main {
+    margin-left: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  @page {
+    margin: 1cm;
+  }
+
+  .border-l-4.bg-green-50,
+  .border-l-4.bg-red-50 {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

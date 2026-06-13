@@ -25,7 +25,7 @@ function AppShellMain({ children }: { children: ReactNode }) {
   return (
     <main
       className={clsx(
-        'min-h-screen pt-16 transition-[margin] duration-200',
+        'min-h-screen pt-16 transition-[margin] duration-200 print:ml-0 print:pt-0',
         isCollapsed ? 'lg:ml-16' : 'lg:ml-64',
       )}
     >

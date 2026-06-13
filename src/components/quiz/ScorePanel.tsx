@@ -147,7 +147,7 @@ export function ScorePanel({
           <Button
             type="button"
             variant="secondary"
-            className="mt-4"
+            className="mt-4 print:hidden"
             leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
             onClick={onReadResults}
           >
@@ -159,6 +159,7 @@ export function ScorePanel({
               <Button
                 type="button"
                 variant="secondary"
+                className="print:hidden"
                 leftIcon={<Volume2 className="h-4 w-4" aria-hidden />}
                 disabled
               >

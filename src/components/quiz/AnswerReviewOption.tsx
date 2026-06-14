@@ -17,6 +17,7 @@ export interface AnswerReviewOptionProps {
   isSelected: boolean
   explanation?: string | null
   showLabel?: boolean
+  displayVariant?: AnswerFeedbackVariant
 }
 
 function getLetterChipClasses(variant: AnswerFeedbackVariant): string {
@@ -59,16 +60,18 @@ export function AnswerReviewOption({
   isSelected,
   explanation,
   showLabel = true,
+  displayVariant,
 }: AnswerReviewOptionProps) {
   const { t } = useLanguage()
-  const variant = resolveAnswerFeedbackVariant(isCorrect, isSelected)
+  const variant =
+    displayVariant ?? resolveAnswerFeedbackVariant(isCorrect, isSelected)
   const labelKey = getAnswerFeedbackLabelKey(variant)
   const icon = getAnswerFeedbackIcon(variant)
 
   return (
     <div
       className={clsx(
-        'flex w-full flex-col rounded-lg px-4 py-3',
+        'flex w-full flex-col rounded-lg px-4 py-3 transition-[background-color,border-color,color] duration-[400ms] ease-in-out',
         getAnswerFeedbackContainerClasses(variant),
       )}
     >

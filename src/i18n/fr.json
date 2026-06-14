@@ -151,6 +151,7 @@
   },
   "results": {
     "calculatingScore": "Calcul de votre score...",
+    "cachedResultsBanner": "Affichage des résultats en cache — certaines fonctionnalités peuvent être limitées.",
     "title": "Résultats du quiz",
     "yourScore": "Votre score",
     "totalPoints": "Points totaux",

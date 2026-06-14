@@ -151,6 +151,7 @@
   },
   "results": {
     "calculatingScore": "Calculando tu puntuación...",
+    "cachedResultsBanner": "Mostrando resultados en caché — algunas funciones pueden estar limitadas.",
     "title": "Resultados del cuestionario",
     "yourScore": "Tu puntuación",
     "totalPoints": "Puntos totales",

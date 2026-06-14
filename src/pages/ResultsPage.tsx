@@ -6,6 +6,7 @@ import { PageWrapper } from '../components/layout/PageWrapper'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
+import { CachedResultsBanner } from '../components/results/CachedResultsBanner'
 import { ExportResultsDropdown } from '../components/results/ExportResultsDropdown'
 import { HighScoreCelebration } from '../components/results/HighScoreCelebration'
 import { ScoreBreakdown } from '../components/results/ScoreBreakdown'
@@ -22,6 +23,10 @@ import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
 import type { RegenerateState } from '../types/regenerate'
 import type { QuizAttempt } from '../types/quiz'
+import {
+  cacheResultsSession,
+  loadResultsSession,
+} from '../utils/resultsSessionCache'
 import { decodeSharePayload } from '../utils/shareScore'
 
 const reviewContainerVariants = {
@@ -54,6 +59,8 @@ export default function ResultsPage() {
 
   const [remoteAttempt, setRemoteAttempt] = useState<QuizAttempt | null>(null)
   const [isLoadingRemote, setIsLoadingRemote] = useState(false)
+  const [remoteFetchSettled, setRemoteFetchSettled] = useState(false)
+  const [remoteFetchFailed, setRemoteFetchFailed] = useState(false)
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [retryModalOpen, setRetryModalOpen] = useState(false)
   const scoreHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -79,6 +86,11 @@ export default function ResultsPage() {
     }
   }, [sharedPayload])
 
+  const sessionCache = useMemo(
+    () => (attemptId ? loadResultsSession(attemptId) : null),
+    [attemptId],
+  )
+
   const localAttempt = useMemo(
     () =>
       (attemptId ? getAttemptById(attemptId) : undefined) ??
@@ -90,33 +102,42 @@ export default function ResultsPage() {
     if (sharedPayload || !attemptId || localAttempt) {
       setRemoteAttempt(null)
       setIsLoadingRemote(false)
+      setRemoteFetchSettled(true)
+      setRemoteFetchFailed(false)
       return
     }
 
     if (!isSupabaseConfigured()) {
       setRemoteAttempt(null)
       setIsLoadingRemote(false)
+      setRemoteFetchSettled(true)
+      setRemoteFetchFailed(false)
       return
     }
 
     let cancelled = false
     setIsLoadingRemote(true)
     setRemoteAttempt(null)
+    setRemoteFetchSettled(false)
+    setRemoteFetchFailed(false)
 
     void getAttempt(attemptId)
       .then((attempt) => {
         if (!cancelled) {
           setRemoteAttempt(attempt)
+          setRemoteFetchFailed(false)
         }
       })
       .catch(() => {
         if (!cancelled) {
           setRemoteAttempt(null)
+          setRemoteFetchFailed(true)
         }
       })
       .finally(() => {
         if (!cancelled) {
           setIsLoadingRemote(false)
+          setRemoteFetchSettled(true)
         }
       })
 
@@ -126,17 +147,42 @@ export default function ResultsPage() {
   }, [attemptId, localAttempt, sharedPayload])
 
   const attempt = useMemo(
-    () => sharedPayload?.attempt ?? localAttempt ?? remoteAttempt ?? undefined,
-    [sharedPayload, localAttempt, remoteAttempt],
+    () =>
+      sharedPayload?.attempt ??
+      localAttempt ??
+      remoteAttempt ??
+      sessionCache?.attempt,
+    [sharedPayload, localAttempt, remoteAttempt, sessionCache],
   )
 
   const quiz = useMemo(
     () =>
       sharedPayload?.quiz ??
       historyQuizzes.find((q) => q.id === attempt?.quizId) ??
-      (currentQuiz?.id === attempt?.quizId ? currentQuiz : undefined),
-    [sharedPayload, historyQuizzes, attempt?.quizId, currentQuiz],
+      (currentQuiz?.id === attempt?.quizId ? currentQuiz : undefined) ??
+      sessionCache?.quiz,
+    [sharedPayload, historyQuizzes, attempt?.quizId, currentQuiz, sessionCache],
   )
+
+  const isFromSessionCache = useMemo(
+    () =>
+      Boolean(sessionCache?.attempt) &&
+      attempt === sessionCache?.attempt &&
+      !sharedPayload?.attempt &&
+      !localAttempt &&
+      !remoteAttempt,
+    [sessionCache, attempt, sharedPayload, localAttempt, remoteAttempt],
+  )
+
+  const isShowingCachedBanner =
+    isFromSessionCache &&
+    remoteFetchSettled &&
+    (remoteFetchFailed || !isSupabaseConfigured())
+
+  useEffect(() => {
+    if (!attempt || !quiz || attempt.id !== attemptId) return
+    cacheResultsSession(attempt, quiz)
+  }, [attempt, quiz, attemptId])
 
   const handleRetryConfirm = useCallback(() => {
     if (!quiz) {
@@ -192,17 +238,30 @@ export default function ResultsPage() {
     scoreHeadingRef.current?.focus()
   }, [attempt?.id])
 
-  if (isLoadingRemote) {
+  if (hasInvalidShareData) {
     return (
       <PageWrapper>
-        <div className="flex min-h-[40vh] items-center justify-center">
-          <Spinner size="lg" />
-        </div>
+        <Card className="mx-auto max-w-md text-center">
+          <p className="text-text-primary">{t('errors.attemptNotFound')}</p>
+          <Button className="mt-4" onClick={() => navigate('/')}>
+            {t('results.backToHome')}
+          </Button>
+        </Card>
       </PageWrapper>
     )
   }
 
-  if (hasInvalidShareData || !attempt) {
+  if (!attempt) {
+    if (!remoteFetchSettled || isLoadingRemote) {
+      return (
+        <PageWrapper>
+          <div className="flex min-h-[40vh] items-center justify-center">
+            <Spinner size="lg" />
+          </div>
+        </PageWrapper>
+      )
+    }
+
     return (
       <PageWrapper>
         <Card className="mx-auto max-w-md text-center">
@@ -218,6 +277,8 @@ export default function ResultsPage() {
   return (
     <PageWrapper title={t('results.title')}>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
+        {isShowingCachedBanner ? <CachedResultsBanner /> : null}
+
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

@@ -151,6 +151,7 @@
   },
   "results": {
     "calculatingScore": "正在计算您的得分...",
+    "cachedResultsBanner": "正在显示缓存的结果 — 部分功能可能受限。",
     "title": "测验结果",
     "yourScore": "您的得分",
     "totalPoints": "总分",

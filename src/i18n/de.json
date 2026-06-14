@@ -151,6 +151,7 @@
   },
   "results": {
     "calculatingScore": "Punkte werden berechnet...",
+    "cachedResultsBanner": "Zwischengespeicherte Ergebnisse werden angezeigt — einige Funktionen sind möglicherweise eingeschränkt.",
     "title": "Quiz-Ergebnisse",
     "yourScore": "Ihre Punktzahl",
     "totalPoints": "Gesamtpunkte",

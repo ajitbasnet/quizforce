@@ -272,6 +272,8 @@ export default function ResultsPage() {
                     }
                     voiceEnabled={voiceEnabled}
                     language={quiz?.language}
+                    animateReveal
+                    attemptId={attempt.id}
                   />
                 </motion.div>
               )

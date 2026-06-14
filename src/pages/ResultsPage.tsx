@@ -8,6 +8,7 @@ import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
 import { ExportResultsDropdown } from '../components/results/ExportResultsDropdown'
 import { HighScoreCelebration } from '../components/results/HighScoreCelebration'
+import { ScoreBreakdown } from '../components/results/ScoreBreakdown'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { StopReadingButton } from '../components/results/StopReadingButton'
 import { Button } from '../components/ui/Button'
@@ -230,6 +231,8 @@ export default function ResultsPage() {
             headingRef={scoreHeadingRef}
           />
         </motion.div>
+
+        {quiz ? <ScoreBreakdown quiz={quiz} attempt={attempt} /> : null}
 
         <section>
           <h2 className="mb-4 text-xl font-semibold text-text-primary">

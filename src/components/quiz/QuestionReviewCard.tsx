@@ -1,15 +1,49 @@
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import { ChevronDown, ChevronUp, Volume2 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
-import { LG_MEDIA_QUERY, useMediaQuery } from '../../hooks/useMediaQuery'
+import {
+  LG_MEDIA_QUERY,
+  PREFERS_REDUCED_MOTION_QUERY,
+  useMediaQuery,
+} from '../../hooks/useMediaQuery'
 import { useVoice } from '../../hooks/useVoice'
 import type { AnswerFeedback, QuizQuestion, SupportedLanguage } from '../../types/quiz'
+import type { AnswerFeedbackVariant } from '../../utils/answerFeedbackStyles'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { AnswerReviewOption } from './AnswerReviewOption'
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
+type RevealPhase = 'initial' | 'correct' | 'wrong' | 'explanation' | 'done'
+
+const explanationVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' as const },
+  },
+}
+
+function getDisplayVariant(
+  phase: RevealPhase,
+  isCorrect: boolean,
+  isSelected: boolean,
+): AnswerFeedbackVariant {
+  if (phase === 'initial') return 'dimmed'
+  if (isCorrect) return 'correct'
+  if (
+    isSelected &&
+    !isCorrect &&
+    (phase === 'wrong' || phase === 'explanation' || phase === 'done')
+  ) {
+    return 'wrongSelected'
+  }
+  return 'dimmed'
+}
 
 interface QuestionReviewCardProps {
   question: QuizQuestion
@@ -18,6 +52,8 @@ interface QuestionReviewCardProps {
   maxPoints?: number
   voiceEnabled?: boolean
   language?: SupportedLanguage
+  animateReveal?: boolean
+  attemptId?: string
 }
 
 export function QuestionReviewCard({
@@ -27,11 +63,48 @@ export function QuestionReviewCard({
   maxPoints = question.points,
   voiceEnabled = false,
   language,
+  animateReveal = false,
+  attemptId,
 }: QuestionReviewCardProps) {
   const { t } = useLanguage()
   const { speakSequence, isSupported } = useVoice()
   const isDesktop = useMediaQuery(LG_MEDIA_QUERY)
+  const prefersReducedMotion = useMediaQuery(PREFERS_REDUCED_MOTION_QUERY)
+  const skipAnimation = !animateReveal || prefersReducedMotion
   const [expanded, setExpanded] = useState(isDesktop)
+  const [phase, setPhase] = useState<RevealPhase>(() =>
+    skipAnimation ? 'done' : 'initial',
+  )
+  const hasStartedReveal = useRef(false)
+
+  useEffect(() => {
+    hasStartedReveal.current = false
+  }, [attemptId])
+
+  useEffect(() => {
+    if (skipAnimation) {
+      setPhase('done')
+      return
+    }
+
+    if (hasStartedReveal.current) return
+
+    hasStartedReveal.current = true
+    setPhase('initial')
+
+    const timers = [
+      setTimeout(() => setPhase('correct'), 200),
+      setTimeout(() => setPhase('wrong'), 400),
+      setTimeout(() => setPhase('explanation'), 600),
+      setTimeout(() => setPhase('done'), 900),
+    ]
+
+    return () => {
+      timers.forEach(clearTimeout)
+    }
+  }, [attemptId, animateReveal, skipAnimation])
+
+  const showExplanation = phase === 'explanation' || phase === 'done'
 
   const correctOptionIndex = question.options.findIndex(
     (option) => option.id === question.correctOptionId,
@@ -128,6 +201,11 @@ export function QuestionReviewCard({
             isCorrect={option.id === question.correctOptionId}
             isSelected={option.id === feedback.selectedOptionId}
             showLabel
+            displayVariant={getDisplayVariant(
+              phase,
+              option.id === question.correctOptionId,
+              option.id === feedback.selectedOptionId,
+            )}
           />
         ))}
       </div>
@@ -159,7 +237,12 @@ export function QuestionReviewCard({
         )}
       >
         {feedback.isCorrect ? (
-          <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
+          <motion.div
+            className="border-l-4 border-green-500 bg-green-50 py-3 pl-4"
+            variants={explanationVariants}
+            initial={skipAnimation ? 'visible' : 'hidden'}
+            animate={showExplanation ? 'visible' : 'hidden'}
+          >
             <p className="text-sm text-green-800">
               <span className="sr-only">{t('quiz.explanation')}:</span>
               <span className="font-semibold">
@@ -167,10 +250,15 @@ export function QuestionReviewCard({
               </span>{' '}
               {question.explanation}
             </p>
-          </div>
+          </motion.div>
         ) : (
           <>
-            <div className="border-l-4 border-red-500 bg-red-50 py-3 pl-4">
+            <motion.div
+              className="border-l-4 border-red-500 bg-red-50 py-3 pl-4"
+              variants={explanationVariants}
+              initial={skipAnimation ? 'visible' : 'hidden'}
+              animate={showExplanation ? 'visible' : 'hidden'}
+            >
               <p className="text-sm text-red-800">
                 <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">
@@ -178,8 +266,13 @@ export function QuestionReviewCard({
                 </span>{' '}
                 {wrongExplanation}
               </p>
-            </div>
-            <div className="border-l-4 border-green-500 bg-green-50 py-3 pl-4">
+            </motion.div>
+            <motion.div
+              className="border-l-4 border-green-500 bg-green-50 py-3 pl-4"
+              variants={explanationVariants}
+              initial={skipAnimation ? 'visible' : 'hidden'}
+              animate={showExplanation ? 'visible' : 'hidden'}
+            >
               <p className="text-sm text-green-800">
                 <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">✓ </span>
@@ -189,7 +282,7 @@ export function QuestionReviewCard({
                 })}
                 {question.explanation}
               </p>
-            </div>
+            </motion.div>
           </>
         )}
       </div>

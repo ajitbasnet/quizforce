@@ -11,6 +11,7 @@ import { getGradeKey } from '../../utils/scoreGrade'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
+import { Tooltip } from '../ui/Tooltip'
 
 interface HistoryCardProps {
   quiz: Quiz
@@ -197,16 +198,18 @@ export function HistoryCard({ quiz, latestAttempt, onDelete }: HistoryCardProps)
             {t('history.viewResults')}
           </Button>
         ) : null}
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="text-red-600 hover:bg-red-50"
-          aria-label={t('history.deleteQuiz')}
-          onClick={handleDelete}
-        >
-          <Trash2 className="h-4 w-4" aria-hidden />
-        </Button>
+        <Tooltip content={t('history.deleteQuiz')}>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="text-red-600 hover:bg-red-50"
+            aria-label={t('history.deleteQuiz')}
+            onClick={handleDelete}
+          >
+            <Trash2 className="h-4 w-4" aria-hidden />
+          </Button>
+        </Tooltip>
       </div>
     </Card>
   )

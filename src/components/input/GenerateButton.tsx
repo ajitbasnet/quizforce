@@ -204,6 +204,7 @@ export function GenerateButton({
         size="lg"
         fullWidth
         disabled={disabled}
+        data-testid="generate-quiz"
         leftIcon={<Sparkles className="h-5 w-5" aria-hidden />}
         onClick={() => void handleGenerate()}
       >

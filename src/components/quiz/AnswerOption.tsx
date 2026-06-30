@@ -120,6 +120,7 @@ function AnswerOptionInner({
     <motion.button
       type="button"
       role="radio"
+      data-testid="answer-option"
       aria-checked={isSelected}
       aria-label={optionLabel}
       aria-describedby={isSubmitted && feedback ? feedbackId : undefined}

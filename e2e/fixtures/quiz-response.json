@@ -1,0 +1,17 @@
+{
+  "id": "msg_e2e_fixture",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-sonnet-4-20250514",
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"title\": \"Industrial Revolution Quiz\",\n  \"description\": \"Test your knowledge of the Industrial Revolution.\",\n  \"questions\": [\n    {\n      \"id\": \"q1\",\n      \"questionText\": \"Where did the Industrial Revolution begin?\",\n      \"options\": [\n        { \"id\": \"q1-a\", \"text\": \"Britain\" },\n        { \"id\": \"q1-b\", \"text\": \"France\" }\n      ],\n      \"correctOptionId\": \"q1-a\",\n      \"explanation\": \"The Industrial Revolution began in Britain in the late eighteenth century.\",\n      \"wrongExplanations\": { \"q1-b\": \"France industrialized later than Britain.\" },\n      \"points\": 20,\n      \"difficulty\": \"easy\"\n    },\n    {\n      \"id\": \"q2\",\n      \"questionText\": \"Which invention greatly improved steam engine efficiency?\",\n      \"options\": [\n        { \"id\": \"q2-a\", \"text\": \"James Watt's steam engine improvements\" },\n        { \"id\": \"q2-b\", \"text\": \"The spinning jenny\" }\n      ],\n      \"correctOptionId\": \"q2-a\",\n      \"explanation\": \"James Watt's improvements in the 1760s and 1770s made steam power practical for factories.\",\n      \"wrongExplanations\": { \"q2-b\": \"The spinning jenny was a textile invention, not a steam engine improvement.\" },\n      \"points\": 20,\n      \"difficulty\": \"medium\"\n    },\n    {\n      \"id\": \"q3\",\n      \"questionText\": \"Which industry was among the first to industrialize?\",\n      \"options\": [\n        { \"id\": \"q3-a\", \"text\": \"Textile manufacturing\" },\n        { \"id\": \"q3-b\", \"text\": \"Banking\" }\n      ],\n      \"correctOptionId\": \"q3-a\",\n      \"explanation\": \"Textile manufacturing adopted mechanized spinning and weaving early in the Industrial Revolution.\",\n      \"wrongExplanations\": { \"q3-b\": \"Banking expanded with industrial growth but was not among the first mechanized industries.\" },\n      \"points\": 20,\n      \"difficulty\": \"easy\"\n    },\n    {\n      \"id\": \"q4\",\n      \"questionText\": \"What process made steel cheaper and stronger in the nineteenth century?\",\n      \"options\": [\n        { \"id\": \"q4-a\", \"text\": \"The Bessemer process\" },\n        { \"id\": \"q4-b\", \"text\": \"The water frame\" }\n      ],\n      \"correctOptionId\": \"q4-a\",\n      \"explanation\": \"The Bessemer process revolutionized steel production in the nineteenth century.\",\n      \"wrongExplanations\": { \"q4-b\": \"The water frame was a textile machine, not a steel-making process.\" },\n      \"points\": 20,\n      \"difficulty\": \"medium\"\n    },\n    {\n      \"id\": \"q5\",\n      \"questionText\": \"Which technology revolutionized long-distance communication in the nineteenth century?\",\n      \"options\": [\n        { \"id\": \"q5-a\", \"text\": \"The telegraph\" },\n        { \"id\": \"q5-b\", \"text\": \"The power loom\" }\n      ],\n      \"correctOptionId\": \"q5-a\",\n      \"explanation\": \"The telegraph allowed messages to travel across continents in hours rather than weeks.\",\n      \"wrongExplanations\": { \"q5-b\": \"The power loom automated weaving but did not transmit messages.\" },\n      \"points\": 20,\n      \"difficulty\": \"hard\"\n    }\n  ]\n}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 100,
+    "output_tokens": 500
+  }
+}

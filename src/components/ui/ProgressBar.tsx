@@ -10,6 +10,7 @@ interface ProgressBarProps {
   height?: ProgressBarHeight
   variant?: ProgressBarVariant
   className?: string
+  'data-testid'?: string
 }
 
 const HEIGHT_CLASSES: Record<ProgressBarHeight, string> = {
@@ -35,6 +36,7 @@ export function ProgressBar({
   height = 'default',
   variant = 'primary',
   className,
+  'data-testid': testId,
 }: ProgressBarProps) {
   const clamped = clampValue(value)
 
@@ -52,6 +54,7 @@ export function ProgressBar({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={label}
+        data-testid={testId}
         className={clsx(
           'w-full overflow-hidden rounded-full bg-gray-200',
           HEIGHT_CLASSES[height],

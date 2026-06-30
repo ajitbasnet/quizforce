@@ -289,6 +289,7 @@ export default function QuizPage() {
             <ProgressBar
               value={((currentQuestionIndex + 1) / total) * 100}
               height="thin"
+              data-testid="quiz-progress"
             />
             <p className="text-sm text-text-muted">
               {t('quiz.questionOf', {
@@ -351,6 +352,7 @@ export default function QuizPage() {
             <Button
               variant="primary"
               className="min-h-11"
+              data-testid="submit-quiz"
               isLoading={isSubmitting}
               onClick={handleSubmitClick}
             >
@@ -360,6 +362,7 @@ export default function QuizPage() {
             <Button
               variant="primary"
               className="min-h-11"
+              data-testid="next-question"
               disabled={!canGoNext || isSubmitting}
               onClick={() => navigateQuestion('next')}
             >

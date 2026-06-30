@@ -267,7 +267,17 @@
     "tagPlaceholder": "Saisissez une étiquette et appuyez sur Entrée",
     "removeTag": "Supprimer l'étiquette",
     "clearTagFilter": "Effacer le filtre d'étiquette",
-    "metadata": "Détails du quiz"
+    "metadata": "Détails du quiz",
+    "viewOriginalContent": "Voir le contenu original",
+    "retakeQuiz": "Refaire le quiz",
+    "attemptHistory": "Historique des tentatives",
+    "compareAttempts": "Comparer les tentatives",
+    "attemptNumber": "Tentative #{{n}}",
+    "questionPreview": "Aperçu des questions",
+    "createdOn": "Créé",
+    "attempt": "Tentative",
+    "date": "Date",
+    "grade": "Note"
   },
   "feedback": {
     "correctAnswer": "Bonne réponse",

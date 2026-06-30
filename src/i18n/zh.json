@@ -267,7 +267,17 @@
     "tagPlaceholder": "输入标签后按 Enter",
     "removeTag": "移除标签",
     "clearTagFilter": "清除标签筛选",
-    "metadata": "测验详情"
+    "metadata": "测验详情",
+    "viewOriginalContent": "查看原始内容",
+    "retakeQuiz": "重新测验",
+    "attemptHistory": "尝试记录",
+    "compareAttempts": "比较尝试",
+    "attemptNumber": "第 {{n}} 次尝试",
+    "questionPreview": "题目预览",
+    "createdOn": "创建时间",
+    "attempt": "尝试",
+    "date": "日期",
+    "grade": "等级"
   },
   "feedback": {
     "correctAnswer": "正确答案",

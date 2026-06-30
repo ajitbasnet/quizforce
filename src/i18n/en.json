@@ -267,7 +267,17 @@
     "tagPlaceholder": "Type a tag and press Enter",
     "removeTag": "Remove tag",
     "clearTagFilter": "Clear tag filter",
-    "metadata": "Quiz Details"
+    "metadata": "Quiz Details",
+    "viewOriginalContent": "View Original Content",
+    "retakeQuiz": "Retake Quiz",
+    "attemptHistory": "Attempt History",
+    "compareAttempts": "Compare Attempts",
+    "attemptNumber": "Attempt #{{n}}",
+    "questionPreview": "Question Preview",
+    "createdOn": "Created",
+    "attempt": "Attempt",
+    "date": "Date",
+    "grade": "Grade"
   },
   "feedback": {
     "correctAnswer": "Correct Answer",

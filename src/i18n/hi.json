@@ -267,7 +267,17 @@
     "tagPlaceholder": "टैग लिखें और Enter दबाएं",
     "removeTag": "टैग हटाएं",
     "clearTagFilter": "टैग फ़िल्टर साफ़ करें",
-    "metadata": "क्विज़ विवरण"
+    "metadata": "क्विज़ विवरण",
+    "viewOriginalContent": "मूल सामग्री देखें",
+    "retakeQuiz": "क्विज़ फिर से लें",
+    "attemptHistory": "प्रयास इतिहास",
+    "compareAttempts": "प्रयासों की तुलना करें",
+    "attemptNumber": "प्रयास #{{n}}",
+    "questionPreview": "प्रश्न पूर्वावलोकन",
+    "createdOn": "बनाया गया",
+    "attempt": "प्रयास",
+    "date": "तारीख",
+    "grade": "ग्रेड"
   },
   "feedback": {
     "correctAnswer": "सही उत्तर",

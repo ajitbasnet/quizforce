@@ -1,14 +1,21 @@
 import clsx from 'clsx'
-import { Bookmark } from 'lucide-react'
-import { useCallback, useMemo } from 'react'
+import { Bookmark, Trash2 } from 'lucide-react'
+import { useCallback, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { HistoryDetail } from '../components/history/HistoryDetail'
+import { AttemptComparisonTable } from '../components/history/AttemptComparisonTable'
+import { AttemptHistoryList } from '../components/history/AttemptHistoryList'
+import { AttemptScoreChart } from '../components/history/AttemptScoreChart'
+import { DeleteQuizModal } from '../components/history/DeleteQuizModal'
+import { QuestionPreviewList } from '../components/history/QuestionPreviewList'
+import { QuizMetadataPanel } from '../components/history/QuizMetadataPanel'
+import { SourceContentCollapsible } from '../components/history/SourceContentCollapsible'
 import { TagInput } from '../components/history/TagInput'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
+import { useQuizStore } from '../store/quizStore'
 
 export default function HistoryDetailPage() {
   const { t } = useLanguage()
@@ -18,20 +25,25 @@ export default function HistoryDetailPage() {
   const attempts = useHistoryStore((s) => s.attempts)
   const updateQuiz = useHistoryStore((s) => s.updateQuiz)
   const toggleFavorite = useHistoryStore((s) => s.toggleFavorite)
+  const removeQuiz = useHistoryStore((s) => s.removeQuiz)
+  const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
+  const resetAttempt = useQuizStore((s) => s.resetAttempt)
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const quiz = useMemo(
     () => (quizId ? quizzes.find((q) => q.id === quizId) : undefined),
     [quizzes, quizId],
   )
 
-  const attempt = useMemo(() => {
-    if (!quizId) return undefined
+  const quizAttempts = useMemo(() => {
+    if (!quizId) return []
     return [...attempts]
       .filter((a) => a.quizId === quizId)
       .sort(
         (a, b) =>
           new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime(),
-      )[0]
+      )
   }, [attempts, quizId])
 
   const handleTagsChange = useCallback(
@@ -46,6 +58,20 @@ export default function HistoryDetailPage() {
     if (!quiz) return
     toggleFavorite(quiz.id)
   }, [quiz, toggleFavorite])
+
+  const handleRetake = useCallback(() => {
+    if (!quiz) return
+    setCurrentQuiz(quiz)
+    resetAttempt()
+    navigate('/quiz')
+  }, [navigate, quiz, resetAttempt, setCurrentQuiz])
+
+  const handleDeleteConfirm = useCallback(() => {
+    if (!quiz) return
+    removeQuiz(quiz.id)
+    setDeleteModalOpen(false)
+    navigate('/history')
+  }, [navigate, quiz, removeQuiz])
 
   if (!quizId || !quiz) {
     return (
@@ -62,28 +88,42 @@ export default function HistoryDetailPage() {
 
   const isFavorited = quiz.isFavorited ?? false
   const tags = quiz.tags ?? []
+  const showComparison = quizAttempts.length >= 2
 
   return (
     <PageWrapper title={quiz.title}>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/history')}>
+            {t('history.backToHistory')}
+          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button onClick={handleRetake}>{t('history.retakeQuiz')}</Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-red-600 hover:bg-red-50"
+              aria-label={t('history.deleteQuiz')}
+              onClick={() => setDeleteModalOpen(true)}
+            >
+              <Trash2 className="h-4 w-4" aria-hidden />
+            </Button>
+          </div>
+        </div>
+
         <Card className="flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0 flex-1">
-              <h2 className="text-lg font-semibold text-text-primary">
-                {t('history.metadata')}
-              </h2>
-              {quiz.description ? (
-                <p className="mt-1 text-sm text-text-muted">
-                  {quiz.description}
-                </p>
-              ) : null}
-            </div>
+            <h2 className="text-lg font-semibold text-text-primary">
+              {t('history.metadata')}
+            </h2>
             <button
               type="button"
               className={clsx(
                 'shrink-0 rounded-full p-2 transition-colors',
                 'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600',
-                isFavorited ? 'text-amber-500' : 'text-gray-300 hover:text-amber-400',
+                isFavorited
+                  ? 'text-amber-500'
+                  : 'text-gray-300 hover:text-amber-400',
               )}
               aria-label={
                 isFavorited ? t('history.unfavorite') : t('history.favorite')
@@ -100,12 +140,27 @@ export default function HistoryDetailPage() {
           <TagInput tags={tags} onChange={handleTagsChange} />
         </Card>
 
-        {attempt ? <HistoryDetail quiz={quiz} attempt={attempt} /> : null}
+        <QuizMetadataPanel quiz={quiz} />
 
-        <Button variant="secondary" onClick={() => navigate('/history')}>
-          {t('history.backToHistory')}
-        </Button>
+        <AttemptHistoryList attempts={quizAttempts} />
+
+        {showComparison ? (
+          <>
+            <AttemptComparisonTable attempts={quizAttempts} />
+            <AttemptScoreChart attempts={quizAttempts} />
+          </>
+        ) : null}
+
+        <SourceContentCollapsible quiz={quiz} />
+
+        <QuestionPreviewList quiz={quiz} />
       </div>
+
+      <DeleteQuizModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={handleDeleteConfirm}
+      />
     </PageWrapper>
   )
 }

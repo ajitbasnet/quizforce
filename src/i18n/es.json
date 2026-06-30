@@ -267,7 +267,17 @@
     "tagPlaceholder": "Escribe una etiqueta y pulsa Enter",
     "removeTag": "Eliminar etiqueta",
     "clearTagFilter": "Quitar filtro de etiqueta",
-    "metadata": "Detalles del cuestionario"
+    "metadata": "Detalles del cuestionario",
+    "viewOriginalContent": "Ver contenido original",
+    "retakeQuiz": "Repetir cuestionario",
+    "attemptHistory": "Historial de intentos",
+    "compareAttempts": "Comparar intentos",
+    "attemptNumber": "Intento #{{n}}",
+    "questionPreview": "Vista previa de preguntas",
+    "createdOn": "Creado",
+    "attempt": "Intento",
+    "date": "Fecha",
+    "grade": "Calificación"
   },
   "feedback": {
     "correctAnswer": "Respuesta correcta",

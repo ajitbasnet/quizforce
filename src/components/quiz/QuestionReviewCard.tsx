@@ -54,6 +54,7 @@ interface QuestionReviewCardProps {
   language?: SupportedLanguage
   animateReveal?: boolean
   attemptId?: string
+  previewMode?: boolean
 }
 
 export function QuestionReviewCard({
@@ -65,13 +66,14 @@ export function QuestionReviewCard({
   language,
   animateReveal = false,
   attemptId,
+  previewMode = false,
 }: QuestionReviewCardProps) {
   const { t } = useLanguage()
   const { speakSequence, isSupported } = useVoice()
   const isDesktop = useMediaQuery(LG_MEDIA_QUERY)
   const prefersReducedMotion = useMediaQuery(PREFERS_REDUCED_MOTION_QUERY)
-  const skipAnimation = !animateReveal || prefersReducedMotion
-  const [expanded, setExpanded] = useState(isDesktop)
+  const skipAnimation = previewMode || !animateReveal || prefersReducedMotion
+  const [expanded, setExpanded] = useState(previewMode || isDesktop)
   const [phase, setPhase] = useState<RevealPhase>(() =>
     skipAnimation ? 'done' : 'initial',
   )
@@ -179,7 +181,7 @@ export function QuestionReviewCard({
         {question.questionText}
       </h3>
 
-      {voiceEnabled && isSupported && (
+      {!previewMode && voiceEnabled && isSupported && (
         <Button
           type="button"
           variant="ghost"
@@ -210,30 +212,32 @@ export function QuestionReviewCard({
         ))}
       </div>
 
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        className="mt-4 print:hidden"
-        rightIcon={
-          expanded ? (
-            <ChevronUp className="h-4 w-4" aria-hidden />
-          ) : (
-            <ChevronDown className="h-4 w-4" aria-hidden />
-          )
-        }
-        onClick={() => setExpanded((value) => !value)}
-        aria-expanded={expanded}
-      >
-        {expanded
-          ? t('results.hideExplanation')
-          : t('results.showExplanation')}
-      </Button>
+      {!previewMode ? (
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="mt-4 print:hidden"
+          rightIcon={
+            expanded ? (
+              <ChevronUp className="h-4 w-4" aria-hidden />
+            ) : (
+              <ChevronDown className="h-4 w-4" aria-hidden />
+            )
+          }
+          onClick={() => setExpanded((value) => !value)}
+          aria-expanded={expanded}
+        >
+          {expanded
+            ? t('results.hideExplanation')
+            : t('results.showExplanation')}
+        </Button>
+      ) : null}
 
       <div
         className={clsx(
           'mt-3 flex flex-col gap-3',
-          !expanded && 'hidden print:block',
+          !previewMode && !expanded && 'hidden print:block',
         )}
       >
         {feedback.isCorrect ? (

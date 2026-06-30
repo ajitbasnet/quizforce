@@ -56,6 +56,21 @@
     animation: progress-shimmer 1.5s infinite;
   }
 
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .animate-skeleton-shimmer {
+    background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  }
+
   @keyframes dash-border {
     to {
       background-position: 100% 0;

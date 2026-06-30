@@ -254,7 +254,20 @@
     "sortMostQuestions": "Más preguntas",
     "sortBy": "Ordenar por",
     "filterSourceType": "Tipo de fuente",
-    "syncing": "Sincronizando..."
+    "syncing": "Sincronizando...",
+    "exportAll": "Exportar todo el historial",
+    "importHistory": "Importar historial",
+    "importSuccess": "Se importaron {{quizzes}} cuestionarios y {{attempts}} intentos.",
+    "importInvalid": "Formato de archivo de historial no válido.",
+    "importFailed": "No se pudo importar el archivo de historial.",
+    "starred": "Destacados",
+    "favorite": "Añadir a favoritos",
+    "unfavorite": "Quitar de favoritos",
+    "addTag": "Añadir etiqueta",
+    "tagPlaceholder": "Escribe una etiqueta y pulsa Enter",
+    "removeTag": "Eliminar etiqueta",
+    "clearTagFilter": "Quitar filtro de etiqueta",
+    "metadata": "Detalles del cuestionario"
   },
   "feedback": {
     "correctAnswer": "Respuesta correcta",

@@ -1,13 +1,15 @@
 import clsx from 'clsx'
-import { Trash2 } from 'lucide-react'
-import { useCallback, type MouseEvent } from 'react'
+import { Bookmark, Trash2 } from 'lucide-react'
+import { memo, useCallback, type MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LANGUAGE_OPTIONS } from '../../i18n'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useHistoryStore } from '../../store/historyStore'
 import { useQuizStore } from '../../store/quizStore'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 import { formatRelativeTime } from '../../utils/formatRelativeTime'
 import { getGradeKey } from '../../utils/scoreGrade'
+import { getTagColorClass } from '../../utils/tagColors'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
@@ -82,12 +84,15 @@ function MiniScoreRing({ percentage }: { percentage: number }) {
   )
 }
 
-export function HistoryCard({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
+function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
   const { t, currentLang } = useLanguage()
   const navigate = useNavigate()
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
   const resetAttempt = useQuizStore((s) => s.resetAttempt)
+  const toggleFavorite = useHistoryStore((s) => s.toggleFavorite)
 
+  const isFavorited = quiz.isFavorited ?? false
+  const tags = quiz.tags ?? []
   const sourceBadge = SOURCE_BADGE_CONFIG[quiz.sourceType]
   const flag =
     LANGUAGE_OPTIONS.find((opt) => opt.code === quiz.language)?.flag ?? ''
@@ -127,20 +132,83 @@ export function HistoryCard({ quiz, latestAttempt, onDelete }: HistoryCardProps)
     [onDelete, quiz.id],
   )
 
+  const handleToggleFavorite = useCallback(
+    (event: MouseEvent) => {
+      event.stopPropagation()
+      toggleFavorite(quiz.id)
+    },
+    [quiz.id, toggleFavorite],
+  )
+
+  const handleTagClick = useCallback(
+    (event: MouseEvent, tag: string) => {
+      event.stopPropagation()
+      navigate(`/history?tag=${encodeURIComponent(tag)}`)
+    },
+    [navigate],
+  )
+
   return (
     <Card
       className="group flex flex-col gap-3 hover:shadow-md"
       onClick={handleCardClick}
     >
       <div className="flex items-center justify-between gap-2">
-        <Badge
-          variant={sourceBadge.variant}
-          size="sm"
-          className={sourceBadge.className}
-        >
-          {t(sourceBadge.labelKey)}
-        </Badge>
-        <span className="text-xs text-text-muted">{relativeDate}</span>
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <Badge
+            variant={sourceBadge.variant}
+            size="sm"
+            className={sourceBadge.className}
+          >
+            {t(sourceBadge.labelKey)}
+          </Badge>
+          {tags.length > 0 ? (
+            <div className="flex min-w-0 flex-wrap gap-1">
+              {tags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  className={clsx(
+                    'inline-flex max-w-full truncate rounded-full px-2 py-0.5 text-xs font-medium',
+                    getTagColorClass(tag),
+                  )}
+                  onClick={(event) => handleTagClick(event, tag)}
+                >
+                  #{tag}
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
+        <div className="flex shrink-0 items-center gap-1">
+          <Tooltip
+            content={
+              isFavorited ? t('history.unfavorite') : t('history.favorite')
+            }
+          >
+            <button
+              type="button"
+              className={clsx(
+                'rounded-full p-1 transition-colors',
+                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600',
+                isFavorited
+                  ? 'text-amber-500'
+                  : 'text-gray-300 hover:text-amber-400',
+              )}
+              aria-label={
+                isFavorited ? t('history.unfavorite') : t('history.favorite')
+              }
+              aria-pressed={isFavorited}
+              onClick={handleToggleFavorite}
+            >
+              <Bookmark
+                className={clsx('h-4 w-4', isFavorited && 'fill-current')}
+                aria-hidden
+              />
+            </button>
+          </Tooltip>
+          <span className="text-xs text-text-muted">{relativeDate}</span>
+        </div>
       </div>
 
       <div>
@@ -214,3 +282,5 @@ export function HistoryCard({ quiz, latestAttempt, onDelete }: HistoryCardProps)
     </Card>
   )
 }
+
+export const HistoryCard = memo(HistoryCardInner)

@@ -254,7 +254,20 @@
     "sortMostQuestions": "Meiste Fragen",
     "sortBy": "Sortieren nach",
     "filterSourceType": "Quelltyp",
-    "syncing": "Synchronisierung..."
+    "syncing": "Synchronisierung...",
+    "exportAll": "Gesamten Verlauf exportieren",
+    "importHistory": "Verlauf importieren",
+    "importSuccess": "{{quizzes}} Quiz und {{attempts}} Versuche importiert.",
+    "importInvalid": "Ungültiges Verlaufsdateiformat.",
+    "importFailed": "Verlaufsdatei konnte nicht importiert werden.",
+    "starred": "Favoriten",
+    "favorite": "Zu Favoriten hinzufügen",
+    "unfavorite": "Aus Favoriten entfernen",
+    "addTag": "Tag hinzufügen",
+    "tagPlaceholder": "Tag eingeben und Enter drücken",
+    "removeTag": "Tag entfernen",
+    "clearTagFilter": "Tag-Filter löschen",
+    "metadata": "Quiz-Details"
   },
   "feedback": {
     "correctAnswer": "Richtige Antwort",

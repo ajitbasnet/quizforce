@@ -254,7 +254,20 @@
     "sortMostQuestions": "सबसे अधिक प्रश्न",
     "sortBy": "क्रमबद्ध करें",
     "filterSourceType": "स्रोत प्रकार",
-    "syncing": "सिंक हो रहा है..."
+    "syncing": "सिंक हो रहा है...",
+    "exportAll": "सभी इतिहास निर्यात करें",
+    "importHistory": "इतिहास आयात करें",
+    "importSuccess": "{{quizzes}} क्विज़ और {{attempts}} प्रयास आयात किए गए।",
+    "importInvalid": "अमान्य इतिहास फ़ाइल प्रारूप।",
+    "importFailed": "इतिहास फ़ाइल आयात नहीं हो सकी।",
+    "starred": "पसंदीदा",
+    "favorite": "पसंदीदा में जोड़ें",
+    "unfavorite": "पसंदीदा से हटाएं",
+    "addTag": "टैग जोड़ें",
+    "tagPlaceholder": "टैग लिखें और Enter दबाएं",
+    "removeTag": "टैग हटाएं",
+    "clearTagFilter": "टैग फ़िल्टर साफ़ करें",
+    "metadata": "क्विज़ विवरण"
   },
   "feedback": {
     "correctAnswer": "सही उत्तर",

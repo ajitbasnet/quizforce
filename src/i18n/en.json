@@ -254,7 +254,20 @@
     "sortMostQuestions": "Most Questions",
     "sortBy": "Sort by",
     "filterSourceType": "Source type",
-    "syncing": "Syncing..."
+    "syncing": "Syncing...",
+    "exportAll": "Export All History",
+    "importHistory": "Import History",
+    "importSuccess": "Imported {{quizzes}} quizzes and {{attempts}} attempts.",
+    "importInvalid": "Invalid history file format.",
+    "importFailed": "Could not import history file.",
+    "starred": "Starred",
+    "favorite": "Add to favorites",
+    "unfavorite": "Remove from favorites",
+    "addTag": "Add tag",
+    "tagPlaceholder": "Type a tag and press Enter",
+    "removeTag": "Remove tag",
+    "clearTagFilter": "Clear tag filter",
+    "metadata": "Quiz Details"
   },
   "feedback": {
     "correctAnswer": "Correct Answer",

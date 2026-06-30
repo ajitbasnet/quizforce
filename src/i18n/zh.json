@@ -254,7 +254,20 @@
     "sortMostQuestions": "最多题目",
     "sortBy": "排序",
     "filterSourceType": "来源类型",
-    "syncing": "同步中..."
+    "syncing": "同步中...",
+    "exportAll": "导出全部历史",
+    "importHistory": "导入历史",
+    "importSuccess": "已导入 {{quizzes}} 个测验和 {{attempts}} 次尝试。",
+    "importInvalid": "无效的历史文件格式。",
+    "importFailed": "无法导入历史文件。",
+    "starred": "已收藏",
+    "favorite": "添加到收藏",
+    "unfavorite": "取消收藏",
+    "addTag": "添加标签",
+    "tagPlaceholder": "输入标签后按 Enter",
+    "removeTag": "移除标签",
+    "clearTagFilter": "清除标签筛选",
+    "metadata": "测验详情"
   },
   "feedback": {
     "correctAnswer": "正确答案",

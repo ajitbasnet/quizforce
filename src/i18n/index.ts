@@ -1,6 +1,11 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import type { SupportedLanguage } from '../types/quiz'
+import {
+  applyDocumentLanguage,
+  isSupportedLanguage,
+  readExplicitLanguage,
+} from '../utils/languageLocale'
 import de from './de.json'
 import en from './en.json'
 import es from './es.json'
@@ -10,16 +15,6 @@ import ne from './ne.json'
 import zh from './zh.json'
 
 export const STORAGE_KEY = 'quizforge-settings'
-
-const SUPPORTED_LANGUAGE_CODES: SupportedLanguage[] = [
-  'en',
-  'es',
-  'fr',
-  'hi',
-  'ne',
-  'de',
-  'zh',
-]
 
 export interface LanguageOption {
   code: SupportedLanguage
@@ -41,11 +36,10 @@ export const LANGUAGE_OPTIONS: LanguageOption[] = [
 export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string }[] =
   LANGUAGE_OPTIONS.map(({ code, nativeName }) => ({ code, label: nativeName }))
 
-function isSupportedLanguage(lang: string): lang is SupportedLanguage {
-  return SUPPORTED_LANGUAGE_CODES.includes(lang as SupportedLanguage)
-}
-
 function getPersistedLanguage(): SupportedLanguage {
+  const explicit = readExplicitLanguage()
+  if (explicit) return explicit
+
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return 'en'
@@ -78,6 +72,6 @@ i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
 })
 
-document.documentElement.lang = i18n.language
+applyDocumentLanguage(getPersistedLanguage())
 
 export default i18n

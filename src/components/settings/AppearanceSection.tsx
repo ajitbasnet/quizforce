@@ -1,11 +1,15 @@
 import clsx from 'clsx'
+import { Download } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
+import { usePwaInstall } from '../../hooks/usePwaInstall'
 import { Badge } from '../ui/Badge'
+import { Button } from '../ui/Button'
 import { fieldLabelClass } from '../ui/formFieldUtils'
 import { SettingsSectionCard } from './SettingsSectionCard'
 
 export function AppearanceSection() {
   const { t } = useLanguage()
+  const { canInstall, promptInstall } = usePwaInstall()
 
   return (
     <SettingsSectionCard
@@ -37,6 +41,17 @@ export function AppearanceSection() {
         <p className="text-sm text-text-muted">
           {t('settings.appearanceDescription')}
         </p>
+        {canInstall ? (
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
+            leftIcon={<Download aria-hidden className="h-4 w-4" />}
+            onClick={() => void promptInstall()}
+          >
+            {t('pwa.installApp')}
+          </Button>
+        ) : null}
       </div>
     </SettingsSectionCard>
   )

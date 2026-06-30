@@ -330,6 +330,10 @@
     "actionColumn": "操作",
     "shortcutColumn": "快捷键"
   },
+  "pwa": {
+    "installApp": "安装应用",
+    "offlineBanner": "您已离线 — 无法生成测验"
+  },
   "auth": {
     "signIn": "登录",
     "signOut": "退出登录",

@@ -13,6 +13,7 @@ import {
 import { QuickSettingsProvider } from '../../hooks/useQuickSettings'
 import { ShortcutHelpProvider, useShortcutHelp } from '../../hooks/useShortcutHelp'
 import { SidebarProvider, useSidebar } from './SidebarContext'
+import { OfflineBanner } from './OfflineBanner'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
 
@@ -41,6 +42,7 @@ function AppShellLayout() {
   return (
     <div className="min-h-screen bg-bg text-text-primary">
       <TopBar />
+      <OfflineBanner />
       <Sidebar />
       <AppShellMain>
         <Outlet />

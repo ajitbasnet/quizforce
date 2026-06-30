@@ -330,6 +330,10 @@
     "actionColumn": "Action",
     "shortcutColumn": "Shortcut"
   },
+  "pwa": {
+    "installApp": "Install App",
+    "offlineBanner": "You're offline — quiz generation unavailable"
+  },
   "auth": {
     "signIn": "Sign In",
     "signOut": "Sign Out",

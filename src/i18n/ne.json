@@ -330,6 +330,10 @@
     "actionColumn": "कार्य",
     "shortcutColumn": "सर्टकट"
   },
+  "pwa": {
+    "installApp": "एप इन्स्टल गर्नुहोस्",
+    "offlineBanner": "तपाईं अफलाइन हुनुहुन्छ — क्विज सिर्जना उपलब्ध छैन"
+  },
   "auth": {
     "signIn": "साइन इन",
     "signOut": "साइन आउट",

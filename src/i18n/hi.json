@@ -330,6 +330,10 @@
     "actionColumn": "क्रिया",
     "shortcutColumn": "शॉर्टकट"
   },
+  "pwa": {
+    "installApp": "ऐप इंस्टॉल करें",
+    "offlineBanner": "आप ऑफ़लाइन हैं — क्विज़ जनरेशन उपलब्ध नहीं है"
+  },
   "auth": {
     "signIn": "साइन इन",
     "signOut": "साइन आउट",

@@ -330,6 +330,10 @@
     "actionColumn": "Aktion",
     "shortcutColumn": "Tastenkürzel"
   },
+  "pwa": {
+    "installApp": "App installieren",
+    "offlineBanner": "Sie sind offline — Quiz-Generierung nicht verfügbar"
+  },
   "auth": {
     "signIn": "Anmelden",
     "signOut": "Abmelden",

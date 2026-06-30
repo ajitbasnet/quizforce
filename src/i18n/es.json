@@ -330,6 +330,10 @@
     "actionColumn": "Acción",
     "shortcutColumn": "Atajo"
   },
+  "pwa": {
+    "installApp": "Instalar aplicación",
+    "offlineBanner": "Estás sin conexión — la generación de cuestionarios no está disponible"
+  },
   "auth": {
     "signIn": "Iniciar sesión",
     "signOut": "Cerrar sesión",

@@ -330,6 +330,10 @@
     "actionColumn": "Action",
     "shortcutColumn": "Raccourci"
   },
+  "pwa": {
+    "installApp": "Installer l'application",
+    "offlineBanner": "Vous êtes hors ligne — la génération de quiz n'est pas disponible"
+  },
   "auth": {
     "signIn": "Se connecter",
     "signOut": "Se déconnecter",

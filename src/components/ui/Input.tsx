@@ -1,6 +1,8 @@
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
+import { useShakeOnError } from '../../hooks/useShakeOnError'
 import {
   controlBaseClass,
   controlErrorClass,
@@ -39,6 +41,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
   const describedBy = [errorId, !error && helperId].filter(Boolean).join(' ') || undefined
   const hasIcons = !!(leftIcon || rightIcon)
+  const shouldShake = useShakeOnError(error)
 
   return (
     <div className="w-full">
@@ -48,7 +51,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         </label>
       )}
       {label && !inputId && <span className={fieldLabelClass}>{label}</span>}
-      <div className={clsx(hasIcons && 'relative')}>
+      <motion.div
+        className={clsx(hasIcons && 'relative')}
+        animate={shouldShake ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
+        transition={{ duration: 0.4 }}
+      >
         {leftIcon && (
           <span
             className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-text-muted"
@@ -82,7 +89,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             {rightIcon}
           </span>
         )}
-      </div>
+      </motion.div>
       {error?.message && (
         <p id={errorId} className={fieldErrorClass} role="alert">
           {error.message}

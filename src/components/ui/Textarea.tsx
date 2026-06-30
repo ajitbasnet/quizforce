@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import {
   useCallback,
   useEffect,
@@ -7,6 +8,7 @@ import {
   type TextareaHTMLAttributes,
 } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
+import { useShakeOnError } from '../../hooks/useShakeOnError'
 import {
   controlBaseClass,
   controlErrorClass,
@@ -64,6 +66,7 @@ export function Textarea({
   const helperId = inputId && helperText ? `${inputId}-helper` : undefined
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
   const describedBy = [errorId, !error && helperId].filter(Boolean).join(' ') || undefined
+  const shouldShake = useShakeOnError(error)
 
   const setRef = useCallback(
     (el: HTMLTextAreaElement | null) => {
@@ -97,23 +100,28 @@ export function Textarea({
         </label>
       )}
       {label && !inputId && <span className={fieldLabelClass}>{label}</span>}
-      <textarea
-        {...register}
-        {...props}
-        ref={setRef}
-        id={inputId}
-        rows={rows}
-        aria-invalid={!!error}
-        aria-describedby={describedBy}
-        onInput={handleInput}
-        className={clsx(
-          controlBaseClass,
-          'px-3 py-2',
-          autoResize && 'resize-none overflow-hidden',
-          error && controlErrorClass,
-          className,
-        )}
-      />
+      <motion.div
+        animate={shouldShake ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <textarea
+          {...register}
+          {...props}
+          ref={setRef}
+          id={inputId}
+          rows={rows}
+          aria-invalid={!!error}
+          aria-describedby={describedBy}
+          onInput={handleInput}
+          className={clsx(
+            controlBaseClass,
+            'px-3 py-2',
+            autoResize && 'resize-none overflow-hidden',
+            error && controlErrorClass,
+            className,
+          )}
+        />
+      </motion.div>
       {error?.message && (
         <p id={errorId} className={fieldErrorClass} role="alert">
           {error.message}

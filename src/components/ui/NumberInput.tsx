@@ -1,8 +1,10 @@
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import { Minus, Plus } from 'lucide-react'
 import { useRef, useState } from 'react'
 import type { ChangeEvent, InputHTMLAttributes } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
+import { useShakeOnError } from '../../hooks/useShakeOnError'
 import { Button } from './Button'
 import {
   controlBaseClass,
@@ -50,6 +52,7 @@ export function NumberInput({
   const helperId = inputId && helperText ? `${inputId}-helper` : undefined
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
   const describedBy = [errorId, !error && helperId].filter(Boolean).join(' ') || undefined
+  const shouldShake = useShakeOnError(error)
 
   const setRef = (element: HTMLInputElement | null) => {
     inputRef.current = element
@@ -132,29 +135,35 @@ export function NumberInput({
         >
           <Minus className="h-4 w-4" aria-hidden />
         </Button>
-        <input
-          {...register}
-          {...props}
-          ref={setRef}
-          id={inputId}
-          type="number"
-          step={step}
-          min={min}
-          max={max}
-          value={value}
-          defaultValue={defaultValue}
-          disabled={disabled}
-          onChange={handleChange}
-          onInput={handleInput}
-          aria-invalid={!!error}
-          aria-describedby={describedBy}
-          className={clsx(
-            controlBaseClass,
-            'min-w-0 flex-1 px-3 py-2 text-center',
-            error && controlErrorClass,
-            className,
-          )}
-        />
+        <motion.div
+          className="min-w-0 flex-1"
+          animate={shouldShake ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <input
+            {...register}
+            {...props}
+            ref={setRef}
+            id={inputId}
+            type="number"
+            step={step}
+            min={min}
+            max={max}
+            value={value}
+            defaultValue={defaultValue}
+            disabled={disabled}
+            onChange={handleChange}
+            onInput={handleInput}
+            aria-invalid={!!error}
+            aria-describedby={describedBy}
+            className={clsx(
+              controlBaseClass,
+              'w-full px-3 py-2 text-center',
+              error && controlErrorClass,
+              className,
+            )}
+          />
+        </motion.div>
         <Button
           type="button"
           variant="secondary"

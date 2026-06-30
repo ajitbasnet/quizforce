@@ -4,6 +4,7 @@ import { UserMenu } from '../auth/UserMenu'
 import { useAuth } from '../../hooks/useAuth'
 import { useHistorySync } from '../../hooks/useHistorySync'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useQuickSettings } from '../../hooks/useQuickSettings'
 import { useSettingsStore } from '../../store/settingsStore'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Button } from '../ui/Button'
@@ -33,6 +34,7 @@ export function TopBar() {
   const { t } = useLanguage()
   const location = useLocation()
   const { openMobile } = useSidebar()
+  const { open: openQuickSettings } = useQuickSettings()
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
   const { isFetching: isHistorySyncing } = useHistorySync()
   const {
@@ -82,13 +84,14 @@ export function TopBar() {
         </Tooltip>
 
         <Tooltip content={t('nav.settings')}>
-          <NavLink
-            to="/settings"
-            className={iconLinkClass}
+          <button
+            type="button"
+            className={iconLinkClass({ isActive: false })}
+            onClick={openQuickSettings}
             aria-label={t('nav.settings')}
           >
             <Settings className="h-4 w-4" aria-hidden />
-          </NavLink>
+          </button>
         </Tooltip>
 
         {isConfigured && !isAuthLoading && (

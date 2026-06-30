@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "सेटिङहरू",
+    "quickSettings": "द्रुत सेटिङ्ग",
+    "fullSettings": "पूर्ण सेटिङ्ग →",
     "sectionDefaults": "क्विज पूर्वनिर्धारित",
     "sectionVoice": "आवाज सेटिङहरू",
     "sectionAppearance": "देखावट",

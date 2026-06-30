@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "Ajustes",
+    "quickSettings": "Ajustes rápidos",
+    "fullSettings": "Ajustes completos →",
     "sectionDefaults": "Valores predeterminados del cuestionario",
     "sectionVoice": "Configuración de voz",
     "sectionAppearance": "Apariencia",

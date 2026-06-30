@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "Settings",
+    "quickSettings": "Quick Settings",
+    "fullSettings": "Full Settings →",
     "sectionDefaults": "Quiz Defaults",
     "sectionVoice": "Voice Settings",
     "sectionAppearance": "Appearance",

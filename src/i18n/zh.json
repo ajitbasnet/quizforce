@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "设置",
+    "quickSettings": "快速设置",
+    "fullSettings": "完整设置 →",
     "sectionDefaults": "测验默认值",
     "sectionVoice": "语音设置",
     "sectionAppearance": "外观",

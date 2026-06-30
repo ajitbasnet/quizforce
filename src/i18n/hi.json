@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "सेटिंग्स",
+    "quickSettings": "त्वरित सेटिंग्स",
+    "fullSettings": "पूर्ण सेटिंग्स →",
     "sectionDefaults": "क्विज़ डिफ़ॉल्ट",
     "sectionVoice": "वॉइस सेटिंग्स",
     "sectionAppearance": "दिखावट",

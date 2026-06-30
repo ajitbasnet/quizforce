@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "Paramètres",
+    "quickSettings": "Réglages rapides",
+    "fullSettings": "Réglages complets →",
     "sectionDefaults": "Paramètres du quiz",
     "sectionVoice": "Paramètres vocaux",
     "sectionAppearance": "Apparence",

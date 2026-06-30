@@ -286,6 +286,8 @@
   },
   "settings": {
     "title": "Einstellungen",
+    "quickSettings": "Schnelleinstellungen",
+    "fullSettings": "Alle Einstellungen →",
     "sectionDefaults": "Quiz-Standards",
     "sectionVoice": "Spracheinstellungen",
     "sectionAppearance": "Erscheinungsbild",

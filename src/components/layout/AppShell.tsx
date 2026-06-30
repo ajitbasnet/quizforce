@@ -2,7 +2,9 @@ import clsx from 'clsx'
 import { type ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 import { AuthModal } from '../auth/AuthModal'
+import { QuickSettingsDrawer } from '../settings/QuickSettingsDrawer'
 import { AuthProvider } from '../../hooks/useAuth'
+import { QuickSettingsProvider } from '../../hooks/useQuickSettings'
 import { SidebarProvider, useSidebar } from './SidebarContext'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
@@ -11,14 +13,17 @@ export function AppShell() {
   return (
     <AuthProvider>
       <SidebarProvider>
-        <div className="min-h-screen bg-bg text-text-primary">
-          <TopBar />
-          <Sidebar />
-          <AppShellMain>
-            <Outlet />
-          </AppShellMain>
-          <AuthModal />
-        </div>
+        <QuickSettingsProvider>
+          <div className="min-h-screen bg-bg text-text-primary">
+            <TopBar />
+            <Sidebar />
+            <AppShellMain>
+              <Outlet />
+            </AppShellMain>
+            <AuthModal />
+            <QuickSettingsDrawer />
+          </div>
+        </QuickSettingsProvider>
       </SidebarProvider>
     </AuthProvider>
   )

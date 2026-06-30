@@ -1,13 +1,12 @@
 import clsx from 'clsx'
-import { LANGUAGE_OPTIONS } from '../../i18n'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useSettingsAutoSave } from '../../hooks/useSettingsAutoSave'
 import { useSettingsStore } from '../../store/settingsStore'
 import type { QuizSettings } from '../../types/quiz'
-import { NumberInput } from '../ui/NumberInput'
-import { Select } from '../ui/Select'
 import { fieldLabelClass } from '../ui/formFieldUtils'
 import { SettingsSectionCard } from './SettingsSectionCard'
+import { SettingsDefaultsFields } from './SettingsDefaultsFields'
+import { SettingsLanguageField } from './SettingsLanguageField'
 
 type Difficulty = QuizSettings['difficulty']
 
@@ -32,23 +31,14 @@ export function QuizDefaultsSection() {
       saved={saved}
     >
       <div className="flex flex-col gap-5">
-        <NumberInput
-          label={t('settings.questionsCount')}
-          min={5}
-          max={50}
-          value={settings.questionsCount}
-          onChange={(event) =>
-            save({ questionsCount: Number(event.target.value) })
+        <SettingsDefaultsFields
+          questionsCount={settings.questionsCount}
+          pointsPerQuestion={settings.pointsPerQuestion}
+          onQuestionsCountChange={(questionsCount) =>
+            save({ questionsCount })
           }
-        />
-
-        <NumberInput
-          label={t('settings.pointsPerQuestion')}
-          min={1}
-          max={100}
-          value={settings.pointsPerQuestion}
-          onChange={(event) =>
-            save({ pointsPerQuestion: Number(event.target.value) })
+          onPointsPerQuestionChange={(pointsPerQuestion) =>
+            save({ pointsPerQuestion })
           }
         />
 
@@ -79,24 +69,13 @@ export function QuizDefaultsSection() {
           </div>
         </div>
 
-        <Select
-          label={t('settings.language')}
+        <SettingsLanguageField
           value={settings.language}
-          onChange={(event) => {
-            void changeLanguage(
-              event.target.value as QuizSettings['language'],
-            ).then(markSaved)
+          onChange={(language) => {
+            void changeLanguage(language).then(markSaved)
           }}
-        >
-          {LANGUAGE_OPTIONS.map((option) => (
-            <option key={option.code} value={option.code}>
-              {option.flag} {option.nativeName}
-            </option>
-          ))}
-        </Select>
-        <p className="-mt-3 text-sm text-text-muted">
-          {t('settings.languageDescription')}
-        </p>
+          showDescription
+        />
       </div>
     </SettingsSectionCard>
   )

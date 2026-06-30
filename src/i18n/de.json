@@ -260,6 +260,7 @@
     "importSuccess": "{{quizzes}} Quiz und {{attempts}} Versuche importiert.",
     "importInvalid": "Ungültiges Verlaufsdateiformat.",
     "importFailed": "Verlaufsdatei konnte nicht importiert werden.",
+    "loadMore": "Mehr laden",
     "starred": "Favoriten",
     "favorite": "Zu Favoriten hinzufügen",
     "unfavorite": "Aus Favoriten entfernen",

@@ -1,5 +1,5 @@
 import { Download, Search, Upload } from 'lucide-react'
-import { useCallback, useRef, useState, type ChangeEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { ClearHistoryModal } from '../components/history/ClearHistoryModal'
 import { DeleteQuizModal } from '../components/history/DeleteQuizModal'
 import { HistoryCard } from '../components/history/HistoryCard'
@@ -11,6 +11,7 @@ import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { useToast } from '../components/ui/Toast'
 import { useHistory } from '../hooks/useHistory'
+import { useDebounce } from '../hooks/useDebounce'
 import { useHistorySync } from '../hooks/useHistorySync'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
@@ -20,6 +21,8 @@ import {
   getHistoryExportFilename,
   validateHistoryImport,
 } from '../utils/historyExport'
+
+const PAGE_SIZE = 12
 
 export default function HistoryPage() {
   const { t } = useLanguage()
@@ -36,14 +39,32 @@ export default function HistoryPage() {
     stats,
     filters,
     setFilters,
-    searchQuery,
-    setSearchQuery,
     clearFilters,
     filteredQuizzes,
   } = useHistory()
 
   const [clearModalOpen, setClearModalOpen] = useState(false)
   const [deleteQuizId, setDeleteQuizId] = useState<string | null>(null)
+  const [searchInput, setSearchInput] = useState(filters.q)
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+  const debouncedSearch = useDebounce(searchInput, 200)
+
+  useEffect(() => {
+    setSearchInput(filters.q)
+  }, [filters.q])
+
+  useEffect(() => {
+    if (debouncedSearch !== filters.q) {
+      setFilters({ q: debouncedSearch })
+    }
+  }, [debouncedSearch, filters.q, setFilters])
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE)
+  }, [filters.q, filters.type, filters.sort, filters.starred, filters.tag])
+
+  const visibleQuizzes = filteredQuizzes.slice(0, visibleCount)
+  const showLoadMore = filteredQuizzes.length > visibleCount
 
   const handleClearConfirm = useCallback(() => {
     clearHistory()
@@ -142,8 +163,8 @@ export default function HistoryPage() {
           </Button>
           <Input
             type="search"
-            value={searchQuery}
-            onChange={(event) => setSearchQuery(event.target.value)}
+            value={searchInput}
+            onChange={(event) => setSearchInput(event.target.value)}
             placeholder={t('history.searchPlaceholder')}
             leftIcon={<Search className="h-4 w-4" />}
             className="w-full sm:w-64"
@@ -161,16 +182,29 @@ export default function HistoryPage() {
       {filteredQuizzes.length === 0 ? (
         <HistoryEmptyState hasQuizzes={quizzes.length > 0} />
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {filteredQuizzes.map((quiz) => (
-            <HistoryCard
-              key={quiz.id}
-              quiz={quiz}
-              latestAttempt={getLatestAttempt(quiz.id)}
-              onDelete={handleDeleteRequest}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {visibleQuizzes.map((quiz) => (
+              <HistoryCard
+                key={quiz.id}
+                quiz={quiz}
+                latestAttempt={getLatestAttempt(quiz.id)}
+                onDelete={handleDeleteRequest}
+              />
+            ))}
+          </div>
+          {showLoadMore ? (
+            <div className="mt-6 flex justify-center">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+              >
+                {t('history.loadMore')}
+              </Button>
+            </div>
+          ) : null}
+        </>
       )}
 
       <ClearHistoryModal

@@ -260,6 +260,7 @@
     "importSuccess": "Imported {{quizzes}} quizzes and {{attempts}} attempts.",
     "importInvalid": "Invalid history file format.",
     "importFailed": "Could not import history file.",
+    "loadMore": "Load More",
     "starred": "Starred",
     "favorite": "Add to favorites",
     "unfavorite": "Remove from favorites",

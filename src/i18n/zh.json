@@ -260,6 +260,7 @@
     "importSuccess": "已导入 {{quizzes}} 个测验和 {{attempts}} 次尝试。",
     "importInvalid": "无效的历史文件格式。",
     "importFailed": "无法导入历史文件。",
+    "loadMore": "加载更多",
     "starred": "已收藏",
     "favorite": "添加到收藏",
     "unfavorite": "取消收藏",

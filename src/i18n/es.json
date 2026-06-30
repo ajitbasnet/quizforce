@@ -260,6 +260,7 @@
     "importSuccess": "Se importaron {{quizzes}} cuestionarios y {{attempts}} intentos.",
     "importInvalid": "Formato de archivo de historial no válido.",
     "importFailed": "No se pudo importar el archivo de historial.",
+    "loadMore": "Cargar más",
     "starred": "Destacados",
     "favorite": "Añadir a favoritos",
     "unfavorite": "Quitar de favoritos",

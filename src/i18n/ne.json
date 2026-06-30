@@ -260,6 +260,7 @@
     "importSuccess": "{{quizzes}} क्विज र {{attempts}} प्रयास आयात भयो।",
     "importInvalid": "अमान्य इतिहास फाइल ढाँचा।",
     "importFailed": "इतिहास फाइल आयात गर्न सकिएन।",
+    "loadMore": "थप लोड गर्नुहोस्",
     "starred": "मनपर्ने",
     "favorite": "मनपर्नेमा थप्नुहोस्",
     "unfavorite": "मनपर्नेबाट हटाउनुहोस्",

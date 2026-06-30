@@ -260,6 +260,7 @@
     "importSuccess": "{{quizzes}} quiz et {{attempts}} tentatives importés.",
     "importInvalid": "Format de fichier d'historique invalide.",
     "importFailed": "Impossible d'importer le fichier d'historique.",
+    "loadMore": "Charger plus",
     "starred": "Favoris",
     "favorite": "Ajouter aux favoris",
     "unfavorite": "Retirer des favoris",

@@ -15,6 +15,7 @@ import {
   PDF_MAX_FILE_SIZE_BYTES,
   PDFParseError,
   PDFPasswordError,
+  validatePdfMagicBytes,
 } from '../../utils/pdfParser'
 import { pdfSchema } from '../../utils/validators'
 import { Button } from '../ui/Button'
@@ -78,6 +79,12 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
         setState('processing')
 
         try {
+          const isValidPdf = await validatePdfMagicBytes(selectedFile)
+          if (!isValidPdf) {
+            setError(t('errors.invalidPdfFile'))
+            return
+          }
+
           const result = await extractTextFromPDF(selectedFile)
           setExtractedText(result.text)
           setPageCount(result.pageCount)

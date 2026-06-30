@@ -39,6 +39,8 @@ function getErrorMessage(
         return t('errors.missingApiKey')
       case 'RATE_LIMIT_ERROR':
         return t('errors.rateLimit')
+      case 'RATE_LIMIT_CLIENT':
+        return t('errors.generationCooldown')
       case 'OVERLOADED_ERROR':
         return t('errors.overloaded')
       case 'INVALID_API_KEY':

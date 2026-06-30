@@ -23,7 +23,7 @@ test.describe('happy path', () => {
       'utf-8',
     )
 
-    await page.route('**/v1/messages', async (route) => {
+    await page.route('**/api/generate-quiz', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',

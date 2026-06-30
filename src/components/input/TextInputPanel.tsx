@@ -14,6 +14,7 @@ import {
   textInputSchema,
   translateValidationMessage,
 } from '../../utils/validators'
+import { stripHtmlTags } from '../../utils/sanitizeText'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Textarea } from '../ui/Textarea'
@@ -77,14 +78,14 @@ export const TextInputPanel = forwardRef<TextInputPanelHandle, TextInputPanelPro
         validate: async () => {
           const ok = await trigger()
           if (!ok) return { ok: false }
-          return { ok: true, content: getValues('content') }
+          return { ok: true, content: stripHtmlTags(getValues('content')) }
         },
       }),
       [trigger, getValues],
     )
 
     const onValidSubmit = (data: FormValues) => {
-      onSubmit?.(data.content)
+      onSubmit?.(stripHtmlTags(data.content))
     }
 
     const handleFormSubmit = (e: FormEvent) => {

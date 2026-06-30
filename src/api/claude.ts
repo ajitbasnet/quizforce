@@ -1,14 +1,21 @@
-// Requires VITE_ANTHROPIC_API_KEY in .env at runtime
 import {
   QuizGenerationError,
   type GenerateQuizParams,
 } from '../types/api'
 import type { Quiz } from '../types/quiz'
+import {
+  assertGenerationAllowed,
+  recordGeneration,
+} from '../utils/generationRateLimit'
 import { buildQuizPrompt } from '../utils/promptBuilder'
 import { parseAndValidateClaudeQuiz } from '../utils/quizSchema'
+import { stripHtmlTags } from '../utils/sanitizeText'
 import { z } from 'zod'
 
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages'
+const PROXY_API_URL = '/api/generate-quiz'
+const useProxy =
+  import.meta.env.PROD || import.meta.env.VITE_USE_PROXY !== 'false'
 const MODEL = 'claude-sonnet-4-20250514'
 const MAX_TOKENS = 4000
 const PROGRESS_DURATION_MS = 3000
@@ -121,23 +128,34 @@ export async function generateQuiz({
   onProgress,
   signal,
 }: GenerateQuizParams): Promise<Quiz> {
+  assertGenerationAllowed()
+
   const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
-  if (!apiKey) {
+  if (!useProxy && !apiKey) {
     throw new QuizGenerationError('Missing API key', 'AUTH_ERROR')
   }
 
-  const { system, user } = buildQuizPrompt(content, settings, sourceType)
+  const sanitizedContent = stripHtmlTags(content)
+  const { system, user } = buildQuizPrompt(
+    sanitizedContent,
+    settings,
+    sourceType,
+  )
   const progress = startProgressSimulation(onProgress)
 
+  const headers: Record<string, string> = {
+    'anthropic-version': '2023-06-01',
+    'content-type': 'application/json',
+  }
+  if (!useProxy) {
+    headers['x-api-key'] = apiKey!
+    headers['anthropic-dangerous-direct-browser-access'] = 'true'
+  }
+
   try {
-    const response = await fetch(ANTHROPIC_API_URL, {
+    const response = await fetch(useProxy ? PROXY_API_URL : ANTHROPIC_API_URL, {
       method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
+      headers,
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
@@ -164,7 +182,7 @@ export async function generateQuiz({
     let quiz: Quiz
     try {
       quiz = parseAndValidateClaudeQuiz(text, {
-        content,
+        content: sanitizedContent,
         settings,
         sourceType,
       })
@@ -195,6 +213,7 @@ export async function generateQuiz({
       )
     }
 
+    recordGeneration()
     progress.stop(100)
     return quiz
   } catch (error) {

@@ -1,4 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist'
+import { stripHtmlTags } from './sanitizeText'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
@@ -84,9 +85,25 @@ function truncateText(text: string): string {
   return `${cleaned.slice(0, MAX_TEXT_LENGTH)}${TRUNCATION_SUFFIX}`
 }
 
+export async function validatePdfMagicBytes(file: File): Promise<boolean> {
+  const header = new Uint8Array(await file.slice(0, 5).arrayBuffer())
+  return (
+    header[0] === 0x25 &&
+    header[1] === 0x50 &&
+    header[2] === 0x44 &&
+    header[3] === 0x46 &&
+    header[4] === 0x2d
+  )
+}
+
 export async function extractTextFromPDF(
   file: File,
 ): Promise<PDFExtractResult> {
+  const hasPdfHeader = await validatePdfMagicBytes(file)
+  if (!hasPdfHeader) {
+    throw new PDFParseError('Invalid PDF file')
+  }
+
   try {
     const data = await file.arrayBuffer()
     const pdf = await pdfjsLib.getDocument({ data }).promise
@@ -110,7 +127,7 @@ export async function extractTextFromPDF(
       throw new PDFParseError('No text could be extracted from PDF')
     }
 
-    const text = truncateText(pageTexts.join('\n'))
+    const text = truncateText(stripHtmlTags(pageTexts.join('\n')))
     return { text, pageCount, totalPages: pdf.numPages }
   } catch (error) {
     mapPdfError(error)

@@ -188,6 +188,13 @@ export async function generateQuiz({
       throw error
     }
 
+    if (quiz.questions.length === 0) {
+      throw new QuizGenerationError(
+        'Quiz has no questions',
+        'EMPTY_QUIZ',
+      )
+    }
+
     progress.stop(100)
     return quiz
   } catch (error) {

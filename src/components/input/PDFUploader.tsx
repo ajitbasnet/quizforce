@@ -101,7 +101,7 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
       () => ({
         validate: async () => {
           if (state !== 'success' || !extractedText.trim()) {
-            setSubmitValidationError(t('input.pdfNotReady'))
+            setSubmitValidationError(t('input.pdfUploadRequired'))
             return { ok: false }
           }
 

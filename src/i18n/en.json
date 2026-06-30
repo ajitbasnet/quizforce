@@ -65,6 +65,7 @@
     "pdfRetry": "Try again",
     "pdfInvalidType": "Please upload a PDF file.",
     "pdfNotReady": "Upload and extract a PDF before generating.",
+    "pdfUploadRequired": "Please upload a PDF file first",
     "pdfPasswordProtected": "This PDF is password-protected. Please upload an unlocked file.",
     "promptLabel": "Prompt",
     "promptPlaceholder": "Describe the topic or questions you want, e.g. \"10 questions on photosynthesis\"",
@@ -367,7 +368,12 @@
     "pageTitle": "Something went wrong",
     "goHome": "Go Home",
     "widgetTitle": "This section failed to load.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "suggestionNetwork": "Check your connection and try again.",
+    "suggestionLessContent": "Try with less content.",
+    "suggestionGeneric": "Adjust your input and try again.",
+    "zeroQuestions": "Couldn't generate questions from this content. Try adding more detailed text.",
+    "tryAgain": "Try Again"
   },
   "voice": {
     "enable": "Enable voice",

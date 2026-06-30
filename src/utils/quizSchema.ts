@@ -22,7 +22,7 @@ const claudeQuizQuestionSchema = z.object({
 export const claudeQuizResponseSchema = z.object({
   title: z.string(),
   description: z.string(),
-  questions: z.array(claudeQuizQuestionSchema).min(1),
+  questions: z.array(claudeQuizQuestionSchema),
 })
 
 export type ClaudeQuizResponse = z.infer<typeof claudeQuizResponseSchema>

@@ -65,6 +65,7 @@
     "pdfRetry": "Erneut versuchen",
     "pdfInvalidType": "Bitte laden Sie eine PDF-Datei hoch.",
     "pdfNotReady": "Laden Sie ein PDF hoch und extrahieren Sie es, bevor Sie generieren.",
+    "pdfUploadRequired": "Bitte laden Sie zuerst eine PDF-Datei hoch",
     "pdfPasswordProtected": "Diese PDF ist passwortgeschützt. Bitte laden Sie eine ungeschützte Datei hoch.",
     "promptLabel": "Eingabeaufforderung",
     "promptPlaceholder": "Beschreiben Sie das Thema oder die gewünschten Fragen, z. B. „10 Fragen zur Photosynthese“",
@@ -367,7 +368,12 @@
     "pageTitle": "Etwas ist schiefgelaufen",
     "goHome": "Zur Startseite",
     "widgetTitle": "Dieser Bereich konnte nicht geladen werden.",
-    "retry": "Erneut versuchen"
+    "retry": "Erneut versuchen",
+    "suggestionNetwork": "Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "suggestionLessContent": "Versuchen Sie es mit weniger Inhalt.",
+    "suggestionGeneric": "Passen Sie Ihre Eingabe an und versuchen Sie es erneut.",
+    "zeroQuestions": "Aus diesem Inhalt konnten keine Fragen generiert werden. Fügen Sie ausführlicheren Text hinzu.",
+    "tryAgain": "Erneut versuchen"
   },
   "voice": {
     "enable": "Sprache aktivieren",

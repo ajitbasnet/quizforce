@@ -65,6 +65,7 @@
     "pdfRetry": "Intentar de nuevo",
     "pdfInvalidType": "Sube un archivo PDF.",
     "pdfNotReady": "Sube y extrae un PDF antes de generar.",
+    "pdfUploadRequired": "Primero sube un archivo PDF",
     "pdfPasswordProtected": "Este PDF está protegido con contraseña. Sube un archivo desbloqueado.",
     "promptLabel": "Prompt",
     "promptPlaceholder": "Describe el tema o las preguntas que quieres, p. ej. \"10 preguntas sobre fotosíntesis\"",
@@ -367,7 +368,12 @@
     "pageTitle": "Algo salió mal",
     "goHome": "Ir al inicio",
     "widgetTitle": "No se pudo cargar esta sección.",
-    "retry": "Reintentar"
+    "retry": "Reintentar",
+    "suggestionNetwork": "Comprueba tu conexión e inténtalo de nuevo.",
+    "suggestionLessContent": "Prueba con menos contenido.",
+    "suggestionGeneric": "Ajusta tu entrada e inténtalo de nuevo.",
+    "zeroQuestions": "No se pudieron generar preguntas a partir de este contenido. Añade un texto más detallado.",
+    "tryAgain": "Reintentar"
   },
   "voice": {
     "enable": "Activar voz",

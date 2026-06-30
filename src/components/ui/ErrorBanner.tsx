@@ -1,23 +1,48 @@
 import clsx from 'clsx'
 import { AlertCircle, X } from 'lucide-react'
+import { Button } from './Button'
 
 interface ErrorBannerProps {
   message: string
+  suggestion?: string
+  onRetry?: () => void
   onDismiss?: () => void
+  retryLabel?: string
   className?: string
 }
 
-export function ErrorBanner({ message, onDismiss, className }: ErrorBannerProps) {
+export function ErrorBanner({
+  message,
+  suggestion,
+  onRetry,
+  onDismiss,
+  retryLabel = 'Try Again',
+  className,
+}: ErrorBannerProps) {
   return (
     <div
       role="alert"
       className={clsx(
-        'flex items-start gap-3 rounded-lg border border-danger-600 bg-danger-50 px-4 py-3 text-sm text-danger-600',
+        'flex items-start gap-3 rounded-lg border-l-4 border-danger-500 bg-danger-50 px-4 py-3 text-sm text-danger-600',
         className,
       )}
     >
       <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
-      <p className="flex-1">{message}</p>
+      <div className="flex flex-1 flex-col gap-2">
+        <p>{message}</p>
+        {suggestion && <p className="text-text-muted">{suggestion}</p>}
+        {onRetry && (
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
+            className="self-start"
+            onClick={onRetry}
+          >
+            {retryLabel}
+          </Button>
+        )}
+      </div>
       {onDismiss && (
         <button
           type="button"

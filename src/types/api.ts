@@ -14,6 +14,7 @@ export type QuizGenerationErrorCode =
   | 'RATE_LIMIT_ERROR'
   | 'OVERLOADED_ERROR'
   | 'INVALID_API_KEY'
+  | 'EMPTY_QUIZ'
 
 export class QuizGenerationError extends Error {
   code: QuizGenerationErrorCode

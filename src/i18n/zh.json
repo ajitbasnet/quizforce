@@ -65,6 +65,7 @@
     "pdfRetry": "重试",
     "pdfInvalidType": "请上传 PDF 文件。",
     "pdfNotReady": "生成前请先上传并提取 PDF。",
+    "pdfUploadRequired": "请先上传 PDF 文件",
     "pdfPasswordProtected": "此 PDF 受密码保护，请上传未加密的文件。",
     "promptLabel": "提示词",
     "promptPlaceholder": "描述您想要的主题或题目，例如「10 道关于光合作用的题目」",
@@ -367,7 +368,12 @@
     "pageTitle": "出了点问题",
     "goHome": "返回首页",
     "widgetTitle": "此部分加载失败。",
-    "retry": "重试"
+    "retry": "重试",
+    "suggestionNetwork": "请检查网络连接后重试。",
+    "suggestionLessContent": "请尝试减少内容量。",
+    "suggestionGeneric": "请调整输入内容后重试。",
+    "zeroQuestions": "无法从此内容生成题目，请添加更详细的文本。",
+    "tryAgain": "重试"
   },
   "voice": {
     "enable": "启用语音",

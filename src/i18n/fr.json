@@ -65,6 +65,7 @@
     "pdfRetry": "Réessayer",
     "pdfInvalidType": "Veuillez téléverser un fichier PDF.",
     "pdfNotReady": "Téléversez et extrayez un PDF avant de générer.",
+    "pdfUploadRequired": "Veuillez d'abord téléverser un fichier PDF",
     "pdfPasswordProtected": "Ce PDF est protégé par mot de passe. Téléversez un fichier déverrouillé.",
     "promptLabel": "Consigne",
     "promptPlaceholder": "Décrivez le sujet ou les questions souhaitées, p. ex. « 10 questions sur la photosynthèse »",
@@ -367,7 +368,12 @@
     "pageTitle": "Une erreur s'est produite",
     "goHome": "Retour à l'accueil",
     "widgetTitle": "Cette section n'a pas pu se charger.",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "suggestionNetwork": "Vérifiez votre connexion et réessayez.",
+    "suggestionLessContent": "Essayez avec moins de contenu.",
+    "suggestionGeneric": "Modifiez votre saisie et réessayez.",
+    "zeroQuestions": "Impossible de générer des questions à partir de ce contenu. Ajoutez un texte plus détaillé.",
+    "tryAgain": "Réessayer"
   },
   "voice": {
     "enable": "Activer la voix",

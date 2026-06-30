@@ -13,9 +13,16 @@ import { Button } from '../ui/Button'
 import { ErrorBanner } from '../ui/ErrorBanner'
 import { GenerationProgress } from './GenerationProgress'
 
+const LARGE_CONTENT_THRESHOLD = 8000
+
 type GenerationInputResult =
   | { ok: true; content: string; sourceType: Quiz['sourceType'] }
   | { ok: false }
+
+type CachedGenerationInput = {
+  content: string
+  sourceType: Quiz['sourceType']
+}
 
 interface GenerateButtonProps {
   getGenerationInput: () => Promise<GenerationInputResult>
@@ -38,11 +45,27 @@ function getErrorMessage(
         return t('errors.invalidApiKeyConfig')
       case 'NETWORK_ERROR':
         return t('errors.network')
+      case 'EMPTY_QUIZ':
+        return t('errors.zeroQuestions')
       default:
         return t('errors.generationFailed')
     }
   }
   return t('errors.generationFailed')
+}
+
+function getErrorSuggestion(
+  error: unknown,
+  contentLength: number,
+  t: (key: string) => string,
+): string {
+  if (error instanceof QuizGenerationError && error.code === 'NETWORK_ERROR') {
+    return t('errors.suggestionNetwork')
+  }
+  if (contentLength > LARGE_CONTENT_THRESHOLD) {
+    return t('errors.suggestionLessContent')
+  }
+  return t('errors.suggestionGeneric')
 }
 
 export function GenerateButton({
@@ -59,29 +82,31 @@ export function GenerateButton({
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
   const setError = useQuizStore((s) => s.setError)
   const abortRef = useRef<AbortController | null>(null)
+  const lastInputRef = useRef<CachedGenerationInput | null>(null)
+  const [errorSuggestion, setErrorSuggestion] = useState<string | undefined>()
   const [validationModal, setValidationModal] = useState<{
     rawResponse: string
   } | null>(null)
+
+  const clearGenerationError = () => {
+    setError(null)
+    setErrorSuggestion(undefined)
+  }
 
   const handleCancel = () => {
     abortRef.current?.abort()
     setGenerating(false)
     setProgress(0)
-    setError(null)
+    clearGenerationError()
   }
 
-  const handleGenerate = async () => {
-    const input = await getGenerationInput()
-    if (!input.ok) {
-      return
-    }
-
+  const runGeneration = async (input: CachedGenerationInput) => {
     const controller = new AbortController()
     abortRef.current = controller
 
     setGenerating(true)
     setProgress(0)
-    setError(null)
+    clearGenerationError()
 
     try {
       const quiz = await generateQuiz({
@@ -113,11 +138,34 @@ export function GenerateButton({
         return
       }
       const message = getErrorMessage(error, t)
+      const suggestion = getErrorSuggestion(error, input.content.length, t)
       setError(message)
+      setErrorSuggestion(suggestion)
       setGenerating(false)
     } finally {
       abortRef.current = null
     }
+  }
+
+  const handleGenerate = async () => {
+    const input = await getGenerationInput()
+    if (!input.ok) {
+      return
+    }
+
+    lastInputRef.current = {
+      content: input.content,
+      sourceType: input.sourceType,
+    }
+    await runGeneration(lastInputRef.current)
+  }
+
+  const handleRetry = () => {
+    if (lastInputRef.current) {
+      void runGeneration(lastInputRef.current)
+      return
+    }
+    void handleGenerate()
   }
 
   if (isGenerating) {
@@ -144,7 +192,10 @@ export function GenerateButton({
       {generationError && (
         <ErrorBanner
           message={generationError}
-          onDismiss={() => setError(null)}
+          suggestion={errorSuggestion}
+          onRetry={handleRetry}
+          retryLabel={t('errors.tryAgain')}
+          onDismiss={clearGenerationError}
         />
       )}
       <Button

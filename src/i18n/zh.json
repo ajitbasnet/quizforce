@@ -359,7 +359,11 @@
     "rateLimit": "请求过多，请等待 30 秒后再试。",
     "overloaded": "AI 繁忙，请稍后再试。",
     "invalidApiKeyConfig": "配置错误 — 请联系支持。",
-    "offlineGenerationPaused": "您已离线 — 生成已暂停。"
+    "offlineGenerationPaused": "您已离线 — 生成已暂停。",
+    "pageTitle": "出了点问题",
+    "goHome": "返回首页",
+    "widgetTitle": "此部分加载失败。",
+    "retry": "重试"
   },
   "voice": {
     "enable": "启用语音",

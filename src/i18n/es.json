@@ -359,7 +359,11 @@
     "rateLimit": "Demasiadas solicitudes, espera 30 segundos.",
     "overloaded": "La IA está ocupada, inténtalo de nuevo.",
     "invalidApiKeyConfig": "Error de configuración — contacta con soporte.",
-    "offlineGenerationPaused": "Estás sin conexión — generación pausada."
+    "offlineGenerationPaused": "Estás sin conexión — generación pausada.",
+    "pageTitle": "Algo salió mal",
+    "goHome": "Ir al inicio",
+    "widgetTitle": "No se pudo cargar esta sección.",
+    "retry": "Reintentar"
   },
   "voice": {
     "enable": "Activar voz",

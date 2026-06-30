@@ -359,7 +359,11 @@
     "rateLimit": "Too many requests, please wait 30 seconds.",
     "overloaded": "AI is busy, please try again.",
     "invalidApiKeyConfig": "Configuration error — contact support.",
-    "offlineGenerationPaused": "You're offline — generation paused."
+    "offlineGenerationPaused": "You're offline — generation paused.",
+    "pageTitle": "Something went wrong",
+    "goHome": "Go Home",
+    "widgetTitle": "This section failed to load.",
+    "retry": "Try again"
   },
   "voice": {
     "enable": "Enable voice",

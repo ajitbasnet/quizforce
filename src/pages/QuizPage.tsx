@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, CircleHelp } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
 import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
@@ -312,15 +313,17 @@ export default function QuizPage() {
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.25 }}
             >
-              <QuestionBlock
-                question={currentQuestion}
-                questionNumber={currentQuestionIndex + 1}
-                selectedOptionId={userAnswers[currentQuestion.id] ?? null}
-                onSelect={(optionId) => setAnswer(currentQuestion.id, optionId)}
-                isSubmitted={false}
-                voiceEnabled={voiceEnabled}
-                language={currentQuiz.language}
-              />
+              <WidgetErrorBoundary>
+                <QuestionBlock
+                  question={currentQuestion}
+                  questionNumber={currentQuestionIndex + 1}
+                  selectedOptionId={userAnswers[currentQuestion.id] ?? null}
+                  onSelect={(optionId) => setAnswer(currentQuestion.id, optionId)}
+                  isSubmitted={false}
+                  voiceEnabled={voiceEnabled}
+                  language={currentQuiz.language}
+                />
+              </WidgetErrorBoundary>
             </motion.div>
           </AnimatePresence>
         </main>

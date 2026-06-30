@@ -359,7 +359,11 @@
     "rateLimit": "Trop de requêtes, veuillez attendre 30 secondes.",
     "overloaded": "L'IA est occupée, veuillez réessayer.",
     "invalidApiKeyConfig": "Erreur de configuration — contactez le support.",
-    "offlineGenerationPaused": "Vous êtes hors ligne — génération en pause."
+    "offlineGenerationPaused": "Vous êtes hors ligne — génération en pause.",
+    "pageTitle": "Une erreur s'est produite",
+    "goHome": "Retour à l'accueil",
+    "widgetTitle": "Cette section n'a pas pu se charger.",
+    "retry": "Réessayer"
   },
   "voice": {
     "enable": "Activer la voix",

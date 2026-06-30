@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppShell } from '../components/layout/AppShell'
+import { PageErrorBoundary } from '../components/layout/PageErrorBoundary'
 import { Spinner } from '../components/ui/Spinner'
 
 const HomePage = lazy(() => import('../pages/HomePage'))
@@ -19,7 +20,9 @@ function LazyPage({ Page }: { Page: React.ComponentType }) {
         </div>
       }
     >
-      <Page />
+      <PageErrorBoundary>
+        <Page />
+      </PageErrorBoundary>
     </Suspense>
   )
 }

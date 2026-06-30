@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getAttempt, isSupabaseConfigured } from '../api/supabase'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
@@ -295,13 +296,15 @@ export default function ResultsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ScorePanel
-            attempt={attempt}
-            quiz={quiz}
-            voiceEnabled={voiceEnabled}
-            onReadResults={startReading}
-            headingRef={scoreHeadingRef}
-          />
+          <WidgetErrorBoundary>
+            <ScorePanel
+              attempt={attempt}
+              quiz={quiz}
+              voiceEnabled={voiceEnabled}
+              onReadResults={startReading}
+              headingRef={scoreHeadingRef}
+            />
+          </WidgetErrorBoundary>
         </motion.div>
 
         {quiz ? <ScoreBreakdown quiz={quiz} attempt={attempt} /> : null}

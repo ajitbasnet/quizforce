@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
-import { PageErrorBoundary } from './PageErrorBoundary'
 
 interface PageWrapperProps {
   title?: string
@@ -37,7 +36,7 @@ export function PageWrapper({
             </div>
           )}
 
-          <PageErrorBoundary>{children}</PageErrorBoundary>
+          {children}
         </div>
       </motion.div>
     </main>

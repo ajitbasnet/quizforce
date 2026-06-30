@@ -1,48 +1,68 @@
-import { Component, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
 import { Button } from '../ui/Button'
-import { Card } from '../ui/Card'
+import { ErrorBoundary } from '../ui/ErrorBoundary'
 
-interface PageErrorFallbackProps {
-  onRetry: () => void
-}
-
-function PageErrorFallback({ onRetry }: PageErrorFallbackProps) {
-  const { t } = useLanguage()
-
+function ErrorIllustration() {
   return (
-    <Card className="text-center">
-      <p className="font-medium text-text-primary">{t('errors.generic')}</p>
-      <Button className="mt-4" variant="secondary" onClick={onRetry}>
-        {t('errors.retry', 'Try again')}
-      </Button>
-    </Card>
+    <svg
+      width={120}
+      height={120}
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      className="text-brand-300"
+    >
+      <circle cx="60" cy="60" r="48" className="fill-brand-50 stroke-current" strokeWidth="2" />
+      <path
+        d="M60 36v32"
+        className="stroke-current"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <circle cx="60" cy="80" r="3" className="fill-current" />
+    </svg>
   )
 }
 
-interface PageErrorBoundaryState {
-  hasError: boolean
+interface PageErrorFallbackProps {
+  error: Error
+  onRetry: () => void
 }
 
-export class PageErrorBoundary extends Component<
-  { children: ReactNode },
-  PageErrorBoundaryState
-> {
-  state: PageErrorBoundaryState = { hasError: false }
+function PageErrorFallback({ error, onRetry }: PageErrorFallbackProps) {
+  const { t } = useLanguage()
+  const navigate = useNavigate()
 
-  static getDerivedStateFromError(): PageErrorBoundaryState {
-    return { hasError: true }
-  }
+  return (
+    <div className="flex min-h-[50vh] flex-col items-center justify-center px-4 py-12 text-center">
+      <ErrorIllustration />
+      <h1 className="mt-6 text-xl font-semibold text-text-primary">
+        {t('errors.pageTitle')}
+      </h1>
+      <pre className="mt-3 max-w-lg overflow-x-auto rounded-lg bg-surface-subtle px-4 py-2 text-left text-sm text-text-muted">
+        {error.message}
+      </pre>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <Button onClick={onRetry}>{t('errors.retry')}</Button>
+        <Button variant="secondary" onClick={() => navigate('/')}>
+          {t('errors.goHome')}
+        </Button>
+      </div>
+    </div>
+  )
+}
 
-  handleRetry = () => {
-    this.setState({ hasError: false })
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <PageErrorFallback onRetry={this.handleRetry} />
-    }
-
-    return this.props.children
-  }
+export function PageErrorBoundary({ children }: { children: ReactNode }) {
+  return (
+    <ErrorBoundary
+      fallback={(error, reset) => (
+        <PageErrorFallback error={error} onRetry={reset} />
+      )}
+    >
+      {children}
+    </ErrorBoundary>
+  )
 }

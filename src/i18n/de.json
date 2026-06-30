@@ -359,7 +359,11 @@
     "rateLimit": "Zu viele Anfragen, bitte 30 Sekunden warten.",
     "overloaded": "Die KI ist ausgelastet, bitte erneut versuchen.",
     "invalidApiKeyConfig": "Konfigurationsfehler — Support kontaktieren.",
-    "offlineGenerationPaused": "Sie sind offline — Generierung pausiert."
+    "offlineGenerationPaused": "Sie sind offline — Generierung pausiert.",
+    "pageTitle": "Etwas ist schiefgelaufen",
+    "goHome": "Zur Startseite",
+    "widgetTitle": "Dieser Bereich konnte nicht geladen werden.",
+    "retry": "Erneut versuchen"
   },
   "voice": {
     "enable": "Sprache aktivieren",

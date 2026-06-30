@@ -12,7 +12,7 @@ export function ErrorBanner({ message, onDismiss, className }: ErrorBannerProps)
     <div
       role="alert"
       className={clsx(
-        'flex items-start gap-3 rounded-lg border border-danger bg-red-50 px-4 py-3 text-sm text-danger',
+        'flex items-start gap-3 rounded-lg border border-danger-600 bg-danger-50 px-4 py-3 text-sm text-danger-600',
         className,
       )}
     >
@@ -22,7 +22,7 @@ export function ErrorBanner({ message, onDismiss, className }: ErrorBannerProps)
         <button
           type="button"
           onClick={onDismiss}
-          className="shrink-0 rounded p-0.5 text-danger transition-colors hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-danger focus:ring-offset-2"
+          className="shrink-0 rounded p-0.5 text-danger-600 transition-colors hover:bg-danger-100 focus:outline-none focus:ring-2 focus:ring-danger-600 focus:ring-offset-2"
           aria-label="Dismiss error"
         >
           <X className="h-4 w-4" aria-hidden />

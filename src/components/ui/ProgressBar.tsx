@@ -20,8 +20,8 @@ const HEIGHT_CLASSES: Record<ProgressBarHeight, string> = {
 
 const VARIANT_CLASSES: Record<ProgressBarVariant, string> = {
   primary: 'bg-primary',
-  success: 'bg-success',
-  danger: 'bg-danger',
+  success: 'bg-success-600',
+  danger: 'bg-danger-600',
 }
 
 function clampValue(value: number): number {

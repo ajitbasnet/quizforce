@@ -68,20 +68,20 @@ const VARIANT_CONFIG: Record<
 > = {
   success: {
     icon: CheckCircle2,
-    container: 'border-green-200 bg-green-50',
-    iconClass: 'text-green-600',
+    container: 'border-success-100 bg-success-50',
+    iconClass: 'text-success-600',
     role: 'status',
   },
   error: {
     icon: XCircle,
-    container: 'border-red-200 bg-red-50',
-    iconClass: 'text-red-600',
+    container: 'border-danger-100 bg-danger-50',
+    iconClass: 'text-danger-600',
     role: 'alert',
   },
   info: {
     icon: Info,
-    container: 'border-indigo-200 bg-indigo-50',
-    iconClass: 'text-indigo-600',
+    container: 'border-brand-100 bg-brand-50',
+    iconClass: 'text-brand-600',
     role: 'status',
   },
   warning: {
@@ -120,7 +120,7 @@ export function Toast({ title, description, variant, onDismiss }: ToastProps) {
       <button
         type="button"
         onClick={onDismiss}
-        className="shrink-0 rounded-md p-1 text-text-muted transition-colors hover:bg-black/5 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+        className="shrink-0 rounded-md p-1 text-text-muted transition-colors hover:bg-black/5 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600"
         aria-label="Dismiss"
       >
         <X className="h-4 w-4" />

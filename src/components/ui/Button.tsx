@@ -19,15 +19,15 @@ const BASE_CLASSES =
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    'bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:ring-indigo-600',
+    'bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600',
   secondary:
-    'bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-50 focus-visible:ring-indigo-600',
+    'bg-surface text-brand-600 border border-brand-600 hover:bg-brand-50 focus-visible:ring-brand-600',
   danger:
-    'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-600',
+    'bg-danger-600 text-white hover:brightness-95 focus-visible:ring-danger-600',
   ghost:
-    'bg-transparent text-text-primary hover:bg-gray-100 focus-visible:ring-gray-400',
+    'bg-transparent text-text-primary hover:bg-surface-subtle focus-visible:ring-gray-400',
   success:
-    'bg-green-600 text-white hover:bg-green-700 focus-visible:ring-green-600',
+    'bg-success-600 text-white hover:brightness-95 focus-visible:ring-success-600',
 }
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
 import {
   controlBaseClass,
@@ -19,18 +19,21 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name'>
   rightIcon?: ReactNode
 }
 
-export function Input({
-  register,
-  error,
-  label,
-  helperText,
-  leftIcon,
-  rightIcon,
-  type = 'text',
-  id,
-  className,
-  ...props
-}: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  {
+    register,
+    error,
+    label,
+    helperText,
+    leftIcon,
+    rightIcon,
+    type = 'text',
+    id,
+    className,
+    ...props
+  },
+  ref,
+) {
   const inputId = fieldId(label, id)
   const helperId = inputId && helperText ? `${inputId}-helper` : undefined
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
@@ -55,6 +58,7 @@ export function Input({
           </span>
         )}
         <input
+          ref={ref}
           {...register}
           {...props}
           id={inputId}
@@ -91,4 +95,4 @@ export function Input({
       )}
     </div>
   )
-}
+})

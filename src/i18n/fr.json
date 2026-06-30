@@ -322,6 +322,14 @@
       "zh": "中文"
     }
   },
+  "shortcuts": {
+    "title": "Raccourcis clavier",
+    "openHelp": "Afficher les raccourcis clavier",
+    "focusSearch": "Focus sur la recherche",
+    "focusReview": "Focus sur la révision des réponses",
+    "actionColumn": "Action",
+    "shortcutColumn": "Raccourci"
+  },
   "auth": {
     "signIn": "Se connecter",
     "signOut": "Se déconnecter",

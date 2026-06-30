@@ -13,6 +13,7 @@ import { useToast } from '../components/ui/Toast'
 import { useHistory } from '../hooks/useHistory'
 import { useDebounce } from '../hooks/useDebounce'
 import { useHistorySync } from '../hooks/useHistorySync'
+import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
 import { downloadFile } from '../utils/downloadFile'
@@ -33,6 +34,7 @@ export default function HistoryPage() {
   const importHistory = useHistoryStore((s) => s.importHistory)
   const allAttempts = useHistoryStore((s) => s.attempts)
   const importInputRef = useRef<HTMLInputElement>(null)
+  const searchInputRef = useRef<HTMLInputElement>(null)
   const {
     quizzes,
     getLatestAttempt,
@@ -62,6 +64,15 @@ export default function HistoryPage() {
   useEffect(() => {
     setVisibleCount(PAGE_SIZE)
   }, [filters.q, filters.type, filters.sort, filters.starred, filters.tag])
+
+  useRegisterShortcutActions(
+    {
+      'history-focus-search': () => {
+        searchInputRef.current?.focus()
+      },
+    },
+    [],
+  )
 
   const visibleQuizzes = filteredQuizzes.slice(0, visibleCount)
   const showLoadMore = filteredQuizzes.length > visibleCount
@@ -162,6 +173,7 @@ export default function HistoryPage() {
             {t('history.clearAll')}
           </Button>
           <Input
+            ref={searchInputRef}
             type="search"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}

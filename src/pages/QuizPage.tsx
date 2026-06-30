@@ -11,12 +11,12 @@ import { topBarIconButtonClass } from '../components/layout/topBarActionStyles'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
-import { Modal } from '../components/ui/Modal'
 import { ProgressBar } from '../components/ui/ProgressBar'
 import { Tooltip } from '../components/ui/Tooltip'
 import { useToast } from '../components/ui/Toast'
-import { useKeyboard } from '../hooks/useKeyboard'
+import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
+import { useShortcutHelp } from '../hooks/useShortcutHelp'
 import { useQuizNavigation } from '../hooks/useQuizNavigation'
 import { useVoice } from '../hooks/useVoice'
 import { LANGUAGE_OPTIONS } from '../i18n'
@@ -25,9 +25,6 @@ import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
 import type { QuizSettings } from '../types/quiz'
 import { calculateScore } from '../utils/scoreCalculator'
-
-const kbdClass =
-  'inline-flex min-w-[1.5rem] items-center justify-center rounded border border-gray-200 bg-gray-50 px-1.5 py-0.5 font-mono text-xs text-text-primary'
 
 function formatElapsed(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
@@ -77,7 +74,7 @@ export default function QuizPage() {
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [unansweredModalOpen, setUnansweredModalOpen] = useState(false)
-  const [shortcutsOpen, setShortcutsOpen] = useState(false)
+  const { open: openShortcutHelp } = useShortcutHelp()
 
   useEffect(() => {
     if (currentQuiz) return
@@ -149,33 +146,40 @@ export default function QuizPage() {
     ? currentQuestionIndex === totalQuestions - 1
     : false
 
-  useKeyboard(
+  useRegisterShortcutActions(
     {
-      enabled: !isSubmitting && !!currentQuiz,
-      canGoPrev,
-      canSelectOption: (i) => !!question?.options[i],
-      hasAnswer: !!question && !!userAnswers[question.id],
-      isLastQuestion,
-      onNext: () => {
-        if (canGoNext) navigateQuestion('next')
+      'quiz-next': () => {
+        if (isSubmitting || !currentQuiz || !canGoNext) return false
+        navigateQuestion('next')
       },
-      onPrev: () => {
-        if (canGoPrev) navigateQuestion('prev')
+      'quiz-prev': () => {
+        if (isSubmitting || !currentQuiz || !canGoPrev) return false
+        navigateQuestion('prev')
       },
-      onSelectOption: (i) => {
-        if (!question) return
-        const opt = question.options[i]
-        if (opt) setAnswer(question.id, opt.id)
+      'quiz-select': (event) => {
+        if (isSubmitting || !currentQuiz || !question) return false
+        const index = Number(event.key) - 1
+        if (!question.options[index]) return false
+        setAnswer(question.id, question.options[index].id)
       },
-      onAdvance: () => {
-        if (!question || !userAnswers[question.id]) return
+      'quiz-advance': () => {
+        if (isSubmitting || !currentQuiz || !question || !userAnswers[question.id]) {
+          return false
+        }
         if (isLastQuestion) handleSubmitClick()
         else if (canGoNext) navigateQuestion('next')
       },
-      onToggleVoice: () => updateSettings({ voiceEnabled: !voiceEnabled }),
-      onSkipVoice: () => stop(),
-      onSubmit: () => {
-        if (isLastQuestion) handleSubmitClick()
+      'quiz-submit': () => {
+        if (isSubmitting || !currentQuiz || !isLastQuestion) return false
+        handleSubmitClick()
+      },
+      'quiz-voice': () => {
+        if (isSubmitting || !currentQuiz) return false
+        updateSettings({ voiceEnabled: !voiceEnabled })
+      },
+      'quiz-skip-voice': () => {
+        if (isSubmitting || !currentQuiz) return false
+        stop()
       },
     },
     [
@@ -251,7 +255,7 @@ export default function QuizPage() {
                   type="button"
                   className={`${topBarIconButtonClass} min-h-11 min-w-11`}
                   aria-label={t('quiz.keyboardShortcuts')}
-                  onClick={() => setShortcutsOpen(true)}
+                  onClick={openShortcutHelp}
                 >
                   <CircleHelp className="h-4 w-4" />
                 </button>
@@ -372,52 +376,6 @@ export default function QuizPage() {
         onClose={() => setUnansweredModalOpen(false)}
         onConfirmSubmit={() => void confirmSubmit()}
       />
-
-      <Modal
-        isOpen={shortcutsOpen}
-        onClose={() => setShortcutsOpen(false)}
-        title={t('quiz.keyboardShortcuts')}
-        size="md"
-      >
-        <ul className="space-y-3">
-          {[
-            { label: t('quiz.shortcutNext'), keys: ['→'] },
-            { label: t('quiz.shortcutPrev'), keys: ['←'] },
-            { label: t('quiz.shortcutSelect'), keys: ['1', '–', '4'] },
-            { label: t('quiz.shortcutAdvance'), keys: ['Space'] },
-            { label: t('quiz.shortcutVoice'), keys: ['V'] },
-            { label: t('quiz.shortcutSkipVoice'), keys: ['S'] },
-            {
-              label: t('quiz.shortcutSubmit'),
-              keys: ['Enter'],
-              hint: t('quiz.shortcutSubmitNote'),
-            },
-          ].map(({ label, keys, hint }) => (
-            <li
-              key={label}
-              className="flex items-center justify-between gap-4 text-sm"
-            >
-              <span className="text-text-primary">{label}</span>
-              <span className="flex shrink-0 items-center gap-1">
-                {keys.map((key) =>
-                  key === '–' ? (
-                    <span key={key} className="text-text-muted">
-                      –
-                    </span>
-                  ) : (
-                    <kbd key={key} className={kbdClass}>
-                      {key}
-                    </kbd>
-                  ),
-                )}
-                {hint && (
-                  <span className="ml-1 text-text-muted">({hint})</span>
-                )}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </Modal>
 
       <VoicePlayer />
     </div>

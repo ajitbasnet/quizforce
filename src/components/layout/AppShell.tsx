@@ -1,10 +1,17 @@
 import clsx from 'clsx'
 import { type ReactNode } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { AuthModal } from '../auth/AuthModal'
 import { QuickSettingsDrawer } from '../settings/QuickSettingsDrawer'
+import { ShortcutHelpModal } from '../shortcuts/ShortcutHelpModal'
 import { AuthProvider } from '../../hooks/useAuth'
+import {
+  resolveShortcutContext,
+  useKeyboardShortcuts,
+  useRegisterShortcutActions,
+} from '../../hooks/useKeyboardShortcuts'
 import { QuickSettingsProvider } from '../../hooks/useQuickSettings'
+import { ShortcutHelpProvider, useShortcutHelp } from '../../hooks/useShortcutHelp'
 import { SidebarProvider, useSidebar } from './SidebarContext'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
@@ -14,18 +21,38 @@ export function AppShell() {
     <AuthProvider>
       <SidebarProvider>
         <QuickSettingsProvider>
-          <div className="min-h-screen bg-bg text-text-primary">
-            <TopBar />
-            <Sidebar />
-            <AppShellMain>
-              <Outlet />
-            </AppShellMain>
-            <AuthModal />
-            <QuickSettingsDrawer />
-          </div>
+          <ShortcutHelpProvider>
+            <AppShellLayout />
+          </ShortcutHelpProvider>
         </QuickSettingsProvider>
       </SidebarProvider>
     </AuthProvider>
+  )
+}
+
+function AppShellLayout() {
+  const location = useLocation()
+  const shortcutContext = resolveShortcutContext(location.pathname)
+  const { isOpen, open, close } = useShortcutHelp()
+
+  useRegisterShortcutActions({ 'open-help': open }, [open])
+  useKeyboardShortcuts(shortcutContext)
+
+  return (
+    <div className="min-h-screen bg-bg text-text-primary">
+      <TopBar />
+      <Sidebar />
+      <AppShellMain>
+        <Outlet />
+      </AppShellMain>
+      <AuthModal />
+      <QuickSettingsDrawer />
+      <ShortcutHelpModal
+        isOpen={isOpen}
+        onClose={close}
+        context={shortcutContext}
+      />
+    </div>
   )
 }
 

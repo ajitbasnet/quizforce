@@ -322,6 +322,14 @@
       "zh": "中文"
     }
   },
+  "shortcuts": {
+    "title": "कीबोर्ड शॉर्टकट",
+    "openHelp": "कीबोर्ड शॉर्टकट दिखाएँ",
+    "focusSearch": "खोज पर फ़ोकस करें",
+    "focusReview": "उत्तर समीक्षा पर फ़ोकस करें",
+    "actionColumn": "क्रिया",
+    "shortcutColumn": "शॉर्टकट"
+  },
   "auth": {
     "signIn": "साइन इन",
     "signOut": "साइन आउट",

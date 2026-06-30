@@ -322,6 +322,14 @@
       "zh": "中文"
     }
   },
+  "shortcuts": {
+    "title": "键盘快捷键",
+    "openHelp": "显示键盘快捷键",
+    "focusSearch": "聚焦搜索",
+    "focusReview": "聚焦答案回顾",
+    "actionColumn": "操作",
+    "shortcutColumn": "快捷键"
+  },
   "auth": {
     "signIn": "登录",
     "signOut": "退出登录",

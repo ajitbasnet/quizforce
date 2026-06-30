@@ -322,6 +322,14 @@
       "zh": "中文"
     }
   },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "openHelp": "Show keyboard shortcuts",
+    "focusSearch": "Focus search",
+    "focusReview": "Focus answer review",
+    "actionColumn": "Action",
+    "shortcutColumn": "Shortcut"
+  },
   "auth": {
     "signIn": "Sign In",
     "signOut": "Sign Out",

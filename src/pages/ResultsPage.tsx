@@ -17,6 +17,7 @@ import { Card } from '../components/ui/Card'
 import { Spinner } from '../components/ui/Spinner'
 import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
+import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useResultsVoiceReading } from '../hooks/useResultsVoiceReading'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
@@ -64,6 +65,7 @@ export default function ResultsPage() {
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [retryModalOpen, setRetryModalOpen] = useState(false)
   const scoreHeadingRef = useRef<HTMLHeadingElement>(null)
+  const reviewHeadingRef = useRef<HTMLHeadingElement>(null)
 
   const sharedPayload = useMemo(() => {
     if (!dataParam) return null
@@ -233,6 +235,15 @@ export default function ResultsPage() {
   const { isResultsReading, startReading, stopReading, registerCardRef } =
     useResultsVoiceReading({ attempt, quiz: quiz ?? undefined, voiceEnabled })
 
+  useRegisterShortcutActions(
+    {
+      'results-focus-review': () => {
+        reviewHeadingRef.current?.focus()
+      },
+    },
+    [],
+  )
+
   useEffect(() => {
     if (!attempt) return
     scoreHeadingRef.current?.focus()
@@ -296,7 +307,11 @@ export default function ResultsPage() {
         {quiz ? <ScoreBreakdown quiz={quiz} attempt={attempt} /> : null}
 
         <section>
-          <h2 className="mb-4 text-xl font-semibold text-text-primary">
+          <h2
+            ref={reviewHeadingRef}
+            tabIndex={-1}
+            className="mb-4 text-xl font-semibold text-text-primary outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          >
             {t('results.answerReview')}
           </h2>
           <motion.div

@@ -322,6 +322,14 @@
       "zh": "中文"
     }
   },
+  "shortcuts": {
+    "title": "Tastenkürzel",
+    "openHelp": "Tastenkürzel anzeigen",
+    "focusSearch": "Suche fokussieren",
+    "focusReview": "Antwortübersicht fokussieren",
+    "actionColumn": "Aktion",
+    "shortcutColumn": "Tastenkürzel"
+  },
   "auth": {
     "signIn": "Anmelden",
     "signOut": "Abmelden",

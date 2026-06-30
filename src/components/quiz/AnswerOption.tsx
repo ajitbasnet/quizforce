@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import { memo } from 'react'
 import { Check, CheckCircle2, XCircle } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
@@ -111,10 +112,11 @@ function AnswerOptionInner({
   }
 
   const showSelectedCheck = isSelected && !isSubmitted
+  const showSelectionRing = isSelected && !isSubmitted
   const optionLabel = `${letter}. ${option.text}`
 
   return (
-    <button
+    <motion.button
       type="button"
       role="radio"
       aria-checked={isSelected}
@@ -124,18 +126,32 @@ function AnswerOptionInner({
       onClick={onSelect}
       onMouseEnter={handleVoiceRead}
       onFocus={handleVoiceRead}
+      whileTap={isSubmitted ? undefined : { scale: 0.98 }}
+      animate={{
+        scale: showSelectionRing ? [0.98, 1.02, 1] : 1,
+      }}
+      transition={{ type: 'spring', duration: 0.2 }}
       className={clsx(
-        'flex min-h-11 w-full flex-col rounded-lg border px-4 py-3 text-left transition-colors duration-150',
+        'relative flex min-h-11 w-full flex-col rounded-lg border px-4 py-3 text-left transition-colors duration-150',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
         getButtonClasses(isSelected, isSubmitted, variant),
       )}
     >
+      {showSelectionRing && (
+        <motion.span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-lg ring-2 ring-brand-600"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        />
+      )}
       {isSubmitted && showFeedbackLabels && labelKey && variant && (
-        <p className={clsx('mb-2 text-sm', getLabelClasses(variant))}>
+        <p className={clsx('relative z-10 mb-2 text-sm', getLabelClasses(variant))}>
           {t(labelKey)}
         </p>
       )}
-      <div className="flex w-full items-center gap-3">
+      <div className="relative z-10 flex w-full items-center gap-3">
         <span
           className={clsx(
             'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold',
@@ -168,12 +184,12 @@ function AnswerOptionInner({
       {isSubmitted && feedback && variant && (
         <p
           id={feedbackId}
-          className={clsx('mt-2 pl-11 text-sm', getExplanationClasses(variant))}
+          className={clsx('relative z-10 mt-2 pl-11 text-sm', getExplanationClasses(variant))}
         >
           {feedback}
         </p>
       )}
-    </button>
+    </motion.button>
   )
 }
 

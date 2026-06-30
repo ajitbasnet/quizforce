@@ -96,8 +96,8 @@ const toastMotionProps = {
   initial: { opacity: 0, x: 80 },
   animate: { opacity: 1, x: 0 },
   exit: { opacity: 0, x: 80 },
-  transition: { duration: 0.2 },
-} as const
+  transition: { type: 'spring' as const, stiffness: 400, damping: 25 },
+}
 
 export function Toast({ title, description, variant, onDismiss }: ToastProps) {
   const { icon: Icon, container, iconClass, role } = VARIANT_CONFIG[variant]

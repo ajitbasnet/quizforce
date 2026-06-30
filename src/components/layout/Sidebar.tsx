@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import {
   BarChart2,
   ChevronLeft,
@@ -57,10 +58,10 @@ const NAV_ITEMS: NavItem[] = [
 
 function navLinkClass(isActive: boolean, showCollapsed: boolean) {
   return clsx(
-    'flex items-center rounded-lg text-sm font-medium transition-colors',
+    'relative z-10 flex items-center rounded-lg text-sm font-medium transition-colors',
     showCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
     isActive
-      ? 'bg-brand-50 text-brand-600'
+      ? 'text-brand-600'
       : 'text-text-muted hover:bg-surface-muted hover:text-text-primary',
   )
 }
@@ -139,27 +140,36 @@ export function Sidebar() {
         </div>
 
         <nav className="flex flex-col gap-1 p-2">
-          {NAV_ITEMS.map((item) => {
+          {NAV_ITEMS.map((item, index) => {
             const Icon = item.icon
             const label = t(item.labelKey)
+            const isActive = item.isActive
+              ? item.isActive(location.pathname)
+              : false
+            const primaryActiveIndex = NAV_ITEMS.findIndex((navItem) =>
+              navItem.isActive?.(location.pathname),
+            )
+            const showActiveBg = isActive && index === primaryActiveIndex
+
             const link = (
-              <NavLink
-                key={item.labelKey}
-                to={item.to}
-                end={item.end}
-                onClick={closeMobile}
-                className={({ isActive: routerActive }) =>
-                  navLinkClass(
-                    item.isActive
-                      ? item.isActive(location.pathname)
-                      : routerActive,
-                    showCollapsed,
-                  )
-                }
-              >
-                <Icon className="h-5 w-5 shrink-0" aria-hidden />
-                {!showCollapsed && <span>{label}</span>}
-              </NavLink>
+              <div className="relative">
+                {showActiveBg && (
+                  <motion.div
+                    layoutId="sidebar-active-bg"
+                    className="absolute inset-0 rounded-lg bg-brand-50"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <NavLink
+                  to={item.to}
+                  end={item.end}
+                  onClick={closeMobile}
+                  className={navLinkClass(isActive, showCollapsed)}
+                >
+                  <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                  {!showCollapsed && <span>{label}</span>}
+                </NavLink>
+              </div>
             )
 
             if (showCollapsed) {
@@ -170,7 +180,7 @@ export function Sidebar() {
               )
             }
 
-            return link
+            return <div key={item.labelKey}>{link}</div>
           })}
         </nav>
 

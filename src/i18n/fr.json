@@ -2,6 +2,9 @@
   "app": {
     "name": "QuizForge"
   },
+  "a11y": {
+    "skipToMain": "Aller au contenu principal"
+  },
   "nav": {
     "menu": "Menu",
     "closeSidebar": "Fermer la barre latérale",
@@ -340,6 +343,7 @@
     "myAccount": "Mon compte",
     "sendMagicLink": "Envoyer le lien magique",
     "checkEmail": "Vérifiez votre e-mail pour le lien de connexion.",
+    "emailLabel": "Adresse e-mail",
     "emailPlaceholder": "vous@exemple.com",
     "signInTitle": "Connectez-vous à QuizForge",
     "invalidEmail": "Veuillez saisir une adresse e-mail valide."

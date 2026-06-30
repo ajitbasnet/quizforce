@@ -2,6 +2,9 @@
   "app": {
     "name": "QuizForge"
   },
+  "a11y": {
+    "skipToMain": "跳转到主要内容"
+  },
   "nav": {
     "menu": "菜单",
     "closeSidebar": "关闭侧边栏",
@@ -340,6 +343,7 @@
     "myAccount": "我的账户",
     "sendMagicLink": "发送魔法链接",
     "checkEmail": "请查收邮件中的登录链接。",
+    "emailLabel": "电子邮件地址",
     "emailPlaceholder": "you@example.com",
     "signInTitle": "登录 QuizForge",
     "invalidEmail": "请输入有效的电子邮件地址。"

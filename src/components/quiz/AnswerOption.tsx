@@ -111,12 +111,14 @@ function AnswerOptionInner({
   }
 
   const showSelectedCheck = isSelected && !isSubmitted
+  const optionLabel = `${letter}. ${option.text}`
 
   return (
     <button
       type="button"
       role="radio"
       aria-checked={isSelected}
+      aria-label={optionLabel}
       aria-describedby={isSubmitted && feedback ? feedbackId : undefined}
       disabled={isSubmitted}
       onClick={onSelect}

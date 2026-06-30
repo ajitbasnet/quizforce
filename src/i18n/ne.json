@@ -2,6 +2,9 @@
   "app": {
     "name": "QuizForge"
   },
+  "a11y": {
+    "skipToMain": "मुख्य सामग्रीमा जानुहोस्"
+  },
   "nav": {
     "menu": "मेनु",
     "closeSidebar": "साइडबार बन्द गर्नुहोस्",
@@ -340,6 +343,7 @@
     "myAccount": "मेरो खाता",
     "sendMagicLink": "म्याजिक लिङ्क पठाउनुहोस्",
     "checkEmail": "साइन-इन लिङ्कको लागि आफ्नो इमेल जाँच गर्नुहोस्।",
+    "emailLabel": "इमेल ठेगाना",
     "emailPlaceholder": "tapai@udaharan.com",
     "signInTitle": "QuizForge मा साइन इन गर्नुहोस्",
     "invalidEmail": "कृपया मान्य इमेल ठेगाना प्रविष्ट गर्नुहोस्।"

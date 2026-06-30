@@ -32,7 +32,7 @@ export default {
         },
         primary: '#4F46E5',
         'text-primary': '#111827',
-        'text-muted': '#6B7280',
+        'text-muted': '#5B6470',
         bg: '#F8F7FF',
       },
       borderRadius: {

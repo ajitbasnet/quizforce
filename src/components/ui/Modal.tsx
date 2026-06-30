@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { Button } from './Button'
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -31,6 +32,11 @@ export function Modal({
   size = 'md',
   footer,
 }: ModalProps) {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const titleId = useId()
+
+  useFocusTrap(panelRef, isOpen)
+
   useEffect(() => {
     if (!isOpen) return
 
@@ -54,9 +60,10 @@ export function Modal({
           transition={{ duration: 0.2 }}
         >
           <motion.div
+            ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-labelledby="modal-title"
+            aria-labelledby={titleId}
             onClick={(event) => event.stopPropagation()}
             className={clsx(
               'w-full bg-white rounded-2xl shadow-xl',
@@ -68,7 +75,7 @@ export function Modal({
             transition={{ duration: 0.2 }}
           >
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-              <h2 id="modal-title" className="text-lg font-semibold text-text-primary">
+              <h2 id={titleId} className="text-lg font-semibold text-text-primary">
                 {title}
               </h2>
               <Button
@@ -78,7 +85,7 @@ export function Modal({
                 onClick={onClose}
                 aria-label="Close"
               >
-                <X className="h-4 w-4" />
+                <X className="h-4 w-4" aria-hidden="true" />
               </Button>
             </div>
 

@@ -3,6 +3,7 @@ import { LogOut, User } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { useLanguage } from '../../hooks/useLanguage'
 
 export function UserMenu() {
@@ -13,6 +14,8 @@ export function UserMenu() {
   const [open, setOpen] = useState(false)
 
   const initial = email?.charAt(0).toUpperCase() ?? '?'
+
+  useFocusTrap(containerRef, open)
 
   const close = useCallback(() => setOpen(false), [])
 

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 import {
   buildResultsCsvData,
@@ -31,6 +32,8 @@ export function ExportResultsDropdown({
   const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
+
+  useFocusTrap(containerRef, open)
 
   const close = useCallback(() => {
     setOpen(false)

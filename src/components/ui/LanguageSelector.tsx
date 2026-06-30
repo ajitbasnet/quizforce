@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { LANGUAGE_OPTIONS } from '../../i18n'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import type { SupportedLanguage } from '../../types/quiz'
 
 interface LanguageSelectorProps {
@@ -29,6 +30,8 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
   )
   const selectedOption =
     LANGUAGE_OPTIONS[selectedIndex >= 0 ? selectedIndex : 0] ?? LANGUAGE_OPTIONS[0]
+
+  useFocusTrap(containerRef, open)
 
   const close = useCallback(() => {
     setOpen(false)
@@ -158,7 +161,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
                 className={clsx(
                   'flex w-full items-center gap-3 px-3 py-2 text-left text-sm transition-colors',
                   isHighlighted && 'bg-gray-50',
-                  isSelected && 'bg-brand-50 text-brand-600',
+                  isSelected && 'bg-brand-50 text-brand-700',
                   !isSelected && 'text-text-primary hover:bg-gray-50',
                 )}
                 onMouseEnter={() => setHighlightIndex(index)}

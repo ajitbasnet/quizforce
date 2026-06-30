@@ -58,6 +58,7 @@ export function AuthModal() {
           <Input
             type="email"
             autoComplete="email"
+            label={t('auth.emailLabel')}
             placeholder={t('auth.emailPlaceholder')}
             value={email}
             onChange={(event) => setEmail(event.target.value)}

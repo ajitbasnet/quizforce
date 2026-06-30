@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useQuickSettings } from '../../hooks/useQuickSettings'
+import { useShallow } from 'zustand/react/shallow'
 import { useSettingsStore } from '../../store/settingsStore'
 import type { QuizSettings } from '../../types/quiz'
 import { Drawer } from '../ui/Drawer'
@@ -11,7 +12,23 @@ import { SettingsVoiceFields } from './SettingsVoiceFields'
 export function QuickSettingsDrawer() {
   const { t, changeLanguage } = useLanguage()
   const { isOpen, close } = useQuickSettings()
-  const settings = useSettingsStore((s) => s.settings)
+  const {
+    language,
+    questionsCount,
+    pointsPerQuestion,
+    voiceEnabled,
+    voiceRate,
+    voicePitch,
+  } = useSettingsStore(
+    useShallow((s) => ({
+      language: s.settings.language,
+      questionsCount: s.settings.questionsCount,
+      pointsPerQuestion: s.settings.pointsPerQuestion,
+      voiceEnabled: s.settings.voiceEnabled,
+      voiceRate: s.settings.voiceRate,
+      voicePitch: s.settings.voicePitch,
+    })),
+  )
 
   const updateSettings = (partial: Partial<QuizSettings>) => {
     useSettingsStore.getState().updateSettings(partial)
@@ -34,30 +51,34 @@ export function QuickSettingsDrawer() {
     >
       <div className="flex flex-col gap-5">
         <SettingsLanguageField
-          value={settings.language}
-          onChange={(language) => void changeLanguage(language)}
+          value={language}
+          onChange={(nextLanguage) => void changeLanguage(nextLanguage)}
         />
 
         <SettingsDefaultsFields
-          questionsCount={settings.questionsCount}
-          pointsPerQuestion={settings.pointsPerQuestion}
-          onQuestionsCountChange={(questionsCount) =>
-            updateSettings({ questionsCount })
+          questionsCount={questionsCount}
+          pointsPerQuestion={pointsPerQuestion}
+          onQuestionsCountChange={(nextQuestionsCount) =>
+            updateSettings({ questionsCount: nextQuestionsCount })
           }
-          onPointsPerQuestionChange={(pointsPerQuestion) =>
-            updateSettings({ pointsPerQuestion })
+          onPointsPerQuestionChange={(nextPointsPerQuestion) =>
+            updateSettings({ pointsPerQuestion: nextPointsPerQuestion })
           }
         />
 
         <SettingsVoiceFields
-          voiceEnabled={settings.voiceEnabled}
-          voiceRate={settings.voiceRate}
-          voicePitch={settings.voicePitch}
-          onVoiceEnabledChange={(voiceEnabled) =>
-            updateSettings({ voiceEnabled })
+          voiceEnabled={voiceEnabled}
+          voiceRate={voiceRate}
+          voicePitch={voicePitch}
+          onVoiceEnabledChange={(nextVoiceEnabled) =>
+            updateSettings({ voiceEnabled: nextVoiceEnabled })
           }
-          onVoiceRateChange={(voiceRate) => updateSettings({ voiceRate })}
-          onVoicePitchChange={(voicePitch) => updateSettings({ voicePitch })}
+          onVoiceRateChange={(nextVoiceRate) =>
+            updateSettings({ voiceRate: nextVoiceRate })
+          }
+          onVoicePitchChange={(nextVoicePitch) =>
+            updateSettings({ voicePitch: nextVoicePitch })
+          }
         />
       </div>
     </Drawer>

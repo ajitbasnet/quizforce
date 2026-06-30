@@ -1,5 +1,5 @@
 import { Settings } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useVoice } from '../../hooks/useVoice'
 import { useQuizStore } from '../../store/quizStore'
@@ -49,7 +49,7 @@ function getDifficultyLabel(
   }
 }
 
-export function QuestionBlock({
+function QuestionBlockInner({
   question,
   questionNumber,
   selectedOptionId,
@@ -243,3 +243,17 @@ export function QuestionBlock({
     </div>
   )
 }
+
+function questionBlockPropsAreEqual(
+  prev: QuestionBlockProps,
+  next: QuestionBlockProps,
+): boolean {
+  return (
+    prev.question.id === next.question.id &&
+    prev.selectedOptionId === next.selectedOptionId &&
+    prev.isSubmitted === next.isSubmitted &&
+    prev.voiceEnabled === next.voiceEnabled
+  )
+}
+
+export const QuestionBlock = memo(QuestionBlockInner, questionBlockPropsAreEqual)

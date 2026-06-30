@@ -1,7 +1,7 @@
 import * as pdfjsLib from 'pdfjs-dist'
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
 
 export const PDF_MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024
 

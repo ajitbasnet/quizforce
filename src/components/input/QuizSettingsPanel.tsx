@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useShallow } from 'zustand/react/shallow'
 import { useSettingsStore } from '../../store/settingsStore'
 import type { QuizSettings } from '../../types/quiz'
 import {
@@ -51,7 +52,7 @@ function toTranslatedError(
 export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
   function QuizSettingsPanel(_, ref) {
     const { t } = useLanguage()
-    const settings = useSettingsStore((s) => s.settings)
+    const settings = useSettingsStore(useShallow((s) => s.settings))
     const updateSettings = useSettingsStore((s) => s.updateSettings)
     const [expanded, setExpanded] = useState(false)
 

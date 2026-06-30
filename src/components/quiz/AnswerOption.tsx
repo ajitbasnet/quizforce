@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { memo } from 'react'
 import { Check, CheckCircle2, XCircle } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useVoice } from '../../hooks/useVoice'
@@ -82,7 +83,7 @@ function getButtonClasses(
   return 'border-gray-200 bg-surface hover:border-brand-500 hover:bg-brand-50'
 }
 
-export function AnswerOption({
+function AnswerOptionInner({
   option,
   letter,
   isSelected,
@@ -173,3 +174,18 @@ export function AnswerOption({
     </button>
   )
 }
+
+function answerOptionPropsAreEqual(
+  prev: AnswerOptionProps,
+  next: AnswerOptionProps,
+): boolean {
+  return (
+    prev.isSelected === next.isSelected &&
+    prev.isSubmitted === next.isSubmitted &&
+    prev.isCorrect === next.isCorrect &&
+    prev.option.id === next.option.id &&
+    prev.feedback === next.feedback
+  )
+}
+
+export const AnswerOption = memo(AnswerOptionInner, answerOptionPropsAreEqual)

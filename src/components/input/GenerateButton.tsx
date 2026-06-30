@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { generateQuiz } from '../../api/claude'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useQuizStore } from '../../store/quizStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useSettingsStore } from '../../store/settingsStore'
 import { QuizGenerationError } from '../../types/api'
 import type { Quiz } from '../../types/quiz'
@@ -50,7 +51,7 @@ export function GenerateButton({
 }: GenerateButtonProps) {
   const { t } = useLanguage()
   const navigate = useNavigate()
-  const settings = useSettingsStore((s) => s.settings)
+  const settings = useSettingsStore(useShallow((s) => s.settings))
   const isGenerating = useQuizStore((s) => s.isGenerating)
   const generationError = useQuizStore((s) => s.generationError)
   const setGenerating = useQuizStore((s) => s.setGenerating)

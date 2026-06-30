@@ -1,8 +1,10 @@
 import { Download, Search, Upload } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { isSupabaseConfigured } from '../api/supabase'
 import { ClearHistoryModal } from '../components/history/ClearHistoryModal'
 import { DeleteQuizModal } from '../components/history/DeleteQuizModal'
 import { HistoryCard } from '../components/history/HistoryCard'
+import { HistoryCardSkeleton } from '../components/history/HistoryCardSkeleton'
 import { HistoryEmptyState } from '../components/history/HistoryEmptyState'
 import { HistoryFilterToolbar } from '../components/history/HistoryFilterToolbar'
 import { HistoryStatsBar } from '../components/history/HistoryStatsBar'
@@ -28,7 +30,7 @@ const PAGE_SIZE = 12
 export default function HistoryPage() {
   const { t } = useLanguage()
   const { toast } = useToast()
-  useHistorySync()
+  const { isLoading: isHistorySyncLoading } = useHistorySync()
   const clearHistory = useHistoryStore((s) => s.clearHistory)
   const removeQuiz = useHistoryStore((s) => s.removeQuiz)
   const importHistory = useHistoryStore((s) => s.importHistory)
@@ -76,6 +78,8 @@ export default function HistoryPage() {
 
   const visibleQuizzes = filteredQuizzes.slice(0, visibleCount)
   const showLoadMore = filteredQuizzes.length > visibleCount
+  const showHistorySkeletons =
+    isSupabaseConfigured() && isHistorySyncLoading && quizzes.length === 0
 
   const handleClearConfirm = useCallback(() => {
     clearHistory()
@@ -191,7 +195,13 @@ export default function HistoryPage() {
         <HistoryFilterToolbar filters={filters} onFiltersChange={setFilters} />
       )}
 
-      {filteredQuizzes.length === 0 ? (
+      {showHistorySkeletons ? (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {Array.from({ length: 6 }, (_, index) => (
+            <HistoryCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : filteredQuizzes.length === 0 ? (
         <HistoryEmptyState hasQuizzes={quizzes.length > 0} />
       ) : (
         <>

@@ -7,6 +7,7 @@ import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
+import { ScorePanelSkeleton } from '../components/quiz/ScorePanelSkeleton'
 import { CachedResultsBanner } from '../components/results/CachedResultsBanner'
 import { ExportResultsDropdown } from '../components/results/ExportResultsDropdown'
 import { HighScoreCelebration } from '../components/results/HighScoreCelebration'
@@ -15,7 +16,6 @@ import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { StopReadingButton } from '../components/results/StopReadingButton'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
-import { Spinner } from '../components/ui/Spinner'
 import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
@@ -267,8 +267,8 @@ export default function ResultsPage() {
     if (!remoteFetchSettled || isLoadingRemote) {
       return (
         <PageWrapper>
-          <div className="flex min-h-[40vh] items-center justify-center">
-            <Spinner size="lg" />
+          <div className="mx-auto w-full max-w-4xl">
+            <ScorePanelSkeleton />
           </div>
         </PageWrapper>
       )

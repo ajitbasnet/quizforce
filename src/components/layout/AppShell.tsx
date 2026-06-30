@@ -14,6 +14,7 @@ import { QuickSettingsProvider } from '../../hooks/useQuickSettings'
 import { ShortcutHelpProvider, useShortcutHelp } from '../../hooks/useShortcutHelp'
 import { useLanguage } from '../../hooks/useLanguage'
 import { SidebarProvider, useSidebar } from './SidebarContext'
+import { VoiceUnsupportedNotifier } from '../voice/VoiceUnsupportedNotifier'
 import { OfflineBanner } from './OfflineBanner'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
@@ -59,6 +60,7 @@ function AppShellLayout() {
         onClose={close}
         context={shortcutContext}
       />
+      <VoiceUnsupportedNotifier />
     </div>
   )
 }

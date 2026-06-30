@@ -384,6 +384,7 @@
     "rate": "गति",
     "pitch": "पिच",
     "notSupported": "यो ब्राउजरमा टेक्स्ट-टु-स्पीच समर्थित छैन।",
+    "unsupportedBrowser": "तपाईंको ब्राउजरमा भ्वाइस न्यारेसन समर्थित छैन।",
     "reading": "पढिँदै छ...",
     "skipReading": "पढ्न छोड्नुहोस्",
     "readingQuestion": "प्रश्न {{current}} / {{total}} पढिँदै छ",

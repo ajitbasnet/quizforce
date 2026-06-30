@@ -19,6 +19,7 @@ import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
 import { useShortcutHelp } from '../hooks/useShortcutHelp'
 import { useQuizNavigation } from '../hooks/useQuizNavigation'
+import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useVoice } from '../hooks/useVoice'
 import { LANGUAGE_OPTIONS } from '../i18n'
 import { persistQuizAttempt } from '../services/persistQuizAttempt'
@@ -71,6 +72,7 @@ export default function QuizPage() {
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
   const updateSettings = useSettingsStore((s) => s.updateSettings)
   const { stop } = useVoice()
+  useSpeechCleanup()
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)

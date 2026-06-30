@@ -18,6 +18,7 @@ import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
+import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useResultsVoiceReading } from '../hooks/useResultsVoiceReading'
 import { useHistoryStore } from '../store/historyStore'
@@ -58,6 +59,7 @@ export default function ResultsPage() {
   const getAttemptById = useHistoryStore((s) => s.getAttemptById)
   const historyQuizzes = useHistoryStore((s) => s.quizzes)
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
+  useSpeechCleanup()
 
   const [remoteAttempt, setRemoteAttempt] = useState<QuizAttempt | null>(null)
   const [isLoadingRemote, setIsLoadingRemote] = useState(false)

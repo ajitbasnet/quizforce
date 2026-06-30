@@ -384,6 +384,7 @@
     "rate": "Geschwindigkeit",
     "pitch": "Tonhöhe",
     "notSupported": "Sprachausgabe wird in diesem Browser nicht unterstützt.",
+    "unsupportedBrowser": "Sprachausgabe wird in Ihrem Browser nicht unterstützt.",
     "reading": "Wird vorgelesen...",
     "skipReading": "Vorlesen überspringen",
     "readingQuestion": "Frage {{current}} von {{total}} wird vorgelesen",

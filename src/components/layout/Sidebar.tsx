@@ -14,6 +14,7 @@ import { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useHistoryStore } from '../../store/historyStore'
+import { isSpeechSupported } from '../../utils/speechSupport'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Tooltip } from '../ui/Tooltip'
 import { LanguageSelector } from './LanguageSelector'
@@ -121,7 +122,7 @@ export function Sidebar() {
       >
         <div className="flex flex-col gap-2 border-b border-gray-100 p-2 lg:hidden">
           <LanguageSelector />
-          <VoiceToggle />
+          {isSpeechSupported() && <VoiceToggle />}
         </div>
 
         <div className="hidden items-center justify-end border-b border-gray-100 p-2 lg:flex">

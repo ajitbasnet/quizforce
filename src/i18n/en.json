@@ -384,6 +384,7 @@
     "rate": "Speed",
     "pitch": "Pitch",
     "notSupported": "Text-to-speech is not supported in this browser.",
+    "unsupportedBrowser": "Voice narration isn't supported in your browser.",
     "reading": "Reading...",
     "skipReading": "Skip reading",
     "readingQuestion": "Reading question {{current}} of {{total}}",

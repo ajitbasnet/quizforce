@@ -6,6 +6,7 @@ import { useHistorySync } from '../../hooks/useHistorySync'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useQuickSettings } from '../../hooks/useQuickSettings'
 import { useSettingsStore } from '../../store/settingsStore'
+import { isSpeechSupported } from '../../utils/speechSupport'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Button } from '../ui/Button'
 import { Spinner } from '../ui/Spinner'
@@ -72,9 +73,11 @@ export function TopBar() {
           <LanguageSelector />
         </Tooltip>
 
-        <Tooltip content={voiceEnabled ? t('voice.disable') : t('voice.enable')}>
-          <VoiceToggle />
-        </Tooltip>
+        {isSpeechSupported() && (
+          <Tooltip content={voiceEnabled ? t('voice.disable') : t('voice.enable')}>
+            <VoiceToggle />
+          </Tooltip>
+        )}
 
         <Tooltip content={t('nav.history')}>
           <NavLink to="/history" className={actionLinkClass}>

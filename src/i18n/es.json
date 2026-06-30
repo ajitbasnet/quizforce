@@ -384,6 +384,7 @@
     "rate": "Velocidad",
     "pitch": "Tono",
     "notSupported": "La síntesis de voz no es compatible con este navegador.",
+    "unsupportedBrowser": "La narración por voz no es compatible con tu navegador.",
     "reading": "Leyendo...",
     "skipReading": "Omitir lectura",
     "readingQuestion": "Leyendo pregunta {{current}} de {{total}}",

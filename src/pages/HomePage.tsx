@@ -35,6 +35,7 @@ import {
   type TextInputPanelHandle,
 } from '../components/input/TextInputPanel'
 import { useLanguage } from '../hooks/useLanguage'
+import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useQuizStore } from '../store/quizStore'
 import type { RegenerateState } from '../types/regenerate'
 import type { Quiz } from '../types/quiz'
@@ -120,6 +121,7 @@ function FeatureHighlightCard({
 
 export default function HomePage() {
   const { t } = useLanguage()
+  useSpeechCleanup()
   const location = useLocation()
   const navigate = useNavigate()
   const isGenerating = useQuizStore((s) => s.isGenerating)

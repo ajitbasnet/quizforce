@@ -246,7 +246,15 @@
     "statsTotalQuizzes": "已创建测验",
     "statsQuestionsAnswered": "已答题目",
     "statsBestScore": "最高分",
-    "statsAverageScore": "平均分"
+    "statsAverageScore": "平均分",
+    "filterAll": "全部",
+    "sortLatest": "最新",
+    "sortOldest": "最早",
+    "sortHighestScore": "最高分",
+    "sortMostQuestions": "最多题目",
+    "sortBy": "排序",
+    "filterSourceType": "来源类型",
+    "syncing": "同步中..."
   },
   "feedback": {
     "correctAnswer": "正确答案",

@@ -246,7 +246,15 @@
     "statsTotalQuizzes": "Erstellte Quizze",
     "statsQuestionsAnswered": "Beantwortete Fragen",
     "statsBestScore": "Beste Punktzahl",
-    "statsAverageScore": "Durchschnittliche Punktzahl"
+    "statsAverageScore": "Durchschnittliche Punktzahl",
+    "filterAll": "Alle",
+    "sortLatest": "Neueste",
+    "sortOldest": "Älteste",
+    "sortHighestScore": "Höchste Punktzahl",
+    "sortMostQuestions": "Meiste Fragen",
+    "sortBy": "Sortieren nach",
+    "filterSourceType": "Quelltyp",
+    "syncing": "Synchronisierung..."
   },
   "feedback": {
     "correctAnswer": "Richtige Antwort",

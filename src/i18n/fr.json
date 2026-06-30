@@ -246,7 +246,15 @@
     "statsTotalQuizzes": "Quiz créés",
     "statsQuestionsAnswered": "Questions répondues",
     "statsBestScore": "Meilleur score",
-    "statsAverageScore": "Score moyen"
+    "statsAverageScore": "Score moyen",
+    "filterAll": "Tous",
+    "sortLatest": "Plus récents",
+    "sortOldest": "Plus anciens",
+    "sortHighestScore": "Meilleur score",
+    "sortMostQuestions": "Plus de questions",
+    "sortBy": "Trier par",
+    "filterSourceType": "Type de source",
+    "syncing": "Synchronisation..."
   },
   "feedback": {
     "correctAnswer": "Bonne réponse",

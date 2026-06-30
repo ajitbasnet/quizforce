@@ -246,7 +246,15 @@
     "statsTotalQuizzes": "Total Quizzes Created",
     "statsQuestionsAnswered": "Total Questions Answered",
     "statsBestScore": "Best Score",
-    "statsAverageScore": "Average Score"
+    "statsAverageScore": "Average Score",
+    "filterAll": "All",
+    "sortLatest": "Latest",
+    "sortOldest": "Oldest",
+    "sortHighestScore": "Highest Score",
+    "sortMostQuestions": "Most Questions",
+    "sortBy": "Sort by",
+    "filterSourceType": "Source type",
+    "syncing": "Syncing..."
   },
   "feedback": {
     "correctAnswer": "Correct Answer",

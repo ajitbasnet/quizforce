@@ -246,7 +246,15 @@
     "statsTotalQuizzes": "बनाए गए क्विज़",
     "statsQuestionsAnswered": "उत्तर दिए गए प्रश्न",
     "statsBestScore": "सर्वश्रेष्ठ स्कोर",
-    "statsAverageScore": "औसत स्कोर"
+    "statsAverageScore": "औसत स्कोर",
+    "filterAll": "सभी",
+    "sortLatest": "नवीनतम",
+    "sortOldest": "सबसे पुराना",
+    "sortHighestScore": "सर्वोच्च स्कोर",
+    "sortMostQuestions": "सबसे अधिक प्रश्न",
+    "sortBy": "क्रमबद्ध करें",
+    "filterSourceType": "स्रोत प्रकार",
+    "syncing": "सिंक हो रहा है..."
   },
   "feedback": {
     "correctAnswer": "सही उत्तर",

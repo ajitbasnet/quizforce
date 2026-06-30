@@ -4,24 +4,30 @@ import { ClearHistoryModal } from '../components/history/ClearHistoryModal'
 import { DeleteQuizModal } from '../components/history/DeleteQuizModal'
 import { HistoryCard } from '../components/history/HistoryCard'
 import { HistoryEmptyState } from '../components/history/HistoryEmptyState'
+import { HistoryFilterToolbar } from '../components/history/HistoryFilterToolbar'
 import { HistoryStatsBar } from '../components/history/HistoryStatsBar'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { useHistory } from '../hooks/useHistory'
+import { useHistorySync } from '../hooks/useHistorySync'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
 
 export default function HistoryPage() {
   const { t } = useLanguage()
+  useHistorySync()
   const clearHistory = useHistoryStore((s) => s.clearHistory)
   const removeQuiz = useHistoryStore((s) => s.removeQuiz)
   const {
     quizzes,
     getLatestAttempt,
     stats,
+    filters,
+    setFilters,
     searchQuery,
     setSearchQuery,
+    clearFilters,
     filteredQuizzes,
   } = useHistory()
 
@@ -31,8 +37,8 @@ export default function HistoryPage() {
   const handleClearConfirm = useCallback(() => {
     clearHistory()
     setClearModalOpen(false)
-    setSearchQuery('')
-  }, [clearHistory, setSearchQuery])
+    clearFilters()
+  }, [clearHistory, clearFilters])
 
   const handleDeleteConfirm = useCallback(() => {
     if (!deleteQuizId) return
@@ -71,6 +77,10 @@ export default function HistoryPage() {
       }
     >
       <HistoryStatsBar stats={stats} />
+
+      {quizzes.length > 0 && (
+        <HistoryFilterToolbar filters={filters} onFiltersChange={setFilters} />
+      )}
 
       {filteredQuizzes.length === 0 ? (
         <HistoryEmptyState hasQuizzes={quizzes.length > 0} />

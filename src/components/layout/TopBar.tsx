@@ -1,9 +1,11 @@
 import { History, Menu, Settings, Zap } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useHistorySync } from '../../hooks/useHistorySync'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useSettingsStore } from '../../store/settingsStore'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Button } from '../ui/Button'
+import { Spinner } from '../ui/Spinner'
 import { Tooltip } from '../ui/Tooltip'
 import { LanguageSelector } from './LanguageSelector'
 import { topBarNavLinkClass } from './topBarActionStyles'
@@ -30,6 +32,7 @@ export function TopBar() {
   const location = useLocation()
   const { openMobile } = useSidebar()
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
+  const { isFetching: isHistorySyncing } = useHistorySync()
 
   const breadcrumbKey = getBreadcrumbKey(location.pathname)
 
@@ -48,6 +51,13 @@ export function TopBar() {
       </div>
 
       <div className="ml-auto hidden items-center gap-2 lg:flex">
+        {isHistorySyncing && (
+          <span className="flex items-center gap-1.5 text-xs text-text-muted">
+            <Spinner size="sm" className="text-indigo-600" />
+            {t('history.syncing')}
+          </span>
+        )}
+
         <Tooltip content={t('settings.language')}>
           <LanguageSelector />
         </Tooltip>

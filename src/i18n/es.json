@@ -320,6 +320,16 @@
       "zh": "中文"
     }
   },
+  "auth": {
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "myAccount": "Mi cuenta",
+    "sendMagicLink": "Enviar enlace mágico",
+    "checkEmail": "Revisa tu correo para el enlace de acceso.",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "signInTitle": "Inicia sesión en QuizForge",
+    "invalidEmail": "Introduce una dirección de correo válida."
+  },
   "errors": {
     "generic": "Algo salió mal. Inténtalo de nuevo.",
     "network": "Error de red. Comprueba tu conexión e inténtalo de nuevo.",

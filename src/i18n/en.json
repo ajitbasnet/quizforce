@@ -320,6 +320,16 @@
       "zh": "中文"
     }
   },
+  "auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "myAccount": "My Account",
+    "sendMagicLink": "Send Magic Link",
+    "checkEmail": "Check your email for a sign-in link.",
+    "emailPlaceholder": "you@example.com",
+    "signInTitle": "Sign in to QuizForge",
+    "invalidEmail": "Please enter a valid email address."
+  },
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "network": "Network error. Check your connection and try again.",

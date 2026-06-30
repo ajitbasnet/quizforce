@@ -320,6 +320,16 @@
       "zh": "中文"
     }
   },
+  "auth": {
+    "signIn": "登录",
+    "signOut": "退出登录",
+    "myAccount": "我的账户",
+    "sendMagicLink": "发送魔法链接",
+    "checkEmail": "请查收邮件中的登录链接。",
+    "emailPlaceholder": "you@example.com",
+    "signInTitle": "登录 QuizForge",
+    "invalidEmail": "请输入有效的电子邮件地址。"
+  },
   "errors": {
     "generic": "出了点问题，请重试。",
     "network": "网络错误，请检查连接后重试。",

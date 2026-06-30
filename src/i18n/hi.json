@@ -320,6 +320,16 @@
       "zh": "中文"
     }
   },
+  "auth": {
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट",
+    "myAccount": "मेरा खाता",
+    "sendMagicLink": "मैजिक लिंक भेजें",
+    "checkEmail": "साइन-इन लिंक के लिए अपना ईमेल जाँचें।",
+    "emailPlaceholder": "aap@udaharan.com",
+    "signInTitle": "QuizForge में साइन इन करें",
+    "invalidEmail": "कृपया एक मान्य ईमेल पता दर्ज करें।"
+  },
   "errors": {
     "generic": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
     "network": "नेटवर्क त्रुटि। अपना कनेक्शन जाँचें और पुनः प्रयास करें।",

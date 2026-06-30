@@ -320,6 +320,16 @@
       "zh": "中文"
     }
   },
+  "auth": {
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "myAccount": "Mein Konto",
+    "sendMagicLink": "Magic Link senden",
+    "checkEmail": "Prüfen Sie Ihre E-Mail für den Anmeldelink.",
+    "emailPlaceholder": "sie@beispiel.de",
+    "signInTitle": "Bei QuizForge anmelden",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+  },
   "errors": {
     "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     "network": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",

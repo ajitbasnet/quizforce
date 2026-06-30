@@ -1,5 +1,7 @@
 import { History, Menu, Settings, Zap } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { UserMenu } from '../auth/UserMenu'
+import { useAuth } from '../../hooks/useAuth'
 import { useHistorySync } from '../../hooks/useHistorySync'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useSettingsStore } from '../../store/settingsStore'
@@ -33,6 +35,12 @@ export function TopBar() {
   const { openMobile } = useSidebar()
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
   const { isFetching: isHistorySyncing } = useHistorySync()
+  const {
+    isAuthenticated,
+    isConfigured,
+    isLoading: isAuthLoading,
+    openAuthModal,
+  } = useAuth()
 
   const breadcrumbKey = getBreadcrumbKey(location.pathname)
 
@@ -82,6 +90,16 @@ export function TopBar() {
             <Settings className="h-4 w-4" aria-hidden />
           </NavLink>
         </Tooltip>
+
+        {isConfigured && !isAuthLoading && (
+          isAuthenticated ? (
+            <UserMenu />
+          ) : (
+            <Button type="button" variant="ghost" size="sm" onClick={openAuthModal}>
+              {t('auth.signIn')}
+            </Button>
+          )
+        )}
       </div>
 
       <div className="ml-auto flex lg:hidden">

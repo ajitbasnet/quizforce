@@ -1,7 +1,7 @@
 import { Download, Trash2 } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
-import { getSupabaseClient } from '../../api/supabase'
+import { useCallback, useState } from 'react'
 import { ClearHistoryModal } from '../history/ClearHistoryModal'
+import { useAuth } from '../../hooks/useAuth'
 import { useHistory } from '../../hooks/useHistory'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useHistoryStore } from '../../store/historyStore'
@@ -21,24 +21,7 @@ export function DataPrivacySection() {
   const clearHistory = useHistoryStore((s) => s.clearHistory)
   const [clearModalOpen, setClearModalOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  useEffect(() => {
-    const supabase = getSupabaseClient()
-    if (!supabase) return
-
-    void supabase.auth.getSession().then(({ data }) => {
-      setIsAuthenticated(Boolean(data.session))
-    })
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(Boolean(session))
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
+  const { isAuthenticated } = useAuth()
 
   const handleExport = useCallback(() => {
     const payload = buildHistoryExport(quizzes, allAttempts)

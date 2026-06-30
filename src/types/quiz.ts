@@ -41,6 +41,8 @@ export interface Quiz {
   sourceType: 'text' | 'pdf' | 'prompt' | 'url'
   sourceContent: string
   settings: QuizSettings
+  isFavorited?: boolean
+  tags?: string[]
 }
 
 export interface AnswerFeedback {

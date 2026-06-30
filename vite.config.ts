@@ -7,4 +7,28 @@ export default defineConfig({
   resolve: {
     dedupe: ['i18next', 'react-i18next'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/pdfjs-dist')) {
+            return 'pdfjs'
+          }
+          if (id.includes('node_modules/framer-motion')) {
+            return 'framer-motion'
+          }
+          if (id.includes('node_modules/@supabase')) {
+            return 'supabase'
+          }
+          if (
+            id.includes('node_modules/react-hook-form') ||
+            id.includes('node_modules/@hookform') ||
+            id.includes('node_modules/zod')
+          ) {
+            return 'forms'
+          }
+        },
+      },
+    },
+  },
 })

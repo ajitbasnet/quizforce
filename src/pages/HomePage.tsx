@@ -6,18 +6,22 @@ import {
   Volume2,
   type LucideIcon,
 } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PageWrapper } from '../components/layout/PageWrapper'
-import { GenerateButton } from '../components/input/GenerateButton'
 import {
   InputModeTabs,
   type InputMode,
 } from '../components/input/InputModeTabs'
-import {
-  PDFUploader,
-  type PDFUploaderHandle,
-} from '../components/input/PDFUploader'
+import type { PDFUploaderHandle } from '../components/input/PDFUploader'
 import {
   PromptBuilder,
   type PromptBuilderHandle,
@@ -34,6 +38,19 @@ import { useLanguage } from '../hooks/useLanguage'
 import { useQuizStore } from '../store/quizStore'
 import type { RegenerateState } from '../types/regenerate'
 import type { Quiz } from '../types/quiz'
+import { Spinner } from '../components/ui/Spinner'
+
+const GenerateButton = lazy(() =>
+  import('../components/input/GenerateButton').then((mod) => ({
+    default: mod.GenerateButton,
+  })),
+)
+
+const PDFUploader = lazy(() =>
+  import('../components/input/PDFUploader').then((mod) => ({
+    default: mod.PDFUploader,
+  })),
+)
 
 const containerVariants = {
   hidden: {},
@@ -216,10 +233,18 @@ export default function HomePage() {
                     />
                   )}
                   {inputMode === 'pdf' && (
-                    <PDFUploader
-                      ref={pdfPanelRef}
-                      onExtracted={setPdfContent}
-                    />
+                    <Suspense
+                      fallback={
+                        <div className="flex justify-center py-12">
+                          <Spinner />
+                        </div>
+                      }
+                    >
+                      <PDFUploader
+                        ref={pdfPanelRef}
+                        onExtracted={setPdfContent}
+                      />
+                    </Suspense>
                   )}
                   {inputMode === 'prompt' && (
                     <PromptBuilder
@@ -238,10 +263,12 @@ export default function HomePage() {
             </>
           )}
 
-          <GenerateButton
-            getGenerationInput={getGenerationInput}
-            disabled={isGenerateDisabled}
-          />
+          <Suspense fallback={null}>
+            <GenerateButton
+              getGenerationInput={getGenerationInput}
+              disabled={isGenerateDisabled}
+            />
+          </Suspense>
         </div>
 
         {!isGenerating && (

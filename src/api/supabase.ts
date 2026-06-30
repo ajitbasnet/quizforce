@@ -29,6 +29,7 @@
 // --   percentage numeric(5,2) not null default 0
 // --   time_taken integer not null default 0
 // --   completed_at timestamptz not null default now()
+// --   feedback jsonb not null default '[]'::jsonb
 //
 // Add RLS policies and indexes (user_id, quiz_id, created_at desc) when auth is wired up.
 
@@ -38,6 +39,7 @@ import {
   type SupabaseClient,
 } from '@supabase/supabase-js'
 import type {
+  AnswerFeedback,
   Quiz,
   QuizAttempt,
   QuizQuestion,
@@ -124,6 +126,7 @@ export interface Database {
           percentage: number
           time_taken: number
           completed_at: string
+          feedback: Json
         }
         Insert: {
           id?: string
@@ -135,6 +138,7 @@ export interface Database {
           percentage?: number
           time_taken?: number
           completed_at?: string
+          feedback?: Json
         }
         Update: {
           id?: string
@@ -146,6 +150,7 @@ export interface Database {
           percentage?: number
           time_taken?: number
           completed_at?: string
+          feedback?: Json
         }
         Relationships: []
       }
@@ -232,6 +237,7 @@ function attemptToRow(attempt: QuizAttempt, userId: string): AttemptInsert {
     percentage: attempt.percentage,
     time_taken: attempt.timeTaken,
     completed_at: attempt.completedAt,
+    feedback: attempt.feedback as unknown as Json,
   }
 }
 
@@ -245,7 +251,7 @@ function rowToAttempt(row: AttemptRow): QuizAttempt {
     percentage: Number(row.percentage),
     timeTaken: row.time_taken,
     completedAt: row.completed_at,
-    feedback: [],
+    feedback: (row.feedback as unknown as AnswerFeedback[]) ?? [],
   }
 }
 
@@ -306,4 +312,35 @@ export async function getAttempt(id: string): Promise<QuizAttempt | null> {
   if (!data) return null
 
   return rowToAttempt(data)
+}
+
+export async function fetchAttemptsForUser(
+  userId: string,
+): Promise<QuizAttempt[]> {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured')
+
+  const { data, error } = await supabase
+    .from('attempts')
+    .select('*')
+    .eq('user_id', userId)
+
+  if (error) throw new Error(error.message)
+  return (data ?? []).map(rowToAttempt)
+}
+
+export async function deleteQuiz(
+  quizId: string,
+  userId: string,
+): Promise<void> {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured')
+
+  const { error } = await supabase
+    .from('quizzes')
+    .delete()
+    .eq('id', quizId)
+    .eq('user_id', userId)
+
+  if (error) throw new Error(error.message)
 }

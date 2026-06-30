@@ -45,26 +45,26 @@ export function ScoreBreakdown({ quiz, attempt }: ScoreBreakdownProps) {
         >
           {correctPct > 0 ? (
             <div
-              className="bg-green-600"
+              className="bg-success-600"
               style={{ width: `${correctPct}%` }}
             />
           ) : null}
           {incorrectPct > 0 ? (
             <div
-              className="bg-red-600"
+              className="bg-danger-600"
               style={{ width: `${incorrectPct}%` }}
             />
           ) : null}
         </div>
 
         <div className="mt-3 flex flex-col gap-1 text-sm sm:flex-row sm:justify-between">
-          <p className="text-green-600">
+          <p className="text-success-600">
             {t('results.correctBarLabel', {
               count: data.correctCount,
               points: data.correctPoints,
             })}
           </p>
-          <p className="text-red-600">
+          <p className="text-danger-600">
             {t('results.incorrectBarLabel', { count: data.incorrectCount })}
           </p>
         </div>

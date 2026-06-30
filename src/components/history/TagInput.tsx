@@ -55,8 +55,8 @@ export function TagInput({ tags, onChange, className }: TagInputProps) {
       </span>
       <div
         className={clsx(
-          'flex min-h-10 flex-wrap items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-1.5',
-          'focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20',
+          'flex min-h-10 flex-wrap items-center gap-1.5 rounded-lg border border-gray-200 bg-surface px-2 py-1.5',
+          'focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/20',
         )}
       >
         {tags.map((tag) => (

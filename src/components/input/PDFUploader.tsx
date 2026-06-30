@@ -205,16 +205,16 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
             'relative rounded-2xl border-2 border-dashed p-8 text-center transition-colors',
             isInteractive && 'cursor-pointer',
             isDragging
-              ? 'border-indigo-500 bg-indigo-100/50 animate-dash-border'
-              : 'border-indigo-200 bg-indigo-50/50',
+              ? 'border-brand-500 bg-brand-100/50 animate-dash-border'
+              : 'border-brand-100 bg-brand-50/50',
             (state === 'error' || hasSubmitError) &&
-              'border-red-200 bg-red-50/50',
-            state === 'success' && !hasSubmitError && 'border-green-200 bg-green-50/50',
+              'border-danger-100 bg-danger-50/50',
+            state === 'success' && !hasSubmitError && 'border-success-100 bg-success-50/50',
           )}
         >
           {state === 'processing' && (
             <div className="flex flex-col items-center gap-3">
-              <Spinner size="lg" className="text-indigo-600" />
+              <Spinner size="lg" className="text-brand-600" />
               <p className="text-sm font-medium text-text-primary">
                 {t('input.pdfExtracting')}
               </p>
@@ -223,7 +223,7 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
 
           {state === 'success' && file && (
             <div className="flex flex-col items-center gap-2">
-              <CheckCircle2 className="h-10 w-10 text-green-600" aria-hidden />
+              <CheckCircle2 className="h-10 w-10 text-success-600" aria-hidden />
               <p className="text-sm font-semibold text-text-primary">{file.name}</p>
               <p className="text-sm text-text-muted">
                 {t('input.pdfPageCount', { count: pageCount.toLocaleString() })}
@@ -232,14 +232,14 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
                   count: extractedText.length.toLocaleString(),
                 })}
               </p>
-              <p className="text-sm font-medium text-green-700">{t('input.pdfReady')}</p>
+              <p className="text-sm font-medium text-success-600">{t('input.pdfReady')}</p>
             </div>
           )}
 
           {state === 'error' && (
             <div className="flex flex-col items-center gap-3">
-              <XCircle className="h-10 w-10 text-red-600" aria-hidden />
-              <p className="text-sm text-red-700" role="alert">
+              <XCircle className="h-10 w-10 text-danger-600" aria-hidden />
+              <p className="text-sm text-danger-600" role="alert">
                 {errorMessage}
               </p>
               <Button
@@ -258,7 +258,7 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
 
           {(state === 'idle' || state === 'dragging') && (
             <div className="flex flex-col items-center gap-3">
-              <Upload className="h-10 w-10 text-indigo-500" aria-hidden />
+              <Upload className="h-10 w-10 text-brand-500" aria-hidden />
               <p className="text-sm font-medium text-text-primary">
                 {t('input.pdfDropzone')}
               </p>
@@ -267,7 +267,7 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
         </div>
 
         {submitValidationError && (
-          <p className="mt-2 text-sm text-red-700" role="alert">
+          <p className="mt-2 text-sm text-danger-600" role="alert">
             {submitValidationError}
           </p>
         )}

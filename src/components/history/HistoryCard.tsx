@@ -27,9 +27,9 @@ const MINI_RADIUS = (MINI_RING_SIZE - MINI_STROKE_WIDTH) / 2
 const MINI_CIRCUMFERENCE = 2 * Math.PI * MINI_RADIUS
 
 function getRingColor(pct: number): string {
-  if (pct >= 70) return 'stroke-green-600'
+  if (pct >= 70) return 'stroke-success-600'
   if (pct >= 50) return 'stroke-amber-500'
-  return 'stroke-red-600'
+  return 'stroke-danger-600'
 }
 
 const SOURCE_BADGE_CONFIG: Record<
@@ -190,7 +190,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
               type="button"
               className={clsx(
                 'rounded-full p-1 transition-colors',
-                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600',
+                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600',
                 isFavorited
                   ? 'text-amber-500'
                   : 'text-gray-300 hover:text-amber-400',
@@ -271,7 +271,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
             type="button"
             variant="ghost"
             size="sm"
-            className="text-red-600 hover:bg-red-50"
+            className="text-danger-600 hover:bg-danger-50"
             aria-label={t('history.deleteQuiz')}
             onClick={handleDelete}
           >

@@ -27,18 +27,18 @@ const STAGE_CONFIG: Record<
   1: {
     icon: Brain,
     labelKey: 'quiz.stageAnalyzing',
-    iconClass: 'text-indigo-600',
+    iconClass: 'text-brand-600',
     spin: true,
   },
   2: {
     icon: Sparkles,
     labelKey: 'quiz.stageCrafting',
-    iconClass: 'text-indigo-600',
+    iconClass: 'text-brand-600',
   },
   3: {
     icon: CheckCircle,
     labelKey: 'quiz.stageFinalizing',
-    iconClass: 'text-green-600',
+    iconClass: 'text-success-600',
   },
 }
 

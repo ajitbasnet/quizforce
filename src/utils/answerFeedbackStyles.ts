@@ -10,14 +10,14 @@ export function resolveAnswerFeedbackVariant(
 }
 
 const CONTAINER_CLASSES: Record<AnswerFeedbackVariant, string> = {
-  correct: 'border-2 border-green-500 bg-green-50',
-  wrongSelected: 'border-2 border-red-500 bg-red-50',
-  dimmed: 'border border-gray-200 bg-gray-50',
+  correct: 'border-2 border-success-500 bg-success-50',
+  wrongSelected: 'border-2 border-danger-500 bg-danger-50',
+  dimmed: 'border border-gray-200 bg-surface-muted',
 }
 
 const TEXT_CLASSES: Record<AnswerFeedbackVariant, string> = {
-  correct: 'text-green-800 font-bold',
-  wrongSelected: 'text-red-800',
+  correct: 'text-success-600 font-bold',
+  wrongSelected: 'text-danger-600',
   dimmed: 'text-gray-500',
 }
 

@@ -76,19 +76,19 @@ const FEATURES: FeatureConfig[] = [
     icon: Volume2,
     titleKey: 'home.featureVoiceTitle',
     descriptionKey: 'home.featureVoiceDescription',
-    gradientClass: 'from-indigo-50/90 via-violet-50/50 to-white',
+    gradientClass: 'from-brand-50/90 via-violet-50/50 to-white',
   },
   {
     icon: Globe,
     titleKey: 'home.featureMultilingualTitle',
     descriptionKey: 'home.featureMultilingualDescription',
-    gradientClass: 'from-blue-50/90 via-indigo-50/50 to-white',
+    gradientClass: 'from-blue-50/90 via-brand-50/50 to-white',
   },
   {
     icon: MessageSquareText,
     titleKey: 'home.featureExplanationsTitle',
     descriptionKey: 'home.featureExplanationsDescription',
-    gradientClass: 'from-purple-50/90 via-indigo-50/50 to-white',
+    gradientClass: 'from-purple-50/90 via-brand-50/50 to-white',
   },
 ]
 
@@ -111,7 +111,7 @@ function FeatureHighlightCard({
         gradientClass,
       )}
     >
-      <Icon className="mb-3 h-6 w-6 text-indigo-600" aria-hidden />
+      <Icon className="mb-3 h-6 w-6 text-brand-600" aria-hidden />
       <h3 className="text-base font-semibold text-text-primary">{title}</h3>
       <p className="mt-1 text-sm text-text-muted">{description}</p>
     </motion.div>

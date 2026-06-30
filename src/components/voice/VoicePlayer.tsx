@@ -83,7 +83,7 @@ export function VoicePlayer() {
               <span
                 key={delay}
                 className={clsx(
-                  'h-4 w-1 rounded-full bg-indigo-500',
+                  'h-4 w-1 rounded-full bg-brand-500',
                   isAnimating && 'animate-voice-wave',
                 )}
                 style={isAnimating ? { animationDelay: `${delay}ms` } : undefined}

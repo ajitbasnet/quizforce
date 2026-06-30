@@ -23,9 +23,9 @@ export interface AnswerReviewOptionProps {
 function getLetterChipClasses(variant: AnswerFeedbackVariant): string {
   switch (variant) {
     case 'correct':
-      return 'bg-green-600 text-white'
+      return 'bg-success-600 text-white'
     case 'wrongSelected':
-      return 'bg-red-600 text-white'
+      return 'bg-danger-600 text-white'
     case 'dimmed':
       return 'bg-gray-100 text-gray-500'
   }
@@ -34,9 +34,9 @@ function getLetterChipClasses(variant: AnswerFeedbackVariant): string {
 function getLabelClasses(variant: AnswerFeedbackVariant): string {
   switch (variant) {
     case 'correct':
-      return 'font-bold text-green-600'
+      return 'font-bold text-success-600'
     case 'wrongSelected':
-      return 'font-bold text-red-600'
+      return 'font-bold text-danger-600'
     case 'dimmed':
       return ''
   }
@@ -45,9 +45,9 @@ function getLabelClasses(variant: AnswerFeedbackVariant): string {
 function getExplanationClasses(variant: AnswerFeedbackVariant): string {
   switch (variant) {
     case 'correct':
-      return 'text-green-700'
+      return 'text-success-600'
     case 'wrongSelected':
-      return 'text-red-700'
+      return 'text-danger-600'
     case 'dimmed':
       return 'text-gray-500'
   }
@@ -94,12 +94,12 @@ export function AnswerReviewOption({
         </span>
         {icon === 'check' && (
           <CheckCircle2
-            className="h-5 w-5 shrink-0 text-green-600"
+            className="h-5 w-5 shrink-0 text-success-600"
             aria-hidden
           />
         )}
         {icon === 'x' && (
-          <XCircle className="h-5 w-5 shrink-0 text-red-600" aria-hidden />
+          <XCircle className="h-5 w-5 shrink-0 text-danger-600" aria-hidden />
         )}
       </div>
       {explanation && (

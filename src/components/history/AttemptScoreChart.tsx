@@ -85,7 +85,7 @@ export function AttemptScoreChart({ attempts }: AttemptScoreChartProps) {
           <path
             d={linePath}
             fill="none"
-            className="stroke-indigo-500"
+            className="stroke-brand-500"
             strokeWidth={2}
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -98,7 +98,7 @@ export function AttemptScoreChart({ attempts }: AttemptScoreChartProps) {
               cx={x}
               cy={y}
               r={6}
-              className="fill-indigo-500 stroke-white"
+              className="fill-brand-500 stroke-white"
               strokeWidth={2}
             />
             <title>

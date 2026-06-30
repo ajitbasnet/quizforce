@@ -155,7 +155,7 @@ export default function HistoryPage() {
           <Button
             type="button"
             variant="ghost"
-            className="text-red-600 hover:bg-red-50"
+            className="text-danger-600 hover:bg-danger-50"
             disabled={quizzes.length === 0}
             onClick={() => setClearModalOpen(true)}
           >

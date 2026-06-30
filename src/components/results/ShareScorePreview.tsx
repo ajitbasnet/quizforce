@@ -15,7 +15,7 @@ export function ShareScorePreview({ attempt, quiz }: ShareScorePreviewProps) {
 
   return (
     <div
-      className="w-[320px] max-w-full overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-700 p-6 text-white shadow-lg"
+      className="w-[320px] max-w-full overflow-hidden rounded-2xl bg-gradient-to-br from-brand-600 to-brand-700 p-6 text-white shadow-lg"
       aria-hidden="true"
     >
       <div className="flex items-center gap-2">

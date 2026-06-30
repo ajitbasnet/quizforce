@@ -123,7 +123,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-indigo-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+        className="inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t('settings.language')}
@@ -143,7 +143,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
           aria-label={t('settings.language')}
           tabIndex={-1}
           onKeyDown={handleListKeyDown}
-          className="absolute right-0 top-full z-50 mt-1 min-w-[240px] rounded-lg border border-gray-100 bg-white py-1 shadow-lg focus:outline-none"
+          className="absolute right-0 top-full z-50 mt-1 min-w-[240px] rounded-lg border border-gray-100 bg-surface py-1 shadow-lg focus:outline-none"
         >
           {LANGUAGE_OPTIONS.map((option, index) => {
             const isSelected = option.code === currentLang
@@ -158,7 +158,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
                 className={clsx(
                   'flex w-full items-center gap-3 px-3 py-2 text-left text-sm transition-colors',
                   isHighlighted && 'bg-gray-50',
-                  isSelected && 'bg-indigo-50 text-indigo-600',
+                  isSelected && 'bg-brand-50 text-brand-600',
                   !isSelected && 'text-text-primary hover:bg-gray-50',
                 )}
                 onMouseEnter={() => setHighlightIndex(index)}
@@ -174,7 +174,7 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
                   </span>
                 </span>
                 {isSelected && (
-                  <Check className="h-4 w-4 shrink-0 text-indigo-600" aria-hidden />
+                  <Check className="h-4 w-4 shrink-0 text-brand-600" aria-hidden />
                 )}
               </button>
             )

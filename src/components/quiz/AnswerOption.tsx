@@ -33,15 +33,15 @@ function getLetterChipClasses(
   if (isSubmitted && variant) {
     switch (variant) {
       case 'correct':
-        return 'bg-green-600 text-white'
+        return 'bg-success-600 text-white'
       case 'wrongSelected':
-        return 'bg-red-600 text-white'
+        return 'bg-danger-600 text-white'
       case 'dimmed':
         return 'bg-gray-100 text-gray-500'
     }
   }
   if (isSelected) {
-    return 'bg-indigo-600 text-white'
+    return 'bg-brand-600 text-white'
   }
   return 'bg-gray-100 text-gray-700'
 }
@@ -49,9 +49,9 @@ function getLetterChipClasses(
 function getLabelClasses(variant: AnswerFeedbackVariant): string {
   switch (variant) {
     case 'correct':
-      return 'font-bold text-green-600'
+      return 'font-bold text-success-600'
     case 'wrongSelected':
-      return 'font-bold text-red-600'
+      return 'font-bold text-danger-600'
     case 'dimmed':
       return ''
   }
@@ -60,9 +60,9 @@ function getLabelClasses(variant: AnswerFeedbackVariant): string {
 function getExplanationClasses(variant: AnswerFeedbackVariant): string {
   switch (variant) {
     case 'correct':
-      return 'text-green-700'
+      return 'text-success-600'
     case 'wrongSelected':
-      return 'text-red-700'
+      return 'text-danger-600'
     case 'dimmed':
       return 'text-gray-500'
   }
@@ -77,9 +77,9 @@ function getButtonClasses(
     return getAnswerFeedbackContainerClasses(variant)
   }
   if (isSelected) {
-    return 'border-indigo-600 bg-indigo-50'
+    return 'border-brand-600 bg-brand-50'
   }
-  return 'border-gray-200 bg-white hover:border-indigo-400 hover:bg-indigo-50'
+  return 'border-gray-200 bg-surface hover:border-brand-500 hover:bg-brand-50'
 }
 
 export function AnswerOption({
@@ -123,7 +123,7 @@ export function AnswerOption({
       onFocus={handleVoiceRead}
       className={clsx(
         'flex min-h-11 w-full flex-col rounded-lg border px-4 py-3 text-left transition-colors duration-150',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
         getButtonClasses(isSelected, isSubmitted, variant),
       )}
     >
@@ -150,16 +150,16 @@ export function AnswerOption({
           {option.text}
         </span>
         {showSelectedCheck && (
-          <Check className="h-5 w-5 shrink-0 text-indigo-600" aria-hidden />
+          <Check className="h-5 w-5 shrink-0 text-brand-600" aria-hidden />
         )}
         {icon === 'check' && (
           <CheckCircle2
-            className="h-5 w-5 shrink-0 text-green-600"
+            className="h-5 w-5 shrink-0 text-success-600"
             aria-hidden
           />
         )}
         {icon === 'x' && (
-          <XCircle className="h-5 w-5 shrink-0 text-red-600" aria-hidden />
+          <XCircle className="h-5 w-5 shrink-0 text-danger-600" aria-hidden />
         )}
       </div>
       {isSubmitted && feedback && variant && (

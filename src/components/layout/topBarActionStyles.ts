@@ -1,11 +1,11 @@
 const TOP_BAR_ACTION_BASE = [
   'transition-[color,background-color,box-shadow,transform] duration-200 ease-out',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 focus-visible:ring-offset-0',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-0',
   'active:scale-[0.97]',
 ].join(' ')
 
 const TOP_BAR_ACTION_HOVER =
-  'hover:bg-indigo-50 hover:text-indigo-700'
+  'hover:bg-brand-50 hover:text-brand-700'
 
 export const topBarIconButtonClass = [
   'inline-flex items-center justify-center rounded-lg p-2 text-sm font-medium',
@@ -30,8 +30,8 @@ export function topBarNavLinkClass(isActive: boolean, iconOnly = false) {
     return [
       layout,
       TOP_BAR_ACTION_BASE,
-      'bg-indigo-50 text-indigo-600',
-      'hover:bg-indigo-100/80 hover:text-indigo-700',
+      'bg-brand-50 text-brand-600',
+      'hover:bg-brand-100/80 hover:text-brand-700',
     ].join(' ')
   }
 
@@ -43,7 +43,7 @@ export function topBarNavLinkClass(isActive: boolean, iconOnly = false) {
 export function topBarToggleClass(isActive: boolean) {
   return [
     topBarIconButtonClass,
-    isActive && 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100/80',
+    isActive && 'bg-brand-50 text-brand-600 hover:bg-brand-100/80',
   ]
     .filter(Boolean)
     .join(' ')

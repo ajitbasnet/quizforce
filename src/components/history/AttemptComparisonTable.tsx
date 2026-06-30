@@ -64,7 +64,7 @@ export function AttemptComparisonTable({
                   key={attempt.id}
                   className={clsx(
                     'cursor-pointer border-b border-gray-50 transition-colors last:border-0 hover:bg-gray-50',
-                    isBest && 'bg-green-50 hover:bg-green-50/80',
+                    isBest && 'bg-success-50 hover:bg-success-50/80',
                   )}
                   onClick={() => navigate(`/results/${attempt.id}`)}
                 >

@@ -71,7 +71,7 @@ export function RangeSlider({
         aria-invalid={!!error}
         aria-describedby={describedBy}
         className={clsx(
-          'h-2 w-full cursor-pointer accent-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2',
+          'h-2 w-full cursor-pointer accent-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2',
           error && controlErrorClass,
         )}
       />

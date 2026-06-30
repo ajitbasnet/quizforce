@@ -24,9 +24,9 @@ const RADIUS = (RING_SIZE - STROKE_WIDTH) / 2
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
 function getRingColor(pct: number): string {
-  if (pct >= 70) return 'stroke-green-600'
+  if (pct >= 70) return 'stroke-success-600'
   if (pct >= 50) return 'stroke-amber-500'
-  return 'stroke-red-600'
+  return 'stroke-danger-600'
 }
 
 interface StatCardProps {
@@ -94,7 +94,7 @@ export function ScorePanel({
       >
         <span
           aria-hidden
-          className="font-display text-6xl font-bold text-indigo-600 tabular-nums"
+          className="font-display text-6xl font-bold text-brand-600 tabular-nums"
         >
           {animatedScore}
         </span>

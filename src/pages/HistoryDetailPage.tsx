@@ -102,7 +102,7 @@ export default function HistoryDetailPage() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-red-600 hover:bg-red-50"
+              className="text-danger-600 hover:bg-danger-50"
               aria-label={t('history.deleteQuiz')}
               onClick={() => setDeleteModalOpen(true)}
             >
@@ -120,7 +120,7 @@ export default function HistoryDetailPage() {
               type="button"
               className={clsx(
                 'shrink-0 rounded-full p-2 transition-colors',
-                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600',
+                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600',
                 isFavorited
                   ? 'text-amber-500'
                   : 'text-gray-300 hover:text-amber-400',

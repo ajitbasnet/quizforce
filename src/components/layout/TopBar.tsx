@@ -48,9 +48,9 @@ export function TopBar() {
     <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center gap-4 border-b border-gray-100 bg-white/80 px-4 backdrop-blur-md lg:px-6">
       <Link
         to="/"
-        className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+        className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
       >
-        <Zap className="h-6 w-6 text-indigo-600" aria-hidden />
+        <Zap className="h-6 w-6 text-brand-600" aria-hidden />
         <span className="text-lg font-bold text-text-primary">{t('app.name')}</span>
       </Link>
 
@@ -61,7 +61,7 @@ export function TopBar() {
       <div className="ml-auto hidden items-center gap-2 lg:flex">
         {isHistorySyncing && (
           <span className="flex items-center gap-1.5 text-xs text-text-muted">
-            <Spinner size="sm" className="text-indigo-600" />
+            <Spinner size="sm" className="text-brand-600" />
             {t('history.syncing')}
           </span>
         )}

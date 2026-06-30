@@ -101,9 +101,9 @@ export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
             tabIndex={active ? 0 : -1}
             className={clsx(
               'relative flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
               active
-                ? 'text-indigo-600'
+                ? 'text-brand-600'
                 : 'text-text-muted hover:text-text-primary',
             )}
             onClick={() => selectMode(tabMode)}
@@ -113,7 +113,7 @@ export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
             {active && (
               <motion.div
                 layoutId="input-mode-tab-underline"
-                className="absolute inset-x-0 bottom-0 h-0.5 bg-indigo-600"
+                className="absolute inset-x-0 bottom-0 h-0.5 bg-brand-600"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}

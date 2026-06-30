@@ -242,12 +242,12 @@ export function QuestionReviewCard({
       >
         {feedback.isCorrect ? (
           <motion.div
-            className="border-l-4 border-green-500 bg-green-50 py-3 pl-4"
+            className="border-l-4 border-success-500 bg-success-50 py-3 pl-4"
             variants={explanationVariants}
             initial={skipAnimation ? 'visible' : 'hidden'}
             animate={showExplanation ? 'visible' : 'hidden'}
           >
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-success-600">
               <span className="sr-only">{t('quiz.explanation')}:</span>
               <span className="font-semibold">
                 ✓ {t('results.whyCorrect')}
@@ -258,12 +258,12 @@ export function QuestionReviewCard({
         ) : (
           <>
             <motion.div
-              className="border-l-4 border-red-500 bg-red-50 py-3 pl-4"
+              className="border-l-4 border-danger-500 bg-danger-50 py-3 pl-4"
               variants={explanationVariants}
               initial={skipAnimation ? 'visible' : 'hidden'}
               animate={showExplanation ? 'visible' : 'hidden'}
             >
-              <p className="text-sm text-red-800">
+              <p className="text-sm text-danger-600">
                 <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">
                   ✗ {t('results.whyWrong')}
@@ -272,12 +272,12 @@ export function QuestionReviewCard({
               </p>
             </motion.div>
             <motion.div
-              className="border-l-4 border-green-500 bg-green-50 py-3 pl-4"
+              className="border-l-4 border-success-500 bg-success-50 py-3 pl-4"
               variants={explanationVariants}
               initial={skipAnimation ? 'visible' : 'hidden'}
               animate={showExplanation ? 'visible' : 'hidden'}
             >
-              <p className="text-sm text-green-800">
+              <p className="text-sm text-success-600">
                 <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">✓ </span>
                 {t('results.correctAnswerIs', {

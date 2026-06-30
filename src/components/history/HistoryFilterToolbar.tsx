@@ -62,9 +62,9 @@ export function HistoryFilterToolbar({
                   aria-pressed={active}
                   className={clsx(
                     'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
                     active
-                      ? 'bg-indigo-600 text-white'
+                      ? 'bg-brand-600 text-white'
                       : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary',
                   )}
                   onClick={() => onFiltersChange({ type })}
@@ -81,7 +81,7 @@ export function HistoryFilterToolbar({
               aria-pressed={filters.starred}
               className={clsx(
                 'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
                 filters.starred
                   ? 'bg-amber-500 text-white'
                   : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary',

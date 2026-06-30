@@ -60,8 +60,8 @@ function navLinkClass(isActive: boolean, showCollapsed: boolean) {
     'flex items-center rounded-lg text-sm font-medium transition-colors',
     showCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
     isActive
-      ? 'bg-indigo-50 text-indigo-600'
-      : 'text-text-muted hover:bg-gray-50 hover:text-text-primary',
+      ? 'bg-brand-50 text-brand-600'
+      : 'text-text-muted hover:bg-surface-muted hover:text-text-primary',
   )
 }
 
@@ -127,7 +127,7 @@ export function Sidebar() {
           <button
             type="button"
             onClick={toggleCollapsed}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-gray-50 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface-muted hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
             aria-label={t('nav.toggleSidebar')}
           >
             {isCollapsed ? (

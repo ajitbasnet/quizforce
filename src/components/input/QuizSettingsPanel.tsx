@@ -160,7 +160,7 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
                     className={clsx(
                       'flex-1 rounded-md px-2 py-1.5 text-sm font-medium transition-colors',
                       watch('difficulty') === option
-                        ? 'bg-white text-indigo-600 shadow-sm'
+                        ? 'bg-surface text-brand-600 shadow-sm'
                         : 'text-text-muted hover:text-text-primary',
                     )}
                     onClick={() =>
@@ -201,8 +201,8 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
                   setValue('voiceEnabled', !voiceEnabled, { shouldDirty: true })
                 }
                 className={clsx(
-                  'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2',
-                  voiceEnabled ? 'bg-indigo-600' : 'bg-gray-200',
+                  'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2',
+                  voiceEnabled ? 'bg-brand-600' : 'bg-gray-200',
                 )}
               >
                 <span

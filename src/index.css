@@ -106,8 +106,8 @@
     margin: 1cm;
   }
 
-  .border-l-4.bg-green-50,
-  .border-l-4.bg-red-50 {
+  .border-l-4.bg-success-50,
+  .border-l-4.bg-danger-50 {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

@@ -142,7 +142,7 @@ export function QuestionBlock({
         </Badge>
         {voiceEnabled && isSpeaking && (
           <>
-            <span className="text-sm text-indigo-600">
+            <span className="text-sm text-brand-600">
               🔊 {t('voice.reading')}
             </span>
             <Button

@@ -3,6 +3,13 @@ import { defineConfig, devices } from '@playwright/test'
 const previewPort = 4173
 const baseURL = `http://localhost:${previewPort}`
 
+const responsiveViewports = [
+  { name: 'iphone-14', width: 375, height: 812 },
+  { name: 'ipad', width: 768, height: 1024 },
+  { name: 'laptop', width: 1280, height: 800 },
+  { name: 'desktop', width: 1920, height: 1080 },
+] as const
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -14,8 +21,22 @@ export default defineConfig({
   use: {
     baseURL,
     trace: 'on-first-retry',
-    ...devices['Desktop Chrome'],
   },
+  projects: [
+    {
+      name: 'chromium',
+      testIgnore: /responsive\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    ...responsiveViewports.map((viewport) => ({
+      name: `responsive-${viewport.name}`,
+      testMatch: /responsive\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: viewport.width, height: viewport.height },
+      },
+    })),
+  ],
   webServer: {
     command: `npm run build && npm run preview -- --port ${previewPort}`,
     url: baseURL,

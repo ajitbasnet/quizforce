@@ -1,0 +1,80 @@
+{
+  "quiz": {
+    "id": "e2e-responsive-quiz",
+    "title": "Industrial Revolution Quiz",
+    "description": "Test your knowledge of the Industrial Revolution.",
+    "questions": [
+      {
+        "id": "q1",
+        "questionText": "Where did the Industrial Revolution begin?",
+        "options": [
+          { "id": "q1-a", "text": "Britain" },
+          { "id": "q1-b", "text": "France" }
+        ],
+        "correctOptionId": "q1-a",
+        "explanation": "The Industrial Revolution began in Britain in the late eighteenth century.",
+        "wrongExplanations": { "q1-b": "France industrialized later than Britain." },
+        "points": 20,
+        "difficulty": "easy"
+      },
+      {
+        "id": "q2",
+        "questionText": "Which invention greatly improved steam engine efficiency?",
+        "options": [
+          { "id": "q2-a", "text": "James Watt's steam engine improvements" },
+          { "id": "q2-b", "text": "The spinning jenny" }
+        ],
+        "correctOptionId": "q2-a",
+        "explanation": "James Watt's improvements made steam power practical for factories.",
+        "wrongExplanations": { "q2-b": "The spinning jenny was a textile invention." },
+        "points": 20,
+        "difficulty": "medium"
+      }
+    ],
+    "totalPoints": 40,
+    "language": "en",
+    "createdAt": "2026-06-30T12:00:00.000Z",
+    "sourceType": "text",
+    "sourceContent": "The Industrial Revolution began in Britain...",
+    "settings": {
+      "pointsPerQuestion": 20,
+      "customPointsMap": {},
+      "questionsCount": 2,
+      "difficulty": "mixed",
+      "voiceEnabled": false,
+      "voiceRate": 1,
+      "voicePitch": 1,
+      "voiceURI": null,
+      "timerEnabled": false,
+      "language": "en"
+    },
+    "isFavorited": false,
+    "tags": []
+  },
+  "attempt": {
+    "id": "e2e-responsive-attempt",
+    "quizId": "e2e-responsive-quiz",
+    "answers": { "q1": "q1-a", "q2": "q2-a" },
+    "score": 40,
+    "totalPoints": 40,
+    "percentage": 100,
+    "completedAt": "2026-06-30T12:05:00.000Z",
+    "timeTaken": 120,
+    "feedback": [
+      {
+        "questionId": "q1",
+        "selectedOptionId": "q1-a",
+        "isCorrect": true,
+        "explanation": "The Industrial Revolution began in Britain in the late eighteenth century.",
+        "pointsAwarded": 20
+      },
+      {
+        "questionId": "q2",
+        "selectedOptionId": "q2-a",
+        "isCorrect": true,
+        "explanation": "James Watt's improvements made steam power practical for factories.",
+        "pointsAwarded": 20
+      }
+    ]
+  }
+}

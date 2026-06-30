@@ -14,6 +14,7 @@ import { QuickSettingsProvider } from '../../hooks/useQuickSettings'
 import { ShortcutHelpProvider, useShortcutHelp } from '../../hooks/useShortcutHelp'
 import { useLanguage } from '../../hooks/useLanguage'
 import { SidebarProvider, useSidebar } from './SidebarContext'
+import { ResponsiveTest } from '../dev/ResponsiveTest'
 import { VoiceUnsupportedNotifier } from '../voice/VoiceUnsupportedNotifier'
 import { OfflineBanner } from './OfflineBanner'
 import { Sidebar } from './Sidebar'
@@ -61,6 +62,7 @@ function AppShellLayout() {
         context={shortcutContext}
       />
       <VoiceUnsupportedNotifier />
+      {import.meta.env.DEV && <ResponsiveTest />}
     </div>
   )
 }

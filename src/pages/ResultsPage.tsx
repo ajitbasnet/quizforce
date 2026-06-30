@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getAttempt, isSupabaseConfigured } from '../api/supabase'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import { PageMeta } from '../components/seo/PageMeta'
 import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
@@ -255,6 +256,7 @@ export default function ResultsPage() {
   if (hasInvalidShareData) {
     return (
       <PageWrapper>
+        <PageMeta title="Your Results — QuizForge" />
         <Card className="mx-auto max-w-md text-center">
           <p className="text-text-primary">{t('errors.attemptNotFound')}</p>
           <Button className="mt-4" onClick={() => navigate('/')}>
@@ -269,6 +271,7 @@ export default function ResultsPage() {
     if (!remoteFetchSettled || isLoadingRemote) {
       return (
         <PageWrapper>
+          <PageMeta title="Your Results — QuizForge" />
           <div className="mx-auto w-full max-w-4xl">
             <ScorePanelSkeleton />
           </div>
@@ -278,6 +281,7 @@ export default function ResultsPage() {
 
     return (
       <PageWrapper>
+        <PageMeta title="Your Results — QuizForge" />
         <Card className="mx-auto max-w-md text-center">
           <p className="text-text-primary">{t('errors.attemptNotFound')}</p>
           <Button className="mt-4" onClick={() => navigate('/')}>
@@ -288,8 +292,13 @@ export default function ResultsPage() {
     )
   }
 
+  const resultsTitle = quiz
+    ? `Your Results: ${quiz.title} — QuizForge`
+    : 'Your Results — QuizForge'
+
   return (
     <PageWrapper title={t('results.title')}>
+      <PageMeta title={resultsTitle} />
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
         {isShowingCachedBanner ? <CachedResultsBanner /> : null}
 

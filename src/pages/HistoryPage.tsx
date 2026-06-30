@@ -9,6 +9,7 @@ import { HistoryEmptyState } from '../components/history/HistoryEmptyState'
 import { HistoryFilterToolbar } from '../components/history/HistoryFilterToolbar'
 import { HistoryStatsBar } from '../components/history/HistoryStatsBar'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import { PageMeta } from '../components/seo/PageMeta'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { useToast } from '../components/ui/Toast'
@@ -189,6 +190,7 @@ export default function HistoryPage() {
         </div>
       }
     >
+      <PageMeta title="Quiz History — QuizForge" />
       <HistoryStatsBar stats={stats} />
 
       {quizzes.length > 0 && (

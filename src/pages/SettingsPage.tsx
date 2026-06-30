@@ -5,6 +5,7 @@ import { DataPrivacySection } from '../components/settings/DataPrivacySection'
 import { QuizDefaultsSection } from '../components/settings/QuizDefaultsSection'
 import { VoiceSettingsSection } from '../components/settings/VoiceSettingsSection'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import { PageMeta } from '../components/seo/PageMeta'
 import { useLanguage } from '../hooks/useLanguage'
 
 const SECTION_IDS = ['defaults', 'voice', 'appearance', 'data'] as const
@@ -27,6 +28,7 @@ export default function SettingsPage() {
 
   return (
     <PageWrapper title={t('settings.title')}>
+      <PageMeta title="Settings — QuizForge" />
       <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
         <nav
           aria-label={t('settings.title')}

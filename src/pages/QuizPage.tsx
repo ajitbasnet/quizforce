@@ -3,6 +3,7 @@ import { ArrowLeft, CircleHelp } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
+import { PageMeta } from '../components/seo/PageMeta'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
 import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
@@ -208,6 +209,8 @@ export default function QuizPage() {
 
   if (currentQuiz.questions.length === 0) {
     return (
+      <>
+        <PageMeta title={`${currentQuiz.title} — QuizForge`} />
       <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
         <Card className="max-w-md text-center">
           <p>{t('quiz.noQuestionsGenerated')}</p>
@@ -220,6 +223,7 @@ export default function QuizPage() {
           </Button>
         </Card>
       </div>
+      </>
     )
   }
 
@@ -231,6 +235,8 @@ export default function QuizPage() {
   )
 
   return (
+    <>
+      <PageMeta title={`${currentQuiz.title} — QuizForge`} />
     <div className="flex min-h-[calc(100vh-4rem)] flex-col overflow-x-hidden px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <div className="mx-auto w-full max-w-5xl lg:grid lg:grid-cols-[minmax(0,48rem)_17rem] lg:items-start lg:gap-8">
         <div className="flex min-w-0 flex-1 flex-col gap-6">
@@ -387,5 +393,6 @@ export default function QuizPage() {
 
       <VoicePlayer />
     </div>
+    </>
   )
 }

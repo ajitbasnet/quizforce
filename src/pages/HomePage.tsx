@@ -17,6 +17,7 @@ import {
 } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import { PageMeta } from '../components/seo/PageMeta'
 import {
   InputModeTabs,
   type InputMode,
@@ -201,8 +202,19 @@ export default function HomePage() {
     }
   }, [inputMode, textContent, pdfContent, promptTopic])
 
+  const pageTitle = 'QuizForge — Turn Any Content Into a Quiz'
+
   return (
     <PageWrapper>
+      <PageMeta
+        title={pageTitle}
+        openGraph={{
+          title: pageTitle,
+          description: t('home.heroSubtitle'),
+          image: '/og-image.png',
+          type: 'website',
+        }}
+      />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[11fr_9fr]">
         <div className="flex flex-col gap-6">
           {!isGenerating && (

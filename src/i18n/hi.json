@@ -222,7 +222,21 @@
     "duration": "अवधि",
     "viewDetails": "विवरण देखें",
     "backToHistory": "इतिहास पर वापस जाएँ",
-    "attemptDate": "{{date}} को प्रयास किया गया"
+    "attemptDate": "{{date}} को प्रयास किया गया",
+    "notAttempted": "प्रयास नहीं किया",
+    "retake": "फिर से लें",
+    "viewResults": "परिणाम देखें",
+    "deleteQuiz": "क्विज़ हटाएँ",
+    "sourceText": "टेक्स्ट",
+    "sourcePdf": "PDF",
+    "sourcePrompt": "प्रॉम्प्ट",
+    "sourceUrl": "URL",
+    "questionsCount": "{{count}} प्रश्न",
+    "pointsCount": "{{pts}} अंक",
+    "statsTotalQuizzes": "बनाए गए क्विज़",
+    "statsQuestionsAnswered": "उत्तर दिए गए प्रश्न",
+    "statsBestScore": "सर्वश्रेष्ठ स्कोर",
+    "statsAverageScore": "औसत स्कोर"
   },
   "feedback": {
     "correctAnswer": "सही उत्तर",

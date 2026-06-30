@@ -222,7 +222,21 @@
     "duration": "时长",
     "viewDetails": "查看详情",
     "backToHistory": "返回历史记录",
-    "attemptDate": "测验日期：{{date}}"
+    "attemptDate": "测验日期：{{date}}",
+    "notAttempted": "尚未尝试",
+    "retake": "重新测验",
+    "viewResults": "查看结果",
+    "deleteQuiz": "删除测验",
+    "sourceText": "文本",
+    "sourcePdf": "PDF",
+    "sourcePrompt": "提示词",
+    "sourceUrl": "URL",
+    "questionsCount": "{{count}} 道题",
+    "pointsCount": "{{pts}} 分",
+    "statsTotalQuizzes": "已创建测验",
+    "statsQuestionsAnswered": "已答题目",
+    "statsBestScore": "最高分",
+    "statsAverageScore": "平均分"
   },
   "feedback": {
     "correctAnswer": "正确答案",

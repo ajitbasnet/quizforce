@@ -222,7 +222,21 @@
     "duration": "अवधि",
     "viewDetails": "विवरण हेर्नुहोस्",
     "backToHistory": "इतिहासमा फर्कनुहोस्",
-    "attemptDate": "{{date}} मा प्रयास गरियो"
+    "attemptDate": "{{date}} मा प्रयास गरियो",
+    "notAttempted": "प्रयास गरिएको छैन",
+    "retake": "फेरि लिनुहोस्",
+    "viewResults": "नतिजा हेर्नुहोस्",
+    "deleteQuiz": "क्विज मेटाउनुहोस्",
+    "sourceText": "पाठ",
+    "sourcePdf": "PDF",
+    "sourcePrompt": "प्रम्प्ट",
+    "sourceUrl": "URL",
+    "questionsCount": "{{count}} प्रश्नहरू",
+    "pointsCount": "{{pts}} अङ्क",
+    "statsTotalQuizzes": "सिर्जना गरिएका क्विजहरू",
+    "statsQuestionsAnswered": "उत्तर दिइएका प्रश्नहरू",
+    "statsBestScore": "उत्कृष्ट स्कोर",
+    "statsAverageScore": "औसत स्कोर"
   },
   "feedback": {
     "correctAnswer": "सही उत्तर",

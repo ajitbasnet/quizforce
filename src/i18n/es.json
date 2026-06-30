@@ -222,7 +222,21 @@
     "duration": "Duración",
     "viewDetails": "Ver detalles",
     "backToHistory": "Volver al historial",
-    "attemptDate": "Realizado el {{date}}"
+    "attemptDate": "Realizado el {{date}}",
+    "notAttempted": "Sin intentar",
+    "retake": "Repetir",
+    "viewResults": "Ver resultados",
+    "deleteQuiz": "Eliminar cuestionario",
+    "sourceText": "Texto",
+    "sourcePdf": "PDF",
+    "sourcePrompt": "Prompt",
+    "sourceUrl": "URL",
+    "questionsCount": "{{count}} preguntas",
+    "pointsCount": "{{pts}} pts",
+    "statsTotalQuizzes": "Cuestionarios creados",
+    "statsQuestionsAnswered": "Preguntas respondidas",
+    "statsBestScore": "Mejor puntuación",
+    "statsAverageScore": "Puntuación media"
   },
   "feedback": {
     "correctAnswer": "Respuesta correcta",

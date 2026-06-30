@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { CheckCircle2, XCircle } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
+import { FormattedText } from '../../utils/markdownLite'
 import {
   getAnswerFeedbackContainerClasses,
   getAnswerFeedbackIcon,
@@ -80,17 +81,22 @@ export function AnswerReviewOption({
           {t(labelKey)}
         </p>
       )}
-      <div className="flex w-full items-center gap-3">
+      <div className="flex w-full items-start gap-3">
         <span
           className={clsx(
-            'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold',
+            'mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold',
             getLetterChipClasses(variant),
           )}
         >
           {letter}
         </span>
-        <span className={clsx('flex-1', getAnswerFeedbackTextClasses(variant))}>
-          {text}
+        <span
+          className={clsx(
+            'flex-1 break-words',
+            getAnswerFeedbackTextClasses(variant),
+          )}
+        >
+          <FormattedText text={text} />
         </span>
         {icon === 'check' && (
           <CheckCircle2
@@ -109,7 +115,7 @@ export function AnswerReviewOption({
             getExplanationClasses(variant),
           )}
         >
-          {explanation}
+          <FormattedText text={explanation} />
         </p>
       )}
     </div>

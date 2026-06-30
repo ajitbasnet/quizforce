@@ -5,6 +5,7 @@ import { Check, CheckCircle2, XCircle } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useVoice } from '../../hooks/useVoice'
 import type { QuizOption, SupportedLanguage } from '../../types/quiz'
+import { FormattedText } from '../../utils/markdownLite'
 import {
   getAnswerFeedbackContainerClasses,
   getAnswerFeedbackIcon,
@@ -151,10 +152,10 @@ function AnswerOptionInner({
           {t(labelKey)}
         </p>
       )}
-      <div className="relative z-10 flex w-full items-center gap-3">
+      <div className="relative z-10 flex w-full items-start gap-3">
         <span
           className={clsx(
-            'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold',
+            'mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold',
             getLetterChipClasses(isSelected, isSubmitted, variant),
           )}
         >
@@ -162,11 +163,11 @@ function AnswerOptionInner({
         </span>
         <span
           className={clsx(
-            'flex-1',
+            'flex-1 break-words',
             variant && getAnswerFeedbackTextClasses(variant),
           )}
         >
-          {option.text}
+          <FormattedText text={option.text} />
         </span>
         {showSelectedCheck && (
           <Check className="h-5 w-5 shrink-0 text-brand-600" aria-hidden />
@@ -186,7 +187,7 @@ function AnswerOptionInner({
           id={feedbackId}
           className={clsx('relative z-10 mt-2 pl-11 text-sm', getExplanationClasses(variant))}
         >
-          {feedback}
+          <FormattedText text={feedback} />
         </p>
       )}
     </motion.button>

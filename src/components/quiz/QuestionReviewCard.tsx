@@ -11,6 +11,7 @@ import {
 import { useVoice } from '../../hooks/useVoice'
 import type { AnswerFeedback, QuizQuestion, SupportedLanguage } from '../../types/quiz'
 import type { AnswerFeedbackVariant } from '../../utils/answerFeedbackStyles'
+import { FormattedText } from '../../utils/markdownLite'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { AnswerReviewOption } from './AnswerReviewOption'
@@ -178,7 +179,7 @@ export function QuestionReviewCard({
         id={questionTitleId}
         className="mt-2 text-lg font-semibold leading-relaxed text-text-primary"
       >
-        {question.questionText}
+        <FormattedText text={question.questionText} />
       </h3>
 
       {!previewMode && voiceEnabled && isSupported && (

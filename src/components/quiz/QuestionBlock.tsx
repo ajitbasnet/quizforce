@@ -1,9 +1,15 @@
+import clsx from 'clsx'
 import { Settings } from 'lucide-react'
 import { memo, useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
+import {
+  LG_MEDIA_QUERY,
+  useMediaQuery,
+} from '../../hooks/useMediaQuery'
 import { useVoice } from '../../hooks/useVoice'
 import { useQuizStore } from '../../store/quizStore'
 import type { QuizQuestion, SupportedLanguage } from '../../types/quiz'
+import { FormattedText } from '../../utils/markdownLite'
 import { getOptionFeedback } from '../../utils/quizFeedback'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
@@ -59,6 +65,8 @@ function QuestionBlockInner({
   language,
 }: QuestionBlockProps) {
   const { t } = useLanguage()
+  const isDesktop = useMediaQuery(LG_MEDIA_QUERY)
+  const isLong = question.questionText.length > 300
   const { speakQuestionThenOptions, stop, isSpeaking } = useVoice()
   const customPointsMap = useQuizStore(
     (s) => s.currentQuiz?.settings.customPointsMap ?? {},
@@ -169,9 +177,14 @@ function QuestionBlockInner({
         )}
       </div>
 
-      <p className="py-4 text-xl font-semibold leading-relaxed text-text-primary">
-        {question.questionText}
-      </p>
+      <div
+        className={clsx(
+          'py-4 text-xl font-semibold leading-relaxed text-text-primary',
+          isLong && isDesktop && 'max-h-48 overflow-y-auto',
+        )}
+      >
+        <FormattedText text={question.questionText} />
+      </div>
 
       <div ref={pointsRef} className="relative w-fit">
         <Button

@@ -378,6 +378,13 @@
     "zeroQuestions": "Couldn't generate questions from this content. Try adding more detailed text.",
     "tryAgain": "Try Again"
   },
+  "onboarding": {
+    "welcomeTitle": "Welcome to QuizForge!",
+    "tipVoice": "Turn on voice narration in Settings to have questions read aloud.",
+    "tipLanguage": "Generate quizzes in 7 languages — pick one when creating a quiz.",
+    "tipHistory": "Every quiz you create is saved in History so you can retake or review scores.",
+    "gotIt": "Got it!"
+  },
   "voice": {
     "enable": "Enable voice",
     "disable": "Disable voice",

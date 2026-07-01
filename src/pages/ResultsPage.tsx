@@ -11,6 +11,7 @@ import { ScorePanel } from '../components/quiz/ScorePanel'
 import { ScorePanelSkeleton } from '../components/quiz/ScorePanelSkeleton'
 import { CachedResultsBanner } from '../components/results/CachedResultsBanner'
 import { ExportResultsDropdown } from '../components/results/ExportResultsDropdown'
+import { OnboardingWelcomeModal } from '../components/onboarding/OnboardingWelcomeModal'
 import { HighScoreCelebration } from '../components/results/HighScoreCelebration'
 import { ScoreBreakdown } from '../components/results/ScoreBreakdown'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
@@ -19,6 +20,7 @@ import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { useToast } from '../components/ui/Toast'
 import { useLanguage } from '../hooks/useLanguage'
+import { hasOnboarded, markOnboarded } from '../hooks/useOnboarding'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useResultsVoiceReading } from '../hooks/useResultsVoiceReading'
@@ -58,6 +60,7 @@ export default function ResultsPage() {
   const resetAttempt = useQuizStore((s) => s.resetAttempt)
   const setCompletedAttempt = useQuizStore((s) => s.setCompletedAttempt)
   const getAttemptById = useHistoryStore((s) => s.getAttemptById)
+  const historyAttempts = useHistoryStore((s) => s.attempts)
   const historyQuizzes = useHistoryStore((s) => s.quizzes)
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
   useSpeechCleanup()
@@ -68,6 +71,7 @@ export default function ResultsPage() {
   const [remoteFetchFailed, setRemoteFetchFailed] = useState(false)
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [retryModalOpen, setRetryModalOpen] = useState(false)
+  const [onboardingOpen, setOnboardingOpen] = useState(false)
   const scoreHeadingRef = useRef<HTMLHeadingElement>(null)
   const reviewHeadingRef = useRef<HTMLHeadingElement>(null)
 
@@ -253,6 +257,17 @@ export default function ResultsPage() {
     scoreHeadingRef.current?.focus()
   }, [attempt?.id])
 
+  useEffect(() => {
+    if (!attempt || !quiz || sharedPayload || hasOnboarded()) return
+    if (historyAttempts.length !== 1) return
+    setOnboardingOpen(true)
+  }, [attempt, quiz, sharedPayload, historyAttempts.length])
+
+  const handleOnboardingDismiss = useCallback(() => {
+    markOnboarded()
+    setOnboardingOpen(false)
+  }, [])
+
   if (hasInvalidShareData) {
     return (
       <PageWrapper>
@@ -409,6 +424,11 @@ export default function ResultsPage() {
       ) : null}
 
       <HighScoreCelebration percentage={attempt.percentage} />
+
+      <OnboardingWelcomeModal
+        isOpen={onboardingOpen}
+        onDismiss={handleOnboardingDismiss}
+      />
 
       <StopReadingButton visible={isResultsReading} onStop={stopReading} />
     </PageWrapper>

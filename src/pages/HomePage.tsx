@@ -35,18 +35,13 @@ import {
   TextInputPanel,
   type TextInputPanelHandle,
 } from '../components/input/TextInputPanel'
+import { GenerateButton } from '../components/input/GenerateButton'
 import { useLanguage } from '../hooks/useLanguage'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useQuizStore } from '../store/quizStore'
 import type { RegenerateState } from '../types/regenerate'
 import type { Quiz } from '../types/quiz'
 import { Spinner } from '../components/ui/Spinner'
-
-const GenerateButton = lazy(() =>
-  import('../components/input/GenerateButton').then((mod) => ({
-    default: mod.GenerateButton,
-  })),
-)
 
 const PDFUploader = lazy(() =>
   import('../components/input/PDFUploader').then((mod) => ({
@@ -277,19 +272,17 @@ export default function HomePage() {
             </>
           )}
 
-          <Suspense fallback={null}>
-            <GenerateButton
-              getGenerationInput={getGenerationInput}
-              disabled={isGenerateDisabled}
-            />
-          </Suspense>
+          <GenerateButton
+            getGenerationInput={getGenerationInput}
+            disabled={isGenerateDisabled}
+          />
         </div>
 
         {!isGenerating && (
           <motion.div
             className="flex flex-col gap-4"
             variants={containerVariants}
-            initial="hidden"
+            initial="show"
             animate="show"
           >
             {FEATURES.map((feature) => (

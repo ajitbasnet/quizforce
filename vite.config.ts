@@ -1,11 +1,20 @@
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { VitePWA } from 'vite-plugin-pwa'
 import type { Connect } from 'vite'
 import { handleGenerateQuiz } from './api/lib/handleGenerateQuiz'
 
-function createGenerateQuizProxy(): Connect.NextHandleFunction {
+function resolveAnthropicApiKey(env: Record<string, string>): string | undefined {
+  const key = env.ANTHROPIC_API_KEY || env.VITE_ANTHROPIC_API_KEY
+  if (!key || key === 'your-anthropic-api-key') return undefined
+  return key
+}
+
+function createGenerateQuizProxy(
+  anthropicApiKey: string | undefined,
+  allowedOrigins: string | undefined,
+): Connect.NextHandleFunction {
   return (req, res, next) => {
     const chunks: Buffer[] = []
     req.on('data', (chunk) => {
@@ -25,8 +34,8 @@ function createGenerateQuizProxy(): Connect.NextHandleFunction {
             body: req.method === 'OPTIONS' ? undefined : body,
           })
           const response = await handleGenerateQuiz(request, {
-            apiKey: process.env.ANTHROPIC_API_KEY,
-            allowedOrigins: process.env.ALLOWED_ORIGINS,
+            apiKey: anthropicApiKey,
+            allowedOrigins,
           })
           res.statusCode = response.status
           response.headers.forEach((value, key) => {
@@ -49,9 +58,20 @@ function createGenerateQuizProxy(): Connect.NextHandleFunction {
   }
 }
 
-function apiProxyPlugin(): Plugin {
+function apiProxyPlugin(
+  anthropicApiKey: string | undefined,
+  allowedOrigins: string | undefined,
+): Plugin {
   const attachProxy = (server: { middlewares: Connect.Server }) => {
-    server.middlewares.use('/api/generate-quiz', createGenerateQuizProxy())
+    if (!anthropicApiKey) {
+      console.warn(
+        '[quizforge] ANTHROPIC_API_KEY is not set — quiz generation will fail. Copy .env.example to .env and add your Anthropic API key.',
+      )
+    }
+    server.middlewares.use(
+      '/api/generate-quiz',
+      createGenerateQuizProxy(anthropicApiKey, allowedOrigins),
+    )
   }
 
   return {
@@ -62,10 +82,15 @@ function apiProxyPlugin(): Plugin {
 }
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const anthropicApiKey = resolveAnthropicApiKey(env)
+  const allowedOrigins = env.ALLOWED_ORIGINS
+
+  return {
   plugins: [
     react(),
-    apiProxyPlugin(),
+    apiProxyPlugin(anthropicApiKey, allowedOrigins),
     ...(process.env.ANALYZE
       ? [
           visualizer({
@@ -112,4 +137,5 @@ export default defineConfig({
       },
     },
   },
+  }
 })

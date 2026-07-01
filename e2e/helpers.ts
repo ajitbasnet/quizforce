@@ -6,6 +6,7 @@ export async function setupTestStorage(page: Page): Promise<void> {
     sessionStorage.setItem('quizforge:e2e-init', '1')
     localStorage.clear()
     localStorage.setItem('quizforge:onboarded', 'true')
+    localStorage.setItem('quizforge:e2e-mock-pdf', 'true')
   })
 }
 

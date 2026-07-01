@@ -10,7 +10,17 @@ const MAX_PAGES = 50
 const MAX_TEXT_LENGTH = 12000
 const TRUNCATION_SUFFIX = '[...truncated]'
 
-const isE2ePdfMock = import.meta.env.VITE_E2E_MOCK_PDF === 'true'
+const E2E_PDF_MOCK_STORAGE_KEY = 'quizforge:e2e-mock-pdf'
+
+function isE2ePdfMockEnabled(): boolean {
+  if (import.meta.env.VITE_E2E_MOCK_PDF === 'true') return true
+  if (typeof window === 'undefined') return false
+  try {
+    return window.localStorage.getItem(E2E_PDF_MOCK_STORAGE_KEY) === 'true'
+  } catch {
+    return false
+  }
+}
 
 export interface PDFExtractResult {
   text: string
@@ -88,7 +98,7 @@ function truncateText(text: string): string {
 }
 
 export async function validatePdfMagicBytes(file: File): Promise<boolean> {
-  if (isE2ePdfMock) return true
+  if (isE2ePdfMockEnabled()) return true
 
   const header = new Uint8Array(await file.slice(0, 5).arrayBuffer())
   return (
@@ -103,7 +113,7 @@ export async function validatePdfMagicBytes(file: File): Promise<boolean> {
 export async function extractTextFromPDF(
   file: File,
 ): Promise<PDFExtractResult> {
-  if (isE2ePdfMock) {
+  if (isE2ePdfMockEnabled()) {
     const text = truncateText(stripHtmlTags(await file.text()))
     if (!text) {
       throw new PDFParseError('No text could be extracted from PDF')

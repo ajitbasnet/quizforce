@@ -83,6 +83,8 @@ Origins must match exactly (scheme, host, and port). Preflight `OPTIONS` request
 
 History sync to Supabase is enabled when both `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set. See the SQL schema comments in `src/api/supabase.ts` for table definitions.
 
+**Row Level Security:** After creating tables, run [`supabase/migrations/001_rls_policies.sql`](../supabase/migrations/001_rls_policies.sql) in the Supabase SQL editor so users can only read and write their own `quizzes` and `attempts` rows (`auth.uid() = user_id`).
+
 ## CI/CD (GitHub Actions)
 
 A workflow can run tests and deploy on push to `main`. Prerequisites:

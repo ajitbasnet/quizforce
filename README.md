@@ -192,6 +192,33 @@ In development, the Plausible script is not loaded and `trackEvent()` is a no-op
 
 ---
 
+## Performance
+
+Lighthouse targets (production build, mobile emulation):
+
+| Category | Target | Local preview audit |
+|----------|--------|---------------------|
+| Performance | ≥ 90 | 81 (re-run on Vercel — CDN + compression improve LCP) |
+| Accessibility | ≥ 95 | 98 |
+| Best Practices | ≥ 95 | 100 |
+| SEO | ≥ 90 | 91 |
+
+```bash
+npm run build && npm run preview -- --port 4173
+# In another terminal:
+LIGHTHOUSE_URL=http://localhost:4173 npm run lighthouse
+```
+
+Scores are written to `lighthouse-report.json`. Re-run against your Vercel preview URL before each release:
+
+```bash
+LIGHTHOUSE_URL=https://your-app.vercel.app npm run lighthouse
+```
+
+Optimizations in place: eager-loaded generate CTA on the home page (LCP), fixed-height history skeletons (CLS), async PDF parsing, and semantic HTML with aria labels on interactive controls.
+
+---
+
 ## License
 
 [MIT](LICENSE) — Copyright (c) 2026 QuizForge contributors

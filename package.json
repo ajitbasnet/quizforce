@@ -15,6 +15,8 @@
     "test:responsive": "PLAYWRIGHT_BROWSERS_PATH=0 playwright test e2e/responsive.spec.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "check:i18n": "node scripts/checkI18n.js",
+    "lighthouse": "lighthouse ${LIGHTHOUSE_URL:-http://localhost:4173} --only-categories=performance,accessibility,best-practices,seo --chrome-flags='--headless' --output=json --output-path=./lighthouse-report.json",
     "postinstall": "PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium"
   },
   "dependencies": {
@@ -62,6 +64,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
     "jsdom": "^29.1.1",
+    "lighthouse": "^12.8.1",
     "postcss": "^8.5.15",
     "rollup-plugin-visualizer": "^6.0.3",
     "storybook": "^8.6.18",

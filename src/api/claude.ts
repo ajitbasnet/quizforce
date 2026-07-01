@@ -175,6 +175,9 @@ export async function generateQuiz({
         if (code === 'OVERLOADED_ERROR') {
           throw new QuizGenerationError(message, 'OVERLOADED_ERROR', code)
         }
+        if (code === 'CONFIG_ERROR') {
+          throw new QuizGenerationError(message, 'AUTH_ERROR', code)
+        }
         if (code === 'INVALID_API_KEY') {
           throw new QuizGenerationError(message, 'INVALID_API_KEY', code)
         }

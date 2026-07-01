@@ -4,11 +4,11 @@ import { HistoryCardSkeleton } from '../components/history/HistoryCardSkeleton'
 import { AppShell } from '../components/layout/AppShell'
 import { PageErrorBoundary } from '../components/layout/PageErrorBoundary'
 import { PageWrapper } from '../components/layout/PageWrapper'
+import HomePage from '../pages/HomePage'
 import { QuizPageSkeleton } from '../components/quiz/QuizPageSkeleton'
 import { ScorePanelSkeleton } from '../components/quiz/ScorePanelSkeleton'
 import { Spinner } from '../components/ui/Spinner'
 
-const HomePage = lazy(() => import('../pages/HomePage'))
 const QuizPage = lazy(() => import('../pages/QuizPage'))
 const ResultsPage = lazy(() => import('../pages/ResultsPage'))
 const HistoryPage = lazy(() => import('../pages/HistoryPage'))
@@ -76,7 +76,14 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppShell />}>
-          <Route path="/" element={<LazyPage Page={HomePage} />} />
+          <Route
+            path="/"
+            element={
+              <PageErrorBoundary>
+                <HomePage />
+              </PageErrorBoundary>
+            }
+          />
           <Route
             path="/quiz"
             element={<LazyPage Page={QuizPage} fallback={<QuizPageFallback />} />}

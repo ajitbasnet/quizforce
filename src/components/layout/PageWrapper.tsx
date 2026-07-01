@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 
 interface PageWrapperProps {
   title?: string
@@ -14,12 +16,14 @@ export function PageWrapper({
   actions,
   children,
 }: PageWrapperProps) {
+  const transition = useMotionTransition(MOTION.medium)
+
   return (
     <div className="flex-1 overflow-auto py-6">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
+        transition={transition}
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           {title && (

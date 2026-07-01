@@ -3,6 +3,8 @@ import { X } from 'lucide-react'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 import { Button } from './Button'
 
 interface DrawerProps {
@@ -16,6 +18,7 @@ interface DrawerProps {
 export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
+  const transition = useMotionTransition(MOTION.medium)
 
   useFocusTrap(panelRef, isOpen)
 
@@ -40,7 +43,7 @@ export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={transition}
             aria-hidden="true"
           />
 
@@ -53,7 +56,7 @@ export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps
             initial={{ x: 320 }}
             animate={{ x: 0 }}
             exit={{ x: 320 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={transition}
           >
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
               <h2 id={titleId} className="text-lg font-semibold text-text-primary">

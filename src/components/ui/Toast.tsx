@@ -19,6 +19,7 @@ import {
   type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
+import { useMotionSpring } from '../../hooks/useReducedMotion'
 
 export type ToastVariant = 'success' | 'error' | 'info' | 'warning'
 
@@ -92,11 +93,28 @@ const VARIANT_CONFIG: Record<
   },
 }
 
-const toastMotionProps = {
-  initial: { opacity: 0, x: 80 },
-  animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 80 },
-  transition: { type: 'spring' as const, stiffness: 400, damping: 25 },
+const toastMotionInitial = { opacity: 0, x: 80 }
+const toastMotionAnimate = { opacity: 1, x: 0 }
+const toastMotionExit = { opacity: 0, x: 80 }
+
+function ToastMotionItem({
+  children,
+}: {
+  children: ReactNode
+}) {
+  const spring = useMotionSpring()
+
+  return (
+    <motion.div
+      className="pointer-events-auto"
+      initial={toastMotionInitial}
+      animate={toastMotionAnimate}
+      exit={toastMotionExit}
+      transition={{ type: 'spring', ...spring }}
+    >
+      {children}
+    </motion.div>
+  )
 }
 
 export function Toast({ title, description, variant, onDismiss }: ToastProps) {
@@ -200,18 +218,14 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         >
           <AnimatePresence>
             {toasts.map((item) => (
-              <motion.div
-                key={item.id}
-                className="pointer-events-auto"
-                {...toastMotionProps}
-              >
+              <ToastMotionItem key={item.id}>
                 <Toast
                   title={item.title}
                   description={item.description}
                   variant={item.variant}
                   onDismiss={() => dismiss(item.id)}
                 />
-              </motion.div>
+              </ToastMotionItem>
             ))}
           </AnimatePresence>
         </div>,

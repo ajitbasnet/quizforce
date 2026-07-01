@@ -13,6 +13,7 @@ import {
 import { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useMotionSpring } from '../../hooks/useReducedMotion'
 import { useHistoryStore } from '../../store/historyStore'
 import { isSpeechSupported } from '../../utils/speechSupport'
 import { VoiceToggle } from '../voice/VoiceToggle'
@@ -80,6 +81,7 @@ export function Sidebar() {
   const attempts = useHistoryStore((s) => s.attempts)
 
   const showCollapsed = isCollapsed && !isMobileOpen
+  const springTransition = useMotionSpring()
 
   const averageScore =
     attempts.length > 0
@@ -158,7 +160,7 @@ export function Sidebar() {
                   <motion.div
                     layoutId="sidebar-active-bg"
                     className="absolute inset-0 rounded-lg bg-brand-50"
-                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    transition={{ type: 'spring', ...springTransition }}
                   />
                 )}
                 <NavLink

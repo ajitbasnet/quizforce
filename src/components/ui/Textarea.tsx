@@ -9,6 +9,8 @@ import {
 } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
 import { useShakeOnError } from '../../hooks/useShakeOnError'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 import {
   controlBaseClass,
   controlErrorClass,
@@ -67,6 +69,7 @@ export function Textarea({
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
   const describedBy = [errorId, !error && helperId].filter(Boolean).join(' ') || undefined
   const shouldShake = useShakeOnError(error)
+  const shakeTransition = useMotionTransition(MOTION.fast)
 
   const setRef = useCallback(
     (el: HTMLTextAreaElement | null) => {
@@ -102,7 +105,7 @@ export function Textarea({
       {label && !inputId && <span className={fieldLabelClass}>{label}</span>}
       <motion.div
         animate={shouldShake ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={shakeTransition}
       >
         <textarea
           {...register}

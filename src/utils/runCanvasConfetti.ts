@@ -1,5 +1,7 @@
+import { MOTION } from './motionTokens'
+
 const PARTICLE_COUNT = 150
-const DURATION_MS = 3000
+const DURATION_MS = MOTION.maxDuration * 1000
 const GRAVITY = 0.2
 const COLORS = ['#4F46E5', '#16A34A', '#F59E0B'] as const
 

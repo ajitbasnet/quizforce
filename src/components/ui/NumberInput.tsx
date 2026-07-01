@@ -5,6 +5,8 @@ import { useRef, useState } from 'react'
 import type { ChangeEvent, InputHTMLAttributes } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
 import { useShakeOnError } from '../../hooks/useShakeOnError'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 import { Button } from './Button'
 import {
   controlBaseClass,
@@ -53,6 +55,7 @@ export function NumberInput({
   const errorId = inputId && error?.message ? `${inputId}-error` : undefined
   const describedBy = [errorId, !error && helperId].filter(Boolean).join(' ') || undefined
   const shouldShake = useShakeOnError(error)
+  const shakeTransition = useMotionTransition(MOTION.fast)
 
   const setRef = (element: HTMLInputElement | null) => {
     inputRef.current = element
@@ -138,7 +141,7 @@ export function NumberInput({
         <motion.div
           className="min-w-0 flex-1"
           animate={shouldShake ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={shakeTransition}
         >
           <input
             {...register}

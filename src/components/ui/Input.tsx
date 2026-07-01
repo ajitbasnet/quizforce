@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
 import { useShakeOnError } from '../../hooks/useShakeOnError'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 import {
   controlBaseClass,
   controlErrorClass,
@@ -42,6 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const describedBy = [errorId, !error && helperId].filter(Boolean).join(' ') || undefined
   const hasIcons = !!(leftIcon || rightIcon)
   const shouldShake = useShakeOnError(error)
+  const shakeTransition = useMotionTransition(MOTION.fast)
 
   return (
     <div className="w-full">
@@ -54,7 +57,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       <motion.div
         className={clsx(hasIcons && 'relative')}
         animate={shouldShake ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={shakeTransition}
       >
         {leftIcon && (
           <span

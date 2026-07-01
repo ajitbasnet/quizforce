@@ -4,6 +4,8 @@ import { X } from 'lucide-react'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 import { Button } from './Button'
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -34,6 +36,7 @@ export function Modal({
 }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
+  const transition = useMotionTransition(MOTION.medium)
 
   useFocusTrap(panelRef, isOpen)
 
@@ -57,7 +60,7 @@ export function Modal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={transition}
         >
           <motion.div
             ref={panelRef}
@@ -72,7 +75,7 @@ export function Modal({
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 20, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={transition}
           >
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
               <h2 id={titleId} className="text-lg font-semibold text-text-primary">

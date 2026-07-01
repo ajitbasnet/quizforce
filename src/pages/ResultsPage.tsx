@@ -288,6 +288,9 @@ export default function ResultsPage() {
         <PageWrapper>
           <PageMeta title="Your Results — QuizForge" />
           <div className="mx-auto w-full max-w-4xl">
+            <p className="sr-only" aria-live="polite">
+              {t('results.tallyingScore')}
+            </p>
             <ScorePanelSkeleton />
           </div>
         </PageWrapper>

@@ -131,7 +131,7 @@
     "generatingTitle": "Generando tu cuestionario…",
     "generatingSubtitle": "Esto puede tardar un momento según la longitud del contenido.",
     "stageAnalyzing": "Analizando tu contenido...",
-    "stageCrafting": "Elaborando tus preguntas...",
+    "stageCrafting": "Elaborando preguntas reflexivas...",
     "stageFinalizing": "Finalizando tu cuestionario...",
     "generatingTip1": "Consejo: las preguntas se adaptan a la dificultad seleccionada.",
     "generatingTip2": "Consejo: puedes activar la narración por voz en la configuración del cuestionario.",
@@ -151,7 +151,8 @@
     "close": "Cerrar",
     "noQuestionsGenerated": "No se generaron preguntas",
     "backToHome": "Volver al inicio",
-    "createQuizFirst": "Comienza creando un cuestionario primero."
+    "createQuizFirst": "Comienza creando un cuestionario primero.",
+    "preparingQuestions": "Preparando tus preguntas..."
   },
   "results": {
     "calculatingScore": "Calculando tu puntuación...",
@@ -216,12 +217,13 @@
     "gradeExcellentVoice": "¡Excelente!",
     "gradeGreatVoice": "¡Buen trabajo!",
     "gradeGoodVoice": "Buen esfuerzo.",
-    "gradeKeepPracticingVoice": "Sigue practicando."
+    "gradeKeepPracticingVoice": "Sigue practicando.",
+    "tallyingScore": "Calculando tu puntuación..."
   },
   "history": {
     "title": "Historial de cuestionarios",
-    "emptyTitle": "Aún no hay cuestionarios",
-    "emptyDescription": "Completa un cuestionario y tus intentos aparecerán aquí.",
+    "emptyTitle": "Tus cuestionarios aparecerán aquí",
+    "emptyDescription": "Aún no has creado ningún cuestionario. Empieza uno desde la página de inicio.",
     "score": "Puntuación",
     "duration": "Duración",
     "viewDetails": "Ver detalles",
@@ -230,7 +232,7 @@
     "searchPlaceholder": "Buscar cuestionarios...",
     "clearAll": "Borrar todo el historial",
     "clearAllTitle": "¿Borrar todo el historial?",
-    "clearAllDescription": "Esto eliminará permanentemente todos los cuestionarios e intentos.",
+    "clearAllDescription": "Esto eliminará permanentemente los {{count}} cuestionarios y todos los intentos. Esta acción no se puede deshacer.",
     "clearAllConfirm": "Borrar todo",
     "createFirstQuiz": "Crea tu primer cuestionario",
     "noSearchResults": "Ningún cuestionario coincide con '{{query}}'",
@@ -240,8 +242,8 @@
     "viewResults": "Ver resultados",
     "deleteQuiz": "Eliminar cuestionario",
     "deleteTitle": "¿Eliminar este cuestionario?",
-    "deleteDescription": "Este cuestionario y todos sus intentos serán eliminados.",
-    "deleteConfirm": "Eliminar",
+    "deleteDescription": "Esto eliminará permanentemente '{{title}}' y todos tus intentos. Esta acción no se puede deshacer.",
+    "deleteConfirm": "Eliminar cuestionario",
     "sourceText": "Texto",
     "sourcePdf": "PDF",
     "sourcePrompt": "Prompt",
@@ -351,18 +353,18 @@
     "invalidEmail": "Introduce una dirección de correo válida."
   },
   "errors": {
-    "generic": "Algo salió mal. Inténtalo de nuevo.",
+    "generic": "Ocurrió algo inesperado. Prueba a actualizar la página o volver al inicio.",
     "network": "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
-    "generationFailed": "No se pudo generar el cuestionario. Inténtalo de nuevo.",
+    "generationFailed": "No pudimos generar tu cuestionario. Revisa tu contenido e inténtalo de nuevo.",
     "missingApiKey": "Falta la clave API. Añade VITE_ANTHROPIC_API_KEY a tu archivo .env.",
     "invalidInput": "Entrada no válida. Revisa tu información e inténtalo de nuevo.",
     "textTooShort": "El texto es demasiado corto. Proporciona más contenido.",
     "pdfParseFailed": "No se pudo leer el PDF. Prueba con otro archivo.",
     "pdfTooLarge": "El PDF debe ser de 25 MB o menos.",
     "invalidPdfFile": "Este archivo no parece ser un PDF válido.",
-    "quizNotFound": "Cuestionario no encontrado.",
+    "quizNotFound": "Este cuestionario ya no está disponible. Vuelve al inicio para crear uno nuevo.",
     "attemptNotFound": "Intento de cuestionario no encontrado.",
-    "loadFailed": "No se pudieron cargar los datos. Actualiza la página e inténtalo de nuevo.",
+    "loadFailed": "No pudimos cargar tus datos. Actualiza la página e inténtalo de nuevo.",
     "rateLimit": "Demasiadas solicitudes, espera 30 segundos.",
     "generationCooldown": "Espera antes de generar otro cuestionario.",
     "overloaded": "La IA está ocupada, inténtalo de nuevo.",
@@ -371,12 +373,12 @@
     "pageTitle": "Algo salió mal",
     "goHome": "Ir al inicio",
     "widgetTitle": "No se pudo cargar esta sección.",
-    "retry": "Reintentar",
+    "retry": "Intentar de nuevo",
     "suggestionNetwork": "Comprueba tu conexión e inténtalo de nuevo.",
     "suggestionLessContent": "Prueba con menos contenido.",
     "suggestionGeneric": "Ajusta tu entrada e inténtalo de nuevo.",
     "zeroQuestions": "No se pudieron generar preguntas a partir de este contenido. Añade un texto más detallado.",
-    "tryAgain": "Reintentar"
+    "tryAgain": "Intentar de nuevo"
   },
   "voice": {
     "enable": "Activar voz",
@@ -397,5 +399,12 @@
     "readAgain": "Leer de nuevo",
     "selectVoice": "Voz",
     "openControls": "Voz"
+  },
+  "onboarding": {
+    "welcomeTitle": "¡Bienvenido a QuizForge!",
+    "tipVoice": "Activa la narración por voz en Ajustes para que las preguntas se lean en voz alta.",
+    "tipLanguage": "Genera cuestionarios en 7 idiomas: elige uno al crear un cuestionario.",
+    "tipHistory": "Cada cuestionario que creas se guarda en Historial para que puedas repetirlo o revisar puntuaciones.",
+    "gotIt": "¡Entendido!"
   }
 }

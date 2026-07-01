@@ -79,6 +79,7 @@ export function DataPrivacySection() {
 
       <ClearHistoryModal
         isOpen={clearModalOpen}
+        quizCount={quizzes.length}
         onClose={() => setClearModalOpen(false)}
         onConfirm={handleClearConfirm}
       />

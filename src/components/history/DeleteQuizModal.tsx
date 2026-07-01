@@ -4,12 +4,14 @@ import { Modal } from '../ui/Modal'
 
 interface DeleteQuizModalProps {
   isOpen: boolean
+  quizTitle: string
   onClose: () => void
   onConfirm: () => void
 }
 
 export function DeleteQuizModal({
   isOpen,
+  quizTitle,
   onClose,
   onConfirm,
 }: DeleteQuizModalProps) {
@@ -32,7 +34,9 @@ export function DeleteQuizModal({
         </>
       }
     >
-      <p className="text-sm text-text-muted">{t('history.deleteDescription')}</p>
+      <p className="text-sm text-text-muted">
+        {t('history.deleteDescription', { title: quizTitle })}
+      </p>
     </Modal>
   )
 }

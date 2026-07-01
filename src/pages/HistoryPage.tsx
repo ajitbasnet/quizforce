@@ -1,5 +1,5 @@
 import { Download, Search, Upload } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react'
 import { isSupabaseConfigured } from '../api/supabase'
 import { ClearHistoryModal } from '../components/history/ClearHistoryModal'
 import { DeleteQuizModal } from '../components/history/DeleteQuizModal'
@@ -97,6 +97,11 @@ export default function HistoryPage() {
   const handleDeleteRequest = useCallback((quizId: string) => {
     setDeleteQuizId(quizId)
   }, [])
+
+  const deleteQuizTitle = useMemo(
+    () => quizzes.find((quiz) => quiz.id === deleteQuizId)?.title ?? '',
+    [deleteQuizId, quizzes],
+  )
 
   const handleExport = useCallback(() => {
     const payload = buildHistoryExport(quizzes, allAttempts)
@@ -237,12 +242,14 @@ export default function HistoryPage() {
 
       <ClearHistoryModal
         isOpen={clearModalOpen}
+        quizCount={quizzes.length}
         onClose={() => setClearModalOpen(false)}
         onConfirm={handleClearConfirm}
       />
 
       <DeleteQuizModal
         isOpen={deleteQuizId !== null}
+        quizTitle={deleteQuizTitle}
         onClose={() => setDeleteQuizId(null)}
         onConfirm={handleDeleteConfirm}
       />

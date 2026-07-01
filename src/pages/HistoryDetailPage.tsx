@@ -158,6 +158,7 @@ export default function HistoryDetailPage() {
 
       <DeleteQuizModal
         isOpen={deleteModalOpen}
+        quizTitle={quiz?.title ?? ''}
         onClose={() => setDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
       />

@@ -131,7 +131,7 @@
     "generatingTitle": "Ihr Quiz wird generiert…",
     "generatingSubtitle": "Dies kann je nach Länge des Inhalts einen Moment dauern.",
     "stageAnalyzing": "Ihr Inhalt wird analysiert...",
-    "stageCrafting": "Fragen werden erstellt...",
+    "stageCrafting": "Durchdachte Fragen werden erstellt...",
     "stageFinalizing": "Quiz wird finalisiert...",
     "generatingTip1": "Tipp: Fragen werden an Ihre gewählte Schwierigkeit angepasst.",
     "generatingTip2": "Tipp: Sie können Sprachausgabe in den Quiz-Einstellungen aktivieren.",
@@ -151,7 +151,8 @@
     "close": "Schließen",
     "noQuestionsGenerated": "Keine Fragen generiert",
     "backToHome": "Zurück zur Startseite",
-    "createQuizFirst": "Erstellen Sie zuerst ein Quiz."
+    "createQuizFirst": "Erstellen Sie zuerst ein Quiz.",
+    "preparingQuestions": "Fragen werden vorbereitet..."
   },
   "results": {
     "calculatingScore": "Punkte werden berechnet...",
@@ -216,12 +217,13 @@
     "gradeExcellentVoice": "Ausgezeichnet!",
     "gradeGreatVoice": "Gut gemacht!",
     "gradeGoodVoice": "Guter Einsatz.",
-    "gradeKeepPracticingVoice": "Weiter üben."
+    "gradeKeepPracticingVoice": "Weiter üben.",
+    "tallyingScore": "Punkte werden gezählt..."
   },
   "history": {
     "title": "Quiz-Verlauf",
-    "emptyTitle": "Noch keine Quizze",
-    "emptyDescription": "Schließen Sie ein Quiz ab, und Ihre Versuche werden hier angezeigt.",
+    "emptyTitle": "Ihre Quizze erscheinen hier",
+    "emptyDescription": "Sie haben noch keine Quizze erstellt. Starten Sie eines auf der Startseite.",
     "score": "Punktzahl",
     "duration": "Dauer",
     "viewDetails": "Details anzeigen",
@@ -230,7 +232,7 @@
     "searchPlaceholder": "Quizze suchen...",
     "clearAll": "Gesamten Verlauf löschen",
     "clearAllTitle": "Gesamten Verlauf löschen?",
-    "clearAllDescription": "Dadurch werden alle Quizze und Versuche dauerhaft entfernt.",
+    "clearAllDescription": "Dadurch werden alle {{count}} Quizze und jeder Versuch dauerhaft gelöscht. Das kann nicht rückgängig gemacht werden.",
     "clearAllConfirm": "Alles löschen",
     "createFirstQuiz": "Erstes Quiz erstellen",
     "noSearchResults": "Keine Quizze entsprechen „{{query}}“",
@@ -240,8 +242,8 @@
     "viewResults": "Ergebnisse anzeigen",
     "deleteQuiz": "Quiz löschen",
     "deleteTitle": "Dieses Quiz löschen?",
-    "deleteDescription": "Dieses Quiz und alle Versuche werden entfernt.",
-    "deleteConfirm": "Löschen",
+    "deleteDescription": "Dadurch werden '{{title}}' und alle Ihre Versuche dauerhaft gelöscht. Das kann nicht rückgängig gemacht werden.",
+    "deleteConfirm": "Quiz löschen",
     "sourceText": "Text",
     "sourcePdf": "PDF",
     "sourcePrompt": "Prompt",
@@ -351,18 +353,18 @@
     "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
   },
   "errors": {
-    "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "generic": "Etwas Unerwartetes ist passiert. Aktualisieren Sie die Seite oder kehren Sie zur Startseite zurück.",
     "network": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
-    "generationFailed": "Quiz konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+    "generationFailed": "Wir konnten Ihr Quiz nicht generieren. Prüfen Sie Ihren Inhalt und versuchen Sie es erneut.",
     "missingApiKey": "API-Schlüssel fehlt. Fügen Sie VITE_ANTHROPIC_API_KEY zu Ihrer .env-Datei hinzu.",
     "invalidInput": "Ungültige Eingabe. Überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
     "textTooShort": "Text ist zu kurz. Bitte geben Sie mehr Inhalt an.",
     "pdfParseFailed": "PDF konnte nicht gelesen werden. Versuchen Sie eine andere Datei.",
     "pdfTooLarge": "PDF darf maximal 25 MB groß sein.",
     "invalidPdfFile": "Diese Datei scheint keine gültige PDF zu sein.",
-    "quizNotFound": "Quiz nicht gefunden.",
+    "quizNotFound": "Dieses Quiz ist nicht mehr verfügbar. Gehen Sie zur Startseite, um ein neues zu erstellen.",
     "attemptNotFound": "Quiz-Versuch nicht gefunden.",
-    "loadFailed": "Daten konnten nicht geladen werden. Aktualisieren Sie die Seite und versuchen Sie es erneut.",
+    "loadFailed": "Wir konnten Ihre Daten nicht laden. Aktualisieren Sie die Seite und versuchen Sie es erneut.",
     "rateLimit": "Zu viele Anfragen, bitte 30 Sekunden warten.",
     "generationCooldown": "Bitte warten Sie, bevor Sie ein weiteres Quiz erstellen.",
     "overloaded": "Die KI ist ausgelastet, bitte erneut versuchen.",
@@ -397,5 +399,12 @@
     "readAgain": "Erneut vorlesen",
     "selectVoice": "Stimme",
     "openControls": "Sprache"
+  },
+  "onboarding": {
+    "welcomeTitle": "Willkommen bei QuizForge!",
+    "tipVoice": "Aktivieren Sie die Sprachausgabe in den Einstellungen, damit Fragen vorgelesen werden.",
+    "tipLanguage": "Erstellen Sie Quizze in 7 Sprachen — wählen Sie eine bei der Erstellung.",
+    "tipHistory": "Jedes erstellte Quiz wird im Verlauf gespeichert, damit Sie es wiederholen oder Ergebnisse ansehen können.",
+    "gotIt": "Verstanden!"
   }
 }

@@ -4,12 +4,14 @@ import { Modal } from '../ui/Modal'
 
 interface ClearHistoryModalProps {
   isOpen: boolean
+  quizCount: number
   onClose: () => void
   onConfirm: () => void
 }
 
 export function ClearHistoryModal({
   isOpen,
+  quizCount,
   onClose,
   onConfirm,
 }: ClearHistoryModalProps) {
@@ -32,7 +34,9 @@ export function ClearHistoryModal({
         </>
       }
     >
-      <p className="text-sm text-text-muted">{t('history.clearAllDescription')}</p>
+      <p className="text-sm text-text-muted">
+        {t('history.clearAllDescription', { count: quizCount })}
+      </p>
     </Modal>
   )
 }

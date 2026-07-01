@@ -1,0 +1,70 @@
+export function EmptySearchIllustration() {
+  return (
+    <svg
+      width={120}
+      height={120}
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      className="text-brand-600"
+    >
+      <rect
+        x="24"
+        y="28"
+        width="52"
+        height="64"
+        rx="6"
+        className="fill-brand-50 stroke-current"
+        strokeWidth="2"
+        strokeDasharray="6 4"
+      />
+      <line
+        x1="36"
+        y1="48"
+        x2="64"
+        y2="48"
+        className="stroke-current"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
+      <line
+        x1="36"
+        y1="60"
+        x2="58"
+        y2="60"
+        className="stroke-current"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
+      <line
+        x1="36"
+        y1="72"
+        x2="52"
+        y2="72"
+        className="stroke-current"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
+      <circle
+        cx="76"
+        cy="76"
+        r="18"
+        className="fill-brand-50 stroke-current"
+        strokeWidth="2"
+      />
+      <line
+        x1="89"
+        y1="89"
+        x2="102"
+        y2="102"
+        className="stroke-current"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}

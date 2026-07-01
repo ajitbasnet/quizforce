@@ -204,7 +204,11 @@ export default function HistoryPage() {
           ))}
         </div>
       ) : filteredQuizzes.length === 0 ? (
-        <HistoryEmptyState hasQuizzes={quizzes.length > 0} />
+        <HistoryEmptyState
+          variant={quizzes.length > 0 ? 'noSearchResults' : 'firstVisit'}
+          searchQuery={filters.q}
+          onClearSearch={() => setFilters({ q: '' })}
+        />
       ) : (
         <>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

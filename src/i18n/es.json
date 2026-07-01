@@ -262,6 +262,7 @@
     "sortBy": "Ordenar por",
     "filterSourceType": "Tipo de fuente",
     "syncing": "Sincronizando...",
+    "pullToRefresh": "Desliza hacia abajo para actualizar",
     "exportAll": "Exportar todo el historial",
     "importHistory": "Importar historial",
     "importSuccess": "Se importaron {{quizzes}} cuestionarios y {{attempts}} intentos.",

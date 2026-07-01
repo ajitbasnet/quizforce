@@ -45,6 +45,7 @@ export default defineConfig({
     env: {
       ...process.env,
       VITE_ANTHROPIC_API_KEY: 'test-key-for-e2e',
+      VITE_E2E_MOCK_PDF: 'true',
     },
   },
 })

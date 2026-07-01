@@ -10,6 +10,8 @@ const MAX_PAGES = 50
 const MAX_TEXT_LENGTH = 12000
 const TRUNCATION_SUFFIX = '[...truncated]'
 
+const isE2ePdfMock = import.meta.env.VITE_E2E_MOCK_PDF === 'true'
+
 export interface PDFExtractResult {
   text: string
   pageCount: number
@@ -86,6 +88,8 @@ function truncateText(text: string): string {
 }
 
 export async function validatePdfMagicBytes(file: File): Promise<boolean> {
+  if (isE2ePdfMock) return true
+
   const header = new Uint8Array(await file.slice(0, 5).arrayBuffer())
   return (
     header[0] === 0x25 &&
@@ -99,6 +103,14 @@ export async function validatePdfMagicBytes(file: File): Promise<boolean> {
 export async function extractTextFromPDF(
   file: File,
 ): Promise<PDFExtractResult> {
+  if (isE2ePdfMock) {
+    const text = truncateText(stripHtmlTags(await file.text()))
+    if (!text) {
+      throw new PDFParseError('No text could be extracted from PDF')
+    }
+    return { text, pageCount: 1, totalPages: 1 }
+  }
+
   const hasPdfHeader = await validatePdfMagicBytes(file)
   if (!hasPdfHeader) {
     throw new PDFParseError('Invalid PDF file')

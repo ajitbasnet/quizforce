@@ -262,6 +262,7 @@
     "sortBy": "排序",
     "filterSourceType": "来源类型",
     "syncing": "同步中...",
+    "pullToRefresh": "下拉刷新",
     "exportAll": "导出全部历史",
     "importHistory": "导入历史",
     "importSuccess": "已导入 {{quizzes}} 个测验和 {{attempts}} 次尝试。",

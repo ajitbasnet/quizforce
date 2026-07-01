@@ -32,5 +32,7 @@ export function useHistorySync() {
     isFetching: historyQuery.isFetching,
     isLoading: historyQuery.isLoading,
     isError: historyQuery.isError,
+    isRefreshing: historyQuery.isRefetching,
+    refetch: historyQuery.refetch,
   }
 }

@@ -2,15 +2,13 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { expect, test } from '@playwright/test'
+import { dismissOnboardingModal, setupTestStorage } from './helpers'
 
 const fixturesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures')
 
 test.describe('happy path', () => {
   test.beforeEach(async ({ page }) => {
-    await page.addInitScript(() => {
-      localStorage.clear()
-      sessionStorage.clear()
-    })
+    await setupTestStorage(page)
   })
 
   test('generates a quiz from pasted text and completes it', async ({ page }) => {
@@ -65,5 +63,10 @@ test.describe('happy path', () => {
 
     await expect(page.getByText('Why this is correct:').first()).toBeVisible()
     await expect(page.locator('.border-success-500').first()).toBeVisible()
+
+    await dismissOnboardingModal(page)
+    await page.goto('/history')
+    await expect(page).toHaveURL(/\/history$/)
+    await expect(page.getByText('Industrial Revolution Quiz')).toBeVisible()
   })
 })

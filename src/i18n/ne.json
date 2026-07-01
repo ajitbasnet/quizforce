@@ -262,6 +262,7 @@
     "sortBy": "क्रमबद्ध गर्नुहोस्",
     "filterSourceType": "स्रोत प्रकार",
     "syncing": "सिङ्क हुँदैछ...",
+    "pullToRefresh": "ताजा गर्न तल तान्नुहोस्",
     "exportAll": "सबै इतिहास निर्यात गर्नुहोस्",
     "importHistory": "इतिहास आयात गर्नुहोस्",
     "importSuccess": "{{quizzes}} क्विज र {{attempts}} प्रयास आयात भयो।",

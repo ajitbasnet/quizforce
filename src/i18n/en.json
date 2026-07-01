@@ -262,6 +262,7 @@
     "sortBy": "Sort by",
     "filterSourceType": "Source type",
     "syncing": "Syncing...",
+    "pullToRefresh": "Pull to refresh",
     "exportAll": "Export All History",
     "importHistory": "Import History",
     "importSuccess": "Imported {{quizzes}} quizzes and {{attempts}} attempts.",

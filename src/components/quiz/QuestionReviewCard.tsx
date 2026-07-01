@@ -11,6 +11,7 @@ import {
 import { useVoice } from '../../hooks/useVoice'
 import type { AnswerFeedback, QuizQuestion, SupportedLanguage } from '../../types/quiz'
 import type { AnswerFeedbackVariant } from '../../utils/answerFeedbackStyles'
+import { vibrateCorrect, vibrateWrong } from '../../utils/haptics'
 import { FormattedText } from '../../utils/markdownLite'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
@@ -106,6 +107,12 @@ export function QuestionReviewCard({
       timers.forEach(clearTimeout)
     }
   }, [attemptId, animateReveal, skipAnimation])
+
+  useEffect(() => {
+    if (skipAnimation || previewMode) return
+    if (phase === 'correct') vibrateCorrect()
+    if (phase === 'wrong') vibrateWrong()
+  }, [phase, skipAnimation, previewMode])
 
   const showExplanation = phase === 'explanation' || phase === 'done'
 

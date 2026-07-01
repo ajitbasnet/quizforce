@@ -12,10 +12,12 @@ import { PageWrapper } from '../components/layout/PageWrapper'
 import { PageMeta } from '../components/seo/PageMeta'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
+import { Spinner } from '../components/ui/Spinner'
 import { useToast } from '../components/ui/Toast'
 import { useHistory } from '../hooks/useHistory'
 import { useDebounce } from '../hooks/useDebounce'
 import { useHistorySync } from '../hooks/useHistorySync'
+import { usePullToRefresh } from '../hooks/usePullToRefresh'
 import { useScrollRestoration } from '../hooks/useScrollRestoration'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
@@ -33,7 +35,18 @@ export default function HistoryPage() {
   const { t } = useLanguage()
   const { toast } = useToast()
   useScrollRestoration()
-  const { isLoading: isHistorySyncLoading } = useHistorySync()
+  const {
+    isLoading: isHistorySyncLoading,
+    isRefreshing: isHistoryRefreshing,
+    refetch: refetchHistory,
+  } = useHistorySync()
+
+  usePullToRefresh({
+    enabled: isSupabaseConfigured(),
+    onRefresh: () => {
+      void refetchHistory()
+    },
+  })
   const clearHistory = useHistoryStore((s) => s.clearHistory)
   const removeQuiz = useHistoryStore((s) => s.removeQuiz)
   const importHistory = useHistoryStore((s) => s.importHistory)
@@ -150,9 +163,20 @@ export default function HistoryPage() {
   )
 
   return (
-    <PageWrapper
-      title={t('history.title')}
-      actions={
+    <div className="overscroll-y-contain">
+      {isSupabaseConfigured() && isHistoryRefreshing ? (
+        <div
+          className="fixed inset-x-0 top-16 z-40 flex justify-center pt-2"
+          role="status"
+          aria-live="polite"
+          aria-label={t('history.pullToRefresh')}
+        >
+          <Spinner size="sm" className="text-brand-600" />
+        </div>
+      ) : null}
+      <PageWrapper
+        title={t('history.title')}
+        actions={
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
           <Button
             type="button"
@@ -256,5 +280,6 @@ export default function HistoryPage() {
         onConfirm={handleDeleteConfirm}
       />
     </PageWrapper>
+    </div>
   )
 }

@@ -19,7 +19,7 @@ test.describe('happy path', () => {
       'utf-8',
     )
     const quizResponse = await readFile(
-      path.join(fixturesDir, 'quiz-response.json'),
+      path.join(fixturesDir, 'quiz-api-response.json'),
       'utf-8',
     )
 

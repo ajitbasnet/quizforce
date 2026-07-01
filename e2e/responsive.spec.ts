@@ -21,7 +21,7 @@ function getViewportName(projectName: string): string {
 async function loadFixtures() {
   const [historyText, quizResponse, seed] = await Promise.all([
     readFile(path.join(fixturesDir, 'history.txt'), 'utf-8'),
-    readFile(path.join(fixturesDir, 'quiz-response.json'), 'utf-8'),
+    readFile(path.join(fixturesDir, 'quiz-api-response.json'), 'utf-8'),
     readFile(path.join(fixturesDir, 'responsive-seed.json'), 'utf-8'),
   ])
 

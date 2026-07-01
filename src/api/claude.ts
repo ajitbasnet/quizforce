@@ -153,7 +153,60 @@ export async function generateQuiz({
   }
 
   try {
-    const response = await fetch(useProxy ? PROXY_API_URL : ANTHROPIC_API_URL, {
+    if (useProxy) {
+      const response = await fetch(PROXY_API_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ content, settings, sourceType }),
+        signal,
+      })
+
+      const data = (await response.json()) as {
+        quiz?: Quiz
+        error?: { message?: string; code?: string }
+      }
+
+      if (!response.ok) {
+        const code = data.error?.code
+        const message = data.error?.message ?? 'API request failed'
+        if (response.status === 429 || code === 'RATE_LIMIT_ERROR') {
+          throw new QuizGenerationError(message, 'RATE_LIMIT_ERROR', code)
+        }
+        if (code === 'OVERLOADED_ERROR') {
+          throw new QuizGenerationError(message, 'OVERLOADED_ERROR', code)
+        }
+        if (code === 'INVALID_API_KEY') {
+          throw new QuizGenerationError(message, 'INVALID_API_KEY', code)
+        }
+        if (code === 'VALIDATION_ERROR') {
+          throw new QuizGenerationError(message, 'VALIDATION_ERROR', code)
+        }
+        if (code === 'PARSE_ERROR') {
+          throw new QuizGenerationError(message, 'PARSE_ERROR', code)
+        }
+        if (code === 'EMPTY_QUIZ') {
+          throw new QuizGenerationError(message, 'EMPTY_QUIZ', code)
+        }
+        throw new QuizGenerationError(message, 'API_ERROR', code)
+      }
+
+      const quiz = data.quiz
+      if (!quiz) {
+        throw new QuizGenerationError(
+          'API response did not contain a quiz',
+          'PARSE_ERROR',
+        )
+      }
+      if (quiz.questions.length === 0) {
+        throw new QuizGenerationError('Quiz has no questions', 'EMPTY_QUIZ')
+      }
+
+      recordGeneration()
+      progress.stop(100)
+      return quiz
+    }
+
+    const response = await fetch(ANTHROPIC_API_URL, {
       method: 'POST',
       headers,
       body: JSON.stringify({

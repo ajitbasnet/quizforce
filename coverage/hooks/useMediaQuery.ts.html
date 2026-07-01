@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,54 +92,54 @@
 <a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useState } from 'react'
 &nbsp;
 /** Matches Tailwind `lg` breakpoint (1024px). */
-export const LG_MEDIA_QUERY = <span class="cstat-no" title="statement not covered" >'(min-width: 1024px)'</span>
+export const LG_MEDIA_QUERY = '(min-width: 1024px)'
 &nbsp;
-export const PREFERS_REDUCED_MOTION_QUERY = <span class="cstat-no" title="statement not covered" >'(prefers-reduced-motion: reduce)'</span>
+export const PREFERS_REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 &nbsp;
-function <span class="fstat-no" title="function not covered" >getMatches(q</span>uery: string): boolean {
-<span class="cstat-no" title="statement not covered" >  if (typeof window === 'undefined') <span class="cstat-no" title="statement not covered" >return false</span></span>
-<span class="cstat-no" title="statement not covered" >  return window.matchMedia(query).matches</span>
+function getMatches(query: string): boolean {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof window === 'undefined') <span class="cstat-no" title="statement not covered" >return false</span>
+  return window.matchMedia(query).matches
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useMediaQuery(q</span>uery: string): boolean {
-  const [matches, <span class="cstat-no" title="statement not covered" >setMatches] = <span class="fstat-no" title="function not covered" >useState(() =&gt; <span class="cstat-no" title="statement not covered" >g</span>etMatches(query))</span></span>
+export function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(() =&gt; getMatches(query))
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  useEffect(() =&gt; {</span></span>
-    const mediaQueryList = <span class="cstat-no" title="statement not covered" >window.matchMedia(query)</span>
-    const <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >onChange = () =&gt; <span class="cstat-no" title="statement not covered" >s</span>etMatches(mediaQueryList.matches)</span></span>
+  useEffect(() =&gt; {
+    const mediaQueryList = window.matchMedia(query)
+    const onChange = () =&gt; setMatches(mediaQueryList.matches)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    onChange()</span>
-<span class="cstat-no" title="statement not covered" >    mediaQueryList.addEventListener('change', onChange)</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    return () =&gt; <span class="cstat-no" title="statement not covered" >m</span>ediaQueryList.removeEventListener('change', onChange)</span></span>
+    onChange()
+    mediaQueryList.addEventListener('change', onChange)
+    return () =&gt; mediaQueryList.removeEventListener('change', onChange)
   }, [query])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return matches</span>
+  return matches
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -148,7 +148,7 @@ export function <span class="fstat-no" title="function not covered" >useMediaQue
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T13:46:25.255Z
+                at 2026-07-01T13:50:27.594Z
             </div>
         <script src="../prettify.js"></script>
         <script>

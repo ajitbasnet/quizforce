@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,59 +96,59 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Easing, SpringOptions, Transition } from 'framer-motion'
 import { MOTION } from '../utils/motionTokens'
 import { PREFERS_REDUCED_MOTION_QUERY, useMediaQuery } from './useMediaQuery'
 &nbsp;
-const REDUCED_TRANSITION: Transition = <span class="cstat-no" title="statement not covered" >{ duration: 0 }</span>
-const REDUCED_SPRING: SpringOptions = <span class="cstat-no" title="statement not covered" >{ duration: 0 }</span>
+const REDUCED_TRANSITION: Transition = { duration: 0 }
+const REDUCED_SPRING: SpringOptions = { duration: 0 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useReducedMotion(): boolean {</span>
-<span class="cstat-no" title="statement not covered" >  return useMediaQuery(PREFERS_REDUCED_MOTION_QUERY)</span>
+export function useReducedMotion(): boolean {
+  return useMediaQuery(PREFERS_REDUCED_MOTION_QUERY)
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useMotionTransition(</span>
+export function useMotionTransition(
   duration: number,
-  ease: Easing = <span class="branch-0 cbranch-no" title="branch not covered" >MOTION.easeOut,</span>
+  ease: Easing = MOTION.easeOut,
 ): Transition {
-  const prefersReducedMotion = <span class="cstat-no" title="statement not covered" >useReducedMotion()</span>
+  const prefersReducedMotion = useReducedMotion()
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (prefersReducedMotion) <span class="cstat-no" title="statement not covered" >return REDUCED_TRANSITION</span></span>
+  if (prefersReducedMotion) return REDUCED_TRANSITION
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return { duration, ease }</span>
+  return { duration, ease }
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useMotionSpring(): SpringOptions {</span>
-  const prefersReducedMotion = <span class="cstat-no" title="statement not covered" >useReducedMotion()</span>
+export function useMotionSpring(): SpringOptions {
+  const prefersReducedMotion = useReducedMotion()
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (prefersReducedMotion) <span class="cstat-no" title="statement not covered" >return REDUCED_SPRING</span></span>
+  if (prefersReducedMotion) return REDUCED_SPRING
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return MOTION.spring</span>
+  return MOTION.spring
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -157,7 +157,7 @@ export function <span class="fstat-no" title="function not covered" >useMotionSp
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T13:46:25.255Z
+                at 2026-07-01T13:50:27.594Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,7 +97,7 @@
 <a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,27 +108,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useSettingsStore } from '../store/settingsStore'
 import type { SupportedLanguage } from '../types/quiz'
 &nbsp;
-export const LANG_MAP: Record&lt;SupportedLanguage, string&gt; = <span class="cstat-no" title="statement not covered" >{</span>
+export const LANG_MAP: Record&lt;SupportedLanguage, string&gt; = {
   en: 'en-US',
   es: 'es-ES',
   fr: 'fr-FR',
@@ -138,23 +138,23 @@ export const LANG_MAP: Record&lt;SupportedLanguage, string&gt; = <span class="cs
   zh: 'zh-CN',
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >resolveLang(l</span>ang?: string): string {
-  const { language } = <span class="cstat-no" title="statement not covered" >useSettingsStore.getState().settings</span>
-<span class="cstat-no" title="statement not covered" >  if (lang) {</span>
-<span class="cstat-no" title="statement not covered" >    if (lang in LANG_MAP) {</span>
-<span class="cstat-no" title="statement not covered" >      return LANG_MAP[lang as SupportedLanguage]</span>
+export function resolveLang(lang?: string): string {
+  const { language } = useSettingsStore.getState().settings
+  if (lang) {
+    if (lang in LANG_MAP) {
+      return LANG_MAP[lang as SupportedLanguage]
     }
-<span class="cstat-no" title="statement not covered" >    return lang</span>
+    return lang
   }
-<span class="cstat-no" title="statement not covered" >  return LANG_MAP[language] ?? 'en-US'</span>
+  return LANG_MAP[language] ?? <span class="branch-1 cbranch-no" title="branch not covered" >'en-US'</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >matchesLangPrefix(v</span>oiceLang: string, targetLang: string): boolean {
-  const normalizedVoice = <span class="cstat-no" title="statement not covered" >voiceLang.replace('_', '-').toLowerCase()</span>
-  const normalizedTarget = <span class="cstat-no" title="statement not covered" >targetLang.replace('_', '-').toLowerCase()</span>
-  const voicePrefix = <span class="cstat-no" title="statement not covered" >normalizedVoice.split('-')[0]</span>
-  const targetPrefix = <span class="cstat-no" title="statement not covered" >normalizedTarget.split('-')[0]</span>
-<span class="cstat-no" title="statement not covered" >  return voicePrefix === targetPrefix</span>
+export function matchesLangPrefix(voiceLang: string, targetLang: string): boolean {
+  const normalizedVoice = voiceLang.replace('_', '-').toLowerCase()
+  const normalizedTarget = targetLang.replace('_', '-').toLowerCase()
+  const voicePrefix = normalizedVoice.split('-')[0]
+  const targetPrefix = normalizedTarget.split('-')[0]
+  return voicePrefix === targetPrefix
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -163,7 +163,7 @@ export function <span class="fstat-no" title="function not covered" >matchesLang
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T13:46:25.255Z
+                at 2026-07-01T13:50:27.594Z
             </div>
         <script src="../prettify.js"></script>
         <script>

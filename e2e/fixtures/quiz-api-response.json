@@ -1,0 +1,91 @@
+{
+  "quiz": {
+    "id": "e2e-happy-path-quiz",
+    "title": "Industrial Revolution Quiz",
+    "description": "Test your knowledge of the Industrial Revolution.",
+    "questions": [
+      {
+        "id": "q1",
+        "questionText": "Where did the Industrial Revolution begin?",
+        "options": [
+          { "id": "q1-a", "text": "Britain" },
+          { "id": "q1-b", "text": "France" }
+        ],
+        "correctOptionId": "q1-a",
+        "explanation": "The Industrial Revolution began in Britain in the late eighteenth century.",
+        "wrongExplanations": { "q1-b": "France industrialized later than Britain." },
+        "points": 20,
+        "difficulty": "easy"
+      },
+      {
+        "id": "q2",
+        "questionText": "Which invention greatly improved steam engine efficiency?",
+        "options": [
+          { "id": "q2-a", "text": "James Watt's steam engine improvements" },
+          { "id": "q2-b", "text": "The spinning jenny" }
+        ],
+        "correctOptionId": "q2-a",
+        "explanation": "James Watt's improvements in the 1760s and 1770s made steam power practical for factories.",
+        "wrongExplanations": { "q2-b": "The spinning jenny was a textile invention, not a steam engine improvement." },
+        "points": 20,
+        "difficulty": "medium"
+      },
+      {
+        "id": "q3",
+        "questionText": "Which industry was among the first to industrialize?",
+        "options": [
+          { "id": "q3-a", "text": "Textile manufacturing" },
+          { "id": "q3-b", "text": "Banking" }
+        ],
+        "correctOptionId": "q3-a",
+        "explanation": "Textile manufacturing adopted mechanized spinning and weaving early in the Industrial Revolution.",
+        "wrongExplanations": { "q3-b": "Banking expanded with industrial growth but was not among the first mechanized industries." },
+        "points": 20,
+        "difficulty": "easy"
+      },
+      {
+        "id": "q4",
+        "questionText": "What process made steel cheaper and stronger in the nineteenth century?",
+        "options": [
+          { "id": "q4-a", "text": "The Bessemer process" },
+          { "id": "q4-b", "text": "The water frame" }
+        ],
+        "correctOptionId": "q4-a",
+        "explanation": "The Bessemer process revolutionized steel production in the nineteenth century.",
+        "wrongExplanations": { "q4-b": "The water frame was a textile machine, not a steel-making process." },
+        "points": 20,
+        "difficulty": "medium"
+      },
+      {
+        "id": "q5",
+        "questionText": "Which technology revolutionized long-distance communication in the nineteenth century?",
+        "options": [
+          { "id": "q5-a", "text": "The telegraph" },
+          { "id": "q5-b", "text": "The power loom" }
+        ],
+        "correctOptionId": "q5-a",
+        "explanation": "The telegraph allowed messages to travel across continents in hours rather than weeks.",
+        "wrongExplanations": { "q5-b": "The power loom automated weaving but did not transmit messages." },
+        "points": 20,
+        "difficulty": "hard"
+      }
+    ],
+    "totalPoints": 100,
+    "language": "en",
+    "createdAt": "2026-06-30T12:00:00.000Z",
+    "sourceType": "text",
+    "sourceContent": "The Industrial Revolution began in Britain in the late eighteenth century.",
+    "settings": {
+      "pointsPerQuestion": 20,
+      "customPointsMap": {},
+      "questionsCount": 5,
+      "difficulty": "mixed",
+      "voiceEnabled": false,
+      "voiceRate": 1,
+      "voicePitch": 1,
+      "voiceURI": null,
+      "timerEnabled": false,
+      "language": "en"
+    }
+  }
+}

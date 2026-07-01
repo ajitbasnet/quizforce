@@ -3,24 +3,10 @@ import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { VitePWA } from 'vite-plugin-pwa'
 import type { Connect } from 'vite'
-import { forwardToAnthropic } from './api/lib/forwardToAnthropic'
+import { handleGenerateQuiz } from './api/lib/handleGenerateQuiz'
 
 function createGenerateQuizProxy(): Connect.NextHandleFunction {
   return (req, res, next) => {
-    if (req.method !== 'POST') {
-      res.statusCode = 405
-      res.end('Method not allowed')
-      return
-    }
-
-    const apiKey = process.env.ANTHROPIC_API_KEY
-    if (!apiKey) {
-      res.statusCode = 500
-      res.setHeader('content-type', 'application/json')
-      res.end(JSON.stringify({ error: { message: 'Missing ANTHROPIC_API_KEY' } }))
-      return
-    }
-
     const chunks: Buffer[] = []
     req.on('data', (chunk) => {
       chunks.push(chunk as Buffer)
@@ -28,20 +14,30 @@ function createGenerateQuizProxy(): Connect.NextHandleFunction {
     req.on('end', () => {
       void (async () => {
         try {
-          const body = Buffer.concat(chunks).toString()
+          const body = Buffer.concat(chunks)
           const request = new Request('http://localhost/api/generate-quiz', {
-            method: 'POST',
+            method: req.method ?? 'POST',
             headers: {
               'content-type': req.headers['content-type'] ?? 'application/json',
+              origin: req.headers.origin ?? 'http://localhost:5173',
+              'x-forwarded-for': req.socket.remoteAddress ?? '127.0.0.1',
             },
-            body,
+            body: req.method === 'OPTIONS' ? undefined : body,
           })
-          const response = await forwardToAnthropic(request, apiKey)
+          const response = await handleGenerateQuiz(request, {
+            apiKey: process.env.ANTHROPIC_API_KEY,
+            allowedOrigins: process.env.ALLOWED_ORIGINS,
+          })
           res.statusCode = response.status
           response.headers.forEach((value, key) => {
             res.setHeader(key, value)
           })
-          res.end(Buffer.from(await response.arrayBuffer()))
+          const responseBody = await response.arrayBuffer()
+          if (responseBody.byteLength > 0) {
+            res.end(Buffer.from(responseBody))
+          } else {
+            res.end()
+          }
         } catch {
           res.statusCode = 502
           res.setHeader('content-type', 'application/json')

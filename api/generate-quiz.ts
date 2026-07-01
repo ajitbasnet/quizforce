@@ -1,20 +1,10 @@
-import { forwardToAnthropic } from './lib/forwardToAnthropic'
+import { handleGenerateQuiz } from './lib/handleGenerateQuiz'
+
+export const config = { runtime: 'edge' }
 
 export default async function handler(request: Request): Promise<Response> {
-  if (request.method !== 'POST') {
-    return new Response(
-      JSON.stringify({ error: { message: 'Method not allowed' } }),
-      { status: 405, headers: { 'content-type': 'application/json' } },
-    )
-  }
-
-  const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey) {
-    return new Response(
-      JSON.stringify({ error: { message: 'Server misconfiguration' } }),
-      { status: 500, headers: { 'content-type': 'application/json' } },
-    )
-  }
-
-  return forwardToAnthropic(request, apiKey)
+  return handleGenerateQuiz(request, {
+    apiKey: process.env.ANTHROPIC_API_KEY,
+    allowedOrigins: process.env.ALLOWED_ORIGINS,
+  })
 }

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, CircleHelp } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -7,6 +8,7 @@ import { PageMeta } from '../components/seo/PageMeta'
 import { QuestionBlock } from '../components/quiz/QuestionBlock'
 import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
+import { IosVoiceGestureHint } from '../components/voice/IosVoiceGestureHint'
 import { QuestionMap } from '../components/quiz/QuestionMap'
 import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestionsModal'
 import { topBarIconButtonClass } from '../components/layout/topBarActionStyles'
@@ -245,7 +247,13 @@ export default function QuizPage() {
       <PageMeta title={`${currentQuiz.title} — QuizForge`} />
     <div className="flex min-h-[calc(100vh-4rem)] flex-col overflow-x-hidden px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <div className="mx-auto w-full max-w-5xl lg:grid lg:grid-cols-[minmax(0,48rem)_17rem] lg:items-start lg:gap-8">
-        <div className="flex min-w-0 flex-1 flex-col gap-6">
+        <div
+          className={clsx(
+            'flex min-w-0 flex-1 flex-col gap-6',
+            isLastQuestion &&
+              'max-lg:pb-[calc(5rem+env(safe-area-inset-bottom))]',
+          )}
+        >
         <header>
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
@@ -363,7 +371,7 @@ export default function QuizPage() {
           {isLastQuestion ? (
             <Button
               variant="primary"
-              className="min-h-11"
+              className="min-h-11 hidden lg:inline-flex"
               data-testid="submit-quiz"
               isLoading={isSubmitting}
               onClick={handleSubmitClick}
@@ -397,7 +405,22 @@ export default function QuizPage() {
         onConfirmSubmit={() => void confirmSubmit()}
       />
 
+      {isLastQuestion && (
+        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-gray-200 bg-surface p-4 pb-[max(1rem,env(safe-area-inset-bottom))] dark:border-gray-800 dark:bg-gray-900 lg:hidden">
+          <Button
+            variant="primary"
+            className="min-h-11 w-full"
+            data-testid="submit-quiz-mobile"
+            isLoading={isSubmitting}
+            onClick={handleSubmitClick}
+          >
+            {t('quiz.submitQuiz')}
+          </Button>
+        </div>
+      )}
+
       <VoicePlayer />
+      <IosVoiceGestureHint voiceEnabled={voiceEnabled} />
     </div>
     </>
   )

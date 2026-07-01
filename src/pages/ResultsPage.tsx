@@ -16,6 +16,7 @@ import { HighScoreCelebration } from '../components/results/HighScoreCelebration
 import { ScoreBreakdown } from '../components/results/ScoreBreakdown'
 import { ShareScoreModal } from '../components/results/ShareScoreModal'
 import { StopReadingButton } from '../components/results/StopReadingButton'
+import { IosVoiceGestureHint } from '../components/voice/IosVoiceGestureHint'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { useToast } from '../components/ui/Toast'
@@ -434,6 +435,7 @@ export default function ResultsPage() {
       />
 
       <StopReadingButton visible={isResultsReading} onStop={stopReading} />
+      <IosVoiceGestureHint voiceEnabled={voiceEnabled} />
     </PageWrapper>
   )
 }

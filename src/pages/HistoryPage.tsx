@@ -16,6 +16,7 @@ import { useToast } from '../components/ui/Toast'
 import { useHistory } from '../hooks/useHistory'
 import { useDebounce } from '../hooks/useDebounce'
 import { useHistorySync } from '../hooks/useHistorySync'
+import { useScrollRestoration } from '../hooks/useScrollRestoration'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
 import { useHistoryStore } from '../store/historyStore'
@@ -31,6 +32,7 @@ const PAGE_SIZE = 12
 export default function HistoryPage() {
   const { t } = useLanguage()
   const { toast } = useToast()
+  useScrollRestoration()
   const { isLoading: isHistorySyncLoading } = useHistorySync()
   const clearHistory = useHistoryStore((s) => s.clearHistory)
   const removeQuiz = useHistoryStore((s) => s.removeQuiz)

@@ -402,7 +402,9 @@
     "readOptions": "Lire les options",
     "readAgain": "Relire",
     "selectVoice": "Voix",
-    "openControls": "Voix"
+    "openControls": "Voix",
+    "iosGestureHint": "Sur iPhone et iPad, touchez l'écran une fois pour autoriser la lecture vocale.",
+    "iosGestureHintDismiss": "Fermer l'astuce vocale"
   },
   "onboarding": {
     "welcomeTitle": "Bienvenue sur QuizForge !",

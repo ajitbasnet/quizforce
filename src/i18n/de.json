@@ -402,7 +402,9 @@
     "readOptions": "Optionen vorlesen",
     "readAgain": "Erneut vorlesen",
     "selectVoice": "Stimme",
-    "openControls": "Sprache"
+    "openControls": "Sprache",
+    "iosGestureHint": "Auf iPhone und iPad tippen Sie einmal irgendwo auf den Bildschirm, um die Sprachwiedergabe zu aktivieren.",
+    "iosGestureHintDismiss": "Sprachhinweis schließen"
   },
   "onboarding": {
     "welcomeTitle": "Willkommen bei QuizForge!",

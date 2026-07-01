@@ -402,7 +402,9 @@
     "readOptions": "朗读选项",
     "readAgain": "重新朗读",
     "selectVoice": "语音",
-    "openControls": "语音"
+    "openControls": "语音",
+    "iosGestureHint": "在 iPhone 和 iPad 上，点击屏幕任意位置一次以允许语音播放。",
+    "iosGestureHintDismiss": "关闭语音提示"
   },
   "onboarding": {
     "welcomeTitle": "欢迎使用 QuizForge！",

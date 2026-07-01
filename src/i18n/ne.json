@@ -402,7 +402,9 @@
     "readOptions": "विकल्पहरू पढ्नुहोस्",
     "readAgain": "फेरि पढ्नुहोस्",
     "selectVoice": "आवाज",
-    "openControls": "वाक्"
+    "openControls": "वाक्",
+    "iosGestureHint": "iPhone र iPad मा, भ्वाइस प्लेब्याक अनुमति दिन स्क्रिनमा एक पटक ट्याप गर्नुहोस्।",
+    "iosGestureHintDismiss": "भ्वाइस संकेत खारेज गर्नुहोस्"
   },
   "onboarding": {
     "welcomeTitle": "QuizForge मा स्वागत छ!",

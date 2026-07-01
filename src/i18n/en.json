@@ -409,6 +409,8 @@
     "readOptions": "Read options",
     "readAgain": "Read again",
     "selectVoice": "Voice",
-    "openControls": "Speech"
+    "openControls": "Speech",
+    "iosGestureHint": "On iPhone and iPad, tap anywhere on the screen once to allow voice playback.",
+    "iosGestureHintDismiss": "Dismiss voice hint"
   }
 }

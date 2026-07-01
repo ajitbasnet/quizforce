@@ -330,7 +330,8 @@
       "ne": "नेपाली",
       "de": "Deutsch",
       "zh": "中文"
-    }
+    },
+    "analyticsPrivacy": "Usamos Plausible Analytics: una herramienta que respeta la privacidad, sin cookies ni recopilación de datos personales."
   },
   "shortcuts": {
     "title": "Atajos de teclado",

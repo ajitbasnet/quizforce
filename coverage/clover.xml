@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1782913973024" clover="3.2.0">
-  <project timestamp="1782913973024" name="All files">
-    <metrics statements="694" coveredstatements="635" conditionals="340" coveredconditionals="249" methods="208" coveredmethods="191" elements="1242" coveredelements="1075" complexity="0" loc="694" ncloc="694" packages="2" files="42" classes="42"/>
+<coverage generated="1782915114765" clover="3.2.0">
+  <project timestamp="1782915114765" name="All files">
+    <metrics statements="696" coveredstatements="637" conditionals="346" coveredconditionals="255" methods="209" coveredmethods="192" elements="1251" coveredelements="1084" complexity="0" loc="696" ncloc="696" packages="2" files="43" classes="43"/>
     <package name="hooks">
       <metrics statements="330" coveredstatements="289" conditionals="108" coveredconditionals="68" methods="109" coveredmethods="96"/>
       <file name="useCountUp.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useCountUp.ts">
@@ -381,7 +381,12 @@
       </file>
     </package>
     <package name="utils">
-      <metrics statements="364" coveredstatements="346" conditionals="232" coveredconditionals="181" methods="99" coveredmethods="95"/>
+      <metrics statements="366" coveredstatements="348" conditionals="238" coveredconditionals="187" methods="100" coveredmethods="96"/>
+      <file name="analytics.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/analytics.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="8" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="9" count="2" type="cond" truecount="2" falsecount="0"/>
+      </file>
       <file name="answerFeedbackStyles.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/answerFeedbackStyles.ts">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
         <line num="7" count="6" type="cond" truecount="2" falsecount="0"/>

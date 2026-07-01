@@ -316,6 +316,7 @@
     "comingSoon": "Coming Soon",
     "appearanceDescription": "Choose light or dark mode, or match your system setting.",
     "exportMyData": "Export My Data",
+    "analyticsPrivacy": "We use Plausible Analytics — a privacy-first tool with no cookies or personal data collection.",
     "deleteAccount": "Delete Account",
     "deleteAccountTitle": "Delete your account?",
     "deleteAccountDescription": "This will sign you out and remove your synced data.",

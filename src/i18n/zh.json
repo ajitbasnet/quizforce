@@ -330,7 +330,8 @@
       "ne": "नेपाली",
       "de": "Deutsch",
       "zh": "中文"
-    }
+    },
+    "analyticsPrivacy": "我们使用 Plausible Analytics — 一款注重隐私的分析工具，不使用 Cookie，也不收集个人数据。"
   },
   "shortcuts": {
     "title": "键盘快捷键",

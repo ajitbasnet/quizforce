@@ -46,6 +46,9 @@ export function DataPrivacySection() {
         saved={false}
       >
         <div className="flex flex-col gap-3">
+          <p className="text-sm text-text-muted dark:text-gray-400">
+            {t('settings.analyticsPrivacy')}
+          </p>
           <Button
             type="button"
             variant="danger"

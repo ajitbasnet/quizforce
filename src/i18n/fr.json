@@ -330,7 +330,8 @@
       "ne": "नेपाली",
       "de": "Deutsch",
       "zh": "中文"
-    }
+    },
+    "analyticsPrivacy": "Nous utilisons Plausible Analytics — un outil respectueux de la vie privée, sans cookies ni collecte de données personnelles."
   },
   "shortcuts": {
     "title": "Raccourcis clavier",

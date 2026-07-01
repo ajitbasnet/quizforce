@@ -174,6 +174,24 @@ After import, set environment variables in the Vercel dashboard:
 
 ---
 
+## Privacy
+
+QuizForge uses [Plausible Analytics](https://plausible.io/) in **production builds only** — a cookieless, GDPR-friendly analytics tool. No personal data, user IDs, or emails are collected.
+
+**Events tracked (aggregate only):**
+
+| Event | Properties |
+|-------|------------|
+| `quiz_generated` | `sourceType`, `questionCount`, `language` |
+| `quiz_completed` | `score`, `percentage`, `timeTaken` |
+| `voice_enabled` | — |
+| `language_changed` | `to` (language code) |
+| `pdf_uploaded` | — |
+
+In development, the Plausible script is not loaded and `trackEvent()` is a no-op. You can read the implementation in [`src/utils/analytics.ts`](src/utils/analytics.ts).
+
+---
+
 ## License
 
 [MIT](LICENSE) — Copyright (c) 2026 QuizForge contributors

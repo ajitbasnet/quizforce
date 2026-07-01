@@ -330,7 +330,8 @@
       "ne": "नेपाली",
       "de": "Deutsch",
       "zh": "中文"
-    }
+    },
+    "analyticsPrivacy": "Wir nutzen Plausible Analytics — ein datenschutzfreundliches Tool ohne Cookies oder Erhebung personenbezogener Daten."
   },
   "shortcuts": {
     "title": "Tastenkürzel",

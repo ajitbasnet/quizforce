@@ -1,14 +1,24 @@
 import clsx from 'clsx'
 import { Download } from 'lucide-react'
+import { useDarkMode } from '../../hooks/useDarkMode.tsx'
+import type { ThemePreference } from '../../hooks/useDarkMode'
 import { useLanguage } from '../../hooks/useLanguage'
 import { usePwaInstall } from '../../hooks/usePwaInstall'
-import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { fieldLabelClass } from '../ui/formFieldUtils'
 import { SettingsSectionCard } from './SettingsSectionCard'
 
+const THEME_OPTIONS: ThemePreference[] = ['light', 'system', 'dark']
+
+const THEME_LABEL_KEYS: Record<ThemePreference, string> = {
+  light: 'settings.themeLight',
+  system: 'settings.themeSystem',
+  dark: 'settings.themeDark',
+}
+
 export function AppearanceSection() {
   const { t } = useLanguage()
+  const { theme, setTheme } = useDarkMode()
   const { canInstall, promptInstall } = usePwaInstall()
 
   return (
@@ -18,25 +28,31 @@ export function AppearanceSection() {
       saved={false}
     >
       <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className={clsx(fieldLabelClass, 'mb-0')}>
-              {t('settings.darkMode')}
-            </span>
-            <Badge variant="warning" size="sm">
-              {t('settings.comingSoon')}
-            </Badge>
-          </div>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={false}
+        <div>
+          <span className={fieldLabelClass}>{t('settings.darkMode')}</span>
+          <div
+            role="radiogroup"
             aria-label={t('settings.darkMode')}
-            disabled
-            className="relative inline-flex h-6 w-11 shrink-0 cursor-not-allowed rounded-full border-2 border-transparent bg-gray-200 opacity-50 dark:bg-gray-600"
+            className="flex rounded-lg bg-surface-subtle p-1 dark:bg-gray-800"
           >
-            <span className="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0" />
-          </button>
+            {THEME_OPTIONS.map((option) => (
+              <button
+                key={option}
+                type="button"
+                role="radio"
+                aria-checked={theme === option}
+                className={clsx(
+                  'flex-1 rounded-md px-2 py-1.5 text-sm font-medium transition-colors',
+                  theme === option
+                    ? 'bg-surface text-brand-600 shadow-sm dark:bg-gray-900 dark:text-indigo-400'
+                    : 'text-text-muted hover:text-text-primary dark:text-gray-400 dark:hover:text-gray-100',
+                )}
+                onClick={() => setTheme(option)}
+              >
+                {t(THEME_LABEL_KEYS[option])}
+              </button>
+            ))}
+          </div>
         </div>
         <p className="text-sm text-text-muted dark:text-gray-400">
           {t('settings.appearanceDescription')}

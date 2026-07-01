@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useLanguage } from '../../hooks/useLanguage'
+import { trackEvent } from '../../utils/analytics'
 import { RangeSlider } from '../ui/RangeSlider'
 import { fieldLabelClass } from '../ui/formFieldUtils'
 
@@ -37,7 +38,11 @@ export function SettingsVoiceFields({
           role="switch"
           aria-checked={voiceEnabled}
           aria-label={t('settings.voiceEnabled')}
-          onClick={() => onVoiceEnabledChange(!voiceEnabled)}
+          onClick={() => {
+            const nextEnabled = !voiceEnabled
+            if (nextEnabled) trackEvent('voice_enabled')
+            onVoiceEnabledChange(nextEnabled)
+          }}
           className={clsx(
             'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2',
             voiceEnabled ? 'bg-brand-600' : 'bg-gray-200 dark:bg-gray-600',

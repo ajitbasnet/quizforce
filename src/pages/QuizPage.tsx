@@ -27,6 +27,7 @@ import { persistQuizAttempt } from '../services/persistQuizAttempt'
 import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
 import type { QuizSettings } from '../types/quiz'
+import { trackEvent } from '../utils/analytics'
 import { calculateScore } from '../utils/scoreCalculator'
 
 function formatElapsed(seconds: number): string {
@@ -123,6 +124,11 @@ export default function QuizPage() {
         elapsedSeconds,
       )
       setCompletedAttempt(attempt)
+      trackEvent('quiz_completed', {
+        score: attempt.score,
+        percentage: attempt.percentage,
+        timeTaken: attempt.timeTaken,
+      })
       await persistQuizAttempt(currentQuiz, attempt)
       navigate(`/results/${attempt.id}`)
     } finally {

@@ -10,6 +10,7 @@ import {
   type DragEvent,
 } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
+import { trackEvent } from '../../utils/analytics'
 import {
   extractTextFromPDF,
   PDF_MAX_FILE_SIZE_BYTES,
@@ -90,6 +91,7 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
           setPageCount(result.pageCount)
           setState('success')
           onExtracted(result.text)
+          trackEvent('pdf_uploaded')
         } catch (error) {
           if (error instanceof PDFPasswordError) {
             setError(t('input.pdfPasswordProtected'))

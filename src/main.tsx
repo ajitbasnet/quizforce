@@ -9,6 +9,14 @@ import './index.css'
 import './i18n'
 import App from './App.tsx'
 
+if (import.meta.env.PROD) {
+  const script = document.createElement('script')
+  script.defer = true
+  script.dataset.domain = 'quizforge.app'
+  script.src = 'https://plausible.io/js/script.js'
+  document.head.appendChild(script)
+}
+
 if ('serviceWorker' in navigator) {
   registerSW({ immediate: true })
 }

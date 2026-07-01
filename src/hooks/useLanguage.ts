@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { SUPPORTED_LANGUAGES } from '../i18n'
 import { useSettingsStore } from '../store/settingsStore'
 import type { SupportedLanguage } from '../types/quiz'
+import { trackEvent } from '../utils/analytics'
 import {
   applyDocumentLanguage,
   persistLanguage,
@@ -44,6 +45,7 @@ export function useLanguage() {
     updateSettings({ language: lang })
     applyDocumentLanguage(lang)
     persistLanguage(lang)
+    trackEvent('language_changed', { to: lang })
   }
 
   return {

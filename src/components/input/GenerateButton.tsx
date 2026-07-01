@@ -8,6 +8,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { useSettingsStore } from '../../store/settingsStore'
 import { QuizGenerationError } from '../../types/api'
 import type { Quiz } from '../../types/quiz'
+import { trackEvent } from '../../utils/analytics'
 import { QuizValidationErrorModal } from '../quiz/QuizValidationErrorModal'
 import { Button } from '../ui/Button'
 import { ErrorBanner } from '../ui/ErrorBanner'
@@ -119,6 +120,11 @@ export function GenerateButton({
         signal: controller.signal,
       })
       setCurrentQuiz(quiz)
+      trackEvent('quiz_generated', {
+        sourceType: input.sourceType,
+        questionCount: quiz.questions.length,
+        language: settings.language,
+      })
       navigate('/quiz')
     } catch (error) {
       if (

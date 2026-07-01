@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { HelmetProvider } from 'react-helmet-async'
 import { registerSW } from 'virtual:pwa-register'
 import { ToastProvider } from './components/ui/Toast'
+import { ThemeProvider } from './hooks/useDarkMode.tsx'
 import './index.css'
 import './i18n'
 import App from './App.tsx'
@@ -18,12 +19,14 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <HelmetProvider>
-      <ToastProvider>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </ToastProvider>
-    </HelmetProvider>
+    <ThemeProvider>
+      <HelmetProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </ToastProvider>
+      </HelmetProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

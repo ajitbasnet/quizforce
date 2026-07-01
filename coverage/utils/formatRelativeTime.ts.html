@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,7 +97,7 @@
 <a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,18 +108,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,7 +128,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const RELATIVE_TIME_DIVISIONS: {
   unit: Intl.RelativeTimeFormatUnit
   seconds: number
-}[] = [
+}[] = <span class="cstat-no" title="statement not covered" >[</span>
   { unit: 'year', seconds: 31_536_000 },
   { unit: 'month', seconds: 2_592_000 },
   { unit: 'week', seconds: 604_800 },
@@ -138,19 +138,19 @@
   { unit: 'second', seconds: 1 },
 ]
 &nbsp;
-export function formatRelativeTime(iso: string, locale: string): string {
-  const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) {
-    return iso
+export function <span class="fstat-no" title="function not covered" >formatRelativeTime(i</span>so: string, locale: string): string {
+  const date = <span class="cstat-no" title="statement not covered" >new Date(iso)</span>
+<span class="cstat-no" title="statement not covered" >  if (Number.isNaN(date.getTime())) {</span>
+<span class="cstat-no" title="statement not covered" >    return iso</span>
   }
 &nbsp;
-  const diffInSeconds = Math.round((date.getTime() - Date.now()) / 1000)
-  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
+  const diffInSeconds = <span class="cstat-no" title="statement not covered" >Math.round((date.getTime() - Date.now()) / 1000)</span>
+  const rtf = <span class="cstat-no" title="statement not covered" >new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })</span>
 &nbsp;
-  for (const { unit, seconds } of RELATIVE_TIME_DIVISIONS) {
-    const interval = diffInSeconds / seconds
-    if (Math.abs(interval) &gt;= 1) {
-      return rtf.format(Math.round(interval), unit)
+<span class="cstat-no" title="statement not covered" >  for (const { unit, seconds } of RELATIVE_TIME_DIVISIONS) {</span>
+    const interval = <span class="cstat-no" title="statement not covered" >diffInSeconds / seconds</span>
+<span class="cstat-no" title="statement not covered" >    if (Math.abs(interval) &gt;= 1) {</span>
+<span class="cstat-no" title="statement not covered" >      return rtf.format(Math.round(interval), unit)</span>
     }
   }
 &nbsp;
@@ -163,7 +163,7 @@ export function formatRelativeTime(iso: string, locale: string): string {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T13:30:46.016Z
+                at 2026-07-01T13:36:56.021Z
             </div>
         <script src="../prettify.js"></script>
         <script>

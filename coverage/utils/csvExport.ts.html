@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,48 +89,48 @@
 <a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { downloadFile } from './downloadFile'
 &nbsp;
-export function escapeCsvCell(value: string): string {
-  if (/[",\r\n]/.test(value)) {
-    return `"${value.replace(/"/g, '""')}"`
+export function <span class="fstat-no" title="function not covered" >escapeCsvCell(v</span>alue: string): string {
+<span class="cstat-no" title="statement not covered" >  if (/[",\r\n]/.test(value)) {</span>
+<span class="cstat-no" title="statement not covered" >    return `"${value.replace(/"/g, '""')}"`</span>
   }
-  return value
+<span class="cstat-no" title="statement not covered" >  return value</span>
 }
 &nbsp;
-export function csvExport(
+export function <span class="fstat-no" title="function not covered" >csvExport(</span>
   headers: string[],
   rows: (string | number | boolean)[][],
   filename: string,
 ): void {
-  const lines = [
-    headers.map((header) =&gt; escapeCsvCell(String(header))).join(','),
-    ...rows.map((row) =&gt;
-      row.map((cell) =&gt; escapeCsvCell(String(cell))).join(','),
+  const lines = <span class="cstat-no" title="statement not covered" >[</span>
+    headers.<span class="fstat-no" title="function not covered" >map((h</span>eader) =&gt; <span class="cstat-no" title="statement not covered" >escapeCsvCell(String(header)))</span>.join(','),
+    ...rows.<span class="fstat-no" title="function not covered" >map((r</span>ow) =&gt;
+<span class="cstat-no" title="statement not covered" >      row.<span class="fstat-no" title="function not covered" >map((c</span>ell) =&gt; <span class="cstat-no" title="statement not covered" >escapeCsvCell(String(cell)))</span>.join(','),</span>
     ),
   ]
-  const csv = lines.join('\r\n')
-  downloadFile(csv, filename, 'text/csv;charset=utf-8')
+  const csv = <span class="cstat-no" title="statement not covered" >lines.join('\r\n')</span>
+<span class="cstat-no" title="statement not covered" >  downloadFile(csv, filename, 'text/csv;charset=utf-8')</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -139,7 +139,7 @@ export function csvExport(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T13:30:46.016Z
+                at 2026-07-01T13:36:56.021Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -212,17 +212,17 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
             'relative rounded-2xl border-2 border-dashed p-8 text-center transition-colors',
             isInteractive && 'cursor-pointer',
             isDragging
-              ? 'border-brand-500 bg-brand-100/50 animate-dash-border'
-              : 'border-brand-100 bg-brand-50/50',
+              ? 'border-brand-500 bg-brand-100/50 animate-dash-border dark:border-indigo-400 dark:bg-indigo-950/40'
+              : 'border-brand-100 bg-brand-50/50 dark:border-gray-700 dark:bg-gray-800/50',
             (state === 'error' || hasSubmitError) &&
-              'border-danger-100 bg-danger-50/50',
-            state === 'success' && !hasSubmitError && 'border-success-100 bg-success-50/50',
+              'border-danger-100 bg-danger-50/50 dark:border-danger-800 dark:bg-danger-950/30',
+            state === 'success' && !hasSubmitError && 'border-success-100 bg-success-50/50 dark:border-success-800 dark:bg-success-950/30',
           )}
         >
           {state === 'processing' && (
             <div className="flex flex-col items-center gap-3">
               <Spinner size="lg" className="text-brand-600" />
-              <p className="text-sm font-medium text-text-primary">
+              <p className="text-sm font-medium text-text-primary dark:text-gray-100">
                 {t('input.pdfExtracting')}
               </p>
             </div>
@@ -231,8 +231,8 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
           {state === 'success' && file && (
             <div className="flex flex-col items-center gap-2">
               <CheckCircle2 className="h-10 w-10 text-success-600" aria-hidden />
-              <p className="text-sm font-semibold text-text-primary">{file.name}</p>
-              <p className="text-sm text-text-muted">
+              <p className="text-sm font-semibold text-text-primary dark:text-gray-100">{file.name}</p>
+              <p className="text-sm text-text-muted dark:text-gray-400">
                 {t('input.pdfPageCount', { count: pageCount.toLocaleString() })}
                 {' · '}
                 {t('input.pdfCharCount', {
@@ -266,7 +266,7 @@ export const PDFUploader = forwardRef<PDFUploaderHandle, PDFUploaderProps>(
           {(state === 'idle' || state === 'dragging') && (
             <div className="flex flex-col items-center gap-3">
               <Upload className="h-10 w-10 text-brand-500" aria-hidden />
-              <p className="text-sm font-medium text-text-primary">
+              <p className="text-sm font-medium text-text-primary dark:text-gray-100">
                 {t('input.pdfDropzone')}
               </p>
             </div>

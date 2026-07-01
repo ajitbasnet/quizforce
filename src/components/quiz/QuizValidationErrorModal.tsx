@@ -34,12 +34,12 @@ export function QuizValidationErrorModal({
         </>
       }
     >
-      <p className="text-sm text-text-muted">{t('errors.generationFailed')}</p>
+      <p className="text-sm text-text-muted dark:text-gray-400">{t('errors.generationFailed')}</p>
       <details className="mt-4">
-        <summary className="cursor-pointer text-sm font-medium text-text-primary">
+        <summary className="cursor-pointer text-sm font-medium text-text-primary dark:text-gray-100">
           {t('quiz.rawResponse')}
         </summary>
-        <pre className="mt-2 max-h-64 overflow-auto rounded-lg bg-gray-50 p-3 text-xs text-text-primary">
+        <pre className="mt-2 max-h-64 overflow-auto rounded-lg bg-gray-50 p-3 text-xs text-text-primary dark:bg-gray-800 dark:text-gray-100">
           {rawResponse}
         </pre>
       </details>

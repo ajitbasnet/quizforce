@@ -50,12 +50,12 @@ export function TagInput({ tags, onChange, className }: TagInputProps) {
 
   return (
     <div className={clsx('flex flex-col gap-1.5', className)}>
-      <span className="text-xs font-medium text-text-muted">
+      <span className="text-xs font-medium text-text-muted dark:text-gray-400">
         {t('history.addTag')}
       </span>
       <div
         className={clsx(
-          'flex min-h-10 flex-wrap items-center gap-1.5 rounded-lg border border-gray-200 bg-surface px-2 py-1.5',
+          'flex min-h-10 flex-wrap items-center gap-1.5 rounded-lg border border-gray-200 bg-surface px-2 py-1.5 dark:border-gray-700 dark:bg-gray-900',
           'focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/20',
         )}
       >
@@ -87,7 +87,7 @@ export function TagInput({ tags, onChange, className }: TagInputProps) {
             }
             onKeyDown={handleKeyDown}
             placeholder={t('history.tagPlaceholder')}
-            className="min-w-[8rem] flex-1 border-0 bg-transparent px-1 py-0.5 text-sm text-text-primary outline-none placeholder:text-text-muted"
+            className="min-w-[8rem] flex-1 border-0 bg-transparent px-1 py-0.5 text-sm text-text-primary outline-none placeholder:text-text-muted dark:text-gray-100 dark:placeholder:text-gray-500"
             aria-label={t('history.tagPlaceholder')}
           />
         ) : null}

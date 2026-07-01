@@ -179,7 +179,7 @@ function QuestionBlockInner({
 
       <div
         className={clsx(
-          'py-4 text-xl font-semibold leading-relaxed text-text-primary',
+          'py-4 text-xl font-semibold leading-relaxed text-text-primary dark:text-gray-100',
           isLong && isDesktop && 'max-h-48 overflow-y-auto',
         )}
       >
@@ -203,7 +203,7 @@ function QuestionBlockInner({
           <div
             role="dialog"
             aria-label={t('quiz.customPointsLabel')}
-            className="absolute left-0 top-full z-20 mt-1 w-56 rounded-lg border border-gray-200 bg-white p-3 shadow-lg"
+            className="absolute left-0 top-full z-20 mt-1 w-56 rounded-lg border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-gray-900"
           >
             <NumberInput
               label={t('quiz.customPointsLabel')}

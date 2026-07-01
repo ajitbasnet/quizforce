@@ -41,13 +41,13 @@ export function AttemptComparisonTable({
 
   return (
     <section>
-      <h2 className="mb-4 text-xl font-semibold text-text-primary">
+      <h2 className="mb-4 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('history.compareAttempts')}
       </h2>
       <Card className="overflow-x-auto p-0">
         <table className="w-full min-w-[36rem] text-left text-sm">
           <thead>
-            <tr className="border-b border-gray-100 text-text-muted">
+            <tr className="border-b border-gray-100 text-text-muted dark:border-gray-800 dark:text-gray-400">
               <th className="px-4 py-3 font-medium">{t('history.attempt')}</th>
               <th className="px-4 py-3 font-medium">{t('history.date')}</th>
               <th className="px-4 py-3 font-medium">{t('history.score')}</th>
@@ -63,27 +63,27 @@ export function AttemptComparisonTable({
                 <tr
                   key={attempt.id}
                   className={clsx(
-                    'cursor-pointer border-b border-gray-50 transition-colors last:border-0 hover:bg-gray-50',
-                    isBest && 'bg-success-50 hover:bg-success-50/80',
+                    'cursor-pointer border-b border-gray-50 transition-colors last:border-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800',
+                    isBest && 'bg-success-50 hover:bg-success-50/80 dark:bg-success-950/30 dark:hover:bg-success-950/40',
                   )}
                   onClick={() => navigate(`/results/${attempt.id}`)}
                 >
-                  <td className="px-4 py-3 font-medium text-text-primary">
+                  <td className="px-4 py-3 font-medium text-text-primary dark:text-gray-100">
                     {t('history.attemptNumber', { n: index + 1 })}
                   </td>
-                  <td className="px-4 py-3 text-text-muted">
+                  <td className="px-4 py-3 text-text-muted dark:text-gray-400">
                     {formatCompletionDate(attempt.completedAt, currentLang)}
                   </td>
-                  <td className="px-4 py-3 tabular-nums text-text-primary">
+                  <td className="px-4 py-3 tabular-nums text-text-primary dark:text-gray-100">
                     {attempt.score}/{attempt.totalPoints}
                   </td>
-                  <td className="px-4 py-3 tabular-nums text-text-primary">
+                  <td className="px-4 py-3 tabular-nums text-text-primary dark:text-gray-100">
                     {getAccuracy(attempt)}%
                   </td>
-                  <td className="px-4 py-3 tabular-nums text-text-muted">
+                  <td className="px-4 py-3 tabular-nums text-text-muted dark:text-gray-400">
                     {formatDuration(attempt.timeTaken)}
                   </td>
-                  <td className="px-4 py-3 text-text-primary">
+                  <td className="px-4 py-3 text-text-primary dark:text-gray-100">
                     {t(getGradeKey(attempt.percentage))}
                   </td>
                 </tr>

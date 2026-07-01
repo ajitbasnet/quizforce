@@ -32,7 +32,7 @@ export function SettingsLanguageField({
         ))}
       </Select>
       {showDescription && (
-        <p className="-mt-3 text-sm text-text-muted">
+        <p className="-mt-3 text-sm text-text-muted dark:text-gray-400">
           {t('settings.languageDescription')}
         </p>
       )}

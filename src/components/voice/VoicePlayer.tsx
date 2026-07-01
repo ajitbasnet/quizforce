@@ -48,7 +48,7 @@ export function VoicePlayer() {
       {showPlayer && (
         <motion.div
           key="voice-player"
-          className="fixed bottom-6 left-1/2 z-50 flex max-w-lg -translate-x-1/2 items-center gap-3 rounded-xl bg-white px-4 py-2.5 shadow-lg"
+          className="fixed bottom-6 left-1/2 z-50 flex max-w-lg -translate-x-1/2 items-center gap-3 rounded-xl bg-white px-4 py-2.5 shadow-lg dark:bg-gray-900 dark:border dark:border-gray-800"
           initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -91,7 +91,7 @@ export function VoicePlayer() {
             ))}
           </div>
 
-          <p className="min-w-0 flex-1 truncate text-sm text-text-muted">
+          <p className="min-w-0 flex-1 truncate text-sm text-text-muted dark:text-gray-400">
             {truncateText(currentText)}
           </p>
         </motion.div>

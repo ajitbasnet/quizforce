@@ -104,7 +104,7 @@ export function ExportResultsDropdown({
         <div
           role="menu"
           aria-label={t('results.exportResults')}
-          className="absolute right-0 top-full z-50 mt-1 min-w-[220px] rounded-lg border border-gray-100 bg-white py-1 shadow-lg"
+          className="absolute right-0 top-full z-50 mt-1 min-w-[220px] rounded-lg border border-gray-100 bg-white py-1 shadow-lg dark:border-gray-800 dark:bg-gray-900"
         >
           <ExportMenuItem
             icon={Printer}
@@ -142,13 +142,13 @@ function ExportMenuItem({
       role="menuitem"
       className={clsx(
         'flex w-full items-center gap-3 px-3 py-2 text-left text-sm',
-        'text-text-primary transition-colors hover:bg-gray-50',
-        'focus-visible:bg-gray-50 focus-visible:outline-none',
+        'text-text-primary transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800',
+        'focus-visible:bg-gray-50 focus-visible:outline-none dark:focus-visible:bg-gray-800',
         'focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
       )}
       onClick={onClick}
     >
-      <Icon className="h-4 w-4 shrink-0 text-text-muted" aria-hidden />
+      <Icon className="h-4 w-4 shrink-0 text-text-muted dark:text-gray-400" aria-hidden />
       {label}
     </button>
   )

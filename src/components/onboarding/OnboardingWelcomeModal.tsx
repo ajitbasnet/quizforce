@@ -35,7 +35,7 @@ export function OnboardingWelcomeModal({
     >
       <div className="flex flex-col items-center gap-5">
         <div
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-3xl"
+          className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-3xl dark:bg-gray-800"
           aria-hidden
         >
           🎉
@@ -43,8 +43,8 @@ export function OnboardingWelcomeModal({
 
         <ul className="w-full space-y-3">
           {TIPS.map(({ key, icon: Icon }) => (
-            <li key={key} className="flex gap-3 text-sm text-text-primary">
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+            <li key={key} className="flex gap-3 text-sm text-text-primary dark:text-gray-100">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-gray-800 dark:text-indigo-400">
                 <Icon className="h-4 w-4" aria-hidden />
               </span>
               <span>{t(key)}</span>

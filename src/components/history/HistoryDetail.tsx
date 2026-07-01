@@ -14,7 +14,7 @@ export function HistoryDetail({ quiz, attempt }: HistoryDetailProps) {
 
   return (
     <section>
-      <h2 className="mb-4 text-xl font-semibold text-text-primary">
+      <h2 className="mb-4 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('results.answerReview')}
       </h2>
       <div className="flex flex-col gap-3">

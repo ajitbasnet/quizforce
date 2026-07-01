@@ -32,7 +32,7 @@ export function RetryQuizModal({
         </>
       }
     >
-      <p className="text-sm text-text-muted">
+      <p className="text-sm text-text-muted dark:text-gray-400">
         {t('results.retryDescription')}
       </p>
     </Modal>

@@ -79,7 +79,7 @@ export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
     <div
       ref={tablistRef}
       role="tablist"
-      className="flex w-full border-b border-gray-200"
+      className="flex w-full border-b border-gray-200 dark:border-gray-700"
       onKeyDown={handleKeyDown}
     >
       {TABS.map(({ mode: tabMode, labelKey, icon: Icon }) => {
@@ -103,8 +103,8 @@ export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
               'relative flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
               active
-                ? 'text-brand-600'
-                : 'text-text-muted hover:text-text-primary',
+                ? 'text-brand-600 dark:text-indigo-400'
+                : 'text-text-muted hover:text-text-primary dark:text-gray-400 dark:hover:text-gray-100',
             )}
             onClick={() => selectMode(tabMode)}
           >

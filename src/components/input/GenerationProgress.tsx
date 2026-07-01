@@ -90,7 +90,7 @@ export function GenerationProgress({ onCancel }: GenerationProgressProps) {
                 className={`h-12 w-12 ${iconClass} ${spin ? 'animate-spin' : ''}`}
                 aria-hidden
               />
-              <p className="text-base font-semibold text-text-primary">
+              <p className="text-base font-semibold text-text-primary dark:text-gray-100">
                 {t(labelKey)}
               </p>
             </motion.div>
@@ -111,7 +111,7 @@ export function GenerationProgress({ onCancel }: GenerationProgressProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={fadeTransition}
-                className="text-sm text-text-muted"
+                className="text-sm text-text-muted dark:text-gray-400"
               >
                 {t(tipKey)}
               </motion.p>

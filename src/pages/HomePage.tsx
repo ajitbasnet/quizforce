@@ -78,19 +78,19 @@ const FEATURES: FeatureConfig[] = [
     icon: Volume2,
     titleKey: 'home.featureVoiceTitle',
     descriptionKey: 'home.featureVoiceDescription',
-    gradientClass: 'from-brand-50/90 via-violet-50/50 to-white',
+    gradientClass: 'from-brand-50/90 via-violet-50/50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-950',
   },
   {
     icon: Globe,
     titleKey: 'home.featureMultilingualTitle',
     descriptionKey: 'home.featureMultilingualDescription',
-    gradientClass: 'from-blue-50/90 via-brand-50/50 to-white',
+    gradientClass: 'from-blue-50/90 via-brand-50/50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-950',
   },
   {
     icon: MessageSquareText,
     titleKey: 'home.featureExplanationsTitle',
     descriptionKey: 'home.featureExplanationsDescription',
-    gradientClass: 'from-purple-50/90 via-brand-50/50 to-white',
+    gradientClass: 'from-purple-50/90 via-brand-50/50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-950',
   },
 ]
 
@@ -109,13 +109,13 @@ function FeatureHighlightCard({
     <motion.div
       variants={cardVariants}
       className={clsx(
-        'rounded-2xl border border-gray-100 bg-gradient-to-br p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md',
+        'rounded-2xl border border-gray-100 bg-gradient-to-br p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-gray-800 dark:shadow-none',
         gradientClass,
       )}
     >
       <Icon className="mb-3 h-6 w-6 text-brand-600" aria-hidden />
-      <h3 className="text-base font-semibold text-text-primary">{title}</h3>
-      <p className="mt-1 text-sm text-text-muted">{description}</p>
+      <h3 className="text-base font-semibold text-text-primary dark:text-gray-100">{title}</h3>
+      <p className="mt-1 text-sm text-text-muted dark:text-gray-400">{description}</p>
     </motion.div>
   )
 }
@@ -220,10 +220,10 @@ export default function HomePage() {
           {!isGenerating && (
             <>
               <div>
-                <h1 className="text-3xl font-bold text-text-primary">
+                <h1 className="text-3xl font-bold text-text-primary dark:text-gray-100">
                   {t('home.heroTitle')}
                 </h1>
-                <p className="mt-2 text-text-muted">{t('home.heroSubtitle')}</p>
+                <p className="mt-2 text-text-muted dark:text-gray-400">{t('home.heroSubtitle')}</p>
               </div>
 
               <InputModeTabs mode={inputMode} onModeChange={setInputMode} />

@@ -56,7 +56,7 @@ export function QuizDefaultsSection() {
           <div
             role="radiogroup"
             aria-label={t('settings.difficulty')}
-            className="flex rounded-lg bg-surface-subtle p-1"
+            className="flex rounded-lg bg-surface-subtle p-1 dark:bg-gray-800"
           >
             {DIFFICULTY_OPTIONS.map((option) => (
               <button
@@ -67,8 +67,8 @@ export function QuizDefaultsSection() {
                 className={clsx(
                   'flex-1 rounded-md px-2 py-1.5 text-sm font-medium transition-colors',
                   difficulty === option
-                    ? 'bg-surface text-brand-600 shadow-sm'
-                    : 'text-text-muted hover:text-text-primary',
+                    ? 'bg-surface text-brand-600 shadow-sm dark:bg-gray-900 dark:text-indigo-400'
+                    : 'text-text-muted hover:text-text-primary dark:text-gray-400 dark:hover:text-gray-100',
                 )}
                 onClick={() => save({ difficulty: option })}
               >

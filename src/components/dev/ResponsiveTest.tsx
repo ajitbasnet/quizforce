@@ -82,7 +82,7 @@ export function ResponsiveTest() {
       <button
         type="button"
         onClick={() => setIsOpen((open) => !open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-lg shadow-md transition hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-lg shadow-md transition hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 dark:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800"
         aria-label="Toggle responsive test panel"
         aria-expanded={isOpen}
       >
@@ -91,7 +91,7 @@ export function ResponsiveTest() {
 
       {isOpen && (
         <div
-          className="mt-2 w-72 rounded-card border border-gray-200 bg-white p-4 shadow-lg"
+          className="mt-2 w-72 rounded-card border border-gray-200 bg-white p-4 shadow-lg dark:border-gray-800 dark:bg-gray-900"
           role="region"
           aria-label="Responsive test panel"
         >

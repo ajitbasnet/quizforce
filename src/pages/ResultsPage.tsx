@@ -273,7 +273,7 @@ export default function ResultsPage() {
       <PageWrapper>
         <PageMeta title="Your Results — QuizForge" />
         <Card className="mx-auto max-w-md text-center">
-          <p className="text-text-primary">{t('errors.attemptNotFound')}</p>
+          <p className="text-text-primary dark:text-gray-100">{t('errors.attemptNotFound')}</p>
           <Button className="mt-4" onClick={() => navigate('/')}>
             {t('results.backToHome')}
           </Button>
@@ -301,7 +301,7 @@ export default function ResultsPage() {
       <PageWrapper>
         <PageMeta title="Your Results — QuizForge" />
         <Card className="mx-auto max-w-md text-center">
-          <p className="text-text-primary">{t('errors.attemptNotFound')}</p>
+          <p className="text-text-primary dark:text-gray-100">{t('errors.attemptNotFound')}</p>
           <Button className="mt-4" onClick={() => navigate('/')}>
             {t('results.backToHome')}
           </Button>
@@ -342,7 +342,7 @@ export default function ResultsPage() {
           <h2
             ref={reviewHeadingRef}
             tabIndex={-1}
-            className="mb-4 text-xl font-semibold text-text-primary outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+            className="mb-4 text-xl font-semibold text-text-primary outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-gray-100"
           >
             {t('results.answerReview')}
           </h2>

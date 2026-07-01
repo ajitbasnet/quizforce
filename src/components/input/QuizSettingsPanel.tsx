@@ -107,12 +107,12 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
           onClick={() => setExpanded((prev) => !prev)}
           aria-expanded={expanded}
         >
-          <span className="text-sm font-medium text-text-primary">
+          <span className="text-sm font-medium text-text-primary dark:text-gray-100">
             {t('input.customizeQuiz')}
           </span>
           <ChevronRight
             className={clsx(
-              'h-4 w-4 shrink-0 text-text-muted transition-transform duration-200',
+              'h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 dark:text-gray-400',
               expanded && 'rotate-90',
             )}
             aria-hidden
@@ -150,7 +150,7 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
               <div
                 role="radiogroup"
                 aria-label={t('input.difficulty')}
-                className="flex rounded-lg bg-gray-100 p-1"
+                className="flex rounded-lg bg-gray-100 p-1 dark:bg-gray-800"
               >
                 {DIFFICULTY_OPTIONS.map((option) => (
                   <button
@@ -161,8 +161,8 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
                     className={clsx(
                       'flex-1 rounded-md px-2 py-1.5 text-sm font-medium transition-colors',
                       watch('difficulty') === option
-                        ? 'bg-surface text-brand-600 shadow-sm'
-                        : 'text-text-muted hover:text-text-primary',
+                        ? 'bg-surface text-brand-600 shadow-sm dark:bg-gray-900 dark:text-indigo-400'
+                        : 'text-text-muted hover:text-text-primary dark:text-gray-400 dark:hover:text-gray-100',
                     )}
                     onClick={() =>
                       setValue('difficulty', option, { shouldDirty: true })
@@ -203,7 +203,7 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
                 }
                 className={clsx(
                   'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2',
-                  voiceEnabled ? 'bg-brand-600' : 'bg-gray-200',
+                  voiceEnabled ? 'bg-brand-600' : 'bg-gray-200 dark:bg-gray-600',
                 )}
               >
                 <span

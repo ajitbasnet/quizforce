@@ -120,7 +120,7 @@ export const TextInputPanel = forwardRef<TextInputPanelHandle, TextInputPanelPro
         />
 
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-text-muted dark:text-gray-400">
             {t('input.textCharCount', {
               current: content.length.toLocaleString(),
               max: TEXT_INPUT_MAX_CHARS.toLocaleString(),

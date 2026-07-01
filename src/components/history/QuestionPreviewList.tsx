@@ -11,7 +11,7 @@ export function QuestionPreviewList({ quiz }: QuestionPreviewListProps) {
 
   return (
     <section>
-      <h2 className="mb-4 text-xl font-semibold text-text-primary">
+      <h2 className="mb-4 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('history.questionPreview')}
       </h2>
       <div className="flex flex-col gap-3">

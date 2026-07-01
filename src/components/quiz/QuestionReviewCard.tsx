@@ -150,7 +150,7 @@ export function QuestionReviewCard({
   return (
     <section
       aria-labelledby={questionTitleId}
-      className="bg-white rounded-2xl shadow-sm p-4 print:break-inside-avoid"
+      className="bg-white rounded-2xl shadow-sm p-4 print:break-inside-avoid dark:bg-gray-900 dark:shadow-none dark:border dark:border-gray-800"
     >
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant="default" size="sm">
@@ -177,7 +177,7 @@ export function QuestionReviewCard({
 
       <h3
         id={questionTitleId}
-        className="mt-2 text-lg font-semibold leading-relaxed text-text-primary"
+        className="mt-2 text-lg font-semibold leading-relaxed text-text-primary dark:text-gray-100"
       >
         <FormattedText text={question.questionText} />
       </h3>
@@ -243,12 +243,12 @@ export function QuestionReviewCard({
       >
         {feedback.isCorrect ? (
           <motion.div
-            className="border-l-4 border-success-500 bg-success-50 py-3 pl-4"
+            className="border-l-4 border-success-500 bg-success-50 py-3 pl-4 dark:bg-success-950/40"
             variants={explanationVariants}
             initial={skipAnimation ? 'visible' : 'hidden'}
             animate={showExplanation ? 'visible' : 'hidden'}
           >
-            <p className="text-sm text-success-600">
+            <p className="text-sm text-success-600 dark:text-success-400">
               <span className="sr-only">{t('quiz.explanation')}:</span>
               <span className="font-semibold">
                 ✓ {t('results.whyCorrect')}
@@ -259,12 +259,12 @@ export function QuestionReviewCard({
         ) : (
           <>
             <motion.div
-              className="border-l-4 border-danger-500 bg-danger-50 py-3 pl-4"
+              className="border-l-4 border-danger-500 bg-danger-50 py-3 pl-4 dark:bg-danger-950/40"
               variants={explanationVariants}
               initial={skipAnimation ? 'visible' : 'hidden'}
               animate={showExplanation ? 'visible' : 'hidden'}
             >
-              <p className="text-sm text-danger-600">
+              <p className="text-sm text-danger-600 dark:text-danger-400">
                 <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">
                   ✗ {t('results.whyWrong')}
@@ -273,12 +273,12 @@ export function QuestionReviewCard({
               </p>
             </motion.div>
             <motion.div
-              className="border-l-4 border-success-500 bg-success-50 py-3 pl-4"
+              className="border-l-4 border-success-500 bg-success-50 py-3 pl-4 dark:bg-success-950/40"
               variants={explanationVariants}
               initial={skipAnimation ? 'visible' : 'hidden'}
               animate={showExplanation ? 'visible' : 'hidden'}
             >
-              <p className="text-sm text-success-600">
+              <p className="text-sm text-success-600 dark:text-success-400">
                 <span className="sr-only">{t('quiz.explanation')}:</span>
                 <span className="font-semibold">✓ </span>
                 {t('results.correctAnswerIs', {

@@ -44,7 +44,7 @@ function AppShellLayout() {
   useKeyboardShortcuts(shortcutContext)
 
   return (
-    <div className="min-h-screen bg-bg text-text-primary">
+    <div className="min-h-screen bg-bg text-text-primary dark:bg-gray-950 dark:text-gray-100">
       <a href="#main-content" className="skip-link">
         {t('a11y.skipToMain')}
       </a>

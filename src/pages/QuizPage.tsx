@@ -243,17 +243,17 @@ export default function QuizPage() {
         <header>
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
-              <h1 className="break-words font-display text-2xl font-bold text-text-primary">
+              <h1 className="break-words font-display text-2xl font-bold text-text-primary dark:text-gray-100">
                 {currentQuiz.title}
               </h1>
               {currentQuiz.description && (
-                <p className="mt-1 text-text-muted">{currentQuiz.description}</p>
+                <p className="mt-1 text-text-muted dark:text-gray-400">{currentQuiz.description}</p>
               )}
             </div>
             <div className="flex shrink-0 items-center gap-1">
               {settings.timerEnabled && (
                 <span
-                  className="font-mono text-sm tabular-nums text-text-primary"
+                  className="font-mono text-sm tabular-nums text-text-primary dark:text-gray-100"
                   aria-label={formatElapsed(elapsedSeconds)}
                 >
                   {formatElapsed(elapsedSeconds)}
@@ -290,14 +290,14 @@ export default function QuizPage() {
           </div>
         </header>
 
-        <div className="sticky top-16 z-10 max-sm:-mx-4 bg-bg/95 px-4 py-2 backdrop-blur sm:max-lg:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
+        <div className="sticky top-16 z-10 max-sm:-mx-4 bg-bg/95 px-4 py-2 backdrop-blur sm:max-lg:-mx-6 sm:px-6 lg:mx-0 lg:px-0 dark:bg-gray-950/95">
           <div className="flex flex-col gap-1">
             <ProgressBar
               value={((currentQuestionIndex + 1) / total) * 100}
               height="thin"
               data-testid="quiz-progress"
             />
-            <p className="text-sm text-text-muted">
+            <p className="text-sm text-text-muted dark:text-gray-400">
               {t('quiz.questionOf', {
                 current: currentQuestionIndex + 1,
                 total,
@@ -347,7 +347,7 @@ export default function QuizPage() {
             {t('quiz.previousQuestion')}
           </Button>
 
-          <span className="min-w-0 text-sm text-text-muted">
+          <span className="min-w-0 text-sm text-text-muted dark:text-gray-400">
             {t('quiz.questionOf', {
               current: currentQuestionIndex + 1,
               total,

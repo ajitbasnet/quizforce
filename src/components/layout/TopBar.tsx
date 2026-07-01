@@ -48,22 +48,22 @@ export function TopBar() {
   const breadcrumbKey = getBreadcrumbKey(location.pathname)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center gap-4 border-b border-gray-100 bg-white/80 px-4 backdrop-blur-md lg:px-6">
+    <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center gap-4 border-b border-gray-100 bg-white/80 px-4 backdrop-blur-md dark:border-gray-800 dark:bg-gray-900/80 lg:px-6">
       <Link
         to="/"
         className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
       >
         <Zap className="h-6 w-6 text-brand-600" aria-hidden />
-        <span className="text-lg font-bold text-text-primary">{t('app.name')}</span>
+        <span className="text-lg font-bold text-text-primary dark:text-gray-100">{t('app.name')}</span>
       </Link>
 
       <div className="hidden flex-1 justify-center lg:flex">
-        <span className="text-sm text-text-muted">{t(breadcrumbKey)}</span>
+        <span className="text-sm text-text-muted dark:text-gray-400">{t(breadcrumbKey)}</span>
       </div>
 
       <div className="ml-auto hidden items-center gap-2 lg:flex">
         {isHistorySyncing && (
-          <span className="flex items-center gap-1.5 text-xs text-text-muted">
+          <span className="flex items-center gap-1.5 text-xs text-text-muted dark:text-gray-400">
             <Spinner size="sm" className="text-brand-600" />
             {t('history.syncing')}
           </span>

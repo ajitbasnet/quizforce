@@ -81,12 +81,12 @@ export function AuthModal() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 260, damping: 20 }}
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 dark:bg-gray-800">
                 <Mail className="h-8 w-8 text-brand-600" aria-hidden />
               </div>
             </motion.div>
           </AnimatePresence>
-          <p className="text-sm text-text-muted">{t('auth.checkEmail')}</p>
+          <p className="text-sm text-text-muted dark:text-gray-400">{t('auth.checkEmail')}</p>
           <Button type="button" variant="ghost" size="sm" onClick={closeAuthModal}>
             {t('results.retryCancel')}
           </Button>

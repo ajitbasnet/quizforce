@@ -34,10 +34,10 @@ export function UnansweredQuestionsModal({
         </>
       }
     >
-      <p className="text-sm text-text-muted">
+      <p className="text-sm text-text-muted dark:text-gray-400">
         {t('quiz.unansweredDescription')}
       </p>
-      <ul className="mt-3 list-inside list-disc text-sm text-text-primary">
+      <ul className="mt-3 list-inside list-disc text-sm text-text-primary dark:text-gray-100">
         {unansweredNumbers.map((num) => (
           <li key={num}>{t('quiz.questionChip', { number: num })}</li>
         ))}

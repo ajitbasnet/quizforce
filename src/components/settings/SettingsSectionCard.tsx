@@ -18,8 +18,8 @@ export function SettingsSectionCard({
   return (
     <section id={id} className="scroll-mt-24">
       <Card>
-        <div className="mb-4 flex items-center justify-between border-b border-surface-subtle pb-2">
-          <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
+        <div className="mb-4 flex items-center justify-between border-b border-surface-subtle pb-2 dark:border-gray-800">
+          <h2 className="text-lg font-semibold text-text-primary dark:text-gray-100">{title}</h2>
           <SavedIndicator visible={saved} />
         </div>
         {children}

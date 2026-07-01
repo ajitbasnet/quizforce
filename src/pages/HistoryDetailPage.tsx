@@ -77,7 +77,7 @@ export default function HistoryDetailPage() {
     return (
       <PageWrapper title={t('history.title')}>
         <Card className="mx-auto max-w-md text-center">
-          <p className="text-text-primary">{t('errors.quizNotFound')}</p>
+          <p className="text-text-primary dark:text-gray-100">{t('errors.quizNotFound')}</p>
           <Button className="mt-4" onClick={() => navigate('/history')}>
             {t('history.backToHistory')}
           </Button>
@@ -102,7 +102,7 @@ export default function HistoryDetailPage() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-danger-600 hover:bg-danger-50"
+              className="text-danger-600 hover:bg-danger-50 dark:hover:bg-danger-950/40"
               aria-label={t('history.deleteQuiz')}
               onClick={() => setDeleteModalOpen(true)}
             >
@@ -113,17 +113,17 @@ export default function HistoryDetailPage() {
 
         <Card className="flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
-            <h2 className="text-lg font-semibold text-text-primary">
+            <h2 className="text-lg font-semibold text-text-primary dark:text-gray-100">
               {t('history.metadata')}
             </h2>
             <button
               type="button"
               className={clsx(
                 'shrink-0 rounded-full p-2 transition-colors',
-                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600',
+                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 dark:hover:bg-gray-800',
                 isFavorited
                   ? 'text-amber-500'
-                  : 'text-gray-300 hover:text-amber-400',
+                  : 'text-gray-300 hover:text-amber-400 dark:text-gray-600',
               )}
               aria-label={
                 isFavorited ? t('history.unfavorite') : t('history.favorite')

@@ -59,7 +59,7 @@ export function DeleteAccountModal({ isOpen, onClose }: DeleteAccountModalProps)
         </>
       }
     >
-      <p className="text-sm text-text-muted">
+      <p className="text-sm text-text-muted dark:text-gray-400">
         {t('settings.deleteAccountDescription')}
       </p>
     </Modal>

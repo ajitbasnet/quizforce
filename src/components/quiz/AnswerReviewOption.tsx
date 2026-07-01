@@ -28,7 +28,7 @@ function getLetterChipClasses(variant: AnswerFeedbackVariant): string {
     case 'wrongSelected':
       return 'bg-danger-600 text-white'
     case 'dimmed':
-      return 'bg-gray-100 text-gray-500'
+      return 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400'
   }
 }
 
@@ -50,7 +50,7 @@ function getExplanationClasses(variant: AnswerFeedbackVariant): string {
     case 'wrongSelected':
       return 'text-danger-600'
     case 'dimmed':
-      return 'text-gray-500'
+      return 'text-gray-500 dark:text-gray-400'
   }
 }
 

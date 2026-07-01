@@ -33,7 +33,7 @@ export function ScoreBreakdown({ quiz, attempt }: ScoreBreakdownProps) {
 
   return (
     <Card className="p-6 sm:p-8">
-      <h2 className="text-lg font-semibold text-text-primary">
+      <h2 className="text-lg font-semibold text-text-primary dark:text-gray-100">
         {t('results.scoreBreakdown')}
       </h2>
 
@@ -73,7 +73,7 @@ export function ScoreBreakdown({ quiz, attempt }: ScoreBreakdownProps) {
       {data.showDifficultyTable ? (
         <table className="mt-6 w-full text-sm">
           <thead>
-            <tr className="text-left text-text-muted">
+            <tr className="text-left text-text-muted dark:text-gray-400">
               <th scope="col" className="pb-2 pr-4 font-medium">
                 {t('input.difficulty')}
               </th>
@@ -88,9 +88,9 @@ export function ScoreBreakdown({ quiz, attempt }: ScoreBreakdownProps) {
               </th>
             </tr>
           </thead>
-          <tbody className="tabular-nums text-text-primary">
+          <tbody className="tabular-nums text-text-primary dark:text-gray-100">
             {data.difficultyRows.map((row) => (
-              <tr key={row.difficulty} className="border-t border-gray-100">
+              <tr key={row.difficulty} className="border-t border-gray-100 dark:border-gray-800">
                 <td className="py-2 pr-4">
                   {t(DIFFICULTY_LABEL_KEYS[row.difficulty])}
                 </td>

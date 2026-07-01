@@ -45,7 +45,7 @@ export function HistoryFilterToolbar({
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium text-text-muted">
+          <span className="text-xs font-medium text-text-muted dark:text-gray-400">
             {t('history.filterSourceType')}
           </span>
           <div
@@ -65,7 +65,7 @@ export function HistoryFilterToolbar({
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
                     active
                       ? 'bg-brand-600 text-white'
-                      : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary',
+                      : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-100',
                   )}
                   onClick={() => onFiltersChange({ type })}
                 >
@@ -84,7 +84,7 @@ export function HistoryFilterToolbar({
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
                 filters.starred
                   ? 'bg-amber-500 text-white'
-                  : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary',
+                  : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-100',
               )}
               onClick={() => onFiltersChange({ starred: !filters.starred })}
             >

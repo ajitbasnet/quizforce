@@ -22,14 +22,14 @@ export function HistoryEmptyState({
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <EmptySearchIllustration />
-        <p className="mt-6 text-text-muted">
+        <p className="mt-6 text-text-muted dark:text-gray-400">
           {t('history.noSearchResults', { query: searchQuery })}
         </p>
         {onClearSearch ? (
           <button
             type="button"
             onClick={onClearSearch}
-            className="mt-3 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
+            className="mt-3 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700 dark:text-indigo-400 dark:hover:text-indigo-300"
           >
             {t('history.clearSearch')}
           </button>
@@ -41,10 +41,10 @@ export function HistoryEmptyState({
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
       <EmptyHistoryIllustration />
-      <h2 className="mt-6 text-xl font-semibold text-text-primary">
+      <h2 className="mt-6 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('history.emptyTitle')}
       </h2>
-      <p className="mt-2 max-w-sm text-text-muted">{t('history.emptyDescription')}</p>
+      <p className="mt-2 max-w-sm text-text-muted dark:text-gray-400">{t('history.emptyDescription')}</p>
       <Button className="mt-6" size="lg" onClick={() => navigate('/')}>
         {t('history.createFirstQuiz')} →
       </Button>

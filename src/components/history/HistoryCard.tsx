@@ -40,11 +40,11 @@ const SOURCE_BADGE_CONFIG: Record<
   pdf: { labelKey: 'history.sourcePdf', variant: 'warning' },
   prompt: {
     labelKey: 'history.sourcePrompt',
-    className: 'bg-purple-100 text-purple-700',
+    className: 'bg-purple-100 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300',
   },
   url: {
     labelKey: 'history.sourceUrl',
-    className: 'bg-teal-100 text-teal-700',
+    className: 'bg-teal-100 text-teal-700 dark:bg-teal-950/50 dark:text-teal-300',
   },
 }
 
@@ -66,7 +66,7 @@ function MiniScoreRing({ percentage }: { percentage: number }) {
         cy={MINI_RING_SIZE / 2}
         r={MINI_RADIUS}
         fill="none"
-        className="stroke-gray-200"
+        className="stroke-gray-200 dark:stroke-gray-700"
         strokeWidth={MINI_STROKE_WIDTH}
       />
       <circle
@@ -190,10 +190,10 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
               type="button"
               className={clsx(
                 'rounded-full p-1 transition-colors',
-                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600',
+                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 dark:hover:bg-gray-800',
                 isFavorited
                   ? 'text-amber-500'
-                  : 'text-gray-300 hover:text-amber-400',
+                  : 'text-gray-300 hover:text-amber-400 dark:text-gray-600',
               )}
               aria-label={
                 isFavorited ? t('history.unfavorite') : t('history.favorite')
@@ -207,22 +207,22 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
               />
             </button>
           </Tooltip>
-          <span className="text-xs text-text-muted">{relativeDate}</span>
+          <span className="text-xs text-text-muted dark:text-gray-400">{relativeDate}</span>
         </div>
       </div>
 
       <div>
-        <h3 className="font-semibold text-text-primary line-clamp-2">
+        <h3 className="font-semibold text-text-primary line-clamp-2 dark:text-gray-100">
           {quiz.title}
         </h3>
         {quiz.description ? (
-          <p className="mt-1 text-sm text-text-muted line-clamp-1">
+          <p className="mt-1 text-sm text-text-muted line-clamp-1 dark:text-gray-400">
             {quiz.description}
           </p>
         ) : null}
       </div>
 
-      <p className="text-sm text-text-muted">
+      <p className="text-sm text-text-muted dark:text-gray-400">
         {t('history.questionsCount', { count: quiz.questions.length })}
         {' • '}
         {t('history.pointsCount', { pts: quiz.totalPoints })}
@@ -234,7 +234,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
           <>
             <MiniScoreRing percentage={latestAttempt.percentage} />
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm font-medium text-text-primary tabular-nums">
+              <span className="text-sm font-medium text-text-primary tabular-nums dark:text-gray-100">
                 {latestAttempt.score}/{latestAttempt.totalPoints}
               </span>
               <Badge variant="default" size="sm">
@@ -243,7 +243,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
             </div>
           </>
         ) : (
-          <span className="text-sm text-text-muted">{t('history.notAttempted')}</span>
+          <span className="text-sm text-text-muted dark:text-gray-400">{t('history.notAttempted')}</span>
         )}
       </div>
 
@@ -271,7 +271,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
             type="button"
             variant="ghost"
             size="sm"
-            className="text-danger-600 hover:bg-danger-50"
+            className="text-danger-600 hover:bg-danger-50 dark:hover:bg-danger-950/40"
             aria-label={t('history.deleteQuiz')}
             onClick={handleDelete}
           >

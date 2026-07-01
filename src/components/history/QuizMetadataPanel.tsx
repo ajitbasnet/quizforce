@@ -13,11 +13,11 @@ const SOURCE_BADGE_CONFIG: Record<
   pdf: { labelKey: 'history.sourcePdf', variant: 'warning' },
   prompt: {
     labelKey: 'history.sourcePrompt',
-    className: 'bg-purple-100 text-purple-700',
+    className: 'bg-purple-100 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300',
   },
   url: {
     labelKey: 'history.sourceUrl',
-    className: 'bg-teal-100 text-teal-700',
+    className: 'bg-teal-100 text-teal-700 dark:bg-teal-950/50 dark:text-teal-300',
   },
 }
 
@@ -43,9 +43,9 @@ export function QuizMetadataPanel({ quiz }: QuizMetadataPanelProps) {
   return (
     <Card className="flex flex-col gap-4">
       <div>
-        <h2 className="text-lg font-semibold text-text-primary">{quiz.title}</h2>
+        <h2 className="text-lg font-semibold text-text-primary dark:text-gray-100">{quiz.title}</h2>
         {quiz.description ? (
-          <p className="mt-1 text-sm text-text-muted">{quiz.description}</p>
+          <p className="mt-1 text-sm text-text-muted dark:text-gray-400">{quiz.description}</p>
         ) : null}
       </div>
 
@@ -66,18 +66,18 @@ export function QuizMetadataPanel({ quiz }: QuizMetadataPanelProps) {
 
       <dl className="grid gap-3 text-sm sm:grid-cols-2">
         <div>
-          <dt className="text-text-muted">{t('history.questionsCount', { count: quiz.questions.length })}</dt>
-          <dd className="font-medium text-text-primary">
+          <dt className="text-text-muted dark:text-gray-400">{t('history.questionsCount', { count: quiz.questions.length })}</dt>
+          <dd className="font-medium text-text-primary dark:text-gray-100">
             {t('history.pointsCount', { pts: quiz.totalPoints })}
           </dd>
         </div>
         <div>
-          <dt className="text-text-muted">{t('input.difficulty')}</dt>
-          <dd className="font-medium text-text-primary">{t(difficultyKey)}</dd>
+          <dt className="text-text-muted dark:text-gray-400">{t('input.difficulty')}</dt>
+          <dd className="font-medium text-text-primary dark:text-gray-100">{t(difficultyKey)}</dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-text-muted">{t('history.createdOn')}</dt>
-          <dd className="font-medium text-text-primary">
+          <dt className="text-text-muted dark:text-gray-400">{t('history.createdOn')}</dt>
+          <dd className="font-medium text-text-primary dark:text-gray-100">
             {formatCompletionDate(quiz.createdAt, currentLang)}
           </dd>
         </div>

@@ -40,13 +40,13 @@ function getLetterChipClasses(
       case 'wrongSelected':
         return 'bg-danger-600 text-white'
       case 'dimmed':
-        return 'bg-gray-100 text-gray-500'
+        return 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400'
     }
   }
   if (isSelected) {
     return 'bg-brand-600 text-white'
   }
-  return 'bg-gray-100 text-gray-700'
+  return 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200'
 }
 
 function getLabelClasses(variant: AnswerFeedbackVariant): string {
@@ -67,7 +67,7 @@ function getExplanationClasses(variant: AnswerFeedbackVariant): string {
     case 'wrongSelected':
       return 'text-danger-600'
     case 'dimmed':
-      return 'text-gray-500'
+      return 'text-gray-500 dark:text-gray-400'
   }
 }
 
@@ -80,9 +80,9 @@ function getButtonClasses(
     return getAnswerFeedbackContainerClasses(variant)
   }
   if (isSelected) {
-    return 'border-brand-600 bg-brand-50'
+    return 'border-brand-600 bg-brand-50 dark:bg-indigo-950/40 dark:border-indigo-400'
   }
-  return 'border-gray-200 bg-surface hover:border-brand-500 hover:bg-brand-50'
+  return 'border-gray-200 bg-surface hover:border-brand-500 hover:bg-brand-50 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-indigo-400 dark:hover:bg-gray-800'
 }
 
 function AnswerOptionInner({

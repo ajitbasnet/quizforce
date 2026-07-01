@@ -40,7 +40,7 @@ export function SourceContentCollapsible({ quiz }: SourceContentCollapsibleProps
       </Button>
       {open ? (
         <Card className="p-0">
-          <pre className="max-h-80 overflow-auto whitespace-pre-wrap break-words p-4 text-sm text-text-primary">
+          <pre className="max-h-80 overflow-auto whitespace-pre-wrap break-words p-4 text-sm text-text-primary dark:text-gray-100">
             {quiz.sourceContent}
           </pre>
         </Card>

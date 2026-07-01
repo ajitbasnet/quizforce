@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1782913152455" clover="3.2.0">
-  <project timestamp="1782913152455" name="All files">
+<coverage generated="1782913459237" clover="3.2.0">
+  <project timestamp="1782913459237" name="All files">
     <metrics statements="694" coveredstatements="635" conditionals="340" coveredconditionals="249" methods="208" coveredmethods="191" elements="1242" coveredelements="1075" complexity="0" loc="694" ncloc="694" packages="2" files="42" classes="42"/>
     <package name="hooks">
       <metrics statements="330" coveredstatements="289" conditionals="108" coveredconditionals="68" methods="109" coveredmethods="96"/>
@@ -388,13 +388,13 @@
         <line num="8" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="9" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="39" count="6" type="stmt"/>
-        <line num="45" count="4" type="stmt"/>
-        <line num="51" count="6" type="stmt"/>
-        <line num="57" count="6" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
+        <line num="48" count="4" type="stmt"/>
+        <line num="54" count="6" type="stmt"/>
+        <line num="60" count="6" type="stmt"/>
       </file>
       <file name="buildResultsExport.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/buildResultsExport.ts">
         <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="6" methods="8" coveredmethods="8"/>

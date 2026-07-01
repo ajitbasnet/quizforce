@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 // SECURITY: Renders structured React elements only — no raw HTML injection.
 
 const CODE_CLASS =
-  'font-mono bg-gray-100 px-1 rounded text-sm'
+  'font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm'
 
 function parseMarkdownLite(text: string): ReactNode[] {
   const nodes: ReactNode[] = []

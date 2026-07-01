@@ -20,32 +20,32 @@ export function AttemptHistoryList({ attempts }: AttemptHistoryListProps) {
 
   return (
     <section>
-      <h2 className="mb-4 text-xl font-semibold text-text-primary">
+      <h2 className="mb-4 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('history.attemptHistory')}
       </h2>
-      <Card className="divide-y divide-gray-100 p-0">
+      <Card className="divide-y divide-gray-100 p-0 dark:divide-gray-800">
         {attempts.map((attempt, index) => {
           const attemptNumber = attempts.length - index
           return (
             <button
               key={attempt.id}
               type="button"
-              className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-gray-50"
+              className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
               onClick={() => navigate(`/results/${attempt.id}`)}
             >
               <div className="min-w-0">
-                <p className="font-medium text-text-primary">
+                <p className="font-medium text-text-primary dark:text-gray-100">
                   {t('history.attemptNumber', { n: attemptNumber })}
                 </p>
-                <p className="text-sm text-text-muted">
+                <p className="text-sm text-text-muted dark:text-gray-400">
                   {formatCompletionDate(attempt.completedAt, currentLang)}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm font-medium tabular-nums text-text-primary">
+                <span className="text-sm font-medium tabular-nums text-text-primary dark:text-gray-100">
                   {attempt.score}/{attempt.totalPoints}
                 </span>
-                <span className="text-sm text-text-muted tabular-nums">
+                <span className="text-sm text-text-muted tabular-nums dark:text-gray-400">
                   {formatDuration(attempt.timeTaken)}
                 </span>
                 <Badge variant="default" size="sm">

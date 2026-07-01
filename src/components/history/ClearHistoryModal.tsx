@@ -34,7 +34,7 @@ export function ClearHistoryModal({
         </>
       }
     >
-      <p className="text-sm text-text-muted">
+      <p className="text-sm text-text-muted dark:text-gray-400">
         {t('history.clearAllDescription', { count: quizCount })}
       </p>
     </Modal>

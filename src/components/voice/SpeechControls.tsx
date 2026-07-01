@@ -161,12 +161,12 @@ function SpeechControlsCollapsible({
         onClick={() => setExpanded((prev) => !prev)}
         aria-expanded={expanded}
       >
-        <span className="text-sm font-medium text-text-primary">
+        <span className="text-sm font-medium text-text-primary dark:text-gray-100">
           {t('voice.controlsTitle')}
         </span>
         <ChevronRight
           className={clsx(
-            'h-4 w-4 shrink-0 text-text-muted transition-transform duration-200',
+            'h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 dark:text-gray-400',
             expanded && 'rotate-90',
           )}
           aria-hidden
@@ -242,7 +242,7 @@ function SpeechControlsMobileDrawer({
             onClick={() => setDrawerOpen(false)}
           />
           <motion.div
-            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[60vh] flex-col rounded-t-2xl bg-white shadow-xl lg:hidden"
+            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[60vh] flex-col rounded-t-2xl bg-white shadow-xl dark:bg-gray-900 lg:hidden"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -252,12 +252,12 @@ function SpeechControlsMobileDrawer({
             aria-label={t('voice.controlsTitle')}
           >
             <div className="flex shrink-0 items-center justify-between gap-2 p-4 pb-2">
-              <h2 className="text-sm font-medium text-text-primary">
+              <h2 className="text-sm font-medium text-text-primary dark:text-gray-100">
                 {t('voice.controlsTitle')}
               </h2>
               <button
                 type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-text-muted hover:bg-gray-100"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-text-muted hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                 aria-label="Close"
                 onClick={() => setDrawerOpen(false)}
               >

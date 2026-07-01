@@ -37,8 +37,8 @@ interface StatCardProps {
 function StatCard({ label, value }: StatCardProps) {
   return (
     <Card className="p-3">
-      <p className="text-xs text-text-muted">{label}</p>
-      <p className="mt-1 text-lg font-semibold text-text-primary tabular-nums">{value}</p>
+      <p className="text-xs text-text-muted dark:text-gray-400">{label}</p>
+      <p className="mt-1 text-lg font-semibold text-text-primary tabular-nums dark:text-gray-100">{value}</p>
     </Card>
   )
 }
@@ -82,7 +82,7 @@ export function ScorePanel({
       <h2
         ref={headingRef}
         tabIndex={-1}
-        className="text-lg font-semibold text-text-primary"
+        className="text-lg font-semibold text-text-primary dark:text-gray-100"
       >
         {quiz?.title ?? t('results.yourScore')}
       </h2>
@@ -98,7 +98,7 @@ export function ScorePanel({
         >
           {animatedScore}
         </span>
-        <span className="text-xl text-text-muted" aria-hidden>
+        <span className="text-xl text-text-muted dark:text-gray-400" aria-hidden>
           / {attempt.totalPoints} {t('results.points')}
         </span>
         {animatedScore === attempt.score ? (
@@ -123,7 +123,7 @@ export function ScorePanel({
               cy={RING_SIZE / 2}
               r={RADIUS}
               fill="none"
-              className="stroke-gray-200"
+              className="stroke-gray-200 dark:stroke-gray-700"
               strokeWidth={STROKE_WIDTH}
             />
             <circle
@@ -139,12 +139,12 @@ export function ScorePanel({
               style={{ transition: 'stroke-dashoffset 1.2s ease-out' }}
             />
           </svg>
-          <span className="absolute font-display text-3xl font-bold text-text-primary tabular-nums">
+          <span className="absolute font-display text-3xl font-bold text-text-primary tabular-nums dark:text-gray-100">
             {percentage}%
           </span>
         </div>
 
-        <p className="mt-3 text-lg font-semibold text-text-primary">{t(gradeKey)}</p>
+        <p className="mt-3 text-lg font-semibold text-text-primary dark:text-gray-100">{t(gradeKey)}</p>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -157,7 +157,7 @@ export function ScorePanel({
         <StatCard label={t('results.accuracy')} value={`${accuracy}%`} />
       </div>
 
-      <p className="mt-4 text-sm text-text-muted">
+      <p className="mt-4 text-sm text-text-muted dark:text-gray-400">
         {formatCompletionDate(attempt.completedAt, currentLang)}
       </p>
 

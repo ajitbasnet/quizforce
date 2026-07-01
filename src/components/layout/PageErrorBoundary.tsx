@@ -15,7 +15,7 @@ function ErrorIllustration() {
       aria-hidden
       className="text-brand-300"
     >
-      <circle cx="60" cy="60" r="48" className="fill-brand-50 stroke-current" strokeWidth="2" />
+      <circle cx="60" cy="60" r="48" className="fill-brand-50 stroke-current dark:fill-gray-800" strokeWidth="2" />
       <path
         d="M60 36v32"
         className="stroke-current"
@@ -39,10 +39,10 @@ function PageErrorFallback({ error, onRetry }: PageErrorFallbackProps) {
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center px-4 py-12 text-center">
       <ErrorIllustration />
-      <h1 className="mt-6 text-xl font-semibold text-text-primary">
+      <h1 className="mt-6 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('errors.pageTitle')}
       </h1>
-      <pre className="mt-3 max-w-lg overflow-x-auto rounded-lg bg-surface-subtle px-4 py-2 text-left text-sm text-text-muted">
+      <pre className="mt-3 max-w-lg overflow-x-auto rounded-lg bg-surface-subtle px-4 py-2 text-left text-sm text-text-muted dark:bg-gray-800 dark:text-gray-400">
         {error.message}
       </pre>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

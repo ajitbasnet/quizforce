@@ -66,8 +66,8 @@ export function UserMenu() {
         onClick={() => setOpen((prev) => !prev)}
         className={clsx(
           'flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold',
-          'bg-brand-100 text-brand-700 transition-colors',
-          'hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2',
+          'bg-brand-100 text-brand-700 transition-colors dark:bg-indigo-950/50 dark:text-indigo-300',
+          'hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 dark:hover:bg-gray-800',
           'focus-visible:ring-brand-600 focus-visible:ring-offset-2',
         )}
       >
@@ -78,7 +78,7 @@ export function UserMenu() {
         <div
           role="menu"
           aria-label={t('auth.myAccount')}
-          className="absolute right-0 top-full z-50 mt-1 min-w-[180px] rounded-lg border border-gray-100 bg-white py-1 shadow-lg"
+          className="absolute right-0 top-full z-50 mt-1 min-w-[180px] rounded-lg border border-gray-100 bg-white py-1 shadow-lg dark:border-gray-800 dark:bg-gray-900"
         >
           <MenuItem icon={User} label={t('auth.myAccount')} onClick={handleMyAccount} />
           <MenuItem icon={LogOut} label={t('auth.signOut')} onClick={handleSignOut} />
@@ -103,13 +103,13 @@ function MenuItem({
       role="menuitem"
       className={clsx(
         'flex w-full items-center gap-3 px-3 py-2 text-left text-sm',
-        'text-text-primary transition-colors hover:bg-surface-muted',
-        'focus-visible:bg-surface-muted focus-visible:outline-none',
+        'text-text-primary transition-colors hover:bg-surface-muted dark:text-gray-100 dark:hover:bg-gray-800',
+        'focus-visible:bg-surface-muted focus-visible:outline-none dark:focus-visible:bg-gray-800',
         'focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
       )}
       onClick={onClick}
     >
-      <Icon className="h-4 w-4 shrink-0 text-text-muted" aria-hidden />
+      <Icon className="h-4 w-4 shrink-0 text-text-muted dark:text-gray-400" aria-hidden />
       {label}
     </button>
   )

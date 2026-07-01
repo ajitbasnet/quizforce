@@ -224,10 +224,10 @@ export const PromptBuilder = forwardRef<PromptBuilderHandle, PromptBuilderProps>
         />
 
         <div className="mt-2">
-          <h3 className="mb-2 text-sm font-medium text-text-primary">
+          <h3 className="mb-2 text-sm font-medium text-text-primary dark:text-gray-100">
             {t('input.previewPromptLabel')}
           </h3>
-          <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg bg-gray-50 p-4 font-mono text-sm text-text-primary">
+          <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg bg-gray-50 p-4 font-mono text-sm text-text-primary dark:bg-gray-800 dark:text-gray-100">
             {previewText}
           </pre>
         </div>

@@ -63,8 +63,8 @@ function navLinkClass(isActive: boolean, showCollapsed: boolean) {
     'relative z-10 flex items-center rounded-lg text-sm font-medium transition-colors',
     showCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
     isActive
-      ? 'text-brand-600'
-      : 'text-text-muted hover:bg-surface-muted hover:text-text-primary',
+      ? 'text-brand-600 dark:text-indigo-400'
+      : 'text-text-muted hover:bg-surface-muted hover:text-text-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100',
   )
 }
 
@@ -117,21 +117,21 @@ export function Sidebar() {
 
       <aside
         className={clsx(
-          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-64 flex-col border-r border-gray-100 bg-white transition-transform duration-200 lg:transition-[width]',
+          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-64 flex-col border-r border-gray-100 bg-white transition-transform duration-200 dark:border-gray-800 dark:bg-gray-900 lg:transition-[width]',
           isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
           isCollapsed ? 'lg:w-16' : 'lg:w-64',
         )}
       >
-        <div className="flex flex-col gap-2 border-b border-gray-100 p-2 lg:hidden">
+        <div className="flex flex-col gap-2 border-b border-gray-100 p-2 dark:border-gray-800 lg:hidden">
           <LanguageSelector />
           {isSpeechSupported() && <VoiceToggle />}
         </div>
 
-        <div className="hidden items-center justify-end border-b border-gray-100 p-2 lg:flex">
+        <div className="hidden items-center justify-end border-b border-gray-100 p-2 dark:border-gray-800 lg:flex">
           <button
             type="button"
             onClick={toggleCollapsed}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface-muted hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
+            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface-muted hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100 dark:focus-visible:ring-offset-gray-900"
             aria-label={t('nav.toggleSidebar')}
           >
             {isCollapsed ? (
@@ -159,7 +159,7 @@ export function Sidebar() {
                 {showActiveBg && (
                   <motion.div
                     layoutId="sidebar-active-bg"
-                    className="absolute inset-0 rounded-lg bg-brand-50"
+                    className="absolute inset-0 rounded-lg bg-brand-50 dark:bg-gray-800"
                     transition={{ type: 'spring', ...springTransition }}
                   />
                 )}
@@ -187,20 +187,20 @@ export function Sidebar() {
           })}
         </nav>
 
-        <div className="mt-auto border-t border-gray-100 p-2">
+        <div className="mt-auto border-t border-gray-100 p-2 dark:border-gray-800">
           {showCollapsed ? (
             <Tooltip content={statsTooltip}>
-              <div className="flex justify-center rounded-lg bg-gray-50 p-2.5">
-                <BarChart2 className="h-5 w-5 text-text-muted" aria-hidden />
+              <div className="flex justify-center rounded-lg bg-gray-50 p-2.5 dark:bg-gray-800">
+                <BarChart2 className="h-5 w-5 text-text-muted dark:text-gray-400" aria-hidden />
               </div>
             </Tooltip>
           ) : (
-            <div className="rounded-lg bg-gray-50 p-3 text-xs">
-              <p className="font-medium text-text-muted">{t('sidebar.stats')}</p>
-              <p className="mt-1 text-text-primary">
+            <div className="rounded-lg bg-gray-50 p-3 text-xs dark:bg-gray-800">
+              <p className="font-medium text-text-muted dark:text-gray-400">{t('sidebar.stats')}</p>
+              <p className="mt-1 text-text-primary dark:text-gray-100">
                 {t('sidebar.totalQuizzes', { count: quizzes.length })}
               </p>
-              <p className="text-text-primary">
+              <p className="text-text-primary dark:text-gray-100">
                 {t('sidebar.averageScore', { score: averageScore })}
               </p>
             </div>

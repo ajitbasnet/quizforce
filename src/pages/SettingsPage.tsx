@@ -41,7 +41,7 @@ export default function SettingsPage() {
               onClick={() => scrollToSection(id)}
               className={clsx(
                 'shrink-0 rounded-pill px-4 py-2 text-left text-sm font-medium transition-colors',
-                'text-text-muted hover:bg-surface-subtle hover:text-text-primary',
+                'text-text-muted hover:bg-surface-subtle hover:text-text-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100',
                 'lg:rounded-lg',
               )}
             >

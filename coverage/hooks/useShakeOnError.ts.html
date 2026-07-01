@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,48 +89,48 @@
 <a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useRef, useState } from 'react'
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >useShakeOnError(e</span>rror: unknown): boolean {
-  const <span class="cstat-no" title="statement not covered" >hadErrorRef = useRef(false)</span>
-  const [shouldShake, <span class="cstat-no" title="statement not covered" >setShouldShake] = useState(false)</span>
+export function useShakeOnError(error: unknown): boolean {
+  const hadErrorRef = useRef(false)
+  const [shouldShake, setShouldShake] = useState(false)
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  useEffect(() =&gt; {</span></span>
-    const hasError = <span class="cstat-no" title="statement not covered" >Boolean(error)</span>
+  useEffect(() =&gt; {
+    const hasError = Boolean(error)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (hasError &amp;&amp; !hadErrorRef.current) {</span>
-<span class="cstat-no" title="statement not covered" >      setShouldShake(true)</span>
-<span class="cstat-no" title="statement not covered" >      hadErrorRef.current = true</span>
-      const timer = <span class="cstat-no" title="statement not covered" >window.<span class="fstat-no" title="function not covered" >setTimeout(() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etShouldShake(false), 4</span>00)</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      return () =&gt; <span class="cstat-no" title="statement not covered" >w</span>indow.clearTimeout(timer)</span></span>
+    if (hasError &amp;&amp; !hadErrorRef.current) {
+      setShouldShake(true)
+      hadErrorRef.current = true
+      const timer = window.setTimeout(() =&gt; setShouldShake(false), 400)
+      return () =&gt; window.clearTimeout(timer)
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!hasError) {</span>
-<span class="cstat-no" title="statement not covered" >      hadErrorRef.current = false</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!hasError) {
+      hadErrorRef.current = false
     }
   }, [error])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return shouldShake</span>
+  return shouldShake
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -139,7 +139,7 @@ export function <span class="fstat-no" title="function not covered" >useShakeOnE
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-01T13:36:56.021Z
+                at 2026-07-01T13:39:12.441Z
             </div>
         <script src="../prettify.js"></script>
         <script>

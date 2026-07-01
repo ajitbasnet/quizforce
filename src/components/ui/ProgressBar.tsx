@@ -43,7 +43,7 @@ export function ProgressBar({
   return (
     <div className={clsx('w-full', className)}>
       {label && (
-        <div className="mb-1 flex justify-between text-sm text-text-muted">
+        <div className="mb-1 flex justify-between text-sm text-text-muted dark:text-gray-400">
           <span>{label}</span>
           <span>{clamped}%</span>
         </div>
@@ -56,7 +56,7 @@ export function ProgressBar({
         aria-label={label}
         data-testid={testId}
         className={clsx(
-          'w-full overflow-hidden rounded-full bg-gray-200',
+          'w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700',
           HEIGHT_CLASSES[height],
         )}
       >
@@ -68,7 +68,7 @@ export function ProgressBar({
           style={{ width: `${clamped}%` }}
         >
           {animated && (
-            <span className="absolute inset-0 animate-progress-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            <span className="absolute inset-0 animate-progress-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/20" />
           )}
         </div>
       </div>

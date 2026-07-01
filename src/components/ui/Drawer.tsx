@@ -52,14 +52,14 @@ export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            className="absolute right-0 top-0 flex h-full w-80 flex-col bg-white shadow-xl"
+            className="absolute right-0 top-0 flex h-full w-80 flex-col bg-white shadow-xl dark:bg-gray-900 dark:border-l dark:border-gray-800"
             initial={{ x: 320 }}
             animate={{ x: 0 }}
             exit={{ x: 320 }}
             transition={transition}
           >
-            <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-              <h2 id={titleId} className="text-lg font-semibold text-text-primary">
+            <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-6 py-4">
+              <h2 id={titleId} className="text-lg font-semibold text-text-primary dark:text-gray-100">
                 {title}
               </h2>
               <Button
@@ -76,7 +76,7 @@ export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps
             <div className="flex-1 overflow-y-auto px-6 py-4">{children}</div>
 
             {footer && (
-              <div className="border-t border-gray-100 px-6 py-4">{footer}</div>
+              <div className="border-t border-gray-100 dark:border-gray-800 px-6 py-4">{footer}</div>
             )}
           </motion.div>
         </div>

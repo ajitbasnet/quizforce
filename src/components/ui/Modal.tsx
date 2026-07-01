@@ -69,7 +69,7 @@ export function Modal({
             aria-labelledby={titleId}
             onClick={(event) => event.stopPropagation()}
             className={clsx(
-              'w-full bg-white rounded-2xl shadow-xl',
+              'w-full bg-white rounded-2xl shadow-xl dark:bg-gray-900 dark:border dark:border-gray-800',
               SIZE_CLASSES[size],
             )}
             initial={{ y: 20, opacity: 0 }}
@@ -77,8 +77,8 @@ export function Modal({
             exit={{ y: 20, opacity: 0 }}
             transition={transition}
           >
-            <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-              <h2 id={titleId} className="text-lg font-semibold text-text-primary">
+            <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-6 py-4">
+              <h2 id={titleId} className="text-lg font-semibold text-text-primary dark:text-gray-100">
                 {title}
               </h2>
               <Button
@@ -95,7 +95,7 @@ export function Modal({
             <div className="px-6 py-4">{children}</div>
 
             {footer && (
-              <div className="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">
+              <div className="flex justify-end gap-2 border-t border-gray-100 dark:border-gray-800 px-6 py-4">
                 {footer}
               </div>
             )}

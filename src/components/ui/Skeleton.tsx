@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import type { CSSProperties } from 'react'
 
-const SHIMMER_CLASSES = 'rounded bg-gray-200 animate-skeleton-shimmer'
+const SHIMMER_CLASSES = 'rounded bg-gray-200 dark:bg-gray-700 animate-skeleton-shimmer'
 
 export function Skeleton({
   className,

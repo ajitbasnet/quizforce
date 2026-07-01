@@ -15,17 +15,17 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const BASE_CLASSES =
-  'inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-[colors,transform] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none'
+  'inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-[colors,transform] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none'
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    'bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600',
+    'bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600 dark:hover:bg-brand-500',
   secondary:
-    'bg-surface text-brand-600 border border-brand-600 hover:bg-brand-50 focus-visible:ring-brand-600',
+    'bg-surface text-brand-600 border border-brand-600 hover:bg-brand-50 focus-visible:ring-brand-600 dark:bg-gray-900 dark:text-indigo-400 dark:border-indigo-400 dark:hover:bg-gray-800',
   danger:
     'bg-danger-600 text-white hover:brightness-95 focus-visible:ring-danger-600',
   ghost:
-    'bg-transparent text-text-primary hover:bg-surface-subtle focus-visible:ring-gray-400',
+    'bg-transparent text-text-primary hover:bg-surface-subtle focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-gray-800',
   success:
     'bg-success-600 text-white hover:brightness-95 focus-visible:ring-success-600',
 }

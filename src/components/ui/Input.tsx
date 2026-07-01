@@ -61,7 +61,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       >
         {leftIcon && (
           <span
-            className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-text-muted"
+            className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-text-muted dark:text-gray-400"
             aria-hidden
           >
             {leftIcon}
@@ -86,7 +86,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         />
         {rightIcon && (
           <span
-            className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-text-muted"
+            className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-text-muted dark:text-gray-400"
             aria-hidden
           >
             {rightIcon}

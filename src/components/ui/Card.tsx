@@ -21,7 +21,7 @@ export function Card({ children, className, onClick }: CardProps) {
   return (
     <div
       className={clsx(
-        'bg-surface rounded-card p-4 shadow-sm transition-shadow duration-200 ease-out hover:shadow-md',
+        'bg-surface rounded-card p-4 shadow-sm transition-shadow duration-200 ease-out hover:shadow-md dark:bg-gray-900 dark:shadow-none dark:border dark:border-gray-800',
         isClickable && 'cursor-pointer',
         className
       )}

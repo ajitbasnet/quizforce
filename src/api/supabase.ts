@@ -172,7 +172,23 @@ let client: SupabaseClient<Database> | null = null
 export function isSupabaseConfigured(): boolean {
   const url = import.meta.env.VITE_SUPABASE_URL
   const key = import.meta.env.VITE_SUPABASE_ANON_KEY
-  return Boolean(url && key)
+  if (!url || !key) return false
+
+  // Ignore placeholders and dashboard links — API URL must be *.supabase.co
+  if (
+    url.includes('your-project') ||
+    url.includes('supabase.com/dashboard') ||
+    key === 'your-anon-key'
+  ) {
+    return false
+  }
+
+  try {
+    const { hostname, protocol } = new URL(url)
+    return protocol === 'https:' && hostname.endsWith('.supabase.co')
+  } catch {
+    return false
+  }
 }
 
 export function getSupabaseClient(): SupabaseClient<Database> | null {

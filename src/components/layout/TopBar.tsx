@@ -42,7 +42,7 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
   const { openMobile } = useSidebar()
   const { open: openQuickSettings } = useQuickSettings()
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
-  const { isFetching: isHistorySyncing } = useHistorySync()
+  const { isLoading: isHistorySyncing } = useHistorySync()
   const {
     isAuthenticated,
     isConfigured,

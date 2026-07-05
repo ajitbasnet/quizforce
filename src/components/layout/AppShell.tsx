@@ -13,6 +13,7 @@ import {
 import { QuickSettingsProvider } from '../../hooks/useQuickSettings'
 import { ShortcutHelpProvider, useShortcutHelp } from '../../hooks/useShortcutHelp'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useScrollThreshold } from '../../hooks/useScrollThreshold'
 import { SidebarProvider, useSidebar } from './SidebarContext'
 import { ResponsiveTest } from '../dev/ResponsiveTest'
 import { VoiceUnsupportedNotifier } from '../voice/VoiceUnsupportedNotifier'
@@ -40,16 +41,23 @@ function AppShellLayout() {
   const location = useLocation()
   const shortcutContext = resolveShortcutContext(location.pathname)
   const { isOpen, open, close } = useShortcutHelp()
+  const { isPastThreshold, sentinelRef, sentinelHeightPx } = useScrollThreshold(8)
 
   useRegisterShortcutActions({ 'open-help': open }, [open])
   useKeyboardShortcuts(shortcutContext)
 
   return (
     <div className="min-h-screen bg-bg text-text-primary dark:bg-gray-950 dark:text-gray-100">
+      <div
+        ref={sentinelRef}
+        className="pointer-events-none w-full"
+        style={{ height: sentinelHeightPx }}
+        aria-hidden="true"
+      />
       <a href="#main-content" className="skip-link">
         {t('a11y.skipToMain')}
       </a>
-      <TopBar />
+      <TopBar isScrolled={isPastThreshold} />
       <OfflineBanner />
       <Sidebar />
       <AppShellMain>

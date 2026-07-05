@@ -31,6 +31,20 @@ async function mockQuizApi(page: Page, quizResponse: string) {
       body: quizResponse,
     })
   })
+
+  await page.route('**/api/translate-quiz', async (route) => {
+    const body = route.request().postDataJSON() as {
+      quiz: Record<string, unknown>
+      targetLanguage: string
+    }
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        quiz: { ...body.quiz, language: body.targetLanguage },
+      }),
+    })
+  })
 }
 
 async function seedHistory(page: Page, seed: ResponsiveSeed) {
@@ -118,7 +132,9 @@ test.describe('integration journeys', () => {
     await completeQuiz(page)
 
     await dismissOnboardingModal(page)
-    await page.getByRole('button', { name: 'Export Results' }).click()
+    const exportButton = page.getByRole('button', { name: 'Export Results' })
+    await expect(exportButton).toBeVisible()
+    await exportButton.click()
     const downloadPromise = page.waitForEvent('download')
     await page.getByRole('menuitem', { name: 'Export as CSV' }).click()
     const download = await downloadPromise

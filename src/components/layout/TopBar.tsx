@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { History, Menu, Settings, Zap } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { UserMenu } from '../auth/UserMenu'
@@ -15,6 +16,10 @@ import { LanguageSelector } from './LanguageSelector'
 import { topBarNavLinkClass } from './topBarActionStyles'
 import { useSidebar } from './SidebarContext'
 
+interface TopBarProps {
+  isScrolled?: boolean
+}
+
 function getBreadcrumbKey(pathname: string): string {
   if (pathname === '/') return 'nav.home'
   if (pathname === '/quiz') return 'nav.quiz'
@@ -31,7 +36,7 @@ const actionLinkClass = ({ isActive }: { isActive: boolean }) =>
 const iconLinkClass = ({ isActive }: { isActive: boolean }) =>
   topBarNavLinkClass(isActive, true)
 
-export function TopBar() {
+export function TopBar({ isScrolled = false }: TopBarProps) {
   const { t } = useLanguage()
   const location = useLocation()
   const { openMobile } = useSidebar()
@@ -48,7 +53,14 @@ export function TopBar() {
   const breadcrumbKey = getBreadcrumbKey(location.pathname)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center gap-4 border-b border-gray-100 bg-white/80 px-4 backdrop-blur-md dark:border-gray-800 dark:bg-gray-900/80 lg:px-6">
+    <header
+      className={clsx(
+        'fixed inset-x-0 top-0 z-50 flex h-16 items-center gap-4 border-b px-4 backdrop-blur-md motion-safe:transition-[background-color,box-shadow,border-color] motion-safe:duration-standard motion-safe:ease-standard lg:px-6',
+        isScrolled
+          ? 'border-gray-200/80 bg-white/95 shadow-elevation-1 dark:border-gray-700/80 dark:bg-gray-900/95'
+          : 'border-gray-100 bg-white/80 dark:border-gray-800 dark:bg-gray-900/80',
+      )}
+    >
       <Link
         to="/"
         className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1783268544615" clover="3.2.0">
-  <project timestamp="1783268544615" name="All files">
-    <metrics statements="974" coveredstatements="782" conditionals="504" coveredconditionals="324" methods="280" coveredmethods="231" elements="1758" coveredelements="1337" complexity="0" loc="974" ncloc="974" packages="2" files="53" classes="53"/>
+<coverage generated="1783268944110" clover="3.2.0">
+  <project timestamp="1783268944110" name="All files">
+    <metrics statements="984" coveredstatements="792" conditionals="507" coveredconditionals="326" methods="284" coveredmethods="235" elements="1775" coveredelements="1353" complexity="0" loc="984" ncloc="984" packages="2" files="54" classes="54"/>
     <package name="hooks">
-      <metrics statements="513" coveredstatements="379" conditionals="214" coveredconditionals="107" methods="148" coveredmethods="114"/>
+      <metrics statements="523" coveredstatements="389" conditionals="217" coveredconditionals="109" methods="152" coveredmethods="118"/>
       <file name="useCountUp.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useCountUp.ts">
         <metrics statements="20" coveredstatements="20" conditionals="7" coveredconditionals="7" methods="5" coveredmethods="5"/>
         <line num="3" count="3" type="stmt"/>
@@ -335,6 +335,19 @@
         <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
+      </file>
+      <file name="useScrollThreshold.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useScrollThreshold.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="3" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
       </file>
       <file name="useSettingsAutoSave.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useSettingsAutoSave.ts">
         <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="7"/>

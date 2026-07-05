@@ -28,6 +28,7 @@ import { hasOnboarded, markOnboarded } from '../hooks/useOnboarding'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useResultsVoiceReading } from '../hooks/useResultsVoiceReading'
+import { useMotionTransition, useReducedMotion } from '../hooks/useReducedMotion'
 import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
@@ -64,6 +65,11 @@ const reviewItemVariants = {
 export default function ResultsPage() {
   const { t } = useLanguage()
   const { toast } = useToast()
+  const prefersReducedMotion = useReducedMotion()
+  const scorePanelTransition = useMotionTransition(
+    MOTION.duration.standard,
+    MOTION.easeStandard,
+  )
   const navigate = useNavigate()
   const { attemptId } = useParams()
   const [searchParams] = useSearchParams()
@@ -223,7 +229,7 @@ export default function ResultsPage() {
   }, [translateError, toast, t])
 
   const activeQuiz = displayQuiz ?? quiz
-  const activeAttempt = displayAttempt ?? attempt
+  const resolvedAttempt = displayAttempt ?? attempt
 
   const isFromSessionCache = useMemo(
     () =>
@@ -241,9 +247,9 @@ export default function ResultsPage() {
     (remoteFetchFailed || !isSupabaseConfigured())
 
   useEffect(() => {
-    if (!activeAttempt || !activeQuiz || activeAttempt.id !== attemptId) return
-    cacheResultsSession(activeAttempt, activeQuiz)
-  }, [activeAttempt, activeQuiz, attemptId])
+    if (!resolvedAttempt || !activeQuiz || resolvedAttempt.id !== attemptId) return
+    cacheResultsSession(resolvedAttempt, activeQuiz)
+  }, [resolvedAttempt, activeQuiz, attemptId])
 
   const handleRetryConfirm = useCallback(() => {
     if (!activeQuiz) {
@@ -283,17 +289,17 @@ export default function ResultsPage() {
   }, [activeQuiz, setCurrentQuiz, navigate, toast, t])
 
   const handleOpenShare = useCallback(() => {
-    if (!activeAttempt) return
+    if (!resolvedAttempt) return
     if (!activeQuiz) {
       toast.error(t('errors.quizNotFound'))
       return
     }
     setShareModalOpen(true)
-  }, [activeAttempt, activeQuiz, toast, t])
+  }, [resolvedAttempt, activeQuiz, toast, t])
 
   const { isResultsReading, startReading, stopReading, registerCardRef } =
     useResultsVoiceReading({
-      attempt: activeAttempt,
+      attempt: resolvedAttempt,
       quiz: activeQuiz,
       voiceEnabled,
     })
@@ -369,6 +375,12 @@ export default function ResultsPage() {
     ? `Your Results: ${activeQuiz.title} — QuizForge`
     : 'Your Results — QuizForge'
 
+  const renderAttempt = displayAttempt ?? attempt
+
+  const reviewItemMotionVariants = prefersReducedMotion
+    ? { hidden: {}, show: {} }
+    : reviewItemVariants
+
   return (
     <PageWrapper title={t('results.title')}>
       <PageMeta title={resultsTitle} />
@@ -380,13 +392,13 @@ export default function ResultsPage() {
         {isShowingCachedBanner ? <CachedResultsBanner /> : null}
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={scorePanelTransition}
         >
           <WidgetErrorBoundary>
             <ScorePanel
-              attempt={activeAttempt}
+              attempt={renderAttempt}
               quiz={activeQuiz}
               voiceEnabled={voiceEnabled}
               onReadResults={startReading}
@@ -396,7 +408,7 @@ export default function ResultsPage() {
         </motion.div>
 
         {activeQuiz ? (
-          <ScoreBreakdown quiz={activeQuiz} attempt={activeAttempt} />
+          <ScoreBreakdown quiz={activeQuiz} attempt={renderAttempt} />
         ) : null}
 
         <section>
@@ -411,21 +423,22 @@ export default function ResultsPage() {
             <motion.div
               className="flex flex-col gap-3"
               variants={reviewContainerVariants}
-              initial="hidden"
+              initial={prefersReducedMotion ? 'show' : 'hidden'}
               animate="show"
             >
               {(activeQuiz?.questions ?? []).map((question, index) => {
-                const feedback = activeAttempt.feedback.find(
+                const feedback = renderAttempt.feedback.find(
                   (entry) => entry.questionId === question.id,
                 )
-                const selectedOptionId = activeAttempt.answers[question.id]
+                const selectedOptionId = renderAttempt.answers[question.id]
 
                 return (
                   <motion.div
                     key={question.id}
                     custom={index}
                     ref={(el) => registerCardRef(question.id, el)}
-                    variants={reviewItemVariants}
+                    initial={prefersReducedMotion ? 'show' : 'hidden'}
+                    variants={reviewItemMotionVariants}
                     className="print:break-inside-avoid"
                   >
                     <QuestionReviewCard
@@ -447,7 +460,7 @@ export default function ResultsPage() {
                       voiceEnabled={voiceEnabled}
                       language={activeQuiz?.language}
                       animateReveal
-                      attemptId={activeAttempt.id}
+                      attemptId={renderAttempt.id}
                     />
                   </motion.div>
                 )
@@ -467,7 +480,7 @@ export default function ResultsPage() {
             {t('results.backToHome')}
           </Button>
           {activeQuiz ? (
-            <ExportResultsDropdown quiz={activeQuiz} attempt={activeAttempt} />
+            <ExportResultsDropdown quiz={activeQuiz} attempt={renderAttempt} />
           ) : null}
           <Button size="lg" variant="secondary" onClick={handleOpenShare}>
             {t('results.shareScore')}
@@ -485,12 +498,12 @@ export default function ResultsPage() {
         <ShareScoreModal
           isOpen={shareModalOpen}
           onClose={() => setShareModalOpen(false)}
-          attempt={activeAttempt}
+          attempt={renderAttempt}
           quiz={activeQuiz}
         />
       ) : null}
 
-      <HighScoreCelebration percentage={activeAttempt.percentage} />
+      <HighScoreCelebration percentage={renderAttempt.percentage} />
 
       <OnboardingWelcomeModal
         isOpen={onboardingOpen}

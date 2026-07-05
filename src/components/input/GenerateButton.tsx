@@ -54,8 +54,6 @@ function getErrorMessage(
         return t('errors.generationCooldown')
       case 'OVERLOADED_ERROR':
         return t('errors.overloaded')
-      case 'INVALID_API_KEY':
-        return t('errors.invalidApiKeyConfig')
       case 'NETWORK_ERROR':
         return t('errors.network')
       case 'EMPTY_QUIZ':

@@ -3,8 +3,7 @@ import { X } from 'lucide-react'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
-import { useMotionTransition } from '../../hooks/useReducedMotion'
-import { MOTION } from '../../utils/motionTokens'
+import { useMotionPreset } from '../../hooks/useReducedMotion'
 import { Button } from './Button'
 
 interface DrawerProps {
@@ -18,7 +17,8 @@ interface DrawerProps {
 export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
-  const transition = useMotionTransition(MOTION.medium)
+  const enterPreset = useMotionPreset('enterModal')
+  const exitPreset = useMotionPreset('exitModal')
 
   useFocusTrap(panelRef, isOpen)
 
@@ -41,9 +41,8 @@ export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps
             className="absolute inset-0 bg-black/40"
             onClick={onClose}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={transition}
+            animate={{ opacity: 1, transition: enterPreset.transition }}
+            exit={{ opacity: 0, transition: exitPreset.transition }}
             aria-hidden="true"
           />
 
@@ -53,10 +52,16 @@ export function Drawer({ isOpen, onClose, title, children, footer }: DrawerProps
             aria-modal="true"
             aria-labelledby={titleId}
             className="absolute right-0 top-0 flex h-full w-80 flex-col bg-white shadow-xl dark:bg-gray-900 dark:border-l dark:border-gray-800"
-            initial={{ x: 320 }}
-            animate={{ x: 0 }}
-            exit={{ x: 320 }}
-            transition={transition}
+            style={{ transformOrigin: 'right center' }}
+            initial={enterPreset.initial}
+            animate={{
+              ...enterPreset.animate,
+              transition: enterPreset.transition,
+            }}
+            exit={{
+              ...exitPreset.exit,
+              transition: exitPreset.transition,
+            }}
           >
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-6 py-4">
               <h2 id={titleId} className="text-lg font-semibold text-text-primary dark:text-gray-100">

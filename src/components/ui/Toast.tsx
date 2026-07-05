@@ -19,7 +19,11 @@ import {
   type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { useMotionSpring } from '../../hooks/useReducedMotion'
+import {
+  useMotionTransition,
+  useReducedMotion,
+} from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 
 export type ToastVariant = 'success' | 'error' | 'info' | 'warning'
 
@@ -55,6 +59,7 @@ export interface ToastProps {
   title: string
   description?: string
   variant: ToastVariant
+  duration: number
   onDismiss: () => void
 }
 
@@ -95,36 +100,49 @@ const VARIANT_CONFIG: Record<
 
 const toastMotionInitial = { opacity: 0, x: 80 }
 const toastMotionAnimate = { opacity: 1, x: 0 }
-const toastMotionExit = { opacity: 0, x: 80 }
+const toastMotionExit = { opacity: 0, x: 96 }
 
 function ToastMotionItem({
   children,
 }: {
   children: ReactNode
 }) {
-  const spring = useMotionSpring()
+  const enterTransition = useMotionTransition(
+    MOTION.duration.standard,
+    MOTION.easeStandard,
+  )
+  const exitTransition = useMotionTransition(
+    MOTION.duration.exit,
+    MOTION.easeStandard,
+  )
 
   return (
     <motion.div
       className="pointer-events-auto"
       initial={toastMotionInitial}
-      animate={toastMotionAnimate}
-      exit={toastMotionExit}
-      transition={{ type: 'spring', ...spring }}
+      animate={{ ...toastMotionAnimate, transition: enterTransition }}
+      exit={{ ...toastMotionExit, transition: exitTransition }}
     >
       {children}
     </motion.div>
   )
 }
 
-export function Toast({ title, description, variant, onDismiss }: ToastProps) {
+export function Toast({
+  title,
+  description,
+  variant,
+  duration,
+  onDismiss,
+}: ToastProps) {
   const { icon: Icon, container, iconClass, role } = VARIANT_CONFIG[variant]
+  const prefersReducedMotion = useReducedMotion()
 
   return (
     <div
       role={role}
       className={clsx(
-        'flex w-80 max-w-[calc(100vw-2rem)] gap-3 rounded-xl border p-4 shadow-lg',
+        'relative flex w-80 max-w-[calc(100vw-2rem)] gap-3 overflow-hidden rounded-xl border p-4 shadow-lg',
         container,
       )}
     >
@@ -143,6 +161,15 @@ export function Toast({ title, description, variant, onDismiss }: ToastProps) {
       >
         <X className="h-4 w-4" />
       </button>
+      {!prefersReducedMotion && (
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 origin-left bg-current opacity-25"
+          initial={{ scaleX: 1 }}
+          animate={{ scaleX: 0 }}
+          transition={{ duration: duration / 1000, ease: 'linear' }}
+          aria-hidden="true"
+        />
+      )}
     </div>
   )
 }
@@ -223,6 +250,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                   title={item.title}
                   description={item.description}
                   variant={item.variant}
+                  duration={item.duration}
                   onDismiss={() => dismiss(item.id)}
                 />
               </ToastMotionItem>

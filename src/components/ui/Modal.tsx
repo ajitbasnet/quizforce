@@ -4,8 +4,7 @@ import { X } from 'lucide-react'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
-import { useMotionTransition } from '../../hooks/useReducedMotion'
-import { MOTION } from '../../utils/motionTokens'
+import { useMotionPreset } from '../../hooks/useReducedMotion'
 import { Button } from './Button'
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -36,7 +35,8 @@ export function Modal({
 }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
-  const transition = useMotionTransition(MOTION.medium)
+  const enterPreset = useMotionPreset('enterModal')
+  const exitPreset = useMotionPreset('exitModal')
 
   useFocusTrap(panelRef, isOpen)
 
@@ -58,9 +58,8 @@ export function Modal({
           className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm bg-black/40"
           onClick={onClose}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={transition}
+          animate={{ opacity: 1, transition: enterPreset.transition }}
+          exit={{ opacity: 0, transition: exitPreset.transition }}
         >
           <motion.div
             ref={panelRef}
@@ -72,10 +71,15 @@ export function Modal({
               'w-full bg-white rounded-2xl shadow-xl dark:bg-gray-900 dark:border dark:border-gray-800',
               SIZE_CLASSES[size],
             )}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 20, opacity: 0 }}
-            transition={transition}
+            initial={enterPreset.initial}
+            animate={{
+              ...enterPreset.animate,
+              transition: enterPreset.transition,
+            }}
+            exit={{
+              ...exitPreset.exit,
+              transition: exitPreset.transition,
+            }}
           >
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-6 py-4">
               <h2 id={titleId} className="text-lg font-semibold text-text-primary dark:text-gray-100">

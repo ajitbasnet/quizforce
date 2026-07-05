@@ -1,5 +1,6 @@
-import { Copy, Link2 } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Check, Copy, Link2 } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState, type MutableRefObject, type ReactNode } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 import {
@@ -21,6 +22,48 @@ interface ShareScoreModalProps {
   quiz: Quiz
 }
 
+const COPY_CONFIRM_MS = 2000
+
+function CopyConfirmIcon({
+  copied,
+  icon,
+}: {
+  copied: boolean
+  icon: ReactNode
+}) {
+  return (
+    <span className="relative inline-flex h-4 w-4 shrink-0 items-center justify-center">
+      <AnimatePresence mode="wait" initial={false}>
+        {copied ? (
+          <motion.span
+            key="check"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="inline-flex"
+            aria-hidden="true"
+          >
+            <Check className="h-4 w-4 text-success-600" />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="default"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="inline-flex"
+            aria-hidden="true"
+          >
+            {icon}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </span>
+  )
+}
+
 export function ShareScoreModal({
   isOpen,
   onClose,
@@ -30,6 +73,10 @@ export function ShareScoreModal({
   const { t } = useLanguage()
   const { toast } = useToast()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [copiedLink, setCopiedLink] = useState(false)
+  const [copiedText, setCopiedText] = useState(false)
+  const copyLinkTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const copyTextTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (!isOpen) return
@@ -46,6 +93,40 @@ export function ShareScoreModal({
       cancelled = true
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (isOpen) return
+
+    setCopiedLink(false)
+    setCopiedText(false)
+    if (copyLinkTimeoutRef.current) {
+      clearTimeout(copyLinkTimeoutRef.current)
+      copyLinkTimeoutRef.current = null
+    }
+    if (copyTextTimeoutRef.current) {
+      clearTimeout(copyTextTimeoutRef.current)
+      copyTextTimeoutRef.current = null
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    return () => {
+      if (copyLinkTimeoutRef.current) clearTimeout(copyLinkTimeoutRef.current)
+      if (copyTextTimeoutRef.current) clearTimeout(copyTextTimeoutRef.current)
+    }
+  }, [])
+
+  const showCopyConfirm = (
+    setter: (value: boolean) => void,
+    timeoutRef: MutableRefObject<ReturnType<typeof setTimeout> | null>,
+  ) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setter(true)
+    timeoutRef.current = setTimeout(() => {
+      setter(false)
+      timeoutRef.current = null
+    }, COPY_CONFIRM_MS)
+  }
 
   const shareUrl = useMemo(
     () => buildShareUrl({ attempt, quiz, isAuthenticated }),
@@ -70,7 +151,7 @@ export function ShareScoreModal({
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl)
-      toast.success(t('results.linkCopied'))
+      showCopyConfirm(setCopiedLink, copyLinkTimeoutRef)
     } catch {
       toast.error(t('errors.generic'))
     }
@@ -79,7 +160,7 @@ export function ShareScoreModal({
   const handleCopyText = async () => {
     try {
       await navigator.clipboard.writeText(shareText)
-      toast.success(t('results.textCopied'))
+      showCopyConfirm(setCopiedText, copyTextTimeoutRef)
     } catch {
       toast.error(t('errors.generic'))
     }
@@ -100,8 +181,14 @@ export function ShareScoreModal({
             type="button"
             variant="secondary"
             fullWidth
-            leftIcon={<Link2 className="h-4 w-4" />}
+            leftIcon={
+              <CopyConfirmIcon
+                copied={copiedLink}
+                icon={<Link2 className="h-4 w-4" />}
+              />
+            }
             onClick={() => void handleCopyLink()}
+            aria-live="polite"
           >
             {t('results.copyLink')}
           </Button>
@@ -109,8 +196,14 @@ export function ShareScoreModal({
             type="button"
             variant="secondary"
             fullWidth
-            leftIcon={<Copy className="h-4 w-4" />}
+            leftIcon={
+              <CopyConfirmIcon
+                copied={copiedText}
+                icon={<Copy className="h-4 w-4" />}
+              />
+            }
             onClick={() => void handleCopyText()}
+            aria-live="polite"
           >
             {t('results.copyText')}
           </Button>

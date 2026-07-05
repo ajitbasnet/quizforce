@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, CircleHelp } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
 import { PageMeta } from '../components/seo/PageMeta'
@@ -23,6 +23,7 @@ import { useQuizLanguageSync } from '../hooks/useQuizLanguageSync'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
 import { useShortcutHelp } from '../hooks/useShortcutHelp'
+import { useMotionPreset } from '../hooks/useReducedMotion'
 import { useQuizNavigation } from '../hooks/useQuizNavigation'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useVoice } from '../hooks/useVoice'
@@ -87,6 +88,29 @@ export default function QuizPage() {
     totalQuestions,
     isAnswered,
   } = useQuizNavigation()
+
+  const navDirectionRef = useRef<'forward' | 'back'>('forward')
+  const questionSlide = useMotionPreset('questionSlide')
+  const slideOffset = 24
+
+  const goNext = useCallback(() => {
+    navDirectionRef.current = 'forward'
+    navigateQuestion('next')
+  }, [navigateQuestion])
+
+  const goPrev = useCallback(() => {
+    navDirectionRef.current = 'back'
+    navigateQuestion('prev')
+  }, [navigateQuestion])
+
+  const handleJumpTo = useCallback(
+    (index: number) => {
+      navDirectionRef.current =
+        index >= currentQuestionIndex ? 'forward' : 'back'
+      jumpTo(index)
+    },
+    [jumpTo, currentQuestionIndex],
+  )
 
   const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
   const updateSettings = useSettingsStore((s) => s.updateSettings)
@@ -177,11 +201,11 @@ export default function QuizPage() {
     {
       'quiz-next': () => {
         if (isSubmitting || !currentQuiz || !canGoNext) return false
-        navigateQuestion('next')
+        goNext()
       },
       'quiz-prev': () => {
         if (isSubmitting || !currentQuiz || !canGoPrev) return false
-        navigateQuestion('prev')
+        goPrev()
       },
       'quiz-select': (event) => {
         if (isSubmitting || !currentQuiz || !question) return false
@@ -194,7 +218,7 @@ export default function QuizPage() {
           return false
         }
         if (isLastQuestion) handleSubmitClick()
-        else if (canGoNext) navigateQuestion('next')
+        else if (canGoNext) goNext()
       },
       'quiz-submit': () => {
         if (isSubmitting || !currentQuiz || !isLastQuestion) return false
@@ -218,7 +242,8 @@ export default function QuizPage() {
       userAnswers,
       isLastQuestion,
       voiceEnabled,
-      navigateQuestion,
+      goNext,
+      goPrev,
       setAnswer,
       handleSubmitClick,
       updateSettings,
@@ -257,6 +282,7 @@ export default function QuizPage() {
     (opt) => opt.code === settingsLanguage,
   )
   const voiceLanguage = currentQuiz.language
+  const isForward = navDirectionRef.current === 'forward'
 
   return (
     <>
@@ -329,6 +355,7 @@ export default function QuizPage() {
             <ProgressBar
               value={((currentQuestionIndex + 1) / total) * 100}
               height="thin"
+              animated
               data-testid="quiz-progress"
             />
             <p className="text-sm text-text-muted dark:text-gray-400">
@@ -344,17 +371,27 @@ export default function QuizPage() {
           total={total}
           currentIndex={currentQuestionIndex}
           isAnswered={isAnswered}
-          onJump={jumpTo}
+          onJump={handleJumpTo}
         />
 
         <main className="flex-1">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestion.id}
-              initial={{ opacity: 0, x: 30 }}
+              initial={
+                questionSlide.initial === false
+                  ? false
+                  : {
+                      opacity: 0,
+                      x: isForward ? slideOffset : -slideOffset,
+                    }
+              }
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.25 }}
+              exit={{
+                opacity: 0,
+                x: isForward ? -slideOffset : slideOffset,
+              }}
+              transition={questionSlide.transition}
             >
               <WidgetErrorBoundary>
                 <QuestionBlock
@@ -376,7 +413,7 @@ export default function QuizPage() {
             variant="ghost"
             className="min-h-11"
             disabled={!canGoPrev || isSubmitting}
-            onClick={() => navigateQuestion('prev')}
+            onClick={goPrev}
           >
             {t('quiz.previousQuestion')}
           </Button>
@@ -404,7 +441,7 @@ export default function QuizPage() {
               className="min-h-11"
               data-testid="next-question"
               disabled={!canGoNext || isSubmitting}
-              onClick={() => navigateQuestion('next')}
+              onClick={goNext}
             >
               {t('quiz.nextQuestion')}
             </Button>

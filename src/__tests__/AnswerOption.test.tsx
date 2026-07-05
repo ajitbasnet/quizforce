@@ -15,6 +15,11 @@ vi.mock('../hooks/useVoice', () => ({
   }),
 }))
 
+vi.mock('../hooks/useReducedMotion', () => ({
+  useReducedMotion: () => false,
+  useMotionSpring: () => ({ stiffness: 300, damping: 25 }),
+}))
+
 const option: QuizOption = {
   id: 'opt-1',
   text: 'Paris',

@@ -3,9 +3,11 @@ import { motion } from 'framer-motion'
 import { memo } from 'react'
 import { Check, CheckCircle2, XCircle } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useMotionSpring, useReducedMotion } from '../../hooks/useReducedMotion'
 import { useVoice } from '../../hooks/useVoice'
 import type { QuizOption, SupportedLanguage } from '../../types/quiz'
 import { FormattedText } from '../../utils/markdownLite'
+import { MOTION } from '../../utils/motionTokens'
 import {
   getAnswerFeedbackContainerClasses,
   getAnswerFeedbackIcon,
@@ -99,6 +101,8 @@ function AnswerOptionInner({
 }: AnswerOptionProps) {
   const { t } = useLanguage()
   const { speak } = useVoice()
+  const prefersReducedMotion = useReducedMotion()
+  const selectionSpring = useMotionSpring()
   const feedbackId = `feedback-${option.id}`
 
   const variant = isSubmitted
@@ -114,7 +118,20 @@ function AnswerOptionInner({
 
   const showSelectedCheck = isSelected && !isSubmitted
   const showSelectionRing = isSelected && !isSubmitted
+  const showCorrectPulse = isSubmitted && variant === 'correct'
   const optionLabel = `${letter}. ${option.text}`
+
+  const scaleAnimation = prefersReducedMotion
+    ? 1
+    : showCorrectPulse
+      ? [1, 1.02, 1]
+      : showSelectionRing
+        ? [0.98, 1.02, 1]
+        : 1
+
+  const scaleTransition = showCorrectPulse
+    ? { duration: MOTION.fast, ease: MOTION.easeEmphasis }
+    : selectionSpring
 
   return (
     <motion.button
@@ -129,12 +146,10 @@ function AnswerOptionInner({
       onMouseEnter={handleVoiceRead}
       onFocus={handleVoiceRead}
       whileTap={isSubmitted ? undefined : { scale: 0.98 }}
-      animate={{
-        scale: showSelectionRing ? [0.98, 1.02, 1] : 1,
-      }}
-      transition={{ type: 'spring', duration: 0.2 }}
+      animate={{ scale: scaleAnimation }}
+      transition={scaleTransition}
       className={clsx(
-        'relative flex min-h-11 w-full flex-col rounded-lg border px-4 py-3 text-left transition-colors duration-150',
+        'relative flex min-h-11 w-full flex-col rounded-lg border px-4 py-3 text-left transition-[color,background-color,border-color] duration-200',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
         getButtonClasses(isSelected, isSubmitted, variant),
       )}

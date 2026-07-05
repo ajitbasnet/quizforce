@@ -12,6 +12,9 @@ dist
 dist-ssr
 storybook-static
 lighthouse-report.json
+.env
+.env.*
+!.env.example
 *.local
 
 # Editor directories and files

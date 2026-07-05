@@ -35,9 +35,13 @@ function getErrorMessage(
   t: (key: string) => string,
 ): string {
   if (error instanceof QuizGenerationError) {
+    if (
+      error.code === 'AUTH_ERROR' ||
+      error.apiErrorType === 'CONFIG_ERROR'
+    ) {
+      return t('errors.missingApiKey')
+    }
     switch (error.code) {
-      case 'AUTH_ERROR':
-        return t('errors.missingApiKey')
       case 'RATE_LIMIT_ERROR':
         return t('errors.rateLimit')
       case 'RATE_LIMIT_CLIENT':
@@ -62,8 +66,19 @@ function getErrorSuggestion(
   contentLength: number,
   t: (key: string) => string,
 ): string {
-  if (error instanceof QuizGenerationError && error.code === 'NETWORK_ERROR') {
-    return t('errors.suggestionNetwork')
+  if (error instanceof QuizGenerationError) {
+    if (
+      error.code === 'AUTH_ERROR' ||
+      error.apiErrorType === 'CONFIG_ERROR'
+    ) {
+      return t('errors.suggestionMissingApiKey')
+    }
+    if (error.code === 'INVALID_API_KEY') {
+      return t('errors.suggestionInvalidApiKey')
+    }
+    if (error.code === 'NETWORK_ERROR') {
+      return t('errors.suggestionNetwork')
+    }
   }
   if (contentLength > LARGE_CONTENT_THRESHOLD) {
     return t('errors.suggestionLessContent')

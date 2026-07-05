@@ -68,6 +68,37 @@ export function buildQuizPrompt(
   return { system: SYSTEM_PROMPT, user }
 }
 
+export type QuizPromptParts = { system: string; user: string }
+
+export function buildGeminiRequestBody(
+  parts: QuizPromptParts,
+  temperature: number,
+) {
+  return {
+    systemInstruction: { parts: [{ text: parts.system }] },
+    contents: [{ role: 'user', parts: [{ text: parts.user }] }],
+    generationConfig: {
+      responseMimeType: 'application/json',
+      temperature,
+    },
+  }
+}
+
+export function buildGroqRequestBody(
+  parts: QuizPromptParts,
+  temperature: number,
+) {
+  return {
+    model: 'llama-3.3-70b-versatile',
+    messages: [
+      { role: 'system', content: parts.system },
+      { role: 'user', content: parts.user },
+    ],
+    response_format: { type: 'json_object' },
+    temperature,
+  }
+}
+
 export type TargetAudience =
   | 'elementary'
   | 'high_school'

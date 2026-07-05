@@ -20,6 +20,7 @@ import { StopReadingButton } from '../components/results/StopReadingButton'
 import { IosVoiceGestureHint } from '../components/voice/IosVoiceGestureHint'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
+import { ScrollFadeEdges } from '../components/ui/ScrollFadeEdges'
 import { useToast } from '../components/ui/Toast'
 import { useQuizLanguageSync } from '../hooks/useQuizLanguageSync'
 import { useLanguage } from '../hooks/useLanguage'
@@ -37,17 +38,27 @@ import {
   loadResultsSession,
 } from '../utils/resultsSessionCache'
 import { decodeSharePayload } from '../utils/shareScore'
+import { MOTION, cappedStaggerDelay } from '../utils/motionTokens'
+
+const REVIEW_STAGGER_BASE_S = 0.15
 
 const reviewContainerVariants = {
   hidden: {},
-  show: {
-    transition: { delayChildren: 0.3, staggerChildren: 0.05 },
-  },
+  show: {},
 }
 
 const reviewItemVariants = {
   hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  show: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: MOTION.duration.standard,
+      delay:
+        REVIEW_STAGGER_BASE_S + cappedStaggerDelay(index, 50, 300) / 1000,
+      ease: MOTION.easeStandard,
+    },
+  }),
 }
 
 export default function ResultsPage() {
@@ -396,50 +407,53 @@ export default function ResultsPage() {
           >
             {t('results.answerReview')}
           </h2>
-          <motion.div
-            className="flex flex-col gap-3"
-            variants={reviewContainerVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {(activeQuiz?.questions ?? []).map((question, index) => {
-              const feedback = activeAttempt.feedback.find(
-                (entry) => entry.questionId === question.id,
-              )
-              const selectedOptionId = activeAttempt.answers[question.id]
+          <ScrollFadeEdges className="max-h-[min(70vh,48rem)]">
+            <motion.div
+              className="flex flex-col gap-3"
+              variants={reviewContainerVariants}
+              initial="hidden"
+              animate="show"
+            >
+              {(activeQuiz?.questions ?? []).map((question, index) => {
+                const feedback = activeAttempt.feedback.find(
+                  (entry) => entry.questionId === question.id,
+                )
+                const selectedOptionId = activeAttempt.answers[question.id]
 
-              return (
-                <motion.div
-                  key={question.id}
-                  ref={(el) => registerCardRef(question.id, el)}
-                  variants={reviewItemVariants}
-                  className="print:break-inside-avoid"
-                >
-                  <QuestionReviewCard
-                    question={question}
-                    feedback={
-                      feedback ?? {
-                        questionId: question.id,
-                        selectedOptionId: selectedOptionId ?? '',
-                        isCorrect: false,
-                        explanation: '',
-                        pointsAwarded: 0,
+                return (
+                  <motion.div
+                    key={question.id}
+                    custom={index}
+                    ref={(el) => registerCardRef(question.id, el)}
+                    variants={reviewItemVariants}
+                    className="print:break-inside-avoid"
+                  >
+                    <QuestionReviewCard
+                      question={question}
+                      feedback={
+                        feedback ?? {
+                          questionId: question.id,
+                          selectedOptionId: selectedOptionId ?? '',
+                          isCorrect: false,
+                          explanation: '',
+                          pointsAwarded: 0,
+                        }
                       }
-                    }
-                    questionNumber={index + 1}
-                    maxPoints={
-                      activeQuiz?.settings.customPointsMap[question.id] ??
-                      question.points
-                    }
-                    voiceEnabled={voiceEnabled}
-                    language={activeQuiz?.language}
-                    animateReveal
-                    attemptId={activeAttempt.id}
-                  />
-                </motion.div>
-              )
-            })}
-          </motion.div>
+                      questionNumber={index + 1}
+                      maxPoints={
+                        activeQuiz?.settings.customPointsMap[question.id] ??
+                        question.points
+                      }
+                      voiceEnabled={voiceEnabled}
+                      language={activeQuiz?.language}
+                      animateReveal
+                      attemptId={activeAttempt.id}
+                    />
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+          </ScrollFadeEdges>
         </section>
 
         <div className="flex flex-wrap gap-3 print:hidden">

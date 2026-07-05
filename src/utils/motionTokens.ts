@@ -67,6 +67,40 @@ export const MOTION_PRESETS = {
   },
 } satisfies Record<string, MotionPreset>
 
+/** Maps linear progress 0–1 through the shared standard cubic-bezier curve. */
+export function easeStandardProgress(t: number): number {
+  return cubicBezier(MOTION.easeStandard[0], MOTION.easeStandard[1], MOTION.easeStandard[2], MOTION.easeStandard[3])(t)
+}
+
+function cubicBezier(x1: number, y1: number, x2: number, y2: number) {
+  const NEWTON_ITERATIONS = 8
+  const NEWTON_MIN_SLOPE = 0.001
+
+  const ax = 3 * x1 - 3 * x2 + 1
+  const bx = 3 * x2 - 6 * x1
+  const cx = 3 * x1
+  const ay = 3 * y1 - 3 * y2 + 1
+  const by = 3 * y2 - 6 * y1
+  const cy = 3 * y1
+
+  const sampleCurveX = (t: number) => ((ax * t + bx) * t + cx) * t
+  const sampleCurveY = (t: number) => ((ay * t + by) * t + cy) * t
+  const sampleCurveDerivativeX = (t: number) => (3 * ax * t + 2 * bx) * t + cx
+
+  const getTForX = (x: number) => {
+    let guess = x
+    for (let i = 0; i < NEWTON_ITERATIONS; i += 1) {
+      const slope = sampleCurveDerivativeX(guess)
+      if (slope < NEWTON_MIN_SLOPE) break
+      const delta = sampleCurveX(guess) - x
+      guess -= delta / slope
+    }
+    return guess
+  }
+
+  return (t: number) => sampleCurveY(getTForX(t))
+}
+
 /** Caps stagger so list reveals stay within ~300ms total. */
 export function cappedStaggerDelay(
   index: number,

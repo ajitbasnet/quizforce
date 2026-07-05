@@ -2,9 +2,11 @@ import { Volume2 } from 'lucide-react'
 import { useEffect, useMemo, useState, type RefObject } from 'react'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useVoice } from '../../hooks/useVoice'
 import type { Quiz, QuizAttempt } from '../../types/quiz'
 import { formatCompletionDate, formatDuration } from '../../utils/formatDate'
+import { easeStandardProgress } from '../../utils/motionTokens'
 import { getGradeKey } from '../../utils/scoreGrade'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
@@ -22,6 +24,8 @@ const RING_SIZE = 132
 const STROKE_WIDTH = 10
 const RADIUS = (RING_SIZE - STROKE_WIDTH) / 2
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
+const SCORE_ANIMATION_MS = 700
+const RING_EASING = 'cubic-bezier(0.4, 0, 0.2, 1)'
 
 function getRingColor(pct: number): string {
   if (pct >= 70) return 'stroke-success-600'
@@ -52,7 +56,15 @@ export function ScorePanel({
 }: ScorePanelProps) {
   const { t, currentLang } = useLanguage()
   const { isSupported } = useVoice()
-  const animatedScore = useCountUp(attempt.score, 1200)
+  const prefersReducedMotion = useReducedMotion()
+  const countUpDuration = prefersReducedMotion ? 0 : SCORE_ANIMATION_MS
+  const animatedScore = useCountUp(
+    attempt.score,
+    countUpDuration,
+    easeStandardProgress,
+  )
+  const isScoreAnimating =
+    !prefersReducedMotion && animatedScore !== attempt.score
   const [ringOffset, setRingOffset] = useState(CIRCUMFERENCE)
 
   const { correctCount, wrongCount, accuracy } = useMemo(() => {
@@ -71,11 +83,15 @@ export function ScorePanel({
   const targetOffset = CIRCUMFERENCE - (percentage / 100) * CIRCUMFERENCE
 
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setRingOffset(targetOffset)
+      return
+    }
     const rafId = requestAnimationFrame(() => {
       setRingOffset(targetOffset)
     })
     return () => cancelAnimationFrame(rafId)
-  }, [targetOffset])
+  }, [targetOffset, prefersReducedMotion])
 
   return (
     <Card className="p-6 sm:p-8 text-center">
@@ -87,13 +103,10 @@ export function ScorePanel({
         {quiz?.title ?? t('results.yourScore')}
       </h2>
 
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        className="mt-4 flex items-baseline justify-center gap-2"
-      >
+      <div className="mt-4 flex items-baseline justify-center gap-2">
         <span
-          aria-hidden
+          aria-live={isScoreAnimating ? 'polite' : undefined}
+          aria-atomic={isScoreAnimating ? true : undefined}
           className="font-display text-6xl font-bold text-brand-600 tabular-nums"
         >
           {animatedScore}
@@ -101,7 +114,7 @@ export function ScorePanel({
         <span className="text-xl text-text-muted dark:text-gray-400" aria-hidden>
           / {attempt.totalPoints} {t('results.points')}
         </span>
-        {animatedScore === attempt.score ? (
+        {!isScoreAnimating ? (
           <span className="sr-only">
             {t('results.yourScore')}: {attempt.score} / {attempt.totalPoints}{' '}
             {t('results.points')}
@@ -136,7 +149,11 @@ export function ScorePanel({
               strokeLinecap="round"
               strokeDasharray={CIRCUMFERENCE}
               strokeDashoffset={ringOffset}
-              style={{ transition: 'stroke-dashoffset 1.2s ease-out' }}
+              style={{
+                transition: prefersReducedMotion
+                  ? 'none'
+                  : `stroke-dashoffset ${SCORE_ANIMATION_MS}ms ${RING_EASING}`,
+              }}
             />
           </svg>
           <span className="absolute font-display text-3xl font-bold text-text-primary tabular-nums dark:text-gray-100">

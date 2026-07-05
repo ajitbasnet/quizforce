@@ -116,8 +116,11 @@ function FeatureHighlightCard({
       <div
         className={clsx(
           'rounded-2xl border border-gray-100 bg-gradient-to-br p-5 shadow-sm dark:border-gray-800 dark:shadow-none',
-          'motion-safe:transition-[box-shadow] motion-safe:duration-standard motion-safe:ease-standard',
+          'motion-safe:transition-[box-shadow,transform,border-color] motion-safe:duration-standard motion-safe:ease-standard',
+          '[@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-0.5',
+          '[@media(hover:hover)_and_(pointer:fine)]:hover:border-brand-100',
           '[@media(hover:hover)_and_(pointer:fine)]:hover:shadow-elevation-2',
+          'dark:[@media(hover:hover)_and_(pointer:fine)]:hover:border-brand-900/40',
           gradientClass,
         )}
       >

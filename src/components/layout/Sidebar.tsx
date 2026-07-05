@@ -115,7 +115,7 @@ export function Sidebar() {
 
       <aside
         className={clsx(
-          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] flex-col border-r border-gray-100 bg-white dark:border-gray-800 dark:bg-gray-900',
+          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] min-w-0 flex-col overflow-x-hidden overflow-y-auto border-r border-gray-100 bg-white dark:border-gray-800 dark:bg-gray-900',
           'motion-safe:transition-[width,transform] motion-safe:duration-standard motion-safe:ease-standard',
           isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
           showCollapsed ? 'w-16 lg:w-16' : 'w-64 lg:w-64',
@@ -192,7 +192,7 @@ export function Sidebar() {
           })}
         </nav>
 
-        <div className="mt-auto border-t border-gray-100 p-2 dark:border-gray-800">
+        <div className="mt-auto min-w-0 border-t border-gray-100 p-2 dark:border-gray-800">
           {showCollapsed ? (
             <Tooltip content={statsTooltip}>
               <div className="flex justify-center rounded-lg bg-gray-50 p-2.5 dark:bg-gray-800">
@@ -200,15 +200,26 @@ export function Sidebar() {
               </div>
             </Tooltip>
           ) : (
-            <div className="rounded-lg bg-gray-50 p-3 text-xs dark:bg-gray-800">
-              <p className="font-medium text-text-muted dark:text-gray-400">{t('sidebar.stats')}</p>
-              <p className="mt-1 text-text-primary dark:text-gray-100">
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                prefersReducedMotion
+                  ? { duration: 0 }
+                  : { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
+              }
+              className="min-w-0 rounded-lg bg-gray-50 p-3 text-xs dark:bg-gray-800"
+            >
+              <p className="font-medium text-text-muted dark:text-gray-400">
+                {t('sidebar.stats')}
+              </p>
+              <p className="mt-1 break-words leading-snug text-text-primary dark:text-gray-100">
                 {t('sidebar.totalQuizzes', { count: quizzes.length })}
               </p>
-              <p className="text-text-primary dark:text-gray-100">
+              <p className="break-words leading-snug text-text-primary dark:text-gray-100">
                 {t('sidebar.averageScore', { score: averageScore })}
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
       </aside>

@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import {
   forwardRef,
   useEffect,
@@ -117,10 +118,20 @@ export const TextInputPanel = forwardRef<TextInputPanelHandle, TextInputPanelPro
           maxLength={TEXT_INPUT_MAX_CHARS}
           register={register('content')}
           error={contentError}
+          className="focus-visible:shadow-[0_0_0_3px_rgba(79,70,229,0.12)] dark:focus-visible:shadow-[0_0_0_3px_rgba(129,140,248,0.2)]"
         />
 
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-sm text-text-muted dark:text-gray-400">
+          <p
+            className={clsx(
+              'text-sm motion-safe:transition-colors motion-safe:duration-micro motion-safe:ease-standard',
+              content.length >= TEXT_INPUT_MAX_CHARS
+                ? 'text-danger-600 dark:text-danger-400'
+                : content.length >= TEXT_INPUT_MAX_CHARS * 0.9
+                  ? 'text-amber-600 dark:text-amber-400'
+                  : 'text-text-muted dark:text-gray-400',
+            )}
+          >
             {t('input.textCharCount', {
               current: content.length.toLocaleString(),
               max: TEXT_INPUT_MAX_CHARS.toLocaleString(),

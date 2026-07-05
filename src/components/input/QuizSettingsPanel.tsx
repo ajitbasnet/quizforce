@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { useShallow } from 'zustand/react/shallow'
 import { useSettingsStore } from '../../store/settingsStore'
 import type { QuizSettings } from '../../types/quiz'
@@ -52,6 +53,7 @@ function toTranslatedError(
 export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
   function QuizSettingsPanel(_, ref) {
     const { t } = useLanguage()
+    const prefersReducedMotion = useReducedMotion()
     const settings = useSettingsStore(useShallow((s) => s.settings))
     const updateSettings = useSettingsStore((s) => s.updateSettings)
     const [expanded, setExpanded] = useState(false)
@@ -103,7 +105,14 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
       <Card>
         <button
           type="button"
-          className="flex w-full items-center justify-between gap-2 text-left"
+          className={clsx(
+            'flex w-full items-center justify-between gap-2 rounded-lg px-1 py-1 text-left',
+            'motion-safe:transition-[color,background-color,transform] motion-safe:duration-micro motion-safe:ease-standard',
+            'motion-safe:active:scale-[0.99] motion-safe:active:duration-micro',
+            '[@media(hover:hover)_and_(pointer:fine)]:hover:bg-brand-50',
+            'dark:[@media(hover:hover)_and_(pointer:fine)]:hover:bg-gray-800/80',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900',
+          )}
           onClick={() => setExpanded((prev) => !prev)}
           aria-expanded={expanded}
         >
@@ -112,15 +121,30 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
           </span>
           <ChevronRight
             className={clsx(
-              'h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 dark:text-gray-400',
+              'h-4 w-4 shrink-0 text-text-muted motion-safe:transition-transform motion-safe:duration-standard motion-safe:ease-standard dark:text-gray-400',
               expanded && 'rotate-90',
             )}
             aria-hidden
           />
         </button>
 
-        {expanded && (
-          <div className="mt-4 flex flex-col gap-5">
+        <div
+          className={clsx(
+            'grid',
+            !prefersReducedMotion &&
+              'motion-safe:transition-[grid-template-rows,opacity] motion-safe:ease-standard',
+            expanded
+              ? prefersReducedMotion
+                ? 'grid-rows-[1fr]'
+                : 'motion-safe:duration-standard grid-rows-[1fr] opacity-100'
+              : prefersReducedMotion
+                ? 'grid-rows-[0fr]'
+                : 'motion-safe:duration-[180ms] grid-rows-[0fr] opacity-0',
+          )}
+          aria-hidden={!expanded}
+        >
+          <div className="overflow-hidden">
+            <div className="mt-4 flex flex-col gap-5">
             <NumberInput
               label={t('input.questionsCount')}
               min={5}
@@ -252,7 +276,8 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
               </>
             )}
           </div>
-        )}
+          </div>
+        </div>
       </Card>
     )
   },

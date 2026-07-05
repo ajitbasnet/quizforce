@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Sparkles } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -105,6 +106,7 @@ export function GenerateButton({
   const setError = useQuizStore((s) => s.setError)
   const abortRef = useRef<AbortController | null>(null)
   const lastInputRef = useRef<CachedGenerationInput | null>(null)
+  const [isPending, setIsPending] = useState(false)
   const [errorSuggestion, setErrorSuggestion] = useState<string | undefined>()
   const [validationModal, setValidationModal] = useState<{
     rawResponse: string
@@ -128,6 +130,7 @@ export function GenerateButton({
 
     setGenerating(true)
     setProgress(0)
+    setIsPending(false)
     clearGenerationError()
 
     try {
@@ -169,14 +172,18 @@ export function GenerateButton({
       setError(message)
       setErrorSuggestion(suggestion)
       setGenerating(false)
+      setIsPending(false)
     } finally {
       abortRef.current = null
     }
   }
 
   const handleGenerate = async () => {
+    if (disabled || isPending) return
+    setIsPending(true)
     const input = await getGenerationInput()
     if (!input.ok) {
+      setIsPending(false)
       return
     }
 
@@ -230,12 +237,16 @@ export function GenerateButton({
         variant="primary"
         size="lg"
         fullWidth
-        disabled={disabled}
+        disabled={disabled || isPending}
+        isLoading={isPending}
+        className={clsx('min-w-[11.5rem]')}
         data-testid="generate-quiz"
-        leftIcon={<Sparkles className="h-5 w-5" aria-hidden />}
+        leftIcon={
+          !isPending ? <Sparkles className="h-5 w-5" aria-hidden /> : undefined
+        }
         onClick={() => void handleGenerate()}
       >
-        {t('input.generateButton')}
+        {isPending ? t('input.generating') : t('input.generateButton')}
       </Button>
     </div>
   )

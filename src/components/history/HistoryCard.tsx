@@ -149,10 +149,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
   )
 
   return (
-    <Card
-      className="group flex flex-col gap-3 hover:shadow-md"
-      onClick={handleCardClick}
-    >
+    <Card className="group flex flex-col gap-3" onClick={handleCardClick}>
       <div className="flex items-center justify-between gap-2">
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <Badge
@@ -189,8 +186,8 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
             <button
               type="button"
               className={clsx(
-                'rounded-full p-1 transition-colors',
-                'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 dark:hover:bg-gray-800',
+                'rounded-full p-1 motion-safe:transition-colors motion-safe:duration-micro',
+                'hover:bg-surface-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 dark:hover:bg-gray-800',
                 isFavorited
                   ? 'text-amber-500'
                   : 'text-gray-300 hover:text-amber-400 dark:text-gray-600',

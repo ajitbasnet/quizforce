@@ -1,5 +1,8 @@
+import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useMotionTransition, useReducedMotion } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 import { EmptyHistoryIllustration } from '../illustrations/EmptyHistoryIllustration'
 import { EmptySearchIllustration } from '../illustrations/EmptySearchIllustration'
 import { Button } from '../ui/Button'
@@ -10,6 +13,11 @@ interface HistoryEmptyStateProps {
   onClearSearch?: () => void
 }
 
+const EMPTY_ENTRANCE = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+} as const
+
 export function HistoryEmptyState({
   variant,
   searchQuery = '',
@@ -17,10 +25,23 @@ export function HistoryEmptyState({
 }: HistoryEmptyStateProps) {
   const { t } = useLanguage()
   const navigate = useNavigate()
+  const prefersReducedMotion = useReducedMotion()
+  const entranceTransition = useMotionTransition(0.3, MOTION.easeStandard)
+
+  const motionProps = prefersReducedMotion
+    ? {}
+    : {
+        initial: EMPTY_ENTRANCE.initial,
+        animate: EMPTY_ENTRANCE.animate,
+        transition: entranceTransition,
+      }
 
   if (variant === 'noSearchResults') {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center">
+      <motion.div
+        {...motionProps}
+        className="flex flex-col items-center justify-center py-16 text-center"
+      >
         <EmptySearchIllustration />
         <p className="mt-6 text-text-muted dark:text-gray-400">
           {t('history.noSearchResults', { query: searchQuery })}
@@ -34,20 +55,25 @@ export function HistoryEmptyState({
             {t('history.clearSearch')}
           </button>
         ) : null}
-      </div>
+      </motion.div>
     )
   }
 
   return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
+    <motion.div
+      {...motionProps}
+      className="flex flex-col items-center justify-center py-16 text-center"
+    >
       <EmptyHistoryIllustration />
       <h2 className="mt-6 text-xl font-semibold text-text-primary dark:text-gray-100">
         {t('history.emptyTitle')}
       </h2>
-      <p className="mt-2 max-w-sm text-text-muted dark:text-gray-400">{t('history.emptyDescription')}</p>
+      <p className="mt-2 max-w-sm text-text-muted dark:text-gray-400">
+        {t('history.emptyDescription')}
+      </p>
       <Button className="mt-6" size="lg" onClick={() => navigate('/')}>
         {t('history.createFirstQuiz')} →
       </Button>
-    </div>
+    </motion.div>
   )
 }

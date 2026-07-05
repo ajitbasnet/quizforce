@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, type Variants } from 'framer-motion'
 import {
   Globe,
   MessageSquareText,
@@ -36,11 +36,14 @@ import {
   type TextInputPanelHandle,
 } from '../components/input/TextInputPanel'
 import { GenerateButton } from '../components/input/GenerateButton'
+import { useInViewReveal } from '../hooks/useInViewReveal'
 import { useLanguage } from '../hooks/useLanguage'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useQuizStore } from '../store/quizStore'
 import type { RegenerateState } from '../types/regenerate'
 import type { Quiz } from '../types/quiz'
+import { MOTION, cappedStaggerDelay } from '../utils/motionTokens'
 import { Spinner } from '../components/ui/Spinner'
 
 const PDFUploader = lazy(() =>
@@ -49,16 +52,22 @@ const PDFUploader = lazy(() =>
   })),
 )
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12 },
-  },
+  show: {},
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.25 } },
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: MOTION.duration.standard,
+      delay: cappedStaggerDelay(index, 50, 300) / 1000,
+      ease: MOTION.easeStandard,
+    },
+  }),
 }
 
 type FeatureConfig = {
@@ -94,29 +103,40 @@ function FeatureHighlightCard({
   title,
   description,
   gradientClass,
+  index,
 }: {
   icon: LucideIcon
   title: string
   description: string
   gradientClass: string
+  index: number
 }) {
   return (
-    <motion.div
-      variants={cardVariants}
-      className={clsx(
-        'rounded-2xl border border-gray-100 bg-gradient-to-br p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-gray-800 dark:shadow-none',
-        gradientClass,
-      )}
-    >
-      <Icon className="mb-3 h-6 w-6 text-brand-600" aria-hidden />
-      <h3 className="text-base font-semibold text-text-primary dark:text-gray-100">{title}</h3>
-      <p className="mt-1 text-sm text-text-muted dark:text-gray-400">{description}</p>
+    <motion.div variants={cardVariants} custom={index}>
+      <div
+        className={clsx(
+          'rounded-2xl border border-gray-100 bg-gradient-to-br p-5 shadow-sm dark:border-gray-800 dark:shadow-none',
+          'motion-safe:transition-[box-shadow] motion-safe:duration-standard motion-safe:ease-standard',
+          '[@media(hover:hover)_and_(pointer:fine)]:hover:shadow-elevation-2',
+          gradientClass,
+        )}
+      >
+        <Icon className="mb-3 h-6 w-6 text-brand-600" aria-hidden />
+        <h3 className="text-base font-semibold text-text-primary dark:text-gray-100">
+          {title}
+        </h3>
+        <p className="mt-1 text-sm text-text-muted dark:text-gray-400">
+          {description}
+        </p>
+      </div>
     </motion.div>
   )
 }
 
 export default function HomePage() {
   const { t } = useLanguage()
+  const prefersReducedMotion = useReducedMotion()
+  const { ref: featuresRef, isInView: featuresInView } = useInViewReveal()
   useSpeechCleanup()
   const location = useLocation()
   const navigate = useNavigate()
@@ -280,14 +300,16 @@ export default function HomePage() {
 
         {!isGenerating && (
           <motion.div
+            ref={featuresRef}
             className="flex flex-col gap-4"
             variants={containerVariants}
-            initial="show"
-            animate="show"
+            initial={prefersReducedMotion ? 'show' : 'hidden'}
+            animate={featuresInView || prefersReducedMotion ? 'show' : 'hidden'}
           >
-            {FEATURES.map((feature) => (
+            {FEATURES.map((feature, index) => (
               <FeatureHighlightCard
                 key={feature.titleKey}
+                index={index}
                 icon={feature.icon}
                 title={t(feature.titleKey)}
                 description={t(feature.descriptionKey)}

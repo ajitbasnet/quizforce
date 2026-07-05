@@ -152,6 +152,8 @@
     "noQuestionsGenerated": "कोई प्रश्न नहीं बने",
     "backToHome": "होम पर वापस जाएँ",
     "createQuizFirst": "पहले एक क्विज़ बनाकर शुरू करें।",
+    "translating": "क्विज़ को {{language}} में अपडेट किया जा रहा है…",
+    "translateFailed": "क्विज़ का अनुवाद नहीं हो सका। पिछली भाषा दिखाई जा रही है।",
     "preparingQuestions": "आपके प्रश्न तैयार किए जा रहे हैं..."
   },
   "results": {

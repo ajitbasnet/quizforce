@@ -4,8 +4,10 @@ import {
   buildGeminiRequestBody,
   buildGroqRequestBody,
   buildQuizPrompt,
+  buildTranslateQuizPrompt,
 } from '../utils/promptBuilder'
 import type { QuizSettings } from '../types/quiz'
+import { makeQuiz } from './fixtures/quiz'
 
 const baseSettings: QuizSettings = {
   pointsPerQuestion: 10,
@@ -46,6 +48,20 @@ describe('buildQuizPrompt', () => {
     expect(user).toContain('- Number of questions: 12')
     expect(user).toContain('- Points per question: 10')
     expect(user).toContain('- Difficulty: medium')
+  })
+})
+
+describe('buildTranslateQuizPrompt', () => {
+  it('includes target language and preserve IDs rule', () => {
+    const quiz = makeQuiz()
+    const { user, system } = buildTranslateQuizPrompt(quiz, 'hi')
+
+    expect(system).toContain('valid JSON only')
+    expect(user).toContain('## Target language')
+    expect(user).toContain('hi')
+    expect(user).toContain('Do NOT change any id, correctOptionId, points, difficulty, or option count.')
+    expect(user).toContain('Preserve every id and correctOptionId exactly as in the input.')
+    expect(user).toContain('Hindi')
   })
 })
 

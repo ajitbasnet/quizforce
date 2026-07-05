@@ -152,6 +152,8 @@
     "noQuestionsGenerated": "未生成任何题目",
     "backToHome": "返回首页",
     "createQuizFirst": "请先创建测验。",
+    "translating": "正在将测验更新为{{language}}…",
+    "translateFailed": "无法翻译测验。显示之前的语言。",
     "preparingQuestions": "正在准备题目..."
   },
   "results": {

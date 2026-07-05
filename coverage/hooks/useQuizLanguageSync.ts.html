@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for utils/promptBuilder.ts</title>
+    <title>Code coverage report for hooks/useQuizLanguageSync.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">utils</a> promptBuilder.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">hooks</a> useQuizLanguageSync.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>59/78</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>15/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">76.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>56/73</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -221,405 +221,321 @@
 <a name='L156'></a><a href='#L156'>156</a>
 <a name='L157'></a><a href='#L157'>157</a>
 <a name='L158'></a><a href='#L158'>158</a>
-<a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a>
-<a name='L161'></a><a href='#L161'>161</a>
-<a name='L162'></a><a href='#L162'>162</a>
-<a name='L163'></a><a href='#L163'>163</a>
-<a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a>
-<a name='L172'></a><a href='#L172'>172</a>
-<a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a>
-<a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a>
-<a name='L178'></a><a href='#L178'>178</a>
-<a name='L179'></a><a href='#L179'>179</a>
-<a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a>
-<a name='L182'></a><a href='#L182'>182</a>
-<a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a>
-<a name='L185'></a><a href='#L185'>185</a>
-<a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L159'></a><a href='#L159'>159</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Quiz, QuizSettings, SupportedLanguage } from '../types/quiz'
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useRef, useState } from 'react'
+import { translateQuiz } from '../api/translateQuiz'
+import { useSettingsStore } from '../store/settingsStore'
+import { QuizGenerationError } from '../types/api'
+import type { Quiz, QuizAttempt, SupportedLanguage } from '../types/quiz'
+import { rebuildAttemptFeedback } from '../utils/rebuildAttemptFeedback'
+import { syncVoiceForLanguage } from '../utils/syncVoiceForLanguage'
 &nbsp;
-const SYSTEM_PROMPT =
-  'You are QuizForge, an expert educator and quiz designer. You ALWAYS respond with valid JSON only — no markdown, no preamble, no explanation outside the JSON.'
+const DEBOUNCE_MS = 300
+const CACHE_PREFIX = 'quizforge:translation:'
 &nbsp;
-const LANGUAGE_LABELS: Record&lt;SupportedLanguage, string&gt; = {
-  en: 'English',
-  es: 'Spanish',
-  fr: 'French',
-  hi: 'Hindi',
-  ne: 'Nepali',
-  de: 'German',
-  zh: 'Chinese',
+function translationCacheKey(quizId: string, targetLang: SupportedLanguage): string {
+  return `${CACHE_PREFIX}${quizId}:${targetLang}`
 }
 &nbsp;
-const SOURCE_TYPE_LABELS: Record&lt;Quiz['sourceType'], string&gt; = {
-  text: 'Text content',
-  pdf: 'PDF content',
-  prompt: 'Topic or prompt',
-  url: 'URL content',
+function readCachedQuiz(cacheKey: string): Quiz | null {
+  try {
+    const raw = sessionStorage.getItem(cacheKey)
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!raw) return null
+<span class="cstat-no" title="statement not covered" >    return JSON.parse(raw) as Quiz</span>
+  } catch {
+<span class="cstat-no" title="statement not covered" >    sessionStorage.removeItem(cacheKey)</span>
+<span class="cstat-no" title="statement not covered" >    return null</span>
+  }
 }
 &nbsp;
-const REQUIRED_JSON_SHAPE = `{
-  "title": "...",
-  "description": "...",
-  "questions": [{
-    "id": "...",
-    "questionText": "...",
-    "options": [{ "id": "...", "text": "..." }],
-    "correctOptionId": "...",
-    "explanation": "...",
-    "wrongExplanations": { "optionId": "why wrong" },
-    "points": 10,
-    "difficulty": "easy|medium|hard",
-    "topic": "optional"
-  }]
-}`
-&nbsp;
-export type QuizPromptParts = { system: string; user: string }
-&nbsp;
-export function buildQuizPrompt(
-  content: string,
-  settings: QuizSettings,
-  sourceType: Quiz['sourceType'],
-): QuizPromptParts {
-  const sourceLabel = SOURCE_TYPE_LABELS[sourceType]
-  const languageLabel = LANGUAGE_LABELS[settings.language]
-&nbsp;
-  const user = [
-    `## Source context (${sourceLabel})`,
-    content,
-    '',
-    '## Generation parameters',
-    `- Number of questions: ${settings.questionsCount}`,
-    `- Difficulty: ${settings.difficulty}`,
-    `- Language: ${settings.language}`,
-    `- Points per question: ${settings.pointsPerQuestion}`,
-    '',
-    '## Required JSON shape',
-    'Respond with a single JSON object matching this structure exactly:',
-    REQUIRED_JSON_SHAPE,
-    '',
-    '## Quality rules',
-    'Ensure wrongExplanations has an entry for every incorrect option. Explanation must be 1-2 sentences. Questions must test real understanding, not trivia.',
-    '',
-    '## Language instruction',
-    `Write all questionText, options, explanation, and wrongExplanations in ${languageLabel}.`,
-  ].join('\n')
-&nbsp;
-  return { system: SYSTEM_PROMPT, user }
-}
-&nbsp;
-export function buildTranslateQuizPrompt(
+function applyTranslation(
   quiz: Quiz,
+  translated: Quiz,
   targetLanguage: SupportedLanguage,
-): QuizPromptParts {
-  const languageLabel = LANGUAGE_LABELS[targetLanguage]
-&nbsp;
-  const translatable = {
-    title: quiz.title,
-    description: quiz.description,
-    questions: quiz.questions.map((question) =&gt; ({
-      id: question.id,
-      questionText: question.questionText,
-      options: question.options,
-      correctOptionId: question.correctOptionId,
-      explanation: question.explanation,
-      wrongExplanations: question.wrongExplanations,
-      points: question.points,
-      difficulty: question.difficulty,
-      topic: question.topic,
-    })),
-  }
-&nbsp;
-  const user = [
-    '## Task',
-    'Translate this quiz to the target language.',
-    '',
-    '## Quiz JSON',
-    JSON.stringify(translatable, null, 2),
-    '',
-    '## Target language',
-    targetLanguage,
-    '',
-    '## Required JSON shape',
-    'Respond with a single JSON object matching this structure exactly:',
-    REQUIRED_JSON_SHAPE,
-    '',
-    '## Translation rules',
-    `- Translate all human-readable strings (title, description, questionText, option text, explanation, wrongExplanations values, topic) to ${languageLabel}.`,
-    '- Do NOT change any id, correctOptionId, points, difficulty, or option count.',
-    '- Preserve every id and correctOptionId exactly as in the input.',
-    '- Return valid JSON only — no markdown fences or preamble.',
-  ].join('\n')
-&nbsp;
-  return { system: SYSTEM_PROMPT, user }
-}
-&nbsp;
-export function buildGeminiRequestBody(
-  parts: QuizPromptParts,
-  temperature: number,
-) {
+): Quiz {
   return {
-    systemInstruction: { parts: [{ text: parts.system }] },
-    contents: [{ role: 'user', parts: [{ text: parts.user }] }],
-    generationConfig: {
-      responseMimeType: 'application/json',
-      temperature,
-    },
+    ...translated,
+    settings: { ...quiz.settings, language: targetLanguage },
   }
 }
 &nbsp;
-export function buildGroqRequestBody(
-  parts: QuizPromptParts,
-  temperature: number,
-) {
-  return {
-    model: 'llama-3.3-70b-versatile',
-    messages: [
-      { role: 'system', content: parts.system },
-      { role: 'user', content: parts.user },
-    ],
-    response_format: { type: 'json_object' },
-    temperature,
-  }
+interface UseQuizLanguageSyncOptions {
+  quiz: Quiz | null | undefined
+  attempt?: QuizAttempt | null
+  onQuizUpdate: (quiz: Quiz) =&gt; void
+  onAttemptUpdate?: (attempt: QuizAttempt) =&gt; void
 }
 &nbsp;
-export type TargetAudience =
-  | 'elementary'
-  | 'high_school'
-  | 'college'
-  | 'professional'
-  | 'custom'
+export function useQuizLanguageSync({
+  quiz,
+  attempt,
+  onQuizUpdate,
+  onAttemptUpdate,
+}: UseQuizLanguageSyncOptions) {
+  const settingsLanguage = useSettingsStore((s) =&gt; s.settings.language)
+  const [isTranslating, setIsTranslating] = useState(false)
+  const [translateError, setTranslateError] = useState&lt;string | null&gt;(null)
 &nbsp;
-export interface PromptBuilderFields {
-  topic: string
-  subtopics: string
-  audience: TargetAudience
-  customAudience: string
-  specialInstructions: string
-}
+  const abortRef = useRef&lt;AbortController | null&gt;(null)
+  const debounceRef = useRef&lt;ReturnType&lt;typeof setTimeout&gt; | null&gt;(null)
+  const latestLangRef = useRef(settingsLanguage)
+  const onQuizUpdateRef = useRef(onQuizUpdate)
+  const onAttemptUpdateRef = useRef(onAttemptUpdate)
+  const attemptRef = useRef(attempt)
 &nbsp;
-export interface PromptBuilderLabels {
-  audience: string
-}
+  onQuizUpdateRef.current = onQuizUpdate
+  onAttemptUpdateRef.current = onAttemptUpdate
+  attemptRef.current = attempt
 &nbsp;
-export function assemblePrompt(
-  fields: PromptBuilderFields,
-  labels: PromptBuilderLabels,
-): string {
-  const lines: string[] = [`Create a quiz on the topic: ${fields.topic.trim()}`]
+  useEffect(() =&gt; {
+    latestLangRef.current = settingsLanguage
 &nbsp;
-  const subtopics = fields.subtopics.trim()
-  if (subtopics) {
-    lines.push('', `Subtopics to cover: ${subtopics}`)
-  }
+    if (!quiz || settingsLanguage === quiz.language) {
+      setIsTranslating(false)
+      setTranslateError(null)
+      return
+    }
 &nbsp;
-  lines.push('', `Target audience: ${labels.audience}`)
+    const targetLanguage = settingsLanguage
+    const sourceQuiz = quiz
 &nbsp;
-  const instructions = fields.specialInstructions.trim()
-  if (instructions) {
-    lines.push('', `Special instructions: ${instructions}`)
-  }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (debounceRef.current) {
+<span class="cstat-no" title="statement not covered" >      clearTimeout(debounceRef.current)</span>
+    }
 &nbsp;
-  return lines.join('\n')
+    debounceRef.current = setTimeout(() =&gt; {
+      void (async () =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (latestLangRef.current !== targetLanguage) <span class="cstat-no" title="statement not covered" >return</span>
+&nbsp;
+        const cacheKey = translationCacheKey(sourceQuiz.id, targetLanguage)
+        const cached = readCachedQuiz(cacheKey)
+&nbsp;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (cached) {
+          const merged = <span class="cstat-no" title="statement not covered" >applyTranslation(sourceQuiz, cached, targetLanguage)</span>
+<span class="cstat-no" title="statement not covered" >          onQuizUpdateRef.current(merged)</span>
+          const currentAttempt = <span class="cstat-no" title="statement not covered" >attemptRef.current</span>
+<span class="cstat-no" title="statement not covered" >          if (currentAttempt &amp;&amp; onAttemptUpdateRef.current) {</span>
+<span class="cstat-no" title="statement not covered" >            onAttemptUpdateRef.current(rebuildAttemptFeedback(merged, currentAttempt))</span>
+          }
+<span class="cstat-no" title="statement not covered" >          syncVoiceForLanguage(targetLanguage)</span>
+<span class="cstat-no" title="statement not covered" >          return</span>
+        }
+&nbsp;
+        abortRef.current?.abort()
+        const controller = new AbortController()
+        abortRef.current = controller
+&nbsp;
+        setIsTranslating(true)
+        setTranslateError(null)
+&nbsp;
+        try {
+          const translated = await translateQuiz(
+            sourceQuiz,
+            targetLanguage,
+            controller.signal,
+          )
+&nbsp;
+          if (latestLangRef.current !== targetLanguage) return
+&nbsp;
+          const merged = applyTranslation(sourceQuiz, translated, targetLanguage)
+          sessionStorage.setItem(cacheKey, JSON.stringify(merged))
+&nbsp;
+          onQuizUpdateRef.current(merged)
+&nbsp;
+          const currentAttempt = attemptRef.current
+          <span class="missing-if-branch" title="if path not taken" >I</span>if (currentAttempt &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >onAttemptUpdateRef.current) {</span>
+<span class="cstat-no" title="statement not covered" >            onAttemptUpdateRef.current(rebuildAttemptFeedback(merged, currentAttempt))</span>
+          }
+&nbsp;
+          syncVoiceForLanguage(targetLanguage)
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >          if (latestLangRef.current !== targetLanguage) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >          if (error instanceof QuizGenerationError &amp;&amp; error.code === 'ABORTED') {</span>
+<span class="cstat-no" title="statement not covered" >            return</span>
+          }
+&nbsp;
+          const message =
+<span class="cstat-no" title="statement not covered" >            error instanceof QuizGenerationError</span>
+              ? error.message
+              : error instanceof Error
+                ? error.message
+                : 'Translation failed'
+<span class="cstat-no" title="statement not covered" >          setTranslateError(message)</span>
+        } finally {
+          if (latestLangRef.current === targetLanguage) {
+            setIsTranslating(false)
+          }
+        }
+      })()
+    }, DEBOUNCE_MS)
+&nbsp;
+    return () =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (debounceRef.current) {
+        clearTimeout(debounceRef.current)
+        debounceRef.current = null
+      }
+      abortRef.current?.abort()
+    }
+  }, [quiz, settingsLanguage])
+&nbsp;
+  return { isTranslating, translateError }
 }
 &nbsp;</pre></td></tr></table></pre>
 

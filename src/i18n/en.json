@@ -152,7 +152,9 @@
     "close": "Close",
     "noQuestionsGenerated": "No questions generated",
     "backToHome": "Back to Home",
-    "createQuizFirst": "Start by creating a quiz first."
+    "createQuizFirst": "Start by creating a quiz first.",
+    "translating": "Updating quiz to {{language}}…",
+    "translateFailed": "Could not translate the quiz. Showing the previous language."
   },
   "results": {
     "calculatingScore": "Calculating your score...",

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1783265122676" clover="3.2.0">
-  <project timestamp="1783265122676" name="All files">
-    <metrics statements="787" coveredstatements="643" conditionals="404" coveredconditionals="259" methods="237" coveredmethods="196" elements="1428" coveredelements="1098" complexity="0" loc="787" ncloc="787" packages="2" files="48" classes="48"/>
+<coverage generated="1783267407580" clover="3.2.0">
+  <project timestamp="1783267407580" name="All files">
+    <metrics statements="927" coveredstatements="758" conditionals="482" coveredconditionals="311" methods="264" coveredmethods="222" elements="1673" coveredelements="1291" complexity="0" loc="927" ncloc="927" packages="2" files="52" classes="52"/>
     <package name="hooks">
-      <metrics statements="406" coveredstatements="289" conditionals="148" coveredconditionals="68" methods="131" coveredmethods="96"/>
+      <metrics statements="491" coveredstatements="359" conditionals="196" coveredconditionals="96" methods="142" coveredmethods="108"/>
       <file name="useCountUp.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useCountUp.ts">
         <metrics statements="20" coveredstatements="20" conditionals="7" coveredconditionals="7" methods="5" coveredmethods="5"/>
         <line num="3" count="3" type="stmt"/>
@@ -169,6 +169,82 @@
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="2" count="1" type="stmt"/>
       </file>
+      <file name="useQuizLanguageSync.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useQuizLanguageSync.ts">
+        <metrics statements="73" coveredstatements="56" conditionals="36" coveredconditionals="15" methods="9" coveredmethods="9"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="51" count="23" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="53" count="8" type="stmt"/>
+        <line num="55" count="8" type="stmt"/>
+        <line num="56" count="8" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+        <line num="58" count="8" type="stmt"/>
+        <line num="59" count="8" type="stmt"/>
+        <line num="60" count="8" type="stmt"/>
+        <line num="62" count="8" type="stmt"/>
+        <line num="63" count="8" type="stmt"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+        <line num="69" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="75" count="3" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="78" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="82" count="3" type="stmt"/>
+        <line num="83" count="3" type="stmt"/>
+        <line num="84" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="86" count="3" type="stmt"/>
+        <line num="87" count="3" type="stmt"/>
+        <line num="89" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="100" count="3" type="stmt"/>
+        <line num="101" count="3" type="stmt"/>
+        <line num="102" count="3" type="stmt"/>
+        <line num="104" count="3" type="stmt"/>
+        <line num="105" count="3" type="stmt"/>
+        <line num="107" count="3" type="stmt"/>
+        <line num="108" count="3" type="stmt"/>
+        <line num="114" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
+        <line num="119" count="2" type="stmt"/>
+        <line num="121" count="2" type="stmt"/>
+        <line num="122" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="126" count="2" type="stmt"/>
+        <line num="128" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="129" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="134" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="141" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="142" count="2" type="stmt"/>
+        <line num="148" count="3" type="stmt"/>
+        <line num="149" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="150" count="3" type="stmt"/>
+        <line num="151" count="3" type="stmt"/>
+        <line num="153" count="3" type="stmt"/>
+        <line num="157" count="8" type="stmt"/>
+      </file>
       <file name="useQuizNavigation.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useQuizNavigation.ts">
         <metrics statements="22" coveredstatements="22" conditionals="8" coveredconditionals="4" methods="9" coveredmethods="9"/>
         <line num="5" count="9" type="stmt"/>
@@ -312,161 +388,173 @@
         <line num="57" count="3" type="stmt"/>
       </file>
       <file name="useVoice.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useVoice.ts">
-        <metrics statements="150" coveredstatements="116" conditionals="50" coveredconditionals="24" methods="39" coveredmethods="27"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="19" count="8" type="stmt"/>
-        <line num="21" count="8" type="stmt"/>
-        <line num="22" count="8" type="stmt"/>
-        <line num="23" count="8" type="stmt"/>
-        <line num="25" count="8" type="cond" truecount="1" falsecount="1"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="36" count="7" type="stmt"/>
-        <line num="38" count="7" type="stmt"/>
-        <line num="39" count="7" type="stmt"/>
-        <line num="40" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="41" count="4" type="stmt"/>
-        <line num="44" count="7" type="stmt"/>
-        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="162" coveredstatements="130" conditionals="62" coveredconditionals="37" methods="41" coveredmethods="30"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="24" count="9" type="stmt"/>
+        <line num="25" count="9" type="cond" truecount="4" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="33" count="9" type="stmt"/>
+        <line num="35" count="9" type="stmt"/>
+        <line num="36" count="9" type="stmt"/>
+        <line num="37" count="9" type="stmt"/>
+        <line num="38" count="9" type="stmt"/>
+        <line num="40" count="9" type="stmt"/>
+        <line num="43" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="cond" truecount="3" falsecount="1"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="51" count="7" type="stmt"/>
-        <line num="52" count="7" type="stmt"/>
-        <line num="56" count="8" type="stmt"/>
-        <line num="57" count="8" type="stmt"/>
-        <line num="58" count="8" type="stmt"/>
-        <line num="62" count="3" type="stmt"/>
-        <line num="63" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="70" count="2" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
-        <line num="74" count="2" type="stmt"/>
-        <line num="75" count="2" type="stmt"/>
-        <line num="76" count="2" type="stmt"/>
-        <line num="80" count="5" type="stmt"/>
-        <line num="81" count="5" type="stmt"/>
-        <line num="82" count="5" type="stmt"/>
-        <line num="84" count="5" type="stmt"/>
-        <line num="85" count="5" type="stmt"/>
-        <line num="86" count="5" type="stmt"/>
-        <line num="87" count="2" type="stmt"/>
-        <line num="88" count="2" type="stmt"/>
-        <line num="91" count="5" type="stmt"/>
-        <line num="92" count="5" type="stmt"/>
-        <line num="96" count="5" type="stmt"/>
-        <line num="97" count="5" type="stmt"/>
-        <line num="99" count="5" type="stmt"/>
-        <line num="100" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="102" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="103" count="5" type="stmt"/>
-        <line num="104" count="5" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="111" count="1" type="stmt"/>
-        <line num="112" count="2" type="stmt"/>
-        <line num="113" count="2" type="stmt"/>
-        <line num="115" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="117" count="1" type="stmt"/>
-        <line num="118" count="1" type="stmt"/>
-        <line num="120" count="1" type="stmt"/>
-        <line num="121" count="1" type="stmt"/>
-        <line num="122" count="1" type="stmt"/>
-        <line num="124" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="126" count="0" type="stmt"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="130" count="1" type="stmt"/>
-        <line num="131" count="1" type="stmt"/>
-        <line num="135" count="0" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
+        <line num="50" count="9" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="9" type="stmt"/>
+        <line num="52" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="57" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="68" count="8" type="stmt"/>
+        <line num="69" count="8" type="stmt"/>
+        <line num="70" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="74" count="8" type="stmt"/>
+        <line num="75" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="8" type="stmt"/>
+        <line num="82" count="8" type="stmt"/>
+        <line num="86" count="9" type="stmt"/>
+        <line num="87" count="9" type="stmt"/>
+        <line num="88" count="9" type="stmt"/>
+        <line num="92" count="3" type="stmt"/>
+        <line num="93" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="99" count="2" type="stmt"/>
+        <line num="100" count="2" type="stmt"/>
+        <line num="101" count="2" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="104" count="2" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+        <line num="106" count="2" type="stmt"/>
+        <line num="110" count="6" type="stmt"/>
+        <line num="111" count="6" type="stmt"/>
+        <line num="112" count="6" type="stmt"/>
+        <line num="114" count="6" type="stmt"/>
+        <line num="115" count="6" type="stmt"/>
+        <line num="116" count="6" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
+        <line num="118" count="2" type="stmt"/>
+        <line num="121" count="6" type="stmt"/>
+        <line num="122" count="6" type="stmt"/>
+        <line num="126" count="6" type="stmt"/>
+        <line num="127" count="6" type="stmt"/>
+        <line num="129" count="6" type="stmt"/>
+        <line num="130" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="132" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="133" count="6" type="stmt"/>
+        <line num="134" count="6" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
-        <line num="139" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="140" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
-        <line num="145" count="0" type="stmt"/>
-        <line num="146" count="0" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
-        <line num="155" count="1" type="stmt"/>
-        <line num="156" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="158" count="1" type="stmt"/>
+        <line num="141" count="1" type="stmt"/>
+        <line num="142" count="2" type="stmt"/>
+        <line num="143" count="2" type="stmt"/>
+        <line num="145" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="148" count="1" type="stmt"/>
+        <line num="150" count="1" type="stmt"/>
+        <line num="151" count="1" type="stmt"/>
+        <line num="152" count="1" type="stmt"/>
+        <line num="154" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
         <line num="159" count="1" type="stmt"/>
         <line num="160" count="1" type="stmt"/>
-        <line num="162" count="1" type="stmt"/>
-        <line num="163" count="1" type="stmt"/>
-        <line num="164" count="1" type="stmt"/>
-        <line num="166" count="2" type="stmt"/>
-        <line num="167" count="1" type="stmt"/>
-        <line num="169" count="1" type="stmt"/>
-        <line num="170" count="1" type="stmt"/>
-        <line num="171" count="1" type="stmt"/>
-        <line num="173" count="1" type="stmt"/>
-        <line num="174" count="1" type="stmt"/>
-        <line num="176" count="1" type="stmt"/>
-        <line num="177" count="1" type="stmt"/>
-        <line num="178" count="0" type="stmt"/>
-        <line num="179" count="0" type="stmt"/>
-        <line num="181" count="1" type="stmt"/>
-        <line num="182" count="1" type="stmt"/>
-        <line num="183" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="184" count="0" type="stmt"/>
-        <line num="185" count="0" type="stmt"/>
-        <line num="186" count="0" type="stmt"/>
-        <line num="187" count="0" type="stmt"/>
+        <line num="161" count="1" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="169" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="185" count="1" type="stmt"/>
+        <line num="186" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="188" count="1" type="stmt"/>
+        <line num="189" count="1" type="stmt"/>
         <line num="190" count="1" type="stmt"/>
-        <line num="191" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="192" count="0" type="stmt"/>
-        <line num="194" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="195" count="0" type="stmt"/>
-        <line num="196" count="0" type="stmt"/>
-        <line num="197" count="0" type="stmt"/>
-        <line num="200" count="0" type="stmt"/>
+        <line num="192" count="1" type="stmt"/>
+        <line num="193" count="1" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="196" count="2" type="stmt"/>
+        <line num="197" count="1" type="stmt"/>
+        <line num="199" count="1" type="stmt"/>
+        <line num="200" count="1" type="stmt"/>
+        <line num="201" count="1" type="stmt"/>
         <line num="203" count="1" type="stmt"/>
         <line num="204" count="1" type="stmt"/>
-        <line num="208" count="77" type="stmt"/>
-        <line num="209" count="77" type="stmt"/>
-        <line num="210" count="77" type="stmt"/>
-        <line num="211" count="77" type="stmt"/>
-        <line num="212" count="16" type="stmt"/>
-        <line num="214" count="16" type="stmt"/>
-        <line num="215" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="216" count="1" type="stmt"/>
-        <line num="217" count="1" type="stmt"/>
-        <line num="218" count="1" type="stmt"/>
-        <line num="221" count="16" type="stmt"/>
-        <line num="222" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="223" count="1" type="stmt"/>
-        <line num="226" count="16" type="stmt"/>
-        <line num="227" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="228" count="1" type="stmt"/>
-        <line num="231" count="16" type="stmt"/>
-        <line num="233" count="5" type="cond" truecount="4" falsecount="0"/>
-        <line num="234" count="4" type="stmt"/>
-        <line num="239" count="16" type="stmt"/>
-        <line num="241" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="242" count="1" type="stmt"/>
-        <line num="247" count="16" type="stmt"/>
-        <line num="249" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="250" count="1" type="stmt"/>
-        <line num="255" count="16" type="stmt"/>
-        <line num="256" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="257" count="1" type="stmt"/>
-        <line num="258" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="259" count="1" type="stmt"/>
-        <line num="262" count="16" type="cond" truecount="2" falsecount="0"/>
-        <line num="263" count="1" type="stmt"/>
-        <line num="279" count="15" type="stmt"/>
+        <line num="206" count="1" type="stmt"/>
+        <line num="207" count="1" type="stmt"/>
+        <line num="208" count="0" type="stmt"/>
+        <line num="209" count="0" type="stmt"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="212" count="1" type="stmt"/>
+        <line num="213" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="214" count="0" type="stmt"/>
+        <line num="215" count="0" type="stmt"/>
+        <line num="216" count="0" type="stmt"/>
+        <line num="217" count="0" type="stmt"/>
+        <line num="220" count="1" type="stmt"/>
+        <line num="221" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="222" count="0" type="stmt"/>
+        <line num="224" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="226" count="0" type="stmt"/>
+        <line num="227" count="0" type="stmt"/>
+        <line num="230" count="0" type="stmt"/>
+        <line num="233" count="1" type="stmt"/>
+        <line num="234" count="1" type="stmt"/>
+        <line num="238" count="86" type="stmt"/>
+        <line num="239" count="86" type="stmt"/>
+        <line num="240" count="86" type="stmt"/>
+        <line num="241" count="86" type="stmt"/>
+        <line num="242" count="18" type="stmt"/>
+        <line num="244" count="18" type="stmt"/>
+        <line num="245" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="246" count="1" type="stmt"/>
+        <line num="247" count="1" type="stmt"/>
+        <line num="248" count="1" type="stmt"/>
+        <line num="251" count="18" type="stmt"/>
+        <line num="252" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="253" count="1" type="stmt"/>
+        <line num="256" count="18" type="stmt"/>
+        <line num="257" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="258" count="1" type="stmt"/>
+        <line num="261" count="18" type="stmt"/>
+        <line num="263" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="264" count="5" type="stmt"/>
+        <line num="269" count="18" type="stmt"/>
+        <line num="271" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="272" count="1" type="stmt"/>
+        <line num="277" count="18" type="stmt"/>
+        <line num="279" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="280" count="1" type="stmt"/>
+        <line num="285" count="18" type="stmt"/>
+        <line num="286" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="287" count="1" type="stmt"/>
+        <line num="288" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="289" count="1" type="stmt"/>
+        <line num="292" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="293" count="1" type="stmt"/>
+        <line num="309" count="17" type="stmt"/>
       </file>
     </package>
     <package name="utils">
-      <metrics statements="381" coveredstatements="354" conditionals="256" coveredconditionals="191" methods="106" coveredmethods="100"/>
+      <metrics statements="436" coveredstatements="399" conditionals="286" coveredconditionals="215" methods="122" coveredmethods="114"/>
       <file name="analytics.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/analytics.ts">
         <metrics statements="2" coveredstatements="2" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="8" count="3" type="cond" truecount="4" falsecount="0"/>
@@ -693,26 +781,31 @@
         <line num="2" count="1" type="stmt"/>
       </file>
       <file name="promptBuilder.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/promptBuilder.ts">
-        <metrics statements="19" coveredstatements="19" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="23" count="3" type="stmt"/>
+        <metrics statements="24" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
         <line num="46" count="4" type="stmt"/>
         <line num="47" count="4" type="stmt"/>
         <line num="49" count="4" type="stmt"/>
         <line num="70" count="4" type="stmt"/>
-        <line num="77" count="9" type="stmt"/>
-        <line num="91" count="5" type="stmt"/>
-        <line num="125" count="2" type="stmt"/>
-        <line num="127" count="2" type="stmt"/>
-        <line num="128" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="132" count="2" type="stmt"/>
-        <line num="134" count="2" type="stmt"/>
-        <line num="135" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="139" count="2" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="79" count="2" type="stmt"/>
+        <line num="82" count="4" type="stmt"/>
+        <line num="95" count="2" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="123" count="10" type="stmt"/>
+        <line num="137" count="6" type="stmt"/>
+        <line num="171" count="2" type="stmt"/>
+        <line num="173" count="2" type="stmt"/>
+        <line num="174" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="175" count="1" type="stmt"/>
+        <line num="178" count="2" type="stmt"/>
+        <line num="180" count="2" type="stmt"/>
+        <line num="181" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="182" count="1" type="stmt"/>
+        <line num="185" count="2" type="stmt"/>
       </file>
       <file name="quizFeedback.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/quizFeedback.ts">
         <metrics statements="3" coveredstatements="3" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
@@ -722,9 +815,9 @@
       </file>
       <file name="quizSchema.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/quizSchema.ts">
         <metrics statements="24" coveredstatements="24" conditionals="18" coveredconditionals="15" methods="7" coveredmethods="7"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
         <line num="31" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="32" count="1" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
@@ -746,6 +839,16 @@
         <line num="93" count="1" type="stmt"/>
         <line num="99" count="2" type="stmt"/>
         <line num="100" count="2" type="stmt"/>
+      </file>
+      <file name="rebuildAttemptFeedback.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/rebuildAttemptFeedback.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
       </file>
       <file name="resultsSessionCache.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/resultsSessionCache.ts">
         <metrics statements="22" coveredstatements="21" conditionals="25" coveredconditionals="20" methods="4" coveredmethods="4"/>
@@ -870,28 +973,36 @@
       </file>
       <file name="speechSupport.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/speechSupport.ts">
         <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="2" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="25" type="cond" truecount="2" falsecount="0"/>
       </file>
       <file name="speechText.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/speechText.ts">
         <metrics statements="18" coveredstatements="18" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="4" count="19" type="stmt"/>
-        <line num="8" count="12" type="stmt"/>
-        <line num="9" count="12" type="cond" truecount="2" falsecount="0"/>
-        <line num="11" count="11" type="stmt"/>
-        <line num="12" count="11" type="stmt"/>
-        <line num="13" count="11" type="stmt"/>
-        <line num="15" count="11" type="stmt"/>
-        <line num="16" count="18" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="11" type="stmt"/>
-        <line num="18" count="11" type="stmt"/>
+        <line num="4" count="21" type="stmt"/>
+        <line num="8" count="13" type="stmt"/>
+        <line num="9" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="12" type="stmt"/>
+        <line num="12" count="12" type="stmt"/>
+        <line num="13" count="12" type="stmt"/>
+        <line num="15" count="12" type="stmt"/>
+        <line num="16" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="12" type="stmt"/>
+        <line num="18" count="12" type="stmt"/>
         <line num="21" count="7" type="stmt"/>
         <line num="22" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="6" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-        <line num="30" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="31" count="11" type="stmt"/>
+        <line num="30" count="12" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="12" type="stmt"/>
+      </file>
+      <file name="syncVoiceForLanguage.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/syncVoiceForLanguage.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="6" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
       </file>
       <file name="tagColors.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/tagColors.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -900,6 +1011,38 @@
         <line num="14" count="3" type="stmt"/>
         <line num="15" count="21" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
+      </file>
+      <file name="translateQuizSchema.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/translateQuizSchema.ts">
+        <metrics statements="29" coveredstatements="19" conditionals="14" coveredconditionals="9" methods="7" coveredmethods="5"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="32" count="5" type="stmt"/>
+        <line num="34" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="40" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="46" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="74" count="6" type="stmt"/>
+        <line num="84" count="3" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
       </file>
       <file name="validators.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/validators.ts">
         <metrics statements="19" coveredstatements="19" conditionals="8" coveredconditionals="8" methods="3" coveredmethods="3"/>
@@ -924,19 +1067,28 @@
         <line num="109" count="1" type="stmt"/>
       </file>
       <file name="voiceLang.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/voiceLang.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
-        <line num="4" count="4" type="stmt"/>
-        <line num="15" count="14" type="stmt"/>
-        <line num="16" count="14" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="18" count="4" type="stmt"/>
+        <metrics statements="21" coveredstatements="21" conditionals="12" coveredconditionals="11" methods="5" coveredmethods="5"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="15" count="15" type="stmt"/>
+        <line num="16" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="5" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="22" count="9" type="cond" truecount="1" falsecount="1"/>
-        <line num="26" count="4" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="29" count="4" type="stmt"/>
-        <line num="30" count="4" type="stmt"/>
+        <line num="26" count="9" type="stmt"/>
+        <line num="27" count="9" type="stmt"/>
+        <line num="28" count="9" type="stmt"/>
+        <line num="29" count="9" type="stmt"/>
+        <line num="30" count="9" type="stmt"/>
+        <line num="37" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="6" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="42" count="11" type="stmt"/>
+        <line num="44" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="49" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
       </file>
     </package>
   </project>

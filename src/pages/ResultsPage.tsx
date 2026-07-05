@@ -6,6 +6,7 @@ import { PageWrapper } from '../components/layout/PageWrapper'
 import { PageMeta } from '../components/seo/PageMeta'
 import { WidgetErrorBoundary } from '../components/layout/WidgetErrorBoundary'
 import { QuestionReviewCard } from '../components/quiz/QuestionReviewCard'
+import { TranslatingQuizBanner } from '../components/quiz/TranslatingQuizBanner'
 import { RetryQuizModal } from '../components/quiz/RetryQuizModal'
 import { ScorePanel } from '../components/quiz/ScorePanel'
 import { ScorePanelSkeleton } from '../components/quiz/ScorePanelSkeleton'
@@ -20,6 +21,7 @@ import { IosVoiceGestureHint } from '../components/voice/IosVoiceGestureHint'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { useToast } from '../components/ui/Toast'
+import { useQuizLanguageSync } from '../hooks/useQuizLanguageSync'
 import { useLanguage } from '../hooks/useLanguage'
 import { hasOnboarded, markOnboarded } from '../hooks/useOnboarding'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
@@ -29,7 +31,7 @@ import { useHistoryStore } from '../store/historyStore'
 import { useQuizStore } from '../store/quizStore'
 import { useSettingsStore } from '../store/settingsStore'
 import type { RegenerateState } from '../types/regenerate'
-import type { QuizAttempt } from '../types/quiz'
+import type { Quiz, QuizAttempt } from '../types/quiz'
 import {
   cacheResultsSession,
   loadResultsSession,
@@ -58,8 +60,10 @@ export default function ResultsPage() {
   const completedAttempt = useQuizStore((s) => s.completedAttempt)
   const currentQuiz = useQuizStore((s) => s.currentQuiz)
   const setCurrentQuiz = useQuizStore((s) => s.setCurrentQuiz)
+  const updateQuizContent = useQuizStore((s) => s.updateQuizContent)
   const resetAttempt = useQuizStore((s) => s.resetAttempt)
   const setCompletedAttempt = useQuizStore((s) => s.setCompletedAttempt)
+  const settingsLanguage = useSettingsStore((s) => s.settings.language)
   const getAttemptById = useHistoryStore((s) => s.getAttemptById)
   const historyAttempts = useHistoryStore((s) => s.attempts)
   const historyQuizzes = useHistoryStore((s) => s.quizzes)
@@ -73,6 +77,10 @@ export default function ResultsPage() {
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [retryModalOpen, setRetryModalOpen] = useState(false)
   const [onboardingOpen, setOnboardingOpen] = useState(false)
+  const [displayQuiz, setDisplayQuiz] = useState<Quiz | undefined>(undefined)
+  const [displayAttempt, setDisplayAttempt] = useState<QuizAttempt | undefined>(
+    undefined,
+  )
   const scoreHeadingRef = useRef<HTMLHeadingElement>(null)
   const reviewHeadingRef = useRef<HTMLHeadingElement>(null)
 
@@ -175,6 +183,37 @@ export default function ResultsPage() {
     [sharedPayload, historyQuizzes, attempt?.quizId, currentQuiz, sessionCache],
   )
 
+  useEffect(() => {
+    setDisplayQuiz(quiz)
+    setDisplayAttempt(attempt)
+  }, [quiz, attempt])
+
+  const { isTranslating, translateError } = useQuizLanguageSync({
+    quiz: displayQuiz,
+    attempt: displayAttempt,
+    onQuizUpdate: (translatedQuiz) => {
+      setDisplayQuiz(translatedQuiz)
+      if (currentQuiz?.id === translatedQuiz.id) {
+        updateQuizContent(translatedQuiz)
+      }
+    },
+    onAttemptUpdate: (translatedAttempt) => {
+      setDisplayAttempt(translatedAttempt)
+      if (completedAttempt?.id === translatedAttempt.id) {
+        setCompletedAttempt(translatedAttempt)
+      }
+    },
+  })
+
+  useEffect(() => {
+    if (translateError) {
+      toast.error(t('quiz.translateFailed'))
+    }
+  }, [translateError, toast, t])
+
+  const activeQuiz = displayQuiz ?? quiz
+  const activeAttempt = displayAttempt ?? attempt
+
   const isFromSessionCache = useMemo(
     () =>
       Boolean(sessionCache?.attempt) &&
@@ -191,17 +230,17 @@ export default function ResultsPage() {
     (remoteFetchFailed || !isSupabaseConfigured())
 
   useEffect(() => {
-    if (!attempt || !quiz || attempt.id !== attemptId) return
-    cacheResultsSession(attempt, quiz)
-  }, [attempt, quiz, attemptId])
+    if (!activeAttempt || !activeQuiz || activeAttempt.id !== attemptId) return
+    cacheResultsSession(activeAttempt, activeQuiz)
+  }, [activeAttempt, activeQuiz, attemptId])
 
   const handleRetryConfirm = useCallback(() => {
-    if (!quiz) {
+    if (!activeQuiz) {
       toast.error(t('errors.quizNotFound'))
       return
     }
-    if (currentQuiz?.id !== quiz.id) {
-      setCurrentQuiz(quiz)
+    if (currentQuiz?.id !== activeQuiz.id) {
+      setCurrentQuiz(activeQuiz)
     } else {
       resetAttempt()
       setCompletedAttempt(null)
@@ -209,7 +248,7 @@ export default function ResultsPage() {
     setRetryModalOpen(false)
     navigate('/quiz')
   }, [
-    quiz,
+    activeQuiz,
     currentQuiz?.id,
     setCurrentQuiz,
     resetAttempt,
@@ -220,29 +259,33 @@ export default function ResultsPage() {
   ])
 
   const handleRegenerate = useCallback(() => {
-    if (!quiz) {
+    if (!activeQuiz) {
       toast.error(t('errors.quizNotFound'))
       return
     }
     setCurrentQuiz(null)
     const regenerate: RegenerateState = {
-      sourceType: quiz.sourceType,
-      sourceContent: quiz.sourceContent,
+      sourceType: activeQuiz.sourceType,
+      sourceContent: activeQuiz.sourceContent,
     }
     navigate('/', { state: { regenerate } })
-  }, [quiz, setCurrentQuiz, navigate, toast, t])
+  }, [activeQuiz, setCurrentQuiz, navigate, toast, t])
 
   const handleOpenShare = useCallback(() => {
-    if (!attempt) return
-    if (!quiz) {
+    if (!activeAttempt) return
+    if (!activeQuiz) {
       toast.error(t('errors.quizNotFound'))
       return
     }
     setShareModalOpen(true)
-  }, [attempt, quiz, toast, t])
+  }, [activeAttempt, activeQuiz, toast, t])
 
   const { isResultsReading, startReading, stopReading, registerCardRef } =
-    useResultsVoiceReading({ attempt, quiz: quiz ?? undefined, voiceEnabled })
+    useResultsVoiceReading({
+      attempt: activeAttempt,
+      quiz: activeQuiz,
+      voiceEnabled,
+    })
 
   useRegisterShortcutActions(
     {
@@ -311,13 +354,17 @@ export default function ResultsPage() {
     )
   }
 
-  const resultsTitle = quiz
-    ? `Your Results: ${quiz.title} — QuizForge`
+  const resultsTitle = activeQuiz
+    ? `Your Results: ${activeQuiz.title} — QuizForge`
     : 'Your Results — QuizForge'
 
   return (
     <PageWrapper title={t('results.title')}>
       <PageMeta title={resultsTitle} />
+      <TranslatingQuizBanner
+        isTranslating={isTranslating}
+        targetLanguage={settingsLanguage}
+      />
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
         {isShowingCachedBanner ? <CachedResultsBanner /> : null}
 
@@ -328,8 +375,8 @@ export default function ResultsPage() {
         >
           <WidgetErrorBoundary>
             <ScorePanel
-              attempt={attempt}
-              quiz={quiz}
+              attempt={activeAttempt}
+              quiz={activeQuiz}
               voiceEnabled={voiceEnabled}
               onReadResults={startReading}
               headingRef={scoreHeadingRef}
@@ -337,7 +384,9 @@ export default function ResultsPage() {
           </WidgetErrorBoundary>
         </motion.div>
 
-        {quiz ? <ScoreBreakdown quiz={quiz} attempt={attempt} /> : null}
+        {activeQuiz ? (
+          <ScoreBreakdown quiz={activeQuiz} attempt={activeAttempt} />
+        ) : null}
 
         <section>
           <h2
@@ -353,11 +402,11 @@ export default function ResultsPage() {
             initial="hidden"
             animate="show"
           >
-            {(quiz?.questions ?? []).map((question, index) => {
-              const feedback = attempt.feedback.find(
+            {(activeQuiz?.questions ?? []).map((question, index) => {
+              const feedback = activeAttempt.feedback.find(
                 (entry) => entry.questionId === question.id,
               )
-              const selectedOptionId = attempt.answers[question.id]
+              const selectedOptionId = activeAttempt.answers[question.id]
 
               return (
                 <motion.div
@@ -379,13 +428,13 @@ export default function ResultsPage() {
                     }
                     questionNumber={index + 1}
                     maxPoints={
-                      quiz?.settings.customPointsMap[question.id] ??
+                      activeQuiz?.settings.customPointsMap[question.id] ??
                       question.points
                     }
                     voiceEnabled={voiceEnabled}
-                    language={quiz?.language}
+                    language={activeQuiz?.language}
                     animateReveal
-                    attemptId={attempt.id}
+                    attemptId={activeAttempt.id}
                   />
                 </motion.div>
               )
@@ -403,8 +452,8 @@ export default function ResultsPage() {
           <Button size="lg" variant="secondary" onClick={() => navigate('/')}>
             {t('results.backToHome')}
           </Button>
-          {quiz ? (
-            <ExportResultsDropdown quiz={quiz} attempt={attempt} />
+          {activeQuiz ? (
+            <ExportResultsDropdown quiz={activeQuiz} attempt={activeAttempt} />
           ) : null}
           <Button size="lg" variant="secondary" onClick={handleOpenShare}>
             {t('results.shareScore')}
@@ -418,16 +467,16 @@ export default function ResultsPage() {
         onConfirm={handleRetryConfirm}
       />
 
-      {quiz ? (
+      {activeQuiz ? (
         <ShareScoreModal
           isOpen={shareModalOpen}
           onClose={() => setShareModalOpen(false)}
-          attempt={attempt}
-          quiz={quiz}
+          attempt={activeAttempt}
+          quiz={activeQuiz}
         />
       ) : null}
 
-      <HighScoreCelebration percentage={attempt.percentage} />
+      <HighScoreCelebration percentage={activeAttempt.percentage} />
 
       <OnboardingWelcomeModal
         isOpen={onboardingOpen}

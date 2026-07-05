@@ -152,6 +152,8 @@
     "noQuestionsGenerated": "Aucune question générée",
     "backToHome": "Retour à l'accueil",
     "createQuizFirst": "Commencez par créer un quiz.",
+    "translating": "Mise à jour du quiz en {{language}}…",
+    "translateFailed": "Impossible de traduire le quiz. Affichage de la langue précédente.",
     "preparingQuestions": "Préparation de vos questions..."
   },
   "results": {

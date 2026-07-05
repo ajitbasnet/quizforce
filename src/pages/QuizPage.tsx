@@ -10,6 +10,7 @@ import { SpeechControls } from '../components/voice/SpeechControls'
 import { VoicePlayer } from '../components/voice/VoicePlayer'
 import { IosVoiceGestureHint } from '../components/voice/IosVoiceGestureHint'
 import { QuestionMap } from '../components/quiz/QuestionMap'
+import { TranslatingQuizBanner } from '../components/quiz/TranslatingQuizBanner'
 import { UnansweredQuestionsModal } from '../components/quiz/UnansweredQuestionsModal'
 import { topBarIconButtonClass } from '../components/layout/topBarActionStyles'
 import { Badge } from '../components/ui/Badge'
@@ -18,6 +19,7 @@ import { Card } from '../components/ui/Card'
 import { ProgressBar } from '../components/ui/ProgressBar'
 import { Tooltip } from '../components/ui/Tooltip'
 import { useToast } from '../components/ui/Toast'
+import { useQuizLanguageSync } from '../hooks/useQuizLanguageSync'
 import { useRegisterShortcutActions } from '../hooks/useKeyboardShortcuts'
 import { useLanguage } from '../hooks/useLanguage'
 import { useShortcutHelp } from '../hooks/useShortcutHelp'
@@ -62,6 +64,19 @@ export default function QuizPage() {
   const userAnswers = useQuizStore((s) => s.userAnswers)
   const setAnswer = useQuizStore((s) => s.setAnswer)
   const setCompletedAttempt = useQuizStore((s) => s.setCompletedAttempt)
+  const updateQuizContent = useQuizStore((s) => s.updateQuizContent)
+
+  const settingsLanguage = useSettingsStore((s) => s.settings.language)
+  const { isTranslating, translateError } = useQuizLanguageSync({
+    quiz: currentQuiz,
+    onQuizUpdate: updateQuizContent,
+  })
+
+  useEffect(() => {
+    if (translateError) {
+      toast.error(t('quiz.translateFailed'))
+    }
+  }, [translateError, toast, t])
 
   const {
     currentQuestionIndex,
@@ -239,12 +254,17 @@ export default function QuizPage() {
   const total = totalQuestions
   const currentQuestion = questions[currentQuestionIndex]
   const languageOption = LANGUAGE_OPTIONS.find(
-    (opt) => opt.code === currentQuiz.language,
+    (opt) => opt.code === settingsLanguage,
   )
+  const voiceLanguage = currentQuiz.language
 
   return (
     <>
       <PageMeta title={`${currentQuiz.title} — QuizForge`} />
+      <TranslatingQuizBanner
+        isTranslating={isTranslating}
+        targetLanguage={settingsLanguage}
+      />
     <div className="flex min-h-[calc(100vh-4rem)] flex-col overflow-x-hidden px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <div className="mx-auto w-full max-w-5xl lg:grid lg:grid-cols-[minmax(0,48rem)_17rem] lg:items-start lg:gap-8">
         <div
@@ -344,7 +364,7 @@ export default function QuizPage() {
                   onSelect={(optionId) => setAnswer(currentQuestion.id, optionId)}
                   isSubmitted={false}
                   voiceEnabled={voiceEnabled}
-                  language={currentQuiz.language}
+                  language={voiceLanguage}
                 />
               </WidgetErrorBoundary>
             </motion.div>
@@ -394,7 +414,7 @@ export default function QuizPage() {
 
         <SpeechControls
           question={currentQuestion}
-          language={currentQuiz.language}
+          language={voiceLanguage}
         />
       </div>
 

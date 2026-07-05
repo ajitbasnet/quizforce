@@ -29,3 +29,24 @@ export function matchesLangPrefix(voiceLang: string, targetLang: string): boolea
   const targetPrefix = normalizedTarget.split('-')[0]
   return voicePrefix === targetPrefix
 }
+
+export function pickDefaultVoiceURI(
+  lang: SupportedLanguage,
+  voices: SpeechSynthesisVoice[],
+): string | null {
+  if (voices.length === 0) return null
+
+  const targetLocale = LANG_MAP[lang].toLowerCase()
+
+  const exactMatch = voices.find(
+    (voice) => voice.lang.replace('_', '-').toLowerCase() === targetLocale,
+  )
+  if (exactMatch) return exactMatch.voiceURI
+
+  const prefixMatch = voices.find((voice) =>
+    matchesLangPrefix(voice.lang, LANG_MAP[lang]),
+  )
+  if (prefixMatch) return prefixMatch.voiceURI
+
+  return null
+}

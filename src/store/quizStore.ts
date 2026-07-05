@@ -10,6 +10,7 @@ interface QuizState {
   generationProgress: number
   generationError: string | null
   setCurrentQuiz: (quiz: Quiz | null) => void
+  updateQuizContent: (quiz: Quiz) => void
   setAnswer: (questionId: string, optionId: string) => void
   setCustomPoints: (questionId: string, points: number) => void
   setCompletedAttempt: (attempt: QuizAttempt | null) => void
@@ -38,6 +39,8 @@ export const useQuizStore = create<QuizState>((set) => ({
       generationProgress: 0,
       generationError: null,
     }),
+
+  updateQuizContent: (quiz) => set({ currentQuiz: quiz }),
 
   setAnswer: (questionId, optionId) =>
     set((state) => ({

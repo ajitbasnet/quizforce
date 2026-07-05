@@ -1,11 +1,13 @@
 import { renderHook } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
+  useHoverCapable,
+  useMotionPreset,
   useMotionSpring,
   useMotionTransition,
   useReducedMotion,
 } from '../hooks/useReducedMotion'
-import { MOTION } from '../utils/motionTokens'
+import { MOTION, MOTION_PRESETS, cappedStaggerDelay } from '../utils/motionTokens'
 
 function createMatchMedia(matches: boolean) {
   return {
@@ -104,5 +106,68 @@ describe('useMotionSpring', () => {
 
     const { result } = renderHook(() => useMotionSpring())
     expect(result.current).toEqual(MOTION.spring)
+  })
+})
+
+describe('useHoverCapable', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('returns true when hover and fine pointer are available', () => {
+    window.matchMedia = vi
+      .fn()
+      .mockReturnValue(createMatchMedia(true))
+
+    const { result } = renderHook(() => useHoverCapable())
+    expect(result.current).toBe(true)
+  })
+
+  it('returns false on touch-only devices', () => {
+    window.matchMedia = vi
+      .fn()
+      .mockReturnValue(createMatchMedia(false))
+
+    const { result } = renderHook(() => useHoverCapable())
+    expect(result.current).toBe(false)
+  })
+})
+
+describe('useMotionPreset', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('returns instant transition when reduced motion is preferred', () => {
+    window.matchMedia = vi
+      .fn()
+      .mockReturnValue(createMatchMedia(true))
+
+    const { result } = renderHook(() => useMotionPreset('enterPage'))
+    expect(result.current).toEqual({
+      initial: false,
+      animate: MOTION_PRESETS.enterPage.animate,
+      exit: undefined,
+      transition: { duration: 0 },
+    })
+  })
+
+  it('returns full preset when motion is allowed', () => {
+    window.matchMedia = vi
+      .fn()
+      .mockReturnValue(createMatchMedia(false))
+
+    const { result } = renderHook(() => useMotionPreset('enterModal'))
+    expect(result.current).toEqual(MOTION_PRESETS.enterModal)
+  })
+})
+
+describe('cappedStaggerDelay', () => {
+  it('scales delay by index', () => {
+    expect(cappedStaggerDelay(2, 50)).toBe(100)
+  })
+
+  it('caps delay at maxMs', () => {
+    expect(cappedStaggerDelay(10, 50, 300)).toBe(300)
   })
 })

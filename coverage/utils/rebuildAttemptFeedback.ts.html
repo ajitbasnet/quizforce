@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,41 +90,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Quiz, QuizAttempt } from '../types/quiz'
 &nbsp;
-export function rebuildAttemptFeedback(
+export function <span class="fstat-no" title="function not covered" >rebuildAttemptFeedback(</span>
   quiz: Quiz,
   attempt: QuizAttempt,
 ): QuizAttempt {
-  const questionById = new Map(quiz.questions.map((q) =&gt; [q.id, q]))
+  const questionById = <span class="cstat-no" title="statement not covered" >new Map(quiz.questions.<span class="fstat-no" title="function not covered" >map((q</span>) =&gt; <span class="cstat-no" title="statement not covered" >[q.id, q])</span>)</span>
 &nbsp;
-  const feedback = attempt.feedback.map((entry) =&gt; {
-    const question = questionById.get(entry.questionId)
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!question) <span class="cstat-no" title="statement not covered" >return entry</span>
+  const feedback = <span class="cstat-no" title="statement not covered" >attempt.feedback.<span class="fstat-no" title="function not covered" >map((e</span>ntry) =&gt; {</span>
+    const question = <span class="cstat-no" title="statement not covered" >questionById.get(entry.questionId)</span>
+<span class="cstat-no" title="statement not covered" >    if (!question) <span class="cstat-no" title="statement not covered" >return entry</span></span>
 &nbsp;
-    const explanation = entry.isCorrect
+    const explanation = <span class="cstat-no" title="statement not covered" >entry.isCorrect</span>
       ? question.explanation
       : (question.wrongExplanations[entry.selectedOptionId] ?? '')
 &nbsp;
-    return { ...entry, explanation }
+<span class="cstat-no" title="statement not covered" >    return { ...entry, explanation }</span>
   })
 &nbsp;
-  return { ...attempt, feedback }
+<span class="cstat-no" title="statement not covered" >  return { ...attempt, feedback }</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -133,7 +133,7 @@ export function rebuildAttemptFeedback(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-05T16:03:27.562Z
+                at 2026-07-05T16:12:36.305Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.57% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -121,35 +121,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,22 +164,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { nanoid } from 'nanoid'
 import type { AnswerFeedback, Quiz, QuizAttempt } from '../types/quiz'
 &nbsp;
-export function calculateScore(
+export function <span class="fstat-no" title="function not covered" >calculateScore(</span>
   quiz: Quiz,
   userAnswers: Record&lt;string, string&gt;,
   customPointsMap: Record&lt;string, number&gt;,
   timeTaken: number,
 ): QuizAttempt {
-  const feedback: AnswerFeedback[] = quiz.questions.map((question) =&gt; {
-    const questionPoints = customPointsMap[question.id] ?? question.points
-    const selectedOptionId = userAnswers[question.id] ?? <span class="branch-1 cbranch-no" title="branch not covered" >''</span>
-    const isCorrect = selectedOptionId === question.correctOptionId
-    const pointsAwarded = isCorrect ? questionPoints : 0
-    const explanation = isCorrect
+  const feedback: AnswerFeedback[] = <span class="cstat-no" title="statement not covered" >quiz.questions.<span class="fstat-no" title="function not covered" >map((q</span>uestion) =&gt; {</span>
+    const questionPoints = <span class="cstat-no" title="statement not covered" >customPointsMap[question.id] ?? question.points</span>
+    const selectedOptionId = <span class="cstat-no" title="statement not covered" >userAnswers[question.id] ?? ''</span>
+    const isCorrect = <span class="cstat-no" title="statement not covered" >selectedOptionId === question.correctOptionId</span>
+    const pointsAwarded = <span class="cstat-no" title="statement not covered" >isCorrect ? questionPoints : 0</span>
+    const explanation = <span class="cstat-no" title="statement not covered" >isCorrect</span>
       ? question.explanation
-      : (question.wrongExplanations[selectedOptionId] ?? <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>
+      : (question.wrongExplanations[selectedOptionId] ?? '')
 &nbsp;
-    return {
+<span class="cstat-no" title="statement not covered" >    return {</span>
       questionId: question.id,
       selectedOptionId,
       isCorrect,
@@ -188,17 +188,17 @@ export function calculateScore(
     }
   })
 &nbsp;
-  const score = feedback.reduce((sum, f) =&gt; sum + f.pointsAwarded, 0)
-  const totalPoints = quiz.questions.reduce(
-    (sum, q) =&gt; sum + (customPointsMap[q.id] ?? q.points),
+  const score = <span class="cstat-no" title="statement not covered" >feedback.<span class="fstat-no" title="function not covered" >reduce((s</span>um, f) =&gt; <span class="cstat-no" title="statement not covered" >sum + f.pointsAwarded, 0</span>)</span>
+  const totalPoints = <span class="cstat-no" title="statement not covered" >quiz.questions.<span class="fstat-no" title="function not covered" >reduce(</span></span>
+    (sum, q) =&gt; <span class="cstat-no" title="statement not covered" >sum + (customPointsMap[q.id] ?? q.points),</span>
     0,
   )
   const percentage =
-    totalPoints &gt; 0
+<span class="cstat-no" title="statement not covered" >    totalPoints &gt; 0</span>
       ? Math.round((score / totalPoints) * 1000) / 10
-      : <span class="branch-1 cbranch-no" title="branch not covered" >0</span>
+      : 0
 &nbsp;
-  return {
+<span class="cstat-no" title="statement not covered" >  return {</span>
     id: nanoid(),
     quizId: quiz.id,
     answers: userAnswers,
@@ -217,7 +217,7 @@ export function calculateScore(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-05T16:03:27.562Z
+                at 2026-07-05T16:12:36.305Z
             </div>
         <script src="../prettify.js"></script>
         <script>

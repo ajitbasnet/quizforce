@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
     @apply bg-bg text-text-primary font-sans antialiased dark:bg-gray-950 dark:text-gray-100;
   }
@@ -107,6 +113,27 @@
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+  }
+
+  .link-underline {
+    @apply relative no-underline;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-px w-full origin-left bg-current motion-safe:transition-transform motion-safe:duration-standard motion-safe:ease-standard;
+    transform: scaleX(0);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link-underline::after {
+      transform: scaleX(1);
+    }
   }
 }
 

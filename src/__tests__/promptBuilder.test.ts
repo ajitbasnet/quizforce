@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { assemblePrompt, buildQuizPrompt } from '../utils/promptBuilder'
+import {
+  assemblePrompt,
+  buildGeminiRequestBody,
+  buildGroqRequestBody,
+  buildQuizPrompt,
+} from '../utils/promptBuilder'
 import type { QuizSettings } from '../types/quiz'
 
 const baseSettings: QuizSettings = {
@@ -41,6 +46,41 @@ describe('buildQuizPrompt', () => {
     expect(user).toContain('- Number of questions: 12')
     expect(user).toContain('- Points per question: 10')
     expect(user).toContain('- Difficulty: medium')
+  })
+})
+
+describe('buildGeminiRequestBody', () => {
+  const parts = { system: 'System prompt', user: 'User prompt' }
+
+  it('maps parts to Gemini generateContent shape', () => {
+    const body = buildGeminiRequestBody(parts, 0.7)
+
+    expect(body).toEqual({
+      systemInstruction: { parts: [{ text: 'System prompt' }] },
+      contents: [{ role: 'user', parts: [{ text: 'User prompt' }] }],
+      generationConfig: {
+        responseMimeType: 'application/json',
+        temperature: 0.7,
+      },
+    })
+  })
+})
+
+describe('buildGroqRequestBody', () => {
+  const parts = { system: 'System prompt', user: 'User prompt' }
+
+  it('maps parts to Groq chat completions shape', () => {
+    const body = buildGroqRequestBody(parts, 0.7)
+
+    expect(body).toEqual({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: 'System prompt' },
+        { role: 'user', content: 'User prompt' },
+      ],
+      response_format: { type: 'json_object' },
+      temperature: 0.7,
+    })
   })
 })
 

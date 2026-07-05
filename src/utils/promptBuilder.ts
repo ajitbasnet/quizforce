@@ -36,11 +36,13 @@ const REQUIRED_JSON_SHAPE = `{
   }]
 }`
 
+export type QuizPromptParts = { system: string; user: string }
+
 export function buildQuizPrompt(
   content: string,
   settings: QuizSettings,
   sourceType: Quiz['sourceType'],
-): { system: string; user: string } {
+): QuizPromptParts {
   const sourceLabel = SOURCE_TYPE_LABELS[sourceType]
   const languageLabel = LANGUAGE_LABELS[settings.language]
 
@@ -67,8 +69,6 @@ export function buildQuizPrompt(
 
   return { system: SYSTEM_PROMPT, user }
 }
-
-export type QuizPromptParts = { system: string; user: string }
 
 export function buildGeminiRequestBody(
   parts: QuizPromptParts,

@@ -8,6 +8,7 @@ import { HistoryCardSkeleton } from '../components/history/HistoryCardSkeleton'
 import { HistoryEmptyState } from '../components/history/HistoryEmptyState'
 import { HistoryFilterToolbar } from '../components/history/HistoryFilterToolbar'
 import { HistoryStatsBar } from '../components/history/HistoryStatsBar'
+import { historyToolbarRowClass } from '../components/history/historyToolbarStyles'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { PageMeta } from '../components/seo/PageMeta'
 import { Button } from '../components/ui/Button'
@@ -177,49 +178,57 @@ export default function HistoryPage() {
       <PageWrapper
         title={t('history.title')}
         actions={
-        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-          <Button
-            type="button"
-            variant="ghost"
-            disabled={quizzes.length === 0}
-            onClick={handleExport}
-          >
-            <Download className="h-4 w-4" aria-hidden />
-            {t('history.exportAll')}
-          </Button>
-          <Button type="button" variant="ghost" onClick={handleImportClick}>
-            <Upload className="h-4 w-4" aria-hidden />
-            {t('history.importHistory')}
-          </Button>
-          <input
-            ref={importInputRef}
-            type="file"
-            accept=".json,application/json"
-            className="hidden"
-            aria-hidden
-            onChange={handleImportFile}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            className="text-danger-600 hover:bg-danger-50 dark:hover:bg-danger-950/40"
-            disabled={quizzes.length === 0}
-            onClick={() => setClearModalOpen(true)}
-          >
-            {t('history.clearAll')}
-          </Button>
-          <Input
-            ref={searchInputRef}
-            type="search"
-            value={searchInput}
-            onChange={(event) => setSearchInput(event.target.value)}
-            placeholder={t('history.searchPlaceholder')}
-            leftIcon={<Search className="h-4 w-4" />}
-            className="w-full sm:w-64"
-            aria-label={t('history.searchPlaceholder')}
-          />
-        </div>
-      }
+          <div className={historyToolbarRowClass}>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              leftIcon={<Download className="h-4 w-4" aria-hidden />}
+              disabled={quizzes.length === 0}
+              onClick={handleExport}
+            >
+              {t('history.exportAll')}
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              leftIcon={<Upload className="h-4 w-4" aria-hidden />}
+              onClick={handleImportClick}
+            >
+              {t('history.importHistory')}
+            </Button>
+            <input
+              ref={importInputRef}
+              type="file"
+              accept=".json,application/json"
+              className="hidden"
+              aria-hidden
+              onChange={handleImportFile}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="text-danger-600 hover:bg-danger-50 dark:hover:bg-danger-950/40"
+              disabled={quizzes.length === 0}
+              onClick={() => setClearModalOpen(true)}
+            >
+              {t('history.clearAll')}
+            </Button>
+            <div className="ms-auto w-52 min-w-[11rem] shrink-0">
+              <Input
+                ref={searchInputRef}
+                type="search"
+                value={searchInput}
+                onChange={(event) => setSearchInput(event.target.value)}
+                placeholder={t('history.searchPlaceholder')}
+                leftIcon={<Search className="h-4 w-4 shrink-0" aria-hidden />}
+                aria-label={t('history.searchPlaceholder')}
+              />
+            </div>
+          </div>
+        }
     >
       <PageMeta title="Quiz History — QuizForge" />
       <HistoryStatsBar stats={stats} />

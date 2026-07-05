@@ -15,7 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const BASE_CLASSES =
-  'inline-flex items-center justify-center gap-2 font-medium rounded-lg motion-safe:transition-[colors,transform,box-shadow] motion-safe:duration-micro active:scale-[0.97] motion-safe:active:duration-micro focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none'
+  'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap font-medium rounded-lg motion-safe:transition-[colors,transform,box-shadow] motion-safe:duration-micro active:scale-[0.97] motion-safe:active:duration-micro focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none'
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:

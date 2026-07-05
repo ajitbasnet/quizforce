@@ -9,6 +9,7 @@ import {
 import { useLanguage } from '../../hooks/useLanguage'
 import { getTagColorClass } from '../../utils/tagColors'
 import { Select } from '../ui/Select'
+import { historyPillRowClass, historyToolbarRowClass } from './historyToolbarStyles'
 
 interface HistoryFilterToolbarProps {
   filters: HistoryFilters
@@ -42,71 +43,68 @@ export function HistoryFilterToolbar({
   const { t } = useLanguage()
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium text-text-muted dark:text-gray-400">
-            {t('history.filterSourceType')}
-          </span>
-          <div
-            className="flex flex-wrap gap-2"
-            role="group"
-            aria-label={t('history.filterSourceType')}
-          >
-            {SOURCE_PILLS.map(({ type, labelKey, icon: Icon }) => {
-              const active = filters.type === type
-              return (
-                <button
-                  key={type}
-                  type="button"
-                  aria-pressed={active}
-                  className={clsx(
-                    'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
-                    active
-                      ? 'bg-brand-600 text-white'
-                      : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-100',
-                  )}
-                  onClick={() => onFiltersChange({ type })}
-                >
-                  {Icon && (
-                    <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                  )}
-                  {t(labelKey)}
-                </button>
-              )
-            })}
-            <button
-              type="button"
-              aria-pressed={filters.starred}
-              className={clsx(
-                'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
-                filters.starred
-                  ? 'bg-amber-500 text-white'
-                  : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-100',
-              )}
-              onClick={() => onFiltersChange({ starred: !filters.starred })}
-            >
-              <Bookmark
+    <div className="mb-6 flex min-w-0 flex-col gap-3">
+      <div className={historyToolbarRowClass}>
+        <span className="shrink-0 whitespace-nowrap text-xs font-medium text-text-muted dark:text-gray-400">
+          {t('history.filterSourceType')}
+        </span>
+        <div
+          className={historyPillRowClass}
+          role="group"
+          aria-label={t('history.filterSourceType')}
+        >
+          {SOURCE_PILLS.map(({ type, labelKey, icon: Icon }) => {
+            const active = filters.type === type
+            return (
+              <button
+                key={type}
+                type="button"
+                aria-pressed={active}
                 className={clsx(
-                  'h-3.5 w-3.5 shrink-0',
-                  filters.starred && 'fill-current',
+                  'inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
+                  active
+                    ? 'bg-brand-600 text-white'
+                    : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-100',
                 )}
-                aria-hidden
-              />
-              {t('history.starred')}
-            </button>
-          </div>
+                onClick={() => onFiltersChange({ type })}
+              >
+                {Icon ? (
+                  <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                ) : null}
+                {t(labelKey)}
+              </button>
+            )
+          })}
+          <button
+            type="button"
+            aria-pressed={filters.starred}
+            className={clsx(
+              'inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
+              filters.starred
+                ? 'bg-amber-500 text-white'
+                : 'bg-gray-100 text-text-muted hover:bg-gray-200 hover:text-text-primary dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-100',
+            )}
+            onClick={() => onFiltersChange({ starred: !filters.starred })}
+          >
+            <Bookmark
+              className={clsx(
+                'h-3.5 w-3.5 shrink-0',
+                filters.starred && 'fill-current',
+              )}
+              aria-hidden
+            />
+            {t('history.starred')}
+          </button>
         </div>
 
         <Select
-          label={t('history.sortBy')}
           value={filters.sort}
           onChange={(event) =>
             onFiltersChange({ sort: event.target.value as HistorySort })
           }
-          className="w-full sm:w-48"
+          className="ms-auto w-44 shrink-0 py-1.5 text-sm"
           aria-label={t('history.sortBy')}
         >
           {SORT_OPTIONS.map(({ value, labelKey }) => (
@@ -118,10 +116,10 @@ export function HistoryFilterToolbar({
       </div>
 
       {filters.tag ? (
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <span
             className={clsx(
-              'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium',
+              'inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium',
               getTagColorClass(filters.tag),
             )}
           >
@@ -132,7 +130,7 @@ export function HistoryFilterToolbar({
               aria-label={t('history.clearTagFilter')}
               onClick={() => onFiltersChange({ tag: null })}
             >
-              <X className="h-3.5 w-3.5" aria-hidden />
+              <X className="h-3.5 w-3.5 shrink-0" aria-hidden />
             </button>
           </span>
         </div>

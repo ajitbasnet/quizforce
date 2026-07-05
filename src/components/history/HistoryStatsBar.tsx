@@ -72,7 +72,9 @@ export function HistoryStatsBar({ stats }: HistoryStatsBarProps) {
         >
           <Card className="flex h-full flex-col gap-2 p-4">
             <Icon className="h-5 w-5 text-brand-600" aria-hidden />
-            <p className="text-xs text-text-muted dark:text-gray-400">{t(labelKey)}</p>
+            <p className="truncate text-xs text-text-muted dark:text-gray-400">
+              {t(labelKey)}
+            </p>
             <p className="text-xl font-bold text-text-primary tabular-nums dark:text-gray-100">
               {getValue(stats)}
             </p>

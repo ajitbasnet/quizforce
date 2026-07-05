@@ -6,6 +6,7 @@ import { AttemptComparisonTable } from '../components/history/AttemptComparisonT
 import { AttemptHistoryList } from '../components/history/AttemptHistoryList'
 import { AttemptScoreChart } from '../components/history/AttemptScoreChart'
 import { DeleteQuizModal } from '../components/history/DeleteQuizModal'
+import { historyToolbarRowClass } from '../components/history/historyToolbarStyles'
 import { QuestionPreviewList } from '../components/history/QuestionPreviewList'
 import { QuizMetadataPanel } from '../components/history/QuizMetadataPanel'
 import { SourceContentCollapsible } from '../components/history/SourceContentCollapsible'
@@ -93,12 +94,14 @@ export default function HistoryDetailPage() {
   return (
     <PageWrapper title={quiz.title}>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className={historyToolbarRowClass}>
           <Button variant="ghost" size="sm" onClick={() => navigate('/history')}>
             {t('history.backToHistory')}
           </Button>
-          <div className="flex flex-wrap items-center gap-2">
-            <Button onClick={handleRetake}>{t('history.retakeQuiz')}</Button>
+          <div className="ms-auto flex shrink-0 items-center gap-2">
+            <Button size="sm" onClick={handleRetake}>
+              {t('history.retakeQuiz')}
+            </Button>
             <Button
               variant="ghost"
               size="sm"
@@ -106,7 +109,7 @@ export default function HistoryDetailPage() {
               aria-label={t('history.deleteQuiz')}
               onClick={() => setDeleteModalOpen(true)}
             >
-              <Trash2 className="h-4 w-4" aria-hidden />
+              <Trash2 className="h-4 w-4 shrink-0" aria-hidden />
             </Button>
           </div>
         </div>

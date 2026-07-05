@@ -14,6 +14,7 @@ import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
 import { Tooltip } from '../ui/Tooltip'
+import { historyPillRowClass } from './historyToolbarStyles'
 
 interface HistoryCardProps {
   quiz: Quiz
@@ -150,34 +151,32 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
 
   return (
     <Card className="group flex flex-col gap-3" onClick={handleCardClick}>
-      <div className="flex items-center justify-between gap-2">
-        <div className="flex min-w-0 flex-1 items-center gap-2">
+      <div className="flex min-w-0 items-center justify-between gap-2">
+        <div className={clsx(historyPillRowClass, 'min-w-0 flex-1 overflow-x-auto')}>
           <Badge
             variant={sourceBadge.variant}
             size="sm"
-            className={sourceBadge.className}
+            className={clsx('shrink-0', sourceBadge.className)}
           >
             {t(sourceBadge.labelKey)}
           </Badge>
-          {tags.length > 0 ? (
-            <div className="flex min-w-0 flex-wrap gap-1">
-              {tags.map((tag) => (
+          {tags.length > 0
+            ? tags.map((tag) => (
                 <button
                   key={tag}
                   type="button"
                   className={clsx(
-                    'inline-flex max-w-full truncate rounded-full px-2 py-0.5 text-xs font-medium',
+                    'inline-flex max-w-[8rem] shrink-0 truncate rounded-full px-2 py-0.5 text-xs font-medium',
                     getTagColorClass(tag),
                   )}
                   onClick={(event) => handleTagClick(event, tag)}
                 >
                   #{tag}
                 </button>
-              ))}
-            </div>
-          ) : null}
+              ))
+            : null}
         </div>
-        <div className="flex shrink-0 items-center gap-1">
+        <div className="flex shrink-0 items-center gap-1 whitespace-nowrap">
           <Tooltip
             content={
               isFavorited ? t('history.unfavorite') : t('history.favorite')
@@ -219,35 +218,41 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
         ) : null}
       </div>
 
-      <p className="text-sm text-text-muted dark:text-gray-400">
+      <p className="truncate text-sm text-text-muted dark:text-gray-400">
         {t('history.questionsCount', { count: quiz.questions.length })}
         {' • '}
         {t('history.pointsCount', { pts: quiz.totalPoints })}
         {flag ? ` • ${flag}` : ''}
       </p>
 
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 items-center gap-3">
         {latestAttempt ? (
           <>
             <MiniScoreRing percentage={latestAttempt.percentage} />
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm font-medium text-text-primary tabular-nums dark:text-gray-100">
+            <div className="flex min-w-0 flex-nowrap items-center gap-2">
+              <span className="shrink-0 text-sm font-medium text-text-primary tabular-nums dark:text-gray-100">
                 {latestAttempt.score}/{latestAttempt.totalPoints}
               </span>
-              <Badge variant="default" size="sm">
+              <Badge variant="default" size="sm" className="shrink-0">
                 {t(getGradeKey(latestAttempt.percentage))}
               </Badge>
             </div>
           </>
         ) : (
-          <span className="text-sm text-text-muted dark:text-gray-400">{t('history.notAttempted')}</span>
+          <span className="text-sm text-text-muted dark:text-gray-400">
+            {t('history.notAttempted')}
+          </span>
         )}
       </div>
 
       <div
         className={clsx(
-          'flex flex-wrap items-center gap-2 pt-1',
-          'opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100',
+          historyPillRowClass,
+          'border-t border-gray-100 pt-3 dark:border-gray-800',
+          'opacity-100 motion-safe:transition-opacity motion-safe:duration-micro',
+          '[@media(hover:hover)_and_(pointer:fine)]:opacity-0',
+          '[@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-100',
+          '[@media(hover:hover)_and_(pointer:fine)]:group-focus-within:opacity-100',
         )}
       >
         <Button type="button" size="sm" onClick={handleRetake}>
@@ -272,7 +277,7 @@ function HistoryCardInner({ quiz, latestAttempt, onDelete }: HistoryCardProps) {
             aria-label={t('history.deleteQuiz')}
             onClick={handleDelete}
           >
-            <Trash2 className="h-4 w-4" aria-hidden />
+            <Trash2 className="h-4 w-4 shrink-0" aria-hidden />
           </Button>
         </Tooltip>
       </div>

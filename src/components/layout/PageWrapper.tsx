@@ -29,9 +29,9 @@ export function PageWrapper({
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={titleTransition}
-            className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
+            className="mb-8 flex min-w-0 flex-col gap-4 lg:flex-row lg:items-start lg:justify-between"
           >
-            <div>
+            <div className="min-w-0 shrink-0">
               <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100">
                 {title}
               </h1>
@@ -42,7 +42,9 @@ export function PageWrapper({
               )}
             </div>
             {actions && (
-              <div className="flex shrink-0 items-center gap-2">{actions}</div>
+              <div className="min-w-0 w-full lg:w-auto lg:max-w-3xl lg:flex-1">
+                {actions}
+              </div>
             )}
           </motion.div>
         )}

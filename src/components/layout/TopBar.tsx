@@ -6,11 +6,9 @@ import { useAuth } from '../../hooks/useAuth'
 import { useHistorySync } from '../../hooks/useHistorySync'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useQuickSettings } from '../../hooks/useQuickSettings'
-import { useSettingsStore } from '../../store/settingsStore'
 import { isSpeechSupported } from '../../utils/speechSupport'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Button } from '../ui/Button'
-import { Tooltip } from '../ui/Tooltip'
 import { LanguageSelector } from './LanguageSelector'
 import { topBarNavLinkClass, topBarUtilityClass } from './topBarActionStyles'
 import { useSidebar } from './SidebarContext'
@@ -37,7 +35,6 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
   const location = useLocation()
   const { openMobile } = useSidebar()
   const { open: openQuickSettings } = useQuickSettings()
-  const voiceEnabled = useSettingsStore((s) => s.settings.voiceEnabled)
   const { isLoading: isHistorySyncing } = useHistorySync()
   const {
     isAuthenticated,
@@ -69,7 +66,7 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
         <span className="text-sm text-text-muted dark:text-gray-400">{t(breadcrumbKey)}</span>
       </div>
 
-      <div className="ml-auto hidden items-center gap-2 lg:flex">
+      <div className="ml-auto hidden items-center gap-1 lg:flex">
         {isHistorySyncing && (
           <span
             role="status"
@@ -84,33 +81,23 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
           </span>
         )}
 
-        <Tooltip content={t('settings.language')}>
-          <LanguageSelector variant="topBar" />
-        </Tooltip>
+        <LanguageSelector variant="topBar" />
 
-        {isSpeechSupported() && (
-          <Tooltip content={voiceEnabled ? t('voice.disable') : t('voice.enable')}>
-            <VoiceToggle />
-          </Tooltip>
-        )}
+        {isSpeechSupported() && <VoiceToggle />}
 
-        <Tooltip content={t('nav.history')}>
-          <NavLink to="/history" className={actionLinkClass}>
-            <History className="h-4 w-4" aria-hidden />
-            {t('nav.history')}
-          </NavLink>
-        </Tooltip>
+        <NavLink to="/history" className={actionLinkClass}>
+          <History className="h-4 w-4" aria-hidden />
+          {t('nav.history')}
+        </NavLink>
 
-        <Tooltip content={t('nav.settings')}>
-          <button
-            type="button"
-            className={topBarUtilityClass({ iconOnly: true })}
-            onClick={openQuickSettings}
-            aria-label={t('nav.settings')}
-          >
-            <Settings className="h-4 w-4" aria-hidden />
-          </button>
-        </Tooltip>
+        <button
+          type="button"
+          className={topBarUtilityClass({ iconOnly: true })}
+          onClick={openQuickSettings}
+          aria-label={t('nav.settings')}
+        >
+          <Settings className="h-4 w-4" aria-hidden />
+        </button>
 
         {isConfigured && !isAuthLoading && (
           isAuthenticated ? (

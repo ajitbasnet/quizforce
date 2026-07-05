@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.58% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/34</span>
+                <span class='fraction'>0/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.23% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/26</span>
+                <span class='fraction'>0/26</span>
             </div>
         
             
@@ -177,7 +177,7 @@
 <a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,18 +205,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,12 +283,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Target, Transition } from 'framer-motion'
 &nbsp;
 /** Shared animation durations, springs, and easing curves for Framer Motion. */
-export const MOTION = {
+export const MOTION = <span class="cstat-no" title="statement not covered" >{</span>
   instant: 0.1,
   fast: 0.2,
   medium: 0.35,
@@ -316,18 +316,18 @@ export type MotionPreset = {
   transition: Transition
 }
 &nbsp;
-const standardTransition = (): Transition =&gt; ({
+const <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >standardTransition = (): Transition =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
   duration: MOTION.duration.standard,
   ease: MOTION.easeStandard,
 })
 &nbsp;
-const exitTransition = (): Transition =&gt; ({
+const <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >exitTransition = (): Transition =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span></span>
   duration: MOTION.duration.exit,
   ease: MOTION.easeStandard,
 })
 &nbsp;
 /** Named enter/exit configs consumed by route, modal, and quiz transitions. */
-export const MOTION_PRESETS = {
+export const MOTION_PRESETS = <span class="cstat-no" title="statement not covered" >{</span>
   enterPage: {
     initial: { opacity: 0, y: 12 },
     animate: { opacity: 1, y: 0 },
@@ -389,12 +389,12 @@ function <span class="fstat-no" title="function not covered" >cubicBezier(x</spa
 }
 &nbsp;
 /** Caps stagger so list reveals stay within ~300ms total. */
-export function cappedStaggerDelay(
+export function <span class="fstat-no" title="function not covered" >cappedStaggerDelay(</span>
   index: number,
-  stepMs = 50,
-  maxMs = 300,
+  stepMs = <span class="branch-0 cbranch-no" title="branch not covered" >50,</span>
+  maxMs = <span class="branch-0 cbranch-no" title="branch not covered" >300,</span>
 ): number {
-  return Math.min(index * stepMs, maxMs)
+<span class="cstat-no" title="statement not covered" >  return Math.min(index * stepMs, maxMs)</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -403,7 +403,7 @@ export function cappedStaggerDelay(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-05T16:44:26.469Z
+                at 2026-07-05T17:02:59.885Z
             </div>
         <script src="../prettify.js"></script>
         <script>

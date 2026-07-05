@@ -43,8 +43,14 @@ import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useQuizStore } from '../store/quizStore'
 import type { RegenerateState } from '../types/regenerate'
 import type { Quiz } from '../types/quiz'
+import {
+  PDF_MIN_CHARS,
+  TEXT_INPUT_MIN_CHARS,
+} from '../utils/validators'
 import { MOTION, cappedStaggerDelay } from '../utils/motionTokens'
 import { Spinner } from '../components/ui/Spinner'
+
+const PROMPT_TOPIC_MIN_CHARS = 3
 
 const PDFUploader = lazy(() =>
   import('../components/input/PDFUploader').then((mod) => ({
@@ -145,6 +151,17 @@ export default function HomePage() {
   const location = useLocation()
   const navigate = useNavigate()
   const isGenerating = useQuizStore((s) => s.isGenerating)
+  const setGenerating = useQuizStore((s) => s.setGenerating)
+  const setProgress = useQuizStore((s) => s.setProgress)
+
+  useEffect(() => {
+    if (isGenerating) {
+      setGenerating(false)
+      setProgress(0)
+    }
+    // Recover from a stale generating flag after refresh or interrupted navigation.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const [inputMode, setInputMode] = useState<InputMode>('text')
   const [textContent, setTextContent] = useState('')
   const [pdfContent, setPdfContent] = useState('')
@@ -211,11 +228,11 @@ export default function HomePage() {
   const isGenerateDisabled = useMemo(() => {
     switch (inputMode) {
       case 'text':
-        return !textContent.trim()
+        return textContent.trim().length < TEXT_INPUT_MIN_CHARS
       case 'pdf':
-        return !pdfContent.trim()
+        return pdfContent.trim().length < PDF_MIN_CHARS
       case 'prompt':
-        return !promptTopic.trim()
+        return promptTopic.trim().length < PROMPT_TOPIC_MIN_CHARS
       default:
         return true
     }

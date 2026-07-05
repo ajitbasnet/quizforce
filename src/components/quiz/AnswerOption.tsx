@@ -4,7 +4,6 @@ import { memo } from 'react'
 import { Check, CheckCircle2, XCircle } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useMotionSpring, useReducedMotion } from '../../hooks/useReducedMotion'
-import { useVoice } from '../../hooks/useVoice'
 import type { QuizOption, SupportedLanguage } from '../../types/quiz'
 import { FormattedText } from '../../utils/markdownLite'
 import { MOTION } from '../../utils/motionTokens'
@@ -95,12 +94,11 @@ function AnswerOptionInner({
   isCorrect,
   onSelect,
   feedback,
-  voiceEnabled,
-  language,
+  voiceEnabled: _voiceEnabled,
+  language: _language,
   showFeedbackLabels = false,
 }: AnswerOptionProps) {
   const { t } = useLanguage()
-  const { speak } = useVoice()
   const prefersReducedMotion = useReducedMotion()
   const selectionSpring = useMotionSpring()
   const feedbackId = `feedback-${option.id}`
@@ -110,11 +108,6 @@ function AnswerOptionInner({
     : null
   const labelKey = variant ? getAnswerFeedbackLabelKey(variant) : null
   const icon = variant ? getAnswerFeedbackIcon(variant) : null
-
-  const handleVoiceRead = () => {
-    if (!voiceEnabled || isSubmitted) return
-    speak(option.text, language)
-  }
 
   const showSelectedCheck = isSelected && !isSubmitted
   const showSelectionRing = isSelected && !isSubmitted
@@ -143,8 +136,6 @@ function AnswerOptionInner({
       aria-describedby={isSubmitted && feedback ? feedbackId : undefined}
       disabled={isSubmitted}
       onClick={onSelect}
-      onMouseEnter={handleVoiceRead}
-      onFocus={handleVoiceRead}
       whileTap={isSubmitted ? undefined : { scale: 0.98 }}
       animate={{ scale: scaleAnimation }}
       transition={scaleTransition}

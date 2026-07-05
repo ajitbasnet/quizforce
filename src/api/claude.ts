@@ -7,6 +7,7 @@ import {
   assertGenerationAllowed,
   recordGeneration,
 } from '../utils/generationRateLimit'
+import { normalizeQuizSettings } from '../utils/normalizeQuizSettings'
 import { buildQuizPrompt } from '../utils/promptBuilder'
 import { parseAndValidateClaudeQuiz } from '../utils/quizSchema'
 import { stripHtmlTags } from '../utils/sanitizeText'
@@ -150,9 +151,20 @@ export async function generateQuiz({
       const response = await fetch(PROXY_API_URL, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ content, settings, sourceType }),
+        body: JSON.stringify({
+          content,
+          settings: normalizeQuizSettings(settings),
+          sourceType,
+        }),
         signal,
       })
+
+      if (response.status === 404) {
+        throw new QuizGenerationError(
+          'Quiz API not found. Restart the dev server (npm run dev) and use the URL it prints — often http://localhost:5173 or :5174.',
+          'NETWORK_ERROR',
+        )
+      }
 
       const data = (await response.json()) as {
         quiz?: Quiz

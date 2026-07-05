@@ -3,6 +3,7 @@ import type { SupportedLanguage } from '../types/quiz'
 import type { TargetAudience } from './promptBuilder'
 
 export const TEXT_INPUT_MAX_CHARS = 20_000
+export const TEXT_INPUT_MIN_CHARS = 50
 export const TEXT_INPUT_WARN_CHARS = 15_000
 export const PDF_MIN_CHARS = 100
 
@@ -31,7 +32,7 @@ const I18N_KEY_PATTERN = /^(input|errors|settings|quiz)\.[a-zA-Z]+/
 export const textInputSchema = z
   .string()
   .trim()
-  .min(50, 'input.textMinLengthError')
+  .min(TEXT_INPUT_MIN_CHARS, 'input.textMinLengthError')
   .max(TEXT_INPUT_MAX_CHARS, 'input.textMaxLengthError')
 
 export const pdfSchema = z

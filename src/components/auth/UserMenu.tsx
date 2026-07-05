@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { LogOut, User } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { topBarAvatarClass } from '../layout/topBarActionStyles'
 import { useAuth } from '../../hooks/useAuth'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { useLanguage } from '../../hooks/useLanguage'
@@ -64,12 +65,7 @@ export function UserMenu() {
         aria-expanded={open}
         aria-label={email ?? t('auth.myAccount')}
         onClick={() => setOpen((prev) => !prev)}
-        className={clsx(
-          'flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold',
-          'bg-brand-100 text-brand-700 transition-colors dark:bg-indigo-950/50 dark:text-indigo-300',
-          'hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 dark:hover:bg-gray-800',
-          'focus-visible:ring-brand-600 focus-visible:ring-offset-2',
-        )}
+        className={topBarAvatarClass(open)}
       >
         {initial}
       </button>
@@ -103,9 +99,13 @@ function MenuItem({
       role="menuitem"
       className={clsx(
         'flex w-full items-center gap-3 px-3 py-2 text-left text-sm',
-        'text-text-primary transition-colors hover:bg-surface-muted dark:text-gray-100 dark:hover:bg-gray-800',
-        'focus-visible:bg-surface-muted focus-visible:outline-none dark:focus-visible:bg-gray-800',
-        'focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
+        'text-text-primary motion-safe:transition-[color,background-color] motion-safe:duration-micro',
+        '[@media(hover:hover)_and_(pointer:fine)]:hover:bg-brand-50/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-brand-700',
+        'dark:text-gray-100 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:bg-gray-800/90 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-indigo-300',
+        'focus-visible:bg-brand-50/80 focus-visible:outline-none dark:focus-visible:bg-gray-800/90',
+        'focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-0 dark:focus-visible:ring-offset-gray-950',
+        '[&_svg]:motion-safe:transition-colors [&_svg]:motion-safe:duration-micro',
+        '[@media(hover:hover)_and_(pointer:fine)]:hover:[&_svg]:text-brand-600 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:[&_svg]:text-indigo-400',
       )}
       onClick={onClick}
     >

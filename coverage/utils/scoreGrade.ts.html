@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,7 +90,7 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,19 +105,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const HIGH_SCORE_THRESHOLD = 90
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const HIGH_SCORE_THRESHOLD = <span class="cstat-no" title="statement not covered" >90</span>
 &nbsp;
 export type GradeKey =
   | 'results.gradeExcellent'
@@ -131,18 +131,18 @@ export type GradeVoiceKey =
   | 'results.gradeGoodVoice'
   | 'results.gradeKeepPracticingVoice'
 &nbsp;
-export function getGradeKey(percentage: number): GradeKey {
-  if (percentage &gt;= HIGH_SCORE_THRESHOLD) return 'results.gradeExcellent'
-  if (percentage &gt;= 70) return 'results.gradeGreat'
-  if (percentage &gt;= 50) return 'results.gradeGood'
-  return 'results.gradeKeepPracticing'
+export function <span class="fstat-no" title="function not covered" >getGradeKey(p</span>ercentage: number): GradeKey {
+<span class="cstat-no" title="statement not covered" >  if (percentage &gt;= HIGH_SCORE_THRESHOLD) <span class="cstat-no" title="statement not covered" >return 'results.gradeExcellent'</span></span>
+<span class="cstat-no" title="statement not covered" >  if (percentage &gt;= 70) <span class="cstat-no" title="statement not covered" >return 'results.gradeGreat'</span></span>
+<span class="cstat-no" title="statement not covered" >  if (percentage &gt;= 50) <span class="cstat-no" title="statement not covered" >return 'results.gradeGood'</span></span>
+<span class="cstat-no" title="statement not covered" >  return 'results.gradeKeepPracticing'</span>
 }
 &nbsp;
-export function getGradeVoiceKey(percentage: number): GradeVoiceKey {
-  if (percentage &gt;= HIGH_SCORE_THRESHOLD) return 'results.gradeExcellentVoice'
-  if (percentage &gt;= 70) return 'results.gradeGreatVoice'
-  if (percentage &gt;= 50) return 'results.gradeGoodVoice'
-  return 'results.gradeKeepPracticingVoice'
+export function <span class="fstat-no" title="function not covered" >getGradeVoiceKey(p</span>ercentage: number): GradeVoiceKey {
+<span class="cstat-no" title="statement not covered" >  if (percentage &gt;= HIGH_SCORE_THRESHOLD) <span class="cstat-no" title="statement not covered" >return 'results.gradeExcellentVoice'</span></span>
+<span class="cstat-no" title="statement not covered" >  if (percentage &gt;= 70) <span class="cstat-no" title="statement not covered" >return 'results.gradeGreatVoice'</span></span>
+<span class="cstat-no" title="statement not covered" >  if (percentage &gt;= 50) <span class="cstat-no" title="statement not covered" >return 'results.gradeGoodVoice'</span></span>
+<span class="cstat-no" title="statement not covered" >  return 'results.gradeKeepPracticingVoice'</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -151,7 +151,7 @@ export function getGradeVoiceKey(percentage: number): GradeVoiceKey {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-05T16:44:26.469Z
+                at 2026-07-05T17:02:59.885Z
             </div>
         <script src="../prettify.js"></script>
         <script>

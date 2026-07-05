@@ -17,6 +17,7 @@ import {
   settingsSchema,
   translateValidationMessage,
 } from '../../utils/validators'
+import { normalizeQuizSettings } from '../../utils/normalizeQuizSettings'
 import { LanguageSelector } from '../layout/LanguageSelector'
 import { Card } from '../ui/Card'
 import { NumberInput } from '../ui/NumberInput'
@@ -54,7 +55,9 @@ export const QuizSettingsPanel = forwardRef<QuizSettingsPanelHandle>(
   function QuizSettingsPanel(_, ref) {
     const { t } = useLanguage()
     const prefersReducedMotion = useReducedMotion()
-    const settings = useSettingsStore(useShallow((s) => s.settings))
+      const settings = normalizeQuizSettings(
+      useSettingsStore(useShallow((s) => s.settings)),
+    )
     const updateSettings = useSettingsStore((s) => s.updateSettings)
     const [expanded, setExpanded] = useState(false)
 

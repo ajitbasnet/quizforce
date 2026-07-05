@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +13,7 @@ import { useSettingsStore } from '../../store/settingsStore'
 import { QuizGenerationError } from '../../types/api'
 import type { Quiz } from '../../types/quiz'
 import { trackEvent } from '../../utils/analytics'
+import { normalizeQuizSettings } from '../../utils/normalizeQuizSettings'
 import { MOTION } from '../../utils/motionTokens'
 import { QuizValidationErrorModal } from '../quiz/QuizValidationErrorModal'
 import { Button } from '../ui/Button'
@@ -115,10 +116,6 @@ export function GenerateButton({
   const [errorSuggestion, setErrorSuggestion] = useState<string | undefined>()
   const shouldShakeError = useShakeOnError(generationError)
   const shakeTransition = useMotionTransition(MOTION.fast, MOTION.easeStandard)
-  const labelTransition = useMotionTransition(
-    MOTION.duration.micro,
-    MOTION.easeStandard,
-  )
   const [validationModal, setValidationModal] = useState<{
     rawResponse: string
   } | null>(null)
@@ -132,6 +129,7 @@ export function GenerateButton({
     abortRef.current?.abort()
     setGenerating(false)
     setProgress(0)
+    setIsPending(false)
     clearGenerationError()
   }
 
@@ -147,7 +145,7 @@ export function GenerateButton({
     try {
       const quiz = await generateQuiz({
         content: input.content,
-        settings,
+        settings: normalizeQuizSettings(settings),
         sourceType: input.sourceType,
         onProgress: setProgress,
         signal: controller.signal,
@@ -183,26 +181,35 @@ export function GenerateButton({
       setError(message)
       setErrorSuggestion(suggestion)
       setGenerating(false)
-      setIsPending(false)
     } finally {
       abortRef.current = null
     }
   }
 
   const handleGenerate = async () => {
-    if (disabled || isPending) return
+    if (disabled || isPending || isGenerating) return
     setIsPending(true)
-    const input = await getGenerationInput()
-    if (!input.ok) {
-      setIsPending(false)
-      return
-    }
+    try {
+      const input = await getGenerationInput()
+      if (!input.ok) {
+        return
+      }
 
-    lastInputRef.current = {
-      content: input.content,
-      sourceType: input.sourceType,
+      lastInputRef.current = {
+        content: input.content,
+        sourceType: input.sourceType,
+      }
+      await runGeneration(lastInputRef.current)
+    } catch (error) {
+      const message = getErrorMessage(error, t)
+      setError(message)
+      setErrorSuggestion(t('errors.suggestionGeneric'))
+      setGenerating(false)
+    } finally {
+      if (!useQuizStore.getState().isGenerating) {
+        setIsPending(false)
+      }
     }
-    await runGeneration(lastInputRef.current)
   }
 
   const handleRetry = () => {
@@ -258,33 +265,17 @@ export function GenerateButton({
         data-testid="generate-quiz"
         onClick={() => void handleGenerate()}
       >
-        <AnimatePresence mode="wait" initial={false}>
-          {isPending ? (
-            <motion.span
-              key="generating"
-              className="inline-flex items-center gap-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={labelTransition}
-            >
-              <Spinner size="sm" />
-              {t('input.generating')}
-            </motion.span>
-          ) : (
-            <motion.span
-              key="generate"
-              className="inline-flex items-center gap-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={labelTransition}
-            >
-              <Sparkles className="h-5 w-5" aria-hidden />
-              {t('input.generateButton')}
-            </motion.span>
-          )}
-        </AnimatePresence>
+        {isPending ? (
+          <span className="inline-flex items-center gap-2">
+            <Spinner size="sm" />
+            {t('input.generating')}
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-2">
+            <Sparkles className="h-5 w-5 shrink-0" aria-hidden />
+            {t('input.generateButton')}
+          </span>
+        )}
       </Button>
     </div>
   )

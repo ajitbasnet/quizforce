@@ -67,7 +67,7 @@ function QuestionBlockInner({
   const { t } = useLanguage()
   const isDesktop = useMediaQuery(LG_MEDIA_QUERY)
   const isLong = question.questionText.length > 300
-  const { speakQuestionThenOptions, stop, isSpeaking } = useVoice()
+  const { stop, isSpeaking } = useVoice()
   const customPointsMap = useQuizStore(
     (s) => s.currentQuiz?.settings.customPointsMap ?? {},
   )
@@ -123,24 +123,6 @@ function QuestionBlockInner({
     setCustomPoints(question.id, draftPoints)
     setPointsOpen(false)
   }
-
-  useEffect(() => {
-    if (!voiceEnabled) return
-    const optionTexts = question.options.map(
-      (option, index) =>
-        `Option ${OPTION_LETTERS[index] ?? String(index + 1)}: ${option.text}`,
-    )
-    speakQuestionThenOptions(question.questionText, optionTexts, language)
-    return () => stop()
-  }, [
-    question.id,
-    question.questionText,
-    question.options,
-    voiceEnabled,
-    language,
-    speakQuestionThenOptions,
-    stop,
-  ])
 
   return (
     <div className="flex flex-col gap-4">

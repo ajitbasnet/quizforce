@@ -168,10 +168,14 @@ export function LanguageSelector({
                 role="option"
                 aria-selected={isSelected}
                 className={clsx(
-                  'flex w-full items-center gap-3 px-3 py-2 text-left text-sm transition-colors',
-                  isHighlighted && 'bg-gray-50 dark:bg-gray-800',
-                  isSelected && 'bg-brand-50 text-brand-700 dark:bg-indigo-950 dark:text-indigo-400',
-                  !isSelected && 'text-text-primary hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800',
+                  'flex w-full items-center gap-3 px-3 py-2 text-left text-sm',
+                  'motion-safe:transition-[color,background-color] motion-safe:duration-micro motion-safe:ease-standard',
+                  isHighlighted &&
+                    'bg-brand-50/70 dark:bg-gray-800/90',
+                  isSelected &&
+                    'bg-brand-50 text-brand-700 shadow-[inset_0_0_0_1px_rgba(79,70,229,0.12)] dark:bg-indigo-950/80 dark:text-indigo-400 dark:shadow-[inset_0_0_0_1px_rgba(129,140,248,0.2)]',
+                  !isSelected &&
+                    'text-text-primary [@media(hover:hover)_and_(pointer:fine)]:hover:bg-brand-50/80 [@media(hover:hover)_and_(pointer:fine)]:hover:text-brand-700 dark:text-gray-100 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:bg-gray-800/90 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-indigo-300',
                 )}
                 onMouseEnter={() => setHighlightIndex(index)}
                 onClick={() => selectLanguage(option.code)}

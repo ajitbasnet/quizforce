@@ -41,6 +41,12 @@ function getErrorMessage(
     ) {
       return t('errors.missingApiKey')
     }
+    if (
+      error.code === 'INVALID_API_KEY' ||
+      error.apiErrorType === 'INVALID_API_KEY'
+    ) {
+      return t('errors.invalidApiKeyConfig')
+    }
     switch (error.code) {
       case 'RATE_LIMIT_ERROR':
         return t('errors.rateLimit')

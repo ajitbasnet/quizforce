@@ -124,8 +124,15 @@ function mapGeminiHttpError(
 ): ProviderCallError {
   const message =
     body.error?.message ?? `Gemini API error (${status})`
+  const lower = message.toLowerCase()
 
-  if (status === 401 || status === 403) {
+  if (
+    status === 401 ||
+    status === 403 ||
+    lower.includes('api key not valid') ||
+    lower.includes('invalid api key') ||
+    lower.includes('api_key_invalid')
+  ) {
     return new ProviderCallError(message, 401, 'INVALID_API_KEY')
   }
 

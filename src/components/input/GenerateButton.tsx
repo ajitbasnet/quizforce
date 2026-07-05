@@ -1,18 +1,23 @@
 import clsx from 'clsx'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { generateQuiz } from '../../api/claude'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useMotionTransition } from '../../hooks/useReducedMotion'
+import { useShakeOnError } from '../../hooks/useShakeOnError'
 import { useQuizStore } from '../../store/quizStore'
 import { useShallow } from 'zustand/react/shallow'
 import { useSettingsStore } from '../../store/settingsStore'
 import { QuizGenerationError } from '../../types/api'
 import type { Quiz } from '../../types/quiz'
 import { trackEvent } from '../../utils/analytics'
+import { MOTION } from '../../utils/motionTokens'
 import { QuizValidationErrorModal } from '../quiz/QuizValidationErrorModal'
 import { Button } from '../ui/Button'
 import { ErrorBanner } from '../ui/ErrorBanner'
+import { Spinner } from '../ui/Spinner'
 import { GenerationProgress } from './GenerationProgress'
 
 const LARGE_CONTENT_THRESHOLD = 8000
@@ -108,6 +113,12 @@ export function GenerateButton({
   const lastInputRef = useRef<CachedGenerationInput | null>(null)
   const [isPending, setIsPending] = useState(false)
   const [errorSuggestion, setErrorSuggestion] = useState<string | undefined>()
+  const shouldShakeError = useShakeOnError(generationError)
+  const shakeTransition = useMotionTransition(MOTION.fast, MOTION.easeStandard)
+  const labelTransition = useMotionTransition(
+    MOTION.duration.micro,
+    MOTION.easeStandard,
+  )
   const [validationModal, setValidationModal] = useState<{
     rawResponse: string
   } | null>(null)
@@ -224,13 +235,18 @@ export function GenerateButton({
         onRetry={handleValidationModalRetry}
       />
       {generationError && (
-        <ErrorBanner
-          message={generationError}
-          suggestion={errorSuggestion}
-          onRetry={handleRetry}
-          retryLabel={t('errors.tryAgain')}
-          onDismiss={clearGenerationError}
-        />
+        <motion.div
+          animate={shouldShakeError ? { x: [0, -4, 4, -2, 2, 0] } : { x: 0 }}
+          transition={shakeTransition}
+        >
+          <ErrorBanner
+            message={generationError}
+            suggestion={errorSuggestion}
+            onRetry={handleRetry}
+            retryLabel={t('errors.tryAgain')}
+            onDismiss={clearGenerationError}
+          />
+        </motion.div>
       )}
       <Button
         type="button"
@@ -238,15 +254,37 @@ export function GenerateButton({
         size="lg"
         fullWidth
         disabled={disabled || isPending}
-        isLoading={isPending}
         className={clsx('min-w-[11.5rem]')}
         data-testid="generate-quiz"
-        leftIcon={
-          !isPending ? <Sparkles className="h-5 w-5" aria-hidden /> : undefined
-        }
         onClick={() => void handleGenerate()}
       >
-        {isPending ? t('input.generating') : t('input.generateButton')}
+        <AnimatePresence mode="wait" initial={false}>
+          {isPending ? (
+            <motion.span
+              key="generating"
+              className="inline-flex items-center gap-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={labelTransition}
+            >
+              <Spinner size="sm" />
+              {t('input.generating')}
+            </motion.span>
+          ) : (
+            <motion.span
+              key="generate"
+              className="inline-flex items-center gap-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={labelTransition}
+            >
+              <Sparkles className="h-5 w-5" aria-hidden />
+              {t('input.generateButton')}
+            </motion.span>
+          )}
+        </AnimatePresence>
       </Button>
     </div>
   )

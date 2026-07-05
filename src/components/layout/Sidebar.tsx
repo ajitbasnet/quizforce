@@ -9,7 +9,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
 import { useMotionSpring, useReducedMotion } from '../../hooks/useReducedMotion'
@@ -30,6 +30,39 @@ type NavItem = {
   to: string
   end?: boolean
   isActive?: (pathname: string) => boolean
+}
+
+function SidebarStatLine({
+  value,
+  className,
+  children,
+}: {
+  value: number
+  className?: string
+  children: ReactNode
+}) {
+  const prefersReducedMotion = useReducedMotion()
+  const prevValue = useRef(value)
+  const [pulse, setPulse] = useState(false)
+
+  useEffect(() => {
+    if (prevValue.current === value) return
+    prevValue.current = value
+    if (prefersReducedMotion) return
+    setPulse(true)
+    const timer = window.setTimeout(() => setPulse(false), 320)
+    return () => window.clearTimeout(timer)
+  }, [value, prefersReducedMotion])
+
+  return (
+    <motion.p
+      className={className}
+      animate={pulse ? { scale: [1, 1.05, 1] } : { scale: 1 }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+    >
+      {children}
+    </motion.p>
+  )
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -213,12 +246,18 @@ export function Sidebar() {
               <p className="font-medium text-text-muted dark:text-gray-400">
                 {t('sidebar.stats')}
               </p>
-              <p className="mt-1 break-words leading-snug text-text-primary dark:text-gray-100">
+              <SidebarStatLine
+                value={quizzes.length}
+                className="mt-1 break-words leading-snug text-text-primary dark:text-gray-100"
+              >
                 {t('sidebar.totalQuizzes', { count: quizzes.length })}
-              </p>
-              <p className="break-words leading-snug text-text-primary dark:text-gray-100">
+              </SidebarStatLine>
+              <SidebarStatLine
+                value={averageScore}
+                className="break-words leading-snug text-text-primary dark:text-gray-100"
+              >
                 {t('sidebar.averageScore', { score: averageScore })}
-              </p>
+              </SidebarStatLine>
             </motion.div>
           )}
         </div>

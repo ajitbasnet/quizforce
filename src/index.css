@@ -74,11 +74,22 @@
   .animate-skeleton-shimmer {
     background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
     background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    animation: skeleton-shimmer 2s ease-in-out infinite;
   }
 
   .dark .animate-skeleton-shimmer {
     background: linear-gradient(90deg, #374151 25%, #1f2937 50%, #374151 75%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-skeleton-shimmer {
+      animation: none;
+      background: #e5e7eb;
+    }
+
+    .dark .animate-skeleton-shimmer {
+      background: #374151;
+    }
   }
 
   @keyframes dash-border {

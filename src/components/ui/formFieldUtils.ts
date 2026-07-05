@@ -4,7 +4,7 @@ export const fieldHelperClass = 'mt-1 text-xs text-text-muted dark:text-gray-400
 export const fieldErrorClass = 'mt-1 text-xs text-danger-600 dark:text-danger-400'
 
 export const controlBaseClass =
-  'w-full rounded-lg border border-gray-200 bg-surface text-sm text-text-primary placeholder:text-text-muted transition-colors focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-brand-600 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:ring-indigo-400 dark:focus:border-indigo-400'
+  'w-full rounded-lg border border-gray-200 bg-surface text-sm text-text-primary placeholder:text-text-muted motion-safe:transition-[border-color,box-shadow] motion-safe:duration-micro focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-1 focus:border-brand-600 disabled:opacity-50 disabled:cursor-not-allowed [@media(hover:hover)_and_(pointer:fine)]:hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:ring-indigo-400 dark:focus:border-indigo-400 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:border-gray-600'
 
 export const controlErrorClass =
   'border-danger-600 focus:ring-danger-600 focus:border-danger-600 dark:border-danger-500 dark:focus:ring-danger-500 dark:focus:border-danger-500'

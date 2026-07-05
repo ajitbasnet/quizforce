@@ -15,11 +15,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const BASE_CLASSES =
-  'inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-[colors,transform] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none'
+  'inline-flex items-center justify-center gap-2 font-medium rounded-lg motion-safe:transition-[colors,transform,box-shadow] motion-safe:duration-micro active:scale-[0.97] motion-safe:active:duration-micro focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none'
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    'bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600 dark:hover:bg-brand-500',
+    'bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600 dark:hover:bg-brand-500 [@media(hover:hover)_and_(pointer:fine)]:motion-safe:hover:-translate-y-px [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-elevation-1',
   secondary:
     'bg-surface text-brand-600 border border-brand-600 hover:bg-brand-50 focus-visible:ring-brand-600 dark:bg-gray-900 dark:text-indigo-400 dark:border-indigo-400 dark:hover:bg-gray-800',
   danger:

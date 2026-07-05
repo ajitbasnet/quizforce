@@ -56,16 +56,16 @@ export function ProgressBar({
         aria-label={label}
         data-testid={testId}
         className={clsx(
-          'w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700',
+          'relative w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700',
           HEIGHT_CLASSES[height],
         )}
       >
         <div
           className={clsx(
-            'relative h-full overflow-hidden rounded-full transition-[width] duration-300 ease-out',
+            'absolute inset-0 origin-left overflow-hidden rounded-full motion-safe:transition-transform motion-safe:duration-standard motion-safe:ease-standard',
             VARIANT_CLASSES[variant],
           )}
-          style={{ width: `${clamped}%` }}
+          style={{ transform: `scaleX(${clamped / 100})` }}
         >
           {animated && (
             <span className="absolute inset-0 animate-progress-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/20" />

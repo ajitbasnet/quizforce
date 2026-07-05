@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,11 +111,9 @@
 <a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,30 +122,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,9 +156,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { SupportedLanguage } from '../types/quiz'
 import { LANG_MAP } from './voiceLang'
 &nbsp;
-export const LANGUAGE_STORAGE_KEY = <span class="cstat-no" title="statement not covered" >'quizforge:language'</span>
+export const LANGUAGE_STORAGE_KEY = 'quizforge:language'
 &nbsp;
-const SUPPORTED_LANGUAGE_CODES: SupportedLanguage[] = <span class="cstat-no" title="statement not covered" >[</span>
+const SUPPORTED_LANGUAGE_CODES: SupportedLanguage[] = [
   'en',
   'es',
   'fr',
@@ -168,31 +168,31 @@ const SUPPORTED_LANGUAGE_CODES: SupportedLanguage[] = <span class="cstat-no" tit
   'zh',
 ]
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >isSupportedLanguage(l</span>ang: string): lang is SupportedLanguage {
-<span class="cstat-no" title="statement not covered" >  return SUPPORTED_LANGUAGE_CODES.includes(lang as SupportedLanguage)</span>
+export function isSupportedLanguage(lang: string): lang is SupportedLanguage {
+  return SUPPORTED_LANGUAGE_CODES.includes(lang as SupportedLanguage)
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >toBcp47(l</span>ang: SupportedLanguage): string {
-<span class="cstat-no" title="statement not covered" >  return LANG_MAP[lang]</span>
+export function toBcp47(lang: SupportedLanguage): string {
+  return LANG_MAP[lang]
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >isRTL(_</span>lang: SupportedLanguage): boolean {
-<span class="cstat-no" title="statement not covered" >  return false</span>
+export function isRTL(_lang: SupportedLanguage): boolean {
+  return false
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >applyDocumentLanguage(l</span>ang: SupportedLanguage): void {
-<span class="cstat-no" title="statement not covered" >  document.documentElement.lang = toBcp47(lang)</span>
-<span class="cstat-no" title="statement not covered" >  document.documentElement.dir = isRTL(lang) ? 'rtl' : 'ltr'</span>
+export function applyDocumentLanguage(lang: SupportedLanguage): void {
+  document.documentElement.lang = toBcp47(lang)
+  document.documentElement.dir = isRTL(lang) ? <span class="branch-0 cbranch-no" title="branch not covered" >'rtl' : '</span>ltr'
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >persistLanguage(l</span>ang: SupportedLanguage): void {
-<span class="cstat-no" title="statement not covered" >  localStorage.setItem(LANGUAGE_STORAGE_KEY, lang)</span>
+export function persistLanguage(lang: SupportedLanguage): void {
+  localStorage.setItem(LANGUAGE_STORAGE_KEY, lang)
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >readExplicitLanguage(): SupportedLanguage | null {</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const raw = <span class="cstat-no" title="statement not covered" >localStorage.getItem(LANGUAGE_STORAGE_KEY)</span>
-<span class="cstat-no" title="statement not covered" >    if (raw &amp;&amp; isSupportedLanguage(raw)) <span class="cstat-no" title="statement not covered" >return raw</span></span>
+export function readExplicitLanguage(): SupportedLanguage | null {
+  try {
+    const raw = localStorage.getItem(LANGUAGE_STORAGE_KEY)
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (raw &amp;&amp; isSupportedLanguage(raw)) return raw
   } catch {
     // ignore storage errors
   }
@@ -205,7 +205,7 @@ export function <span class="fstat-no" title="function not covered" >readExplici
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-05T16:12:36.305Z
+                at 2026-07-05T16:14:37.129Z
             </div>
         <script src="../prettify.js"></script>
         <script>

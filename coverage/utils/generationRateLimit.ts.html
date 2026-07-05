@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -86,45 +86,45 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { QuizGenerationError } from '../types/api'
 &nbsp;
-const STORAGE_KEY = <span class="cstat-no" title="statement not covered" >'quizforge:last-generation'</span>
-const COOLDOWN_MS = <span class="cstat-no" title="statement not covered" >10_000</span>
+const STORAGE_KEY = 'quizforge:last-generation'
+const COOLDOWN_MS = 10_000
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >assertGenerationAllowed(): void {</span>
-  const last = <span class="cstat-no" title="statement not covered" >localStorage.getItem(STORAGE_KEY)</span>
-<span class="cstat-no" title="statement not covered" >  if (!last) <span class="cstat-no" title="statement not covered" >return</span></span>
+export function assertGenerationAllowed(): void {
+  const last = localStorage.getItem(STORAGE_KEY)
+  if (!last) return
 &nbsp;
-  const elapsed = <span class="cstat-no" title="statement not covered" >Date.now() - Number(last)</span>
-<span class="cstat-no" title="statement not covered" >  if (Number.isFinite(elapsed) &amp;&amp; elapsed &lt; COOLDOWN_MS) {</span>
-<span class="cstat-no" title="statement not covered" >    throw new QuizGenerationError(</span>
+  const elapsed = Date.now() - Number(last)
+  if (Number.isFinite(elapsed) &amp;&amp; elapsed &lt; COOLDOWN_MS) {
+    throw new QuizGenerationError(
       'Please wait before generating another quiz.',
       'RATE_LIMIT_CLIENT',
     )
   }
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >recordGeneration(): void {</span>
-<span class="cstat-no" title="statement not covered" >  localStorage.setItem(STORAGE_KEY, String(Date.now()))</span>
+export function recordGeneration(): void {
+  localStorage.setItem(STORAGE_KEY, String(Date.now()))
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -133,7 +133,7 @@ export function <span class="fstat-no" title="function not covered" >recordGener
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-05T16:12:36.305Z
+                at 2026-07-05T16:14:37.129Z
             </div>
         <script src="../prettify.js"></script>
         <script>

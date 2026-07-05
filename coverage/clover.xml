@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1783264991562" clover="3.2.0">
-  <project timestamp="1783264991562" name="All files">
+<coverage generated="1783265122676" clover="3.2.0">
+  <project timestamp="1783265122676" name="All files">
     <metrics statements="787" coveredstatements="643" conditionals="404" coveredconditionals="259" methods="237" coveredmethods="196" elements="1428" coveredelements="1098" complexity="0" loc="787" ncloc="787" packages="2" files="48" classes="48"/>
     <package name="hooks">
       <metrics statements="406" coveredstatements="289" conditionals="148" coveredconditionals="68" methods="131" coveredmethods="96"/>
@@ -694,16 +694,16 @@
       </file>
       <file name="promptBuilder.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/promptBuilder.ts">
         <metrics statements="19" coveredstatements="19" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
-        <line num="47" count="3" type="stmt"/>
-        <line num="49" count="3" type="stmt"/>
-        <line num="70" count="3" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="91" count="1" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="49" count="4" type="stmt"/>
+        <line num="70" count="4" type="stmt"/>
+        <line num="77" count="9" type="stmt"/>
+        <line num="91" count="5" type="stmt"/>
         <line num="125" count="2" type="stmt"/>
         <line num="127" count="2" type="stmt"/>
         <line num="128" count="2" type="cond" truecount="2" falsecount="0"/>
@@ -722,9 +722,9 @@
       </file>
       <file name="quizSchema.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/quizSchema.ts">
         <metrics statements="24" coveredstatements="24" conditionals="18" coveredconditionals="15" methods="7" coveredmethods="7"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
         <line num="31" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="32" count="1" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
@@ -774,10 +774,10 @@
       </file>
       <file name="sanitizeText.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/sanitizeText.ts">
         <metrics statements="5" coveredstatements="4" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
-        <line num="5" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="7" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="5" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="12" count="0" type="stmt"/>
       </file>
       <file name="scoreBreakdown.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/scoreBreakdown.ts">

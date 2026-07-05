@@ -178,6 +178,48 @@ describe('useVoice', () => {
     expect(utterance.text).toBe('What is 2+2?')
   })
 
+  it('falls back to a matching voice when stored voiceURI is wrong language', () => {
+    const englishVoice = {
+      voiceURI: 'en-us',
+      lang: 'en-US',
+      name: 'English',
+    } as SpeechSynthesisVoice
+    const hindiVoice = {
+      voiceURI: 'hi-in',
+      lang: 'hi-IN',
+      name: 'Hindi',
+    } as SpeechSynthesisVoice
+
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      writable: true,
+      value: {
+        speak: speakMock,
+        cancel: cancelMock,
+        pause: pauseMock,
+        resume: resumeMock,
+        getVoices: () => [englishVoice, hindiVoice],
+      },
+    })
+
+    useSettingsStore.setState({
+      settings: {
+        ...useSettingsStore.getState().settings,
+        voiceURI: 'en-us',
+      },
+    })
+
+    const { result } = renderHook(() => useVoice())
+
+    act(() => {
+      result.current.speak('नमस्ते', 'hi')
+    })
+
+    const utterance = speakMock.mock.calls[0]?.[0] as MockSpeechSynthesisUtterance
+    expect(utterance.lang).toBe('hi-IN')
+    expect(utterance.voice?.voiceURI).toBe('hi-in')
+  })
+
   it('returns no-op handlers when speech is unsupported', () => {
     const original = Object.getOwnPropertyDescriptor(window, 'speechSynthesis')
     Reflect.deleteProperty(window, 'speechSynthesis')

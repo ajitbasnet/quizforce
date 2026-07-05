@@ -3,7 +3,13 @@ import { useSettingsStore } from '../store/settingsStore'
 import { useVoiceStore } from '../store/voiceStore'
 import { isSpeechSupported } from '../utils/speechSupport'
 import { clamp, splitIntoSentences } from '../utils/speechText'
-import { resolveLang } from '../utils/voiceLang'
+import type { SupportedLanguage } from '../types/quiz'
+import {
+  LANG_MAP,
+  matchesLangPrefix,
+  pickDefaultVoiceURI,
+  resolveLang,
+} from '../utils/voiceLang'
 
 const utteranceRef: { current: SpeechSynthesisUtterance | null } = {
   current: null,
@@ -14,18 +20,42 @@ let pausedDuringQuestion = false
 
 function noop() {}
 
+function resolveSupportedLanguage(lang?: string): SupportedLanguage {
+  const { language } = useSettingsStore.getState().settings
+  if (lang && lang in LANG_MAP) {
+    return lang as SupportedLanguage
+  }
+  return language
+}
+
 function applyVoiceSettings(utterance: SpeechSynthesisUtterance, lang?: string) {
   const { voiceRate, voicePitch, voiceURI } =
     useSettingsStore.getState().settings
 
   utterance.rate = clamp(voiceRate, 0.1, 10)
   utterance.pitch = clamp(voicePitch, 0, 2)
-  utterance.lang = resolveLang(lang)
+  const targetLocale = resolveLang(lang)
+  utterance.lang = targetLocale
+
+  const voices = window.speechSynthesis.getVoices()
+  let selectedVoice: SpeechSynthesisVoice | undefined
 
   if (voiceURI) {
-    const voices = window.speechSynthesis.getVoices()
     const voice = voices.find((v) => v.voiceURI === voiceURI)
-    if (voice) utterance.voice = voice
+    if (voice && matchesLangPrefix(voice.lang, targetLocale)) {
+      selectedVoice = voice
+    }
+  }
+
+  if (!selectedVoice) {
+    const defaultURI = pickDefaultVoiceURI(resolveSupportedLanguage(lang), voices)
+    if (defaultURI) {
+      selectedVoice = voices.find((v) => v.voiceURI === defaultURI)
+    }
+  }
+
+  if (selectedVoice) {
+    utterance.voice = selectedVoice
   }
 }
 

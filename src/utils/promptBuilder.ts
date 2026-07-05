@@ -70,6 +70,52 @@ export function buildQuizPrompt(
   return { system: SYSTEM_PROMPT, user }
 }
 
+export function buildTranslateQuizPrompt(
+  quiz: Quiz,
+  targetLanguage: SupportedLanguage,
+): QuizPromptParts {
+  const languageLabel = LANGUAGE_LABELS[targetLanguage]
+
+  const translatable = {
+    title: quiz.title,
+    description: quiz.description,
+    questions: quiz.questions.map((question) => ({
+      id: question.id,
+      questionText: question.questionText,
+      options: question.options,
+      correctOptionId: question.correctOptionId,
+      explanation: question.explanation,
+      wrongExplanations: question.wrongExplanations,
+      points: question.points,
+      difficulty: question.difficulty,
+      topic: question.topic,
+    })),
+  }
+
+  const user = [
+    '## Task',
+    'Translate this quiz to the target language.',
+    '',
+    '## Quiz JSON',
+    JSON.stringify(translatable, null, 2),
+    '',
+    '## Target language',
+    targetLanguage,
+    '',
+    '## Required JSON shape',
+    'Respond with a single JSON object matching this structure exactly:',
+    REQUIRED_JSON_SHAPE,
+    '',
+    '## Translation rules',
+    `- Translate all human-readable strings (title, description, questionText, option text, explanation, wrongExplanations values, topic) to ${languageLabel}.`,
+    '- Do NOT change any id, correctOptionId, points, difficulty, or option count.',
+    '- Preserve every id and correctOptionId exactly as in the input.',
+    '- Return valid JSON only — no markdown fences or preamble.',
+  ].join('\n')
+
+  return { system: SYSTEM_PROMPT, user }
+}
+
 export function buildGeminiRequestBody(
   parts: QuizPromptParts,
   temperature: number,

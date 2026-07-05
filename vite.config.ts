@@ -4,21 +4,20 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import { VitePWA } from 'vite-plugin-pwa'
 import type { Connect } from 'vite'
 import { handleGenerateQuiz } from './api/lib/handleGenerateQuiz'
+import { handleTranslateQuiz } from './api/lib/handleTranslateQuiz'
 
-function resolveProviderKeys(env: Record<string, string>): {
-  geminiApiKey: string | undefined
-  groqApiKey: string | undefined
-} {
-  const gemini = env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY
-  const groq = env.GROQ_API_KEY || env.VITE_GROQ_API_KEY
-  return {
-    geminiApiKey:
-      !gemini || gemini === 'your-gemini-api-key' ? undefined : gemini,
-    groqApiKey: !groq || groq === 'your-groq-api-key' ? undefined : groq,
-  }
-}
+type QuizApiHandler = (
+  request: Request,
+  options: {
+    geminiApiKey?: string
+    groqApiKey?: string
+    allowedOrigins?: string
+  },
+) => Promise<Response>
 
-function createGenerateQuizProxy(
+function createQuizApiProxy(
+  apiPath: string,
+  handler: QuizApiHandler,
   providerKeys: {
     geminiApiKey: string | undefined
     groqApiKey: string | undefined
@@ -34,7 +33,7 @@ function createGenerateQuizProxy(
       void (async () => {
         try {
           const body = Buffer.concat(chunks)
-          const request = new Request('http://localhost/api/generate-quiz', {
+          const request = new Request(`http://localhost${apiPath}`, {
             method: req.method ?? 'POST',
             headers: {
               'content-type': req.headers['content-type'] ?? 'application/json',
@@ -43,7 +42,7 @@ function createGenerateQuizProxy(
             },
             body: req.method === 'OPTIONS' ? undefined : body,
           })
-          const response = await handleGenerateQuiz(request, {
+          const response = await handler(request, {
             geminiApiKey: providerKeys.geminiApiKey,
             groqApiKey: providerKeys.groqApiKey,
             allowedOrigins,
@@ -69,6 +68,19 @@ function createGenerateQuizProxy(
   }
 }
 
+function resolveProviderKeys(env: Record<string, string>): {
+  geminiApiKey: string | undefined
+  groqApiKey: string | undefined
+} {
+  const gemini = env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY
+  const groq = env.GROQ_API_KEY || env.VITE_GROQ_API_KEY
+  return {
+    geminiApiKey:
+      !gemini || gemini === 'your-gemini-api-key' ? undefined : gemini,
+    groqApiKey: !groq || groq === 'your-groq-api-key' ? undefined : groq,
+  }
+}
+
 function apiProxyPlugin(
   providerKeys: {
     geminiApiKey: string | undefined
@@ -84,7 +96,21 @@ function apiProxyPlugin(
     }
     server.middlewares.use(
       '/api/generate-quiz',
-      createGenerateQuizProxy(providerKeys, allowedOrigins),
+      createQuizApiProxy(
+        '/api/generate-quiz',
+        handleGenerateQuiz,
+        providerKeys,
+        allowedOrigins,
+      ),
+    )
+    server.middlewares.use(
+      '/api/translate-quiz',
+      createQuizApiProxy(
+        '/api/translate-quiz',
+        handleTranslateQuiz,
+        providerKeys,
+        allowedOrigins,
+      ),
     )
   }
 

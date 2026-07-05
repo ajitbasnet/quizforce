@@ -1,4 +1,3 @@
-import { z } from 'zod'
 import type { Quiz, SupportedLanguage } from '../types/quiz'
 import {
   claudeQuizResponseSchema,

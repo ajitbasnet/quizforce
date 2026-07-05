@@ -11,62 +11,59 @@ import { buildQuizPrompt } from '../utils/promptBuilder'
 import { parseAndValidateClaudeQuiz } from '../utils/quizSchema'
 import { stripHtmlTags } from '../utils/sanitizeText'
 import { z } from 'zod'
+import { callProvider, ProviderCallError } from '../../api/lib/callProvider'
 
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages'
 const PROXY_API_URL = '/api/generate-quiz'
 const useProxy =
   import.meta.env.PROD || import.meta.env.VITE_USE_PROXY !== 'false'
-const MODEL = 'claude-sonnet-4-20250514'
-const MAX_TOKENS = 4000
 const PROGRESS_DURATION_MS = 3000
 const PROGRESS_INTERVAL_MS = 150
 const PROGRESS_CAP = 90
 
-interface AnthropicMessageResponse {
-  content?: Array<{ type?: string; text?: string }>
-}
-
-interface AnthropicErrorResponse {
-  type?: string
-  error?: {
-    type?: string
-    message?: string
-  }
-}
-
-async function parseAnthropicError(
-  response: Response,
-): Promise<QuizGenerationError> {
-  let errorType: string | undefined
-  let message = `API request failed with status ${response.status}`
-
-  const text = await response.text()
-  if (text) {
-    try {
-      const body = JSON.parse(text) as AnthropicErrorResponse
-      errorType = body.error?.type
-      if (body.error?.message) {
-        message = body.error.message
-      }
-    } catch {
-      message = text
-    }
-  }
-
-  switch (errorType) {
-    case 'rate_limit_error':
-      return new QuizGenerationError(message, 'RATE_LIMIT_ERROR', errorType)
-    case 'overloaded_error':
-      return new QuizGenerationError(message, 'OVERLOADED_ERROR', errorType)
-    case 'invalid_api_key':
-    case 'authentication_error':
-      return new QuizGenerationError(message, 'INVALID_API_KEY', errorType)
+function mapProviderCallError(error: ProviderCallError): QuizGenerationError {
+  switch (error.code) {
+    case 'CONFIG_ERROR':
+      return new QuizGenerationError(error.message, 'AUTH_ERROR', error.code)
+    case 'INVALID_API_KEY':
+      return new QuizGenerationError(error.message, 'INVALID_API_KEY', error.code)
+    case 'RATE_LIMIT_ERROR':
+      return new QuizGenerationError(error.message, 'RATE_LIMIT_ERROR', error.code)
+    case 'NETWORK_ERROR':
+      return new QuizGenerationError(error.message, 'NETWORK_ERROR', error.code)
+    case 'PARSE_ERROR':
+      return new QuizGenerationError(error.message, 'PARSE_ERROR', error.code)
     default:
-      if (response.status === 401) {
-        return new QuizGenerationError(message, 'INVALID_API_KEY', errorType)
-      }
-      return new QuizGenerationError(message, 'API_ERROR', errorType)
+      return new QuizGenerationError(error.message, 'API_ERROR', error.code)
   }
+}
+
+function mapProxyError(
+  status: number,
+  code: string | undefined,
+  message: string,
+): QuizGenerationError {
+  if (status === 429 || code === 'RATE_LIMIT_ERROR') {
+    return new QuizGenerationError(message, 'RATE_LIMIT_ERROR', code)
+  }
+  if (code === 'OVERLOADED_ERROR') {
+    return new QuizGenerationError(message, 'OVERLOADED_ERROR', code)
+  }
+  if (code === 'CONFIG_ERROR') {
+    return new QuizGenerationError(message, 'AUTH_ERROR', code)
+  }
+  if (code === 'INVALID_API_KEY') {
+    return new QuizGenerationError(message, 'INVALID_API_KEY', code)
+  }
+  if (code === 'VALIDATION_ERROR') {
+    return new QuizGenerationError(message, 'VALIDATION_ERROR', code)
+  }
+  if (code === 'PARSE_ERROR') {
+    return new QuizGenerationError(message, 'PARSE_ERROR', code)
+  }
+  if (code === 'EMPTY_QUIZ') {
+    return new QuizGenerationError(message, 'EMPTY_QUIZ', code)
+  }
+  return new QuizGenerationError(message, 'API_ERROR', code)
 }
 
 function startProgressSimulation(
@@ -104,6 +101,10 @@ function toQuizGenerationError(error: unknown): QuizGenerationError {
     return error
   }
 
+  if (error instanceof ProviderCallError) {
+    return mapProviderCallError(error)
+  }
+
   if (error instanceof TypeError) {
     return new QuizGenerationError(
       error.message || 'Network request failed',
@@ -130,8 +131,9 @@ export async function generateQuiz({
 }: GenerateQuizParams): Promise<Quiz> {
   assertGenerationAllowed()
 
-  const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
-  if (!useProxy && !apiKey) {
+  const geminiApiKey = import.meta.env.VITE_GEMINI_API_KEY
+  const groqApiKey = import.meta.env.VITE_GROQ_API_KEY
+  if (!useProxy && !geminiApiKey) {
     throw new QuizGenerationError('Missing API key', 'AUTH_ERROR')
   }
 
@@ -142,15 +144,6 @@ export async function generateQuiz({
     sourceType,
   )
   const progress = startProgressSimulation(onProgress)
-
-  const headers: Record<string, string> = {
-    'anthropic-version': '2023-06-01',
-    'content-type': 'application/json',
-  }
-  if (!useProxy) {
-    headers['x-api-key'] = apiKey!
-    headers['anthropic-dangerous-direct-browser-access'] = 'true'
-  }
 
   try {
     if (useProxy) {
@@ -163,34 +156,16 @@ export async function generateQuiz({
 
       const data = (await response.json()) as {
         quiz?: Quiz
+        meta?: { provider?: string }
         error?: { message?: string; code?: string }
       }
 
       if (!response.ok) {
-        const code = data.error?.code
-        const message = data.error?.message ?? 'API request failed'
-        if (response.status === 429 || code === 'RATE_LIMIT_ERROR') {
-          throw new QuizGenerationError(message, 'RATE_LIMIT_ERROR', code)
-        }
-        if (code === 'OVERLOADED_ERROR') {
-          throw new QuizGenerationError(message, 'OVERLOADED_ERROR', code)
-        }
-        if (code === 'CONFIG_ERROR') {
-          throw new QuizGenerationError(message, 'AUTH_ERROR', code)
-        }
-        if (code === 'INVALID_API_KEY') {
-          throw new QuizGenerationError(message, 'INVALID_API_KEY', code)
-        }
-        if (code === 'VALIDATION_ERROR') {
-          throw new QuizGenerationError(message, 'VALIDATION_ERROR', code)
-        }
-        if (code === 'PARSE_ERROR') {
-          throw new QuizGenerationError(message, 'PARSE_ERROR', code)
-        }
-        if (code === 'EMPTY_QUIZ') {
-          throw new QuizGenerationError(message, 'EMPTY_QUIZ', code)
-        }
-        throw new QuizGenerationError(message, 'API_ERROR', code)
+        throw mapProxyError(
+          response.status,
+          data.error?.code,
+          data.error?.message ?? 'API request failed',
+        )
       }
 
       const quiz = data.quiz
@@ -209,31 +184,11 @@ export async function generateQuiz({
       return quiz
     }
 
-    const response = await fetch(ANTHROPIC_API_URL, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        system,
-        messages: [{ role: 'user', content: user }],
-      }),
+    const { raw: text } = await callProvider(
+      { system, user },
+      { geminiApiKey: geminiApiKey!, groqApiKey },
       signal,
-    })
-
-    if (!response.ok) {
-      throw await parseAnthropicError(response)
-    }
-
-    const data = (await response.json()) as AnthropicMessageResponse
-    const text = data.content?.[0]?.text
-
-    if (!text) {
-      throw new QuizGenerationError(
-        'API response did not contain quiz content',
-        'PARSE_ERROR',
-      )
-    }
+    )
 
     let quiz: Quiz
     try {

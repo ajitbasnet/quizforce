@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1782918187292" clover="3.2.0">
-  <project timestamp="1782918187292" name="All files">
-    <metrics statements="785" coveredstatements="641" conditionals="404" coveredconditionals="259" methods="235" coveredmethods="194" elements="1424" coveredelements="1094" complexity="0" loc="785" ncloc="785" packages="2" files="48" classes="48"/>
+<coverage generated="1783264991562" clover="3.2.0">
+  <project timestamp="1783264991562" name="All files">
+    <metrics statements="787" coveredstatements="643" conditionals="404" coveredconditionals="259" methods="237" coveredmethods="196" elements="1428" coveredelements="1098" complexity="0" loc="787" ncloc="787" packages="2" files="48" classes="48"/>
     <package name="hooks">
       <metrics statements="406" coveredstatements="289" conditionals="148" coveredconditionals="68" methods="131" coveredmethods="96"/>
       <file name="useCountUp.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/hooks/useCountUp.ts">
@@ -466,7 +466,7 @@
       </file>
     </package>
     <package name="utils">
-      <metrics statements="379" coveredstatements="352" conditionals="256" coveredconditionals="191" methods="104" coveredmethods="98"/>
+      <metrics statements="381" coveredstatements="354" conditionals="256" coveredconditionals="191" methods="106" coveredmethods="100"/>
       <file name="analytics.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/analytics.ts">
         <metrics statements="2" coveredstatements="2" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="8" count="3" type="cond" truecount="4" falsecount="0"/>
@@ -693,24 +693,26 @@
         <line num="2" count="1" type="stmt"/>
       </file>
       <file name="promptBuilder.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/promptBuilder.ts">
-        <metrics statements="17" coveredstatements="17" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <metrics statements="19" coveredstatements="19" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
-        <line num="44" count="3" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
         <line num="47" count="3" type="stmt"/>
-        <line num="68" count="3" type="stmt"/>
-        <line num="94" count="2" type="stmt"/>
-        <line num="96" count="2" type="stmt"/>
-        <line num="97" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="98" count="1" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
-        <line num="103" count="2" type="stmt"/>
-        <line num="104" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="108" count="2" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="125" count="2" type="stmt"/>
+        <line num="127" count="2" type="stmt"/>
+        <line num="128" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="132" count="2" type="stmt"/>
+        <line num="134" count="2" type="stmt"/>
+        <line num="135" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="139" count="2" type="stmt"/>
       </file>
       <file name="quizFeedback.ts" path="/Users/ajitbasnet/Desktop/quizforce/src/utils/quizFeedback.ts">
         <metrics statements="3" coveredstatements="3" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>

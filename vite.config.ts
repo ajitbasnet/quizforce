@@ -5,14 +5,24 @@ import { VitePWA } from 'vite-plugin-pwa'
 import type { Connect } from 'vite'
 import { handleGenerateQuiz } from './api/lib/handleGenerateQuiz'
 
-function resolveAnthropicApiKey(env: Record<string, string>): string | undefined {
-  const key = env.ANTHROPIC_API_KEY || env.VITE_ANTHROPIC_API_KEY
-  if (!key || key === 'your-anthropic-api-key') return undefined
-  return key
+function resolveProviderKeys(env: Record<string, string>): {
+  geminiApiKey: string | undefined
+  groqApiKey: string | undefined
+} {
+  const gemini = env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY
+  const groq = env.GROQ_API_KEY || env.VITE_GROQ_API_KEY
+  return {
+    geminiApiKey:
+      !gemini || gemini === 'your-gemini-api-key' ? undefined : gemini,
+    groqApiKey: !groq || groq === 'your-groq-api-key' ? undefined : groq,
+  }
 }
 
 function createGenerateQuizProxy(
-  anthropicApiKey: string | undefined,
+  providerKeys: {
+    geminiApiKey: string | undefined
+    groqApiKey: string | undefined
+  },
   allowedOrigins: string | undefined,
 ): Connect.NextHandleFunction {
   return (req, res, next) => {
@@ -34,7 +44,8 @@ function createGenerateQuizProxy(
             body: req.method === 'OPTIONS' ? undefined : body,
           })
           const response = await handleGenerateQuiz(request, {
-            apiKey: anthropicApiKey,
+            geminiApiKey: providerKeys.geminiApiKey,
+            groqApiKey: providerKeys.groqApiKey,
             allowedOrigins,
           })
           res.statusCode = response.status
@@ -59,18 +70,21 @@ function createGenerateQuizProxy(
 }
 
 function apiProxyPlugin(
-  anthropicApiKey: string | undefined,
+  providerKeys: {
+    geminiApiKey: string | undefined
+    groqApiKey: string | undefined
+  },
   allowedOrigins: string | undefined,
 ): Plugin {
   const attachProxy = (server: { middlewares: Connect.Server }) => {
-    if (!anthropicApiKey) {
+    if (!providerKeys.geminiApiKey) {
       console.warn(
-        '[quizforge] ANTHROPIC_API_KEY is not set — quiz generation will fail. Copy .env.example to .env and add your Anthropic API key.',
+        '[quizforge] GEMINI_API_KEY is not set — quiz generation will fail. Copy .env.example to .env and add your Gemini API key.',
       )
     }
     server.middlewares.use(
       '/api/generate-quiz',
-      createGenerateQuizProxy(anthropicApiKey, allowedOrigins),
+      createGenerateQuizProxy(providerKeys, allowedOrigins),
     )
   }
 
@@ -84,13 +98,13 @@ function apiProxyPlugin(
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const anthropicApiKey = resolveAnthropicApiKey(env)
+  const providerKeys = resolveProviderKeys(env)
   const allowedOrigins = env.ALLOWED_ORIGINS
 
   return {
   plugins: [
     react(),
-    apiProxyPlugin(anthropicApiKey, allowedOrigins),
+    apiProxyPlugin(providerKeys, allowedOrigins),
     ...(process.env.ANALYZE
       ? [
           visualizer({

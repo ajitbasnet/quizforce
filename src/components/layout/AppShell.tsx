@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { type ReactNode } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { AuthModal } from '../auth/AuthModal'
 import { QuickSettingsDrawer } from '../settings/QuickSettingsDrawer'
 import { ShortcutHelpModal } from '../shortcuts/ShortcutHelpModal'
@@ -18,6 +18,7 @@ import { ResponsiveTest } from '../dev/ResponsiveTest'
 import { VoiceUnsupportedNotifier } from '../voice/VoiceUnsupportedNotifier'
 import { OfflineBanner } from './OfflineBanner'
 import { Sidebar } from './Sidebar'
+import { RouteTransition } from './RouteTransition'
 import { TopBar } from './TopBar'
 
 export function AppShell() {
@@ -52,7 +53,7 @@ function AppShellLayout() {
       <OfflineBanner />
       <Sidebar />
       <AppShellMain>
-        <Outlet />
+        <RouteTransition />
       </AppShellMain>
       <AuthModal />
       <QuickSettingsDrawer />

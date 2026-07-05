@@ -7,7 +7,7 @@ import { PageWrapper } from '../components/layout/PageWrapper'
 import HomePage from '../pages/HomePage'
 import { QuizPageSkeleton } from '../components/quiz/QuizPageSkeleton'
 import { ScorePanelSkeleton } from '../components/quiz/ScorePanelSkeleton'
-import { Spinner } from '../components/ui/Spinner'
+import { Skeleton } from '../components/ui/Skeleton'
 
 const QuizPage = lazy(() => import('../pages/QuizPage'))
 const ResultsPage = lazy(() => import('../pages/ResultsPage'))
@@ -17,9 +17,17 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage'))
 
 function DefaultPageFallback() {
   return (
-    <div className="flex min-h-[50vh] items-center justify-center">
-      <Spinner />
-    </div>
+    <PageWrapper>
+      <div
+        className="flex flex-col gap-4"
+        aria-busy="true"
+        aria-label="Loading page"
+      >
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-4 w-full max-w-md" />
+        <Skeleton className="mt-2 h-64 w-full rounded-xl" />
+      </div>
+    </PageWrapper>
   )
 }
 
@@ -45,11 +53,51 @@ function HistoryPageFallback() {
   )
 }
 
+function HistoryDetailPageFallback() {
+  return (
+    <PageWrapper>
+      <div
+        className="mx-auto flex w-full max-w-4xl flex-col gap-8"
+        aria-busy="true"
+        aria-label="Loading quiz details"
+      >
+        <Skeleton className="h-8 w-36" />
+        <Skeleton className="h-12 w-full rounded-lg" />
+        <Skeleton className="h-64 w-full rounded-xl" />
+        <Skeleton className="h-48 w-full rounded-xl" />
+      </div>
+    </PageWrapper>
+  )
+}
+
 function ResultsPageFallback() {
   return (
     <PageWrapper>
       <div className="mx-auto w-full max-w-4xl">
         <ScorePanelSkeleton />
+      </div>
+    </PageWrapper>
+  )
+}
+
+function SettingsPageFallback() {
+  return (
+    <PageWrapper>
+      <div
+        className="grid gap-8 lg:grid-cols-[220px_1fr]"
+        aria-busy="true"
+        aria-label="Loading settings"
+      >
+        <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible lg:pb-0">
+          {Array.from({ length: 4 }, (_, index) => (
+            <Skeleton key={index} className="h-10 w-28 shrink-0 rounded-lg" />
+          ))}
+        </div>
+        <div className="flex flex-col gap-6">
+          {Array.from({ length: 4 }, (_, index) => (
+            <Skeleton key={index} className="h-48 w-full rounded-xl" />
+          ))}
+        </div>
       </div>
     </PageWrapper>
   )
@@ -100,8 +148,21 @@ export function AppRouter() {
             path="/history"
             element={<LazyPage Page={HistoryPage} fallback={<HistoryPageFallback />} />}
           />
-          <Route path="/history/:quizId" element={<LazyPage Page={HistoryDetailPage} />} />
-          <Route path="/settings" element={<LazyPage Page={SettingsPage} />} />
+          <Route
+            path="/history/:quizId"
+            element={
+              <LazyPage
+                Page={HistoryDetailPage}
+                fallback={<HistoryDetailPageFallback />}
+              />
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <LazyPage Page={SettingsPage} fallback={<SettingsPageFallback />} />
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

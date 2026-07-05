@@ -2,28 +2,15 @@ import { z } from 'zod'
 import { buildQuizPrompt } from '../../src/utils/promptBuilder'
 import { parseAndValidateClaudeQuiz } from '../../src/utils/quizSchema'
 import { stripHtmlTags } from '../../src/utils/sanitizeText'
+import { callProvider, ProviderCallError } from './callProvider'
 import { getCorsHeaders } from './cors'
 import { generateQuizRequestSchema } from './requestSchema'
 import { getClientIp, isRateLimited } from './rateLimit'
 
-export const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages'
-const MODEL = 'claude-sonnet-4-20250514'
-const MAX_TOKENS = 4000
-
 export interface HandleGenerateQuizOptions {
-  apiKey?: string
+  geminiApiKey?: string
+  groqApiKey?: string
   allowedOrigins?: string
-}
-
-interface AnthropicMessageResponse {
-  content?: Array<{ type?: string; text?: string }>
-}
-
-interface AnthropicErrorResponse {
-  error?: {
-    type?: string
-    message?: string
-  }
 }
 
 function jsonResponse(
@@ -38,29 +25,6 @@ function jsonResponse(
       ...corsHeaders,
     },
   })
-}
-
-function mapAnthropicError(
-  status: number,
-  body: AnthropicErrorResponse,
-): { message: string; code?: string } {
-  const errorType = body.error?.type
-  const message = body.error?.message ?? `Anthropic API error (${status})`
-
-  switch (errorType) {
-    case 'rate_limit_error':
-      return { message, code: 'RATE_LIMIT_ERROR' }
-    case 'overloaded_error':
-      return { message, code: 'OVERLOADED_ERROR' }
-    case 'invalid_api_key':
-    case 'authentication_error':
-      return { message, code: 'INVALID_API_KEY' }
-    default:
-      if (status === 401) {
-        return { message, code: 'INVALID_API_KEY' }
-      }
-      return { message, code: 'API_ERROR' }
-  }
 }
 
 export async function handleGenerateQuiz(
@@ -81,8 +45,8 @@ export async function handleGenerateQuiz(
     )
   }
 
-  const apiKey = options.apiKey
-  if (!apiKey) {
+  const { geminiApiKey, groqApiKey } = options
+  if (!geminiApiKey) {
     return jsonResponse(
       { error: { message: 'Server misconfiguration', code: 'CONFIG_ERROR' } },
       500,
@@ -137,67 +101,24 @@ export async function handleGenerateQuiz(
     sourceType,
   )
 
-  let anthropicResponse: Response
+  let text: string
+  let provider: 'gemini' | 'groq'
   try {
-    anthropicResponse = await fetch(ANTHROPIC_API_URL, {
-      method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_TOKENS,
-        system,
-        messages: [{ role: 'user', content: user }],
-      }),
-    })
-  } catch {
-    return jsonResponse(
-      { error: { message: 'Failed to reach Anthropic API', code: 'NETWORK_ERROR' } },
-      502,
-      corsHeaders,
+    const result = await callProvider(
+      { system, user },
+      { geminiApiKey, groqApiKey },
     )
-  }
-
-  const anthropicText = await anthropicResponse.text()
-  if (!anthropicResponse.ok) {
-    let errorBody: AnthropicErrorResponse = {}
-    if (anthropicText) {
-      try {
-        errorBody = JSON.parse(anthropicText) as AnthropicErrorResponse
-      } catch {
-        errorBody = { error: { message: anthropicText } }
-      }
+    text = result.raw
+    provider = result.provider
+  } catch (error) {
+    if (error instanceof ProviderCallError) {
+      return jsonResponse(
+        { error: { message: error.message, code: error.code } },
+        error.status,
+        corsHeaders,
+      )
     }
-    const mapped = mapAnthropicError(anthropicResponse.status, errorBody)
-    return jsonResponse({ error: mapped }, anthropicResponse.status, corsHeaders)
-  }
-
-  let anthropicData: AnthropicMessageResponse
-  try {
-    anthropicData = JSON.parse(anthropicText) as AnthropicMessageResponse
-  } catch {
-    return jsonResponse(
-      { error: { message: 'Invalid Anthropic response', code: 'PARSE_ERROR' } },
-      502,
-      corsHeaders,
-    )
-  }
-
-  const text = anthropicData.content?.[0]?.text
-  if (!text) {
-    return jsonResponse(
-      {
-        error: {
-          message: 'API response did not contain quiz content',
-          code: 'PARSE_ERROR',
-        },
-      },
-      502,
-      corsHeaders,
-    )
+    throw error
   }
 
   try {
@@ -215,7 +136,7 @@ export async function handleGenerateQuiz(
       )
     }
 
-    return jsonResponse({ quiz }, 200, corsHeaders)
+    return jsonResponse({ quiz, meta: { provider } }, 200, corsHeaders)
   } catch (error) {
     if (error instanceof z.ZodError) {
       return jsonResponse(

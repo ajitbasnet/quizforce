@@ -84,7 +84,7 @@ function AppShellMain({ children }: { children: ReactNode }) {
       id="main-content"
       tabIndex={-1}
       className={clsx(
-        'min-h-screen pt-16 transition-[margin] duration-200 print:ml-0 print:pt-0',
+        'min-h-screen pt-16 motion-safe:transition-[margin] motion-safe:duration-standard motion-safe:ease-standard print:ml-0 print:pt-0',
         isCollapsed ? 'lg:ml-16' : 'lg:ml-64',
       )}
     >

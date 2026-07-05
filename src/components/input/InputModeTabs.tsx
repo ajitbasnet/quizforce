@@ -8,6 +8,8 @@ import {
 } from 'lucide-react'
 import { useCallback, useRef } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
+import { useMotionTransition, useReducedMotion } from '../../hooks/useReducedMotion'
+import { MOTION } from '../../utils/motionTokens'
 
 export type InputMode = 'text' | 'pdf' | 'prompt'
 
@@ -30,6 +32,8 @@ const TABS: TabConfig[] = [
 
 export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
   const { t } = useLanguage()
+  const prefersReducedMotion = useReducedMotion()
+  const underlineTransition = useMotionTransition(MOTION.fast, MOTION.easeStandard)
   const tablistRef = useRef<HTMLDivElement>(null)
   const tabRefs = useRef<Partial<Record<InputMode, HTMLButtonElement>>>({})
 
@@ -100,11 +104,12 @@ export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
             aria-selected={active}
             tabIndex={active ? 0 : -1}
             className={clsx(
-              'relative flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2',
+              'relative flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-medium',
+              'motion-safe:transition-colors motion-safe:duration-micro motion-safe:ease-standard',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950',
               active
                 ? 'text-brand-600 dark:text-indigo-400'
-                : 'text-text-muted hover:text-text-primary dark:text-gray-400 dark:hover:text-gray-100',
+                : 'text-text-muted dark:text-gray-400 [@media(hover:hover)_and_(pointer:fine)]:hover:text-text-primary dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-gray-100',
             )}
             onClick={() => selectMode(tabMode)}
           >
@@ -112,9 +117,9 @@ export function InputModeTabs({ mode, onModeChange }: InputModeTabsProps) {
             <span>{t(labelKey)}</span>
             {active && (
               <motion.div
-                layoutId="input-mode-tab-underline"
-                className="absolute inset-x-0 bottom-0 h-0.5 bg-brand-600"
-                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                layoutId={prefersReducedMotion ? undefined : 'input-mode-tab-underline'}
+                className="absolute inset-x-0 bottom-0 h-0.5 bg-brand-600 dark:bg-indigo-400"
+                transition={underlineTransition}
               />
             )}
           </button>

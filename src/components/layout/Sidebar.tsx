@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import {
   BarChart2,
   ChevronLeft,
-  ChevronRight,
   Clock,
   PlusCircle,
   Settings,
@@ -13,12 +12,16 @@ import {
 import { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../hooks/useLanguage'
-import { useMotionSpring } from '../../hooks/useReducedMotion'
+import { useMotionSpring, useReducedMotion } from '../../hooks/useReducedMotion'
 import { useHistoryStore } from '../../store/historyStore'
 import { isSpeechSupported } from '../../utils/speechSupport'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Tooltip } from '../ui/Tooltip'
 import { LanguageSelector } from './LanguageSelector'
+import {
+  sidebarNavLinkClass,
+  topBarUtilityClass,
+} from './topBarActionStyles'
 import { useSidebar } from './SidebarContext'
 
 type NavItem = {
@@ -58,19 +61,10 @@ const NAV_ITEMS: NavItem[] = [
   },
 ]
 
-function navLinkClass(isActive: boolean, showCollapsed: boolean) {
-  return clsx(
-    'relative z-10 flex items-center rounded-lg text-sm font-medium transition-colors',
-    showCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
-    isActive
-      ? 'text-brand-600 dark:text-indigo-400'
-      : 'text-text-muted hover:bg-surface-muted hover:text-text-primary dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100',
-  )
-}
-
 export function Sidebar() {
   const { t } = useLanguage()
   const location = useLocation()
+  const prefersReducedMotion = useReducedMotion()
   const {
     isCollapsed,
     toggleCollapsed,
@@ -93,6 +87,10 @@ export function Sidebar() {
 
   const statsTooltip = `${t('sidebar.totalQuizzes', { count: quizzes.length })} · ${t('sidebar.averageScore', { score: averageScore })}`
 
+  const primaryActiveIndex = NAV_ITEMS.findIndex((navItem) =>
+    navItem.isActive?.(location.pathname),
+  )
+
   useEffect(() => {
     if (!isMobileOpen) return
 
@@ -109,7 +107,7 @@ export function Sidebar() {
       {isMobileOpen && (
         <button
           type="button"
-          className="fixed inset-0 top-16 z-30 bg-black/40 lg:hidden"
+          className="fixed inset-0 top-16 z-30 bg-black/40 motion-safe:transition-opacity motion-safe:duration-standard lg:hidden"
           onClick={closeMobile}
           aria-label={t('nav.closeSidebar')}
         />
@@ -117,9 +115,10 @@ export function Sidebar() {
 
       <aside
         className={clsx(
-          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-64 flex-col border-r border-gray-100 bg-white transition-transform duration-200 dark:border-gray-800 dark:bg-gray-900 lg:transition-[width]',
+          'fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] flex-col border-r border-gray-100 bg-white dark:border-gray-800 dark:bg-gray-900',
+          'motion-safe:transition-[width,transform] motion-safe:duration-standard motion-safe:ease-standard',
           isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
-          isCollapsed ? 'lg:w-16' : 'lg:w-64',
+          showCollapsed ? 'w-16 lg:w-16' : 'w-64 lg:w-64',
         )}
       >
         <div className="flex flex-col gap-2 border-b border-gray-100 p-2 dark:border-gray-800 lg:hidden">
@@ -131,14 +130,17 @@ export function Sidebar() {
           <button
             type="button"
             onClick={toggleCollapsed}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface-muted hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100 dark:focus-visible:ring-offset-gray-900"
+            className={topBarUtilityClass({ iconOnly: true })}
             aria-label={t('nav.toggleSidebar')}
+            aria-expanded={!isCollapsed}
           >
-            {isCollapsed ? (
-              <ChevronRight className="h-4 w-4" aria-hidden />
-            ) : (
-              <ChevronLeft className="h-4 w-4" aria-hidden />
-            )}
+            <ChevronLeft
+              className={clsx(
+                'h-4 w-4 motion-safe:transition-transform motion-safe:duration-standard motion-safe:ease-standard',
+                isCollapsed && 'rotate-180',
+              )}
+              aria-hidden
+            />
           </button>
         </div>
 
@@ -149,25 +151,28 @@ export function Sidebar() {
             const isActive = item.isActive
               ? item.isActive(location.pathname)
               : false
-            const primaryActiveIndex = NAV_ITEMS.findIndex((navItem) =>
-              navItem.isActive?.(location.pathname),
-            )
             const showActiveBg = isActive && index === primaryActiveIndex
 
             const link = (
               <div className="relative">
-                {showActiveBg && (
-                  <motion.div
-                    layoutId="sidebar-active-bg"
-                    className="absolute inset-0 rounded-lg bg-brand-50 dark:bg-gray-800"
-                    transition={{ type: 'spring', ...springTransition }}
-                  />
-                )}
+                {showActiveBg &&
+                  (prefersReducedMotion ? (
+                    <div
+                      className="absolute inset-0 rounded-lg bg-brand-50 dark:bg-gray-800"
+                      aria-hidden
+                    />
+                  ) : (
+                    <motion.div
+                      layoutId="sidebar-active-bg"
+                      className="absolute inset-0 rounded-lg bg-brand-50 dark:bg-gray-800"
+                      transition={{ type: 'spring', ...springTransition }}
+                    />
+                  ))}
                 <NavLink
                   to={item.to}
                   end={item.end}
                   onClick={closeMobile}
-                  className={navLinkClass(isActive, showCollapsed)}
+                  className={sidebarNavLinkClass(isActive, showCollapsed)}
                 >
                   <Icon className="h-5 w-5 shrink-0" aria-hidden />
                   {!showCollapsed && <span>{label}</span>}

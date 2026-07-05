@@ -7,6 +7,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react'
+import { topBarUtilityClass } from '../layout/topBarActionStyles'
 import { useLanguage } from '../../hooks/useLanguage'
 import { LANGUAGE_OPTIONS } from '../../i18n'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
@@ -14,9 +15,13 @@ import type { SupportedLanguage } from '../../types/quiz'
 
 interface LanguageSelectorProps {
   className?: string
+  variant?: 'default' | 'topBar'
 }
 
-export function LanguageSelector({ className }: LanguageSelectorProps) {
+export function LanguageSelector({
+  className,
+  variant = 'default',
+}: LanguageSelectorProps) {
   const { t, changeLanguage, currentLang } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -126,7 +131,11 @@ export function LanguageSelector({ className }: LanguageSelectorProps) {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-indigo-400 dark:focus-visible:ring-offset-gray-950"
+        className={clsx(
+          variant === 'topBar'
+            ? topBarUtilityClass({ isToggled: open })
+            : 'inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-indigo-400 dark:focus-visible:ring-offset-gray-950',
+        )}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t('settings.language')}

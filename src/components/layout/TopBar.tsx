@@ -10,10 +10,9 @@ import { useSettingsStore } from '../../store/settingsStore'
 import { isSpeechSupported } from '../../utils/speechSupport'
 import { VoiceToggle } from '../voice/VoiceToggle'
 import { Button } from '../ui/Button'
-import { Spinner } from '../ui/Spinner'
 import { Tooltip } from '../ui/Tooltip'
 import { LanguageSelector } from './LanguageSelector'
-import { topBarNavLinkClass } from './topBarActionStyles'
+import { topBarNavLinkClass, topBarUtilityClass } from './topBarActionStyles'
 import { useSidebar } from './SidebarContext'
 
 interface TopBarProps {
@@ -32,9 +31,6 @@ function getBreadcrumbKey(pathname: string): string {
 
 const actionLinkClass = ({ isActive }: { isActive: boolean }) =>
   topBarNavLinkClass(isActive)
-
-const iconLinkClass = ({ isActive }: { isActive: boolean }) =>
-  topBarNavLinkClass(isActive, true)
 
 export function TopBar({ isScrolled = false }: TopBarProps) {
   const { t } = useLanguage()
@@ -75,14 +71,21 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
 
       <div className="ml-auto hidden items-center gap-2 lg:flex">
         {isHistorySyncing && (
-          <span className="flex items-center gap-1.5 text-xs text-text-muted dark:text-gray-400">
-            <Spinner size="sm" className="text-brand-600" />
+          <span
+            role="status"
+            aria-live="polite"
+            className={topBarUtilityClass({ isStatus: true })}
+          >
+            <span
+              className="inline-block h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-brand-600 border-t-transparent motion-reduce:animate-none"
+              aria-hidden="true"
+            />
             {t('history.syncing')}
           </span>
         )}
 
         <Tooltip content={t('settings.language')}>
-          <LanguageSelector />
+          <LanguageSelector variant="topBar" />
         </Tooltip>
 
         {isSpeechSupported() && (
@@ -101,7 +104,7 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
         <Tooltip content={t('nav.settings')}>
           <button
             type="button"
-            className={iconLinkClass({ isActive: false })}
+            className={topBarUtilityClass({ iconOnly: true })}
             onClick={openQuickSettings}
             aria-label={t('nav.settings')}
           >
@@ -113,9 +116,13 @@ export function TopBar({ isScrolled = false }: TopBarProps) {
           isAuthenticated ? (
             <UserMenu />
           ) : (
-            <Button type="button" variant="ghost" size="sm" onClick={openAuthModal}>
+            <button
+              type="button"
+              className={topBarUtilityClass()}
+              onClick={openAuthModal}
+            >
               {t('auth.signIn')}
-            </Button>
+            </button>
           )
         )}
       </div>

@@ -38,7 +38,7 @@ import {
 import { GenerateButton } from '../components/input/GenerateButton'
 import { useInViewReveal } from '../hooks/useInViewReveal'
 import { useLanguage } from '../hooks/useLanguage'
-import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useMotionTransition, useReducedMotion } from '../hooks/useReducedMotion'
 import { useSpeechCleanup } from '../hooks/useSpeechCleanup'
 import { useQuizStore } from '../store/quizStore'
 import type { RegenerateState } from '../types/regenerate'
@@ -136,6 +136,7 @@ function FeatureHighlightCard({
 export default function HomePage() {
   const { t } = useLanguage()
   const prefersReducedMotion = useReducedMotion()
+  const tabPanelTransition = useMotionTransition(MOTION.instant, MOTION.easeStandard)
   const { ref: featuresRef, isInView: featuresInView } = useInViewReveal()
   useSpeechCleanup()
   const location = useLocation()
@@ -246,10 +247,10 @@ export default function HomePage() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={inputMode}
-                  initial={{ opacity: 0 }}
+                  initial={prefersReducedMotion ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.15 }}
+                  exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+                  transition={tabPanelTransition}
                 >
                   {inputMode === 'text' && (
                     <TextInputPanel
